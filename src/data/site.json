@@ -1,0 +1,72 @@
+{
+  "nombre": "Chymera Studios",
+  "ciudad": "Bogotá",
+  "whatsapp": "573203357408",
+  "whatsappTexto": "Hola Chymera, quiero una página web para mi negocio.",
+  "correo": "studio.chymera@gmail.com",
+  "instagram": "",
+  "hero": {
+    "titulo": "Tu negocio, fácil de encontrar y de reservar.",
+    "subtitulo": "Páginas web para gimnasios, estudios, spas y negocios de bienestar en Bogotá. Listas en días, con precio cerrado y alguien que las mantiene cada mes."
+  },
+  "beneficios": [
+    { "titulo": "Te encuentran en Google", "texto": "Tu negocio aparece cuando buscan \"gimnasio cerca\" o \"spa en Usaquén\", con dirección, horarios y fotos." },
+    { "titulo": "Te escriben y reservan", "texto": "Botón de WhatsApp con el mensaje listo, formulario y reservas en línea conectadas a tu negocio." },
+    { "titulo": "Se ve profesional en el celular", "texto": "Rápida, clara y con tu marca. La mayoría de tus clientes te va a ver desde el teléfono." }
+  ],
+  "sectores": [
+    { "titulo": "Gimnasios y estudios", "texto": "Planes y precios, horario de clases, entrenadores y clase de prueba." },
+    { "titulo": "Spas y estética", "texto": "Menú de servicios con duración y precio, galería y reserva de cita." },
+    { "titulo": "Canchas y clubes", "texto": "Precios por horario, reserva con anticipo y torneos." }
+  ],
+  "paquetes": [
+    {
+      "nombre": "Presencia",
+      "precio": "490.000",
+      "mensual": "49.000",
+      "resumen": "Una página con todo lo esencial para que te encuentren y te escriban.",
+      "incluye": ["Portada, servicios, horarios y galería", "Ubicación con mapa", "Botón de WhatsApp y redes", "Dominio propio y SEO básico", "1 ronda de cambios", "Lista en 3 a 5 días hábiles"],
+      "destacado": false
+    },
+    {
+      "nombre": "Negocio",
+      "precio": "1.150.000",
+      "mensual": "49.000",
+      "resumen": "Sitio de hasta 5 páginas para verte serio frente a las cadenas.",
+      "incluye": ["Todo lo de Presencia", "Planes y precios, equipo y testimonios", "Preguntas frecuentes y formulario", "Perfil de Google Business optimizado", "2 rondas de cambios", "Listo en 7 a 10 días hábiles"],
+      "destacado": true
+    },
+    {
+      "nombre": "Reservas",
+      "precio": "1.790.000",
+      "mensual": "95.000",
+      "resumen": "Todo lo de Negocio, más reservas en línea y cobro de anticipos.",
+      "incluye": ["Todo lo de Negocio", "Página de reservas por horario", "Anticipos con link de pago", "Plan Activo incluido", "2 rondas de cambios", "Listo en 10 a 14 días hábiles"],
+      "destacado": false
+    }
+  ],
+  "planes": [
+    { "nombre": "Base", "precio": "49.000", "texto": "Hosting, dominio, candado de seguridad, copias de respaldo, soporte por WhatsApp y 30 minutos de cambios al mes." },
+    { "nombre": "Activo", "precio": "95.000", "texto": "Todo lo de Base, 60 minutos de cambios, una landing de promoción al trimestre y reporte mensual de visitas." }
+  ],
+  "portafolio": [
+    { "titulo": "Gimnasio de fuerza", "tipo": "Paquete Negocio" },
+    { "titulo": "Spa y bienestar", "tipo": "Paquete Negocio" },
+    { "titulo": "Complejo de canchas", "tipo": "Paquete Reservas" }
+  ],
+  "proceso": [
+    { "titulo": "Hablamos", "texto": "Nos cuentas de tu negocio y llenas un formulario corto con tus datos, fotos y precios." },
+    { "titulo": "Te mostramos un borrador", "texto": "Recibes un link para ver tu página en el celular antes de pagar el saldo." },
+    { "titulo": "Ajustamos", "texto": "Hacemos los cambios que pidas dentro de las rondas de tu paquete." },
+    { "titulo": "Publicamos", "texto": "Conectamos tu dominio, Google y WhatsApp. Tu página queda en línea." },
+    { "titulo": "Te acompañamos", "texto": "Cada mes mantenemos tu página y hacemos los cambios que necesites." }
+  ],
+  "preguntas": [
+    { "p": "¿De quién es el dominio?", "r": "Tuyo. Lo registramos a tu nombre. Mientras tengas el plan mensual, nosotros nos encargamos de renovarlo y mantenerlo." },
+    { "p": "¿Puedo empezar sin pagar la instalación?", "r": "Sí. Presencia por COP 95.000 al mes o Negocio por COP 149.000 al mes, con un compromiso de 12 meses." },
+    { "p": "¿Cómo pago?", "r": "50 % para empezar y 50 % antes de publicar. La mensualidad se paga por adelantado cada mes, o el año completo con 2 meses gratis." },
+    { "p": "¿Qué pasa si cancelo el plan mensual?", "r": "Nos avisas con 30 días. El dominio sigue siendo tuyo; si quieres llevarte el diseño y el código, se pueden comprar aparte." },
+    { "p": "¿Necesito tener fotos y textos?", "r": "Los textos los escribimos nosotros a partir de lo que nos cuentes. Las fotos pueden ser tuyas, de bancos gratuitos o de un fotógrafo aliado." },
+    { "p": "¿Cuánto tardan los cambios?", "r": "Los cambios pequeños del plan mensual quedan listos en 1 a 2 días hábiles." }
+  ]
+}

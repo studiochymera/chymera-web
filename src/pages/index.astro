@@ -1,0 +1,208 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+
+const wa = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappTexto)}`;
+const nav = [
+  { href: '#servicios', texto: 'Servicios' },
+  { href: '#precios', texto: 'Precios' },
+  { href: '#portafolio', texto: 'Portafolio' },
+  { href: '#proceso', texto: 'Proceso' },
+  { href: '#preguntas', texto: 'Preguntas' },
+];
+---
+
+<Base>
+  <!-- Encabezado -->
+  <header class="sticky top-0 z-40 border-b border-azul/10 bg-crema/90 backdrop-blur">
+    <div class="contenedor flex h-16 items-center justify-between gap-4">
+      <a href="#inicio" class="flex items-center" aria-label="Chymera Studios, inicio">
+        <img src="brand/logotipo-navy.webp" alt="Chymera Studios" width="160" height="40" class="h-7 w-auto sm:h-8" />
+      </a>
+      <nav class="hidden items-center gap-7 text-sm font-medium text-azul md:flex" aria-label="Principal">
+        {nav.map((n) => <a href={n.href} class="hover:text-celeste">{n.texto}</a>)}
+      </nav>
+      <a href={wa} class="boton-azul px-4 py-2 sm:px-5" target="_blank" rel="noopener">Escríbenos</a>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <!-- Portada -->
+    <section class="bg-azul text-crema">
+      <div class="contenedor grid items-center gap-10 py-16 sm:py-24 md:grid-cols-[1.2fr_1fr]">
+        <div>
+          <p class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-celeste">Estudio web en {site.ciudad}</p>
+          <h1 class="text-4xl font-semibold leading-tight text-crema sm:text-5xl lg:text-6xl">{site.hero.titulo}</h1>
+          <p class="mt-6 max-w-xl text-lg text-crema/80">{site.hero.subtitulo}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={wa} class="boton-claro" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+            <a href="#precios" class="boton-borde">Ver precios</a>
+          </div>
+        </div>
+        <img src="brand/isotipo-cream.webp" alt="" width="900" height="676" class="mx-auto w-4/5 max-w-md opacity-95 md:w-full" />
+      </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section id="servicios" class="py-16 sm:py-24">
+      <div class="contenedor">
+        <h2 class="max-w-2xl text-3xl font-semibold sm:text-4xl">Una página que trabaja por tu negocio, no solo una vitrina.</h2>
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {site.beneficios.map((b, i) => (
+            <article class="rounded-2xl border border-azul/10 bg-white/60 p-6">
+              <span class="font-display text-sm font-semibold text-celeste">0{i + 1}</span>
+              <h3 class="mt-3 text-xl font-semibold">{b.titulo}</h3>
+              <p class="mt-2 text-tinta/75">{b.texto}</p>
+            </article>
+          ))}
+        </div>
+
+        <h2 class="mt-20 text-2xl font-semibold sm:text-3xl">Hechas para tu sector</h2>
+        <div class="mt-6 grid gap-5 md:grid-cols-3">
+          {site.sectores.map((s) => (
+            <article class="rounded-2xl bg-azul p-6 text-crema">
+              <h3 class="text-xl font-semibold text-crema">{s.titulo}</h3>
+              <p class="mt-2 text-crema/75">{s.texto}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Precios -->
+    <section id="precios" class="bg-crema-2 py-16 sm:py-24">
+      <div class="contenedor">
+        <h2 class="text-3xl font-semibold sm:text-4xl">Precios claros, sin sorpresas</h2>
+        <p class="mt-3 max-w-2xl text-tinta/75">Pago único de instalación más un plan mensual que mantiene tu página en línea y al día. Precios en pesos colombianos.</p>
+
+        <div class="mt-10 grid gap-5 lg:grid-cols-3">
+          {site.paquetes.map((p) => (
+            <article class:list={[
+              'flex flex-col rounded-2xl p-7',
+              p.destacado ? 'bg-azul text-crema ring-2 ring-celeste' : 'border border-azul/10 bg-crema',
+            ]}>
+              <div class="flex items-center justify-between">
+                <h3 class:list={['text-2xl font-semibold', p.destacado && 'text-crema']}>{p.nombre}</h3>
+                {p.destacado && <span class="rounded-full bg-celeste px-3 py-1 text-xs font-semibold text-azul">Más elegido</span>}
+              </div>
+              <p class:list={['mt-2 text-sm', p.destacado ? 'text-crema/75' : 'text-tinta/70']}>{p.resumen}</p>
+              <p class="mt-6">
+                <span class="font-display text-4xl font-semibold">${p.precio}</span>
+                <span class:list={['ml-1 text-sm', p.destacado ? 'text-crema/70' : 'text-tinta/60']}>COP</span>
+              </p>
+              <p class:list={['text-sm', p.destacado ? 'text-crema/75' : 'text-tinta/70']}>+ ${p.mensual} al mes</p>
+              <ul class="mt-6 space-y-2 text-sm">
+                {p.incluye.map((item) => (
+                  <li class="flex gap-2">
+                    <span aria-hidden="true" class:list={[p.destacado ? 'text-celeste' : 'text-azul']}>✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href={wa} target="_blank" rel="noopener" class:list={['mt-8', p.destacado ? 'boton-claro' : 'boton-azul']}>Quiero {p.nombre}</a>
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {site.planes.map((pl) => (
+            <div class="rounded-2xl border border-azul/10 bg-crema p-6">
+              <p class="font-display text-lg font-semibold text-azul">Plan {pl.nombre} · ${pl.precio} al mes</p>
+              <p class="mt-2 text-sm text-tinta/75">{pl.texto}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="mt-8 rounded-2xl border border-dashed border-azul/30 p-5 text-sm text-azul">
+          <strong>Precio fundador:</strong> los 3 primeros negocios que trabajen con nosotros tienen un descuento especial en la instalación a cambio de su testimonio. Pregúntanos si aún hay cupo.
+        </p>
+      </div>
+    </section>
+
+    <!-- Portafolio -->
+    <section id="portafolio" class="py-16 sm:py-24">
+      <div class="contenedor">
+        <h2 class="text-3xl font-semibold sm:text-4xl">Portafolio</h2>
+        <p class="mt-3 max-w-2xl text-tinta/75">Estamos preparando ejemplos para cada sector. Muy pronto podrás verlos aquí.</p>
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {site.portafolio.map((d) => (
+            <article class="overflow-hidden rounded-2xl border border-azul/10 bg-white/60">
+              <div class="flex aspect-[4/3] items-center justify-center bg-azul">
+                <img src="brand/llama-cream.webp" alt="" width="60" height="128" class="h-16 w-auto opacity-60" />
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-semibold">{d.titulo}</h3>
+                <p class="text-sm text-tinta/60">{d.tipo} · Próximamente</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Proceso -->
+    <section id="proceso" class="bg-azul py-16 text-crema sm:py-24">
+      <div class="contenedor">
+        <h2 class="text-3xl font-semibold text-crema sm:text-4xl">Así trabajamos</h2>
+        <ol class="mt-10 grid gap-5 md:grid-cols-5">
+          {site.proceso.map((paso, i) => (
+            <li class="rounded-2xl border border-crema/15 p-5">
+              <span class="font-display text-3xl font-semibold text-celeste">{i + 1}</span>
+              <h3 class="mt-3 text-lg font-semibold text-crema">{paso.titulo}</h3>
+              <p class="mt-2 text-sm text-crema/75">{paso.texto}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Preguntas -->
+    <section id="preguntas" class="py-16 sm:py-24">
+      <div class="contenedor max-w-3xl">
+        <h2 class="text-3xl font-semibold sm:text-4xl">Preguntas frecuentes</h2>
+        <div class="mt-8 divide-y divide-azul/10 border-y border-azul/10">
+          {site.preguntas.map((q) => (
+            <details class="group py-5">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display font-semibold text-azul">
+                {q.p}
+                <span class="text-xl text-celeste transition group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p class="mt-3 text-tinta/75">{q.r}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="bg-azul text-crema">
+      <div class="contenedor flex flex-col items-start gap-6 py-16 sm:py-20 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h2 class="text-3xl font-semibold text-crema sm:text-4xl">¿Hablamos de tu negocio?</h2>
+          <p class="mt-3 max-w-xl text-crema/80">Escríbenos por WhatsApp y te mostramos cómo se vería tu página antes de que decidas.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href={wa} class="boton-claro" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+          <a href={`mailto:${site.correo}`} class="boton-borde">{site.correo}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-tinta py-10 text-sm text-crema/60">
+    <div class="contenedor flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+      <img src="brand/logotipo-cream.webp" alt="Chymera Studios" width="160" height="40" class="h-6 w-auto" />
+      <p>© {new Date().getFullYear()} {site.nombre} · {site.ciudad}, Colombia</p>
+    </div>
+  </footer>
+
+  <a
+    href={wa}
+    target="_blank"
+    rel="noopener"
+    aria-label="Escríbenos por WhatsApp"
+    class="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg"
+  >
+    <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7a10.7 10.7 0 0 1-5.5-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.7 14.7 0 0 0 5.6 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.1-.3-.2-.6-.3z"/></svg>
+  </a>
+</Base>

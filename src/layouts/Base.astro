@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+import site from '../data/site.json';
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+}
+
+const {
+  titulo = `${site.nombre} · Páginas web para negocios en ${site.ciudad}`,
+  descripcion = site.hero.subtitulo,
+} = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.nombre,
+  url: 'https://chymerastudios.com',
+  email: site.correo,
+  areaServed: site.ciudad,
+  address: { '@type': 'PostalAddress', addressLocality: site.ciudad, addressCountry: 'CO' },
+};
+---
+
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <meta name="theme-color" content="#1D2A3A" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:image" content="brand/imagotipo-navy.png" />
+    <meta property="og:locale" content="es_CO" />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

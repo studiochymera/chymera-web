@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/sora";
+
+@theme {
+  --color-crema: #FDF8F4;
+  --color-crema-2: #F3ECE4;
+  --color-azul: #1D2A3A;
+  --color-azul-2: #26364A;
+  --color-celeste: #279BF2;
+  --color-tinta: #040507;
+  --color-vino: #722F38;
+
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+  --font-display: "Sora Variable", "Inter Variable", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-crema text-tinta font-sans antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-display text-azul tracking-tight;
+  }
+}
+
+@utility contenedor {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+@utility boton {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition;
+}
+
+@utility boton-claro {
+  @apply boton bg-crema text-azul hover:bg-white;
+}
+
+@utility boton-azul {
+  @apply boton bg-azul text-crema hover:bg-azul-2;
+}
+
+@utility boton-borde {
+  @apply boton border border-crema/40 text-crema hover:border-celeste hover:text-celeste;
+}
