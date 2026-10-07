@@ -1,0 +1,8 @@
+// Configuración de Cloudflare Workers: publica la carpeta dist/ como sitio estático.
+{
+  "name": "chymera-web",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}

@@ -1,6 +1,6 @@
 # Web de Chymera Studios
 
-Sitio estático en Astro + Tailwind CSS v4. Se publica en Cloudflare Pages desde GitHub.
+Sitio estático en Astro + Tailwind CSS v4. Se publica en Cloudflare (Workers con archivos estáticos, ver `wrangler.jsonc`) cada vez que se sube un cambio a la rama main de GitHub (studiochymera/chymera-web).
 
 ## Reglas de la casa
 - Todo texto, precio y dato de contacto vive en `src/data/site.json`. No escribir textos sueltos en los componentes.
