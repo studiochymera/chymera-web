@@ -19,6 +19,13 @@
     { "titulo": "Spas y estética", "texto": "Menú de servicios con duración y precio, galería y reserva de cita." },
     { "titulo": "Canchas y clubes", "texto": "Precios por horario, reserva con anticipo y torneos." }
   ],
+  "especiales": {
+    "titulo": "Pedidos especiales",
+    "texto": "También hacemos páginas web a la medida para personas y proyectos que no son un negocio local. Cuéntanos qué necesitas y te enviamos una cotización sin compromiso.",
+    "ejemplos": ["Portafolios personales", "Hojas de vida en línea", "Semilleros y grupos de investigación", "Eventos y lanzamientos", "Fundaciones y proyectos"],
+    "boton": "Cotizar un pedido especial",
+    "whatsappTexto": "Hola Chymera, quiero cotizar una página web a la medida."
+  },
   "paquetes": [
     {
       "nombre": "Presencia",
@@ -67,6 +74,7 @@
     { "p": "¿Cómo pago?", "r": "50 % para empezar y 50 % antes de publicar. La mensualidad se paga por adelantado cada mes, o el año completo con 2 meses gratis." },
     { "p": "¿Qué pasa si cancelo el plan mensual?", "r": "Nos avisas con 30 días. El dominio sigue siendo tuyo; si quieres llevarte el diseño y el código, se pueden comprar aparte." },
     { "p": "¿Necesito tener fotos y textos?", "r": "Los textos los escribimos nosotros a partir de lo que nos cuentes. Las fotos pueden ser tuyas, de bancos gratuitos o de un fotógrafo aliado." },
+    { "p": "¿Hacen páginas que no sean para negocios?", "r": "Sí. Hacemos portafolios personales, hojas de vida en línea, páginas para semilleros de investigación, eventos y otros proyectos a la medida. El precio depende de lo que necesites: escríbenos y te cotizamos sin compromiso." },
     { "p": "¿Cuánto tardan los cambios?", "r": "Los cambios pequeños del plan mensual quedan listos en 1 a 2 días hábiles." }
   ]
 }
