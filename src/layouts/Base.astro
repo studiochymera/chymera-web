@@ -23,6 +23,7 @@ const schema = {
   email: site.correo,
   telephone: `+${site.whatsapp}`,
   image: imagenSocial,
+  sameAs: [`https://www.instagram.com/${site.instagram}/`],
   areaServed: site.ciudad,
   address: { '@type': 'PostalAddress', addressLocality: site.ciudad, addressCountry: 'CO' },
 };
