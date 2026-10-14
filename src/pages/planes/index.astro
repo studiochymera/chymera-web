@@ -32,14 +32,14 @@ const titulo = `${d.titulo} · ${site.nombre}`;
               href={`${p.slug}/`}
               class:list={[
                 'group flex flex-col rounded-2xl p-6 transition',
-                p.destacado ? 'bg-crema text-azul ring-2 ring-celeste' : 'border border-crema/20 hover:border-celeste',
+                p.destacado ? 'border border-transparent bg-crema text-azul ring-2 ring-celeste' : 'border border-crema/20 hover:border-celeste',
               ]}
             >
               <span class:list={['font-display text-xl font-semibold', p.destacado ? 'text-azul' : 'text-crema']}>{p.nombre}</span>
               <span class="mt-3 font-display text-3xl font-semibold">${p.precio}</span>
               <span class:list={['text-sm', p.destacado ? 'text-tinta/70' : 'text-crema/70']}>COP + ${p.mensual} al mes</span>
               <span class:list={['mt-4 text-sm', p.destacado ? 'text-tinta/75' : 'text-crema/75']}>{p.resumen}</span>
-              <span class:list={['mt-5 text-sm font-semibold underline underline-offset-4', p.destacado ? 'text-azul' : 'text-celeste']}>
+              <span class:list={['mt-auto pt-5 text-sm font-semibold underline underline-offset-4', p.destacado ? 'text-azul' : 'text-celeste']}>
                 {d.verDetalle}
               </span>
             </a>

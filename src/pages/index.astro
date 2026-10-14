@@ -81,7 +81,7 @@ const waEspecial = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(sit
           {site.paquetes.map((p) => (
             <article class:list={[
               'flex flex-col rounded-2xl p-7',
-              p.destacado ? 'bg-azul text-crema ring-2 ring-celeste' : 'border border-azul/10 bg-crema',
+              p.destacado ? 'border border-transparent bg-azul text-crema ring-2 ring-celeste' : 'border border-azul/10 bg-crema',
             ]}>
               <div class="flex items-center justify-between">
                 <h3 class:list={['text-2xl font-semibold', p.destacado && 'text-crema']}>{p.nombre}</h3>
@@ -101,7 +101,7 @@ const waEspecial = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(sit
                   </li>
                 ))}
               </ul>
-              <div class="mt-8 flex flex-col gap-3">
+              <div class="mt-auto flex flex-col gap-3 pt-8">
                 <a href={enlaceWhatsApp(site.whatsapp, site.detallePlanes.whatsappPlan.replace('{plan}', p.nombre))} target="_blank" rel="noopener" class:list={[p.destacado ? 'boton-claro' : 'boton-azul']}>Quiero {p.nombre}</a>
                 <a href={`planes/${p.slug}/`} class:list={['text-center text-sm font-semibold underline underline-offset-4', p.destacado ? 'text-crema hover:text-celeste' : 'text-azul hover:text-azul-2']}>{site.detallePlanes.verDetalle}</a>
               </div>
