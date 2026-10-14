@@ -1,0 +1,165 @@
+{
+  "negocio": {
+    "nombre": "Filo Barbería",
+    "corto": "Filo",
+    "tipo": "HairSalon",
+    "barrio": "Chapinero",
+    "ciudad": "Bogotá",
+    "region": "Bogotá D.C.",
+    "lugar": "Chapinero, Bogotá",
+    "direccion": "Chapinero, Bogotá D.C.",
+    "telefono": "+57 320 335 7408",
+    "telefonoEnlace": "+573203357408",
+    "descripcion": "Barbería clásica en Chapinero, Bogotá: corte a tijera, degradado, arreglo de barba y afeitado con navaja y toalla caliente.",
+    "rangoPrecios": "$10.000 - $85.000"
+  },
+  "seo": {
+    "titulo": "Barbería en Chapinero, Bogotá · Filo Barbería",
+    "descripcion": "Corte clásico, degradado, barba y afeitado con toalla caliente en Chapinero, Bogotá. Mira precios y horario, y pide tu turno por WhatsApp.",
+    "tituloPrivacidad": "Aviso de privacidad · Filo Barbería, Chapinero",
+    "colorTema": "#141210"
+  },
+  "incluye": {
+    "portada": "Portada con nombre, frase, barrio y WhatsApp a la vista · Presencia",
+    "servicios": "Hasta 10 servicios con descripción y precio · Presencia",
+    "nosotros": "Historia y lo que diferencia al negocio · Presencia",
+    "galeria": "Galería de hasta 10 fotos · Presencia",
+    "contacto": "Mapa, horario, WhatsApp, teléfono y redes · Presencia",
+    "pie": "Datos del negocio y aviso de privacidad básico · Presencia",
+    "privacidad": "Aviso de privacidad básico · Presencia"
+  },
+  "comunes": {
+    "saltar": "Saltar al contenido",
+    "menu": "Menú",
+    "inicio": "Ir al inicio de Filo Barbería",
+    "pideTurno": "Pide turno",
+    "botonWhatsApp": "Pide tu turno por WhatsApp",
+    "etiquetaWhatsApp": "Escríbele a Filo Barbería por WhatsApp",
+    "instagram": "Instagram"
+  },
+  "menu": [
+    { "texto": "Servicios", "ancla": "servicios" },
+    { "texto": "Nosotros", "ancla": "nosotros" },
+    { "texto": "Galería", "ancla": "galeria" },
+    { "texto": "Ubicación", "ancla": "ubicacion" }
+  ],
+  "horario": [
+    {
+      "dias": "Lunes a sábado",
+      "corto": "Lun. a sáb.",
+      "abre": "09:00",
+      "cierra": "20:00",
+      "schema": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    },
+    {
+      "dias": "Domingos y festivos",
+      "corto": "Dom. y festivos",
+      "abre": "10:00",
+      "cierra": "16:00",
+      "schema": ["Sunday", "PublicHolidays"]
+    }
+  ],
+  "portada": {
+    "oficios": ["Corte", "Barba", "Navaja"],
+    "nombre": "Filo",
+    "lema": "Barbería en Chapinero",
+    "texto": "Corte a tijera, degradados limpios y afeitado con navaja y toalla caliente. Sin afanes, con buen pulso y como se hace el oficio.",
+    "verPrecios": "Ver servicios y precios",
+    "alt": "Barbero cortando el pelo a un cliente en una barbería con luz cálida",
+    "horarioTitulo": "Abierto",
+    "desde": "Desde 2014"
+  },
+  "servicios": {
+    "etiqueta": "La carta",
+    "titulo": "Servicios",
+    "tituloCursiva": "y precios",
+    "intro": "Diez servicios, precios claros y el mismo cuidado en cada silla. Atendemos por orden de llegada o con turno apartado por WhatsApp.",
+    "cabezaCarta": "Filo Barbería · Chapinero",
+    "tituloCarta": "Carta de servicios",
+    "nota": "Precios en pesos colombianos, con impuestos incluidos. Recibimos efectivo, tarjeta, Nequi y Daviplata.",
+    "grupos": [
+      {
+        "titulo": "Cortes",
+        "items": [
+          { "nombre": "Corte clásico", "precio": 35000, "duracion": "40 min", "descripcion": "Tijera y máquina a tu medida, con lavado, toalla y peinado con producto." },
+          { "nombre": "Degradado", "precio": 38000, "duracion": "45 min", "descripcion": "Bajo, medio o alto, bien difuminado y con el contorno a navaja." },
+          { "nombre": "Corte + barba", "precio": 55000, "duracion": "1 h", "descripcion": "Corte a tu gusto y barba perfilada a navaja, en la misma silla." },
+          { "nombre": "Corte infantil", "precio": 28000, "duracion": "30 min", "descripcion": "Para menores de 12 años, con paciencia y sin afanes." },
+          { "nombre": "Diseño o línea", "precio": 10000, "duracion": "10 min", "descripcion": "Una raya o un diseño a máquina para sumarle a tu corte." }
+        ]
+      },
+      {
+        "titulo": "Barba y rostro",
+        "items": [
+          { "nombre": "Arreglo de barba", "precio": 25000, "duracion": "30 min", "descripcion": "Rebajada, perfilada a navaja y con aceite para dejarla suave." },
+          { "nombre": "Afeitado clásico con toalla caliente", "precio": 40000, "duracion": "40 min", "descripcion": "Toalla caliente, espuma a brocha y navaja. Cierra con toalla fría y bálsamo." },
+          { "nombre": "Perfilado de cejas", "precio": 12000, "duracion": "10 min", "descripcion": "Con pinza y navaja, limpio y sin que se vea dibujado." },
+          { "nombre": "Mascarilla facial", "precio": 20000, "duracion": "20 min", "descripcion": "Mascarilla de carbón activado para limpiar los poros, con toalla caliente." }
+        ]
+      }
+    ],
+    "casa": {
+      "etiqueta": "De la casa",
+      "nombre": "Ritual Filo",
+      "precio": 85000,
+      "duracion": "1 h 30 min",
+      "descripcion": "Corte, barba, afeitado con toalla caliente y mascarilla. Hora y media para ti, con un tinto de cortesía."
+    }
+  },
+  "nosotros": {
+    "etiqueta": "Sobre nosotros",
+    "titulo": "Una silla, una navaja",
+    "tituloCursiva": "y el tiempo que haga falta.",
+    "parrafos": [
+      "Filo abrió en 2014 en un local pequeño de Chapinero, con dos sillas de hierro, una navaja heredada y una idea sencilla: hacer el oficio como lo aprendimos, sin correr. Seguimos en el mismo barrio, ahora con cuatro sillas y muchos de los clientes que llegaron ese primer año.",
+      "Aquí cada corte empieza con una conversación y termina cuando queda bien, no cuando se acaba el turno. Usamos hoja nueva en la navaja para cada cliente, toalla caliente de verdad y productos que te enseñamos a usar en casa. Si es tu primera vez, escríbenos y te contamos qué te va mejor."
+    ],
+    "selloAntes": "Desde",
+    "sello": "2014",
+    "selloLugar": "Chapinero",
+    "alt": "Barbero de pie junto a su silla de trabajo en la barbería"
+  },
+  "galeria": {
+    "etiqueta": "Galería",
+    "titulo": "El oficio,",
+    "tituloCursiva": "de cerca",
+    "intro": "Tijera, navaja y toalla caliente en el día a día de la barbería.",
+    "fotos": [
+      { "slot": "galeria-05", "forma": "horizontal", "alt": "Cliente con toalla caliente en la cara antes del afeitado" },
+      { "slot": "galeria-01", "forma": "vertical", "alt": "Degradado bajo recién terminado, visto de cerca" },
+      { "slot": "galeria-02", "forma": "vertical", "alt": "Barbero perfilando una barba con navaja" },
+      { "slot": "galeria-03", "forma": "cuadrada", "alt": "Tijeras, peines y navaja sobre el mesón de trabajo" },
+      { "slot": "galeria-06", "forma": "horizontal", "alt": "Interior de la barbería con sillas, espejos y luz cálida" },
+      { "slot": "galeria-08", "forma": "cuadrada", "alt": "Barbero repasando un corte con máquina" },
+      { "slot": "galeria-04", "forma": "vertical", "alt": "Silla de barbero clásica de cuero y metal" },
+      { "slot": "galeria-07", "forma": "vertical", "alt": "Cliente con el corte recién hecho y la barba arreglada" }
+    ],
+    "instagramTitulo": "Más cortes, todos los días",
+    "instagramTexto": "Subimos el trabajo de la semana a Instagram.",
+    "instagramBoton": "Síguenos en Instagram"
+  },
+  "contacto": {
+    "etiqueta": "Ubicación y contacto",
+    "titulo": "Te esperamos",
+    "tituloCursiva": "en Chapinero",
+    "intro": "Llega sin cita y espera tu turno, o escríbenos por WhatsApp y te apartamos la hora.",
+    "tituloHorario": "Horario",
+    "tituloContacto": "Contacto",
+    "etiquetaDireccion": "Dirección",
+    "etiquetaWhatsApp": "WhatsApp",
+    "textoWhatsApp": "Escríbenos",
+    "etiquetaTelefono": "Teléfono",
+    "etiquetaInstagram": "Redes",
+    "mapaTitulo": "Mapa de Filo Barbería en Chapinero, Bogotá"
+  },
+  "pie": {
+    "lema": "Corte, barba y navaja en Chapinero.",
+    "tituloVisitanos": "Visítanos",
+    "tituloHorario": "Horario",
+    "tituloEscribenos": "Escríbenos",
+    "privacidad": "Aviso de privacidad"
+  },
+  "privacidad": {
+    "volver": "Volver a la barbería"
+  }
+}

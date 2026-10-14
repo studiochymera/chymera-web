@@ -1,0 +1,90 @@
+---
+// Servicios: la lista de precios como tablero clásico, con puntos guía entre servicio y precio (estilo carta de bar).
+import Icono from './Icono.astro';
+import { d, contacto } from './datos';
+import { pesos } from '../../../base/formato';
+
+const s = d.servicios;
+const esquinas = ['-left-[4px] -top-[4px]', '-right-[4px] -top-[4px]', '-left-[4px] -bottom-[4px]', '-right-[4px] -bottom-[4px]'];
+---
+
+<section id="servicios" class="relative bg-carbon pt-14 pb-20 sm:pt-20 sm:pb-28 lg:pt-28 lg:pb-36" data-incluye={d.incluye.servicios}>
+  <div class="contenedor lg:grid lg:grid-cols-12 lg:gap-12">
+    <div class="lg:sticky lg:top-10 lg:col-span-4 lg:self-start lg:pt-6">
+      <p class="etiqueta flex items-center gap-3 text-laton">
+        <span class="h-px w-8 bg-laton" aria-hidden="true"></span>{s.etiqueta}
+      </p>
+      <h2 class="mt-5 text-[clamp(3.25rem,15vw,5.75rem)] leading-[0.92]">
+        {s.titulo} <span class="block italic text-hueso/75">{s.tituloCursiva}</span>
+      </h2>
+      <p class="mt-6 max-w-sm text-hueso/75">{s.intro}</p>
+      <a href={contacto.whatsapp} target="_blank" rel="noopener" class="boton boton-vino mt-9 hidden lg:inline-flex">
+        <Icono nombre="whatsapp" />
+        {d.comunes.botonWhatsApp}
+      </a>
+    </div>
+
+    <div class="mt-12 lg:col-span-8 lg:mt-0">
+      <div class="marco-doble relative mx-1.5 bg-carbon-2 px-5 pt-9 pb-8 sm:mx-0 sm:px-10 sm:pt-12 sm:pb-10 lg:px-14 lg:pt-14 lg:pb-12">
+        {esquinas.map((e) => <span class:list={['absolute h-2 w-2 rotate-45 bg-laton', e]} aria-hidden="true"></span>)}
+
+        <div class="text-center">
+          <p class="etiqueta text-[0.6875rem] text-laton">{s.cabezaCarta}</p>
+          <p class="mt-3 font-serif text-[2rem] leading-none italic sm:text-[2.5rem]">{s.tituloCarta}</p>
+          <p class="mt-5 flex items-center justify-center gap-3 text-laton" aria-hidden="true">
+            <span class="h-px w-14 bg-laton/50"></span>
+            <span class="h-1.5 w-1.5 rotate-45 bg-laton"></span>
+            <span class="h-px w-14 bg-laton/50"></span>
+          </p>
+        </div>
+
+        <div>
+          {s.grupos.map((g) => (
+            <div class="mt-10 sm:mt-12">
+              <h3 class="etiqueta flex items-center gap-4 font-sans text-laton">
+                {g.titulo}
+                <span class="h-px flex-1 bg-laton/30" aria-hidden="true"></span>
+              </h3>
+              <ul class="mt-6 space-y-6 sm:space-y-7">
+                {g.items.map((it) => (
+                  <li class="group">
+                    <div class="flex items-end">
+                      <p class="max-w-[72%] font-serif text-[1.375rem] leading-[1.15] sm:text-2xl">{it.nombre}</p>
+                      <span class="guia text-laton/55 transition-colors duration-300 group-hover:text-laton" aria-hidden="true"></span>
+                      <p class="shrink-0 font-serif text-[1.375rem] leading-[1.15] tabular-nums sm:text-2xl">{pesos(it.precio)}</p>
+                    </div>
+                    <div class="mt-1.5 flex items-baseline justify-between gap-5">
+                      <p class="text-[0.9375rem] leading-snug text-hueso/70">{it.descripcion}</p>
+                      <p class="etiqueta shrink-0 text-[0.6875rem] tracking-[0.14em] text-laton">{it.duracion}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div class="group relative mt-12 bg-vino px-5 py-7 sm:px-8 sm:py-8">
+          <div class="poste absolute inset-y-0 left-0 w-1.5" aria-hidden="true"></div>
+          <h3 class="etiqueta font-sans text-hueso/85">{s.casa.etiqueta}</h3>
+          <div class="mt-3 flex items-end">
+            <p class="max-w-[72%] font-serif text-[1.75rem] leading-none italic sm:text-[2.125rem]">{s.casa.nombre}</p>
+            <span class="guia text-hueso/50 transition-colors duration-300 group-hover:text-hueso/90" aria-hidden="true"></span>
+            <p class="shrink-0 font-serif text-[1.75rem] leading-none tabular-nums sm:text-[2.125rem]">{pesos(s.casa.precio)}</p>
+          </div>
+          <div class="mt-3 flex items-baseline justify-between gap-5">
+            <p class="text-[0.9375rem] leading-snug text-hueso/90">{s.casa.descripcion}</p>
+            <p class="etiqueta shrink-0 text-[0.6875rem] tracking-[0.14em] text-hueso/85">{s.casa.duracion}</p>
+          </div>
+        </div>
+
+        <p class="mx-auto mt-8 max-w-md text-center text-sm leading-relaxed text-hueso/65">{s.nota}</p>
+      </div>
+
+      <a href={contacto.whatsapp} target="_blank" rel="noopener" class="boton boton-vino mt-10 w-full lg:hidden">
+        <Icono nombre="whatsapp" />
+        {d.comunes.botonWhatsApp}
+      </a>
+    </div>
+  </div>
+</section>

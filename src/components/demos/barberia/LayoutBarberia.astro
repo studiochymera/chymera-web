@@ -1,0 +1,43 @@
+---
+// Layout de la demo Filo Barbería (plan Presencia): envuelve la base técnica con el diseño de Filo.
+import '../../../styles/demos/barberia.css';
+import Layout from '../../../base/Layout.astro';
+import BotonWhatsApp from '../../../base/BotonWhatsApp.astro';
+import FranjaDemo from '../FranjaDemo.astro';
+import Encabezado from './Encabezado.astro';
+import Pie from './Pie.astro';
+import { d, contacto, schemaFilo } from './datos';
+import { raiz } from '../../../base/formato';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  sobrePortada?: boolean;
+}
+
+const { titulo, descripcion, sobrePortada = false } = Astro.props;
+const r = raiz(Astro.url.pathname);
+const url = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<Layout
+  titulo={titulo}
+  descripcion={descripcion}
+  noIndexar={true}
+  icono={`${r}demos/barberia/icono.svg`}
+  colorTema={d.seo.colorTema}
+  imagenSocial="demos/barberia/og.jpg"
+  schemas={[schemaFilo(url, Astro.site)]}
+>
+  <FranjaDemo slug="barberia" />
+  <a href="#contenido" class="etiqueta sr-only z-[80] bg-hueso px-4 py-3 text-carbon focus:not-sr-only focus:absolute focus:left-4 focus:top-4">{d.comunes.saltar}</a>
+  <div class="relative">
+    <Encabezado sobrePortada={sobrePortada} />
+    <main id="contenido">
+      <slot />
+    </main>
+  </div>
+  <Pie />
+  <BotonWhatsApp numero={contacto.numeroWhatsApp} texto={contacto.textoWhatsApp} etiqueta={d.comunes.etiquetaWhatsApp} />
+</Layout>
+

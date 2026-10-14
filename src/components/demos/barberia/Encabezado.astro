@@ -1,0 +1,71 @@
+---
+// Encabezado de Filo: sobre la foto de portada en la página principal, sobre carbón en las demás.
+import Poste from './Poste.astro';
+import { d, contacto } from './datos';
+import { raiz } from '../../../base/formato';
+
+interface Props {
+  sobrePortada?: boolean;
+}
+const { sobrePortada = false } = Astro.props;
+const inicio = sobrePortada ? '' : `${raiz(Astro.url.pathname)}demos/barberia/`;
+const enlace = (ancla: string) => `${inicio}#${ancla}`;
+---
+
+<header class:list={['z-30 w-full', sobrePortada ? 'absolute inset-x-0 top-0' : 'relative bg-carbon border-b border-laton/25']}>
+  <div class="contenedor flex h-18 items-center justify-between gap-4 sm:h-22">
+    <a href={sobrePortada ? '#inicio' : inicio} class="group flex min-h-11 items-center gap-3 text-hueso" aria-label={d.comunes.inicio}>
+      <Poste class="h-9 w-2.5" />
+      <span class="font-serif text-[1.75rem] leading-none tracking-tight">{d.negocio.corto}</span>
+      <span class="etiqueta mt-1 hidden text-[0.625rem] text-laton sm:inline">{d.negocio.barrio}</span>
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex" aria-label={d.comunes.menu}>
+      <ul class="flex items-center gap-7">
+        {d.menu.map((m) => (
+          <li>
+            <a href={enlace(m.ancla)} class="enlace-subrayado inline-flex min-h-11 items-center text-[0.9375rem] font-medium text-hueso/90 hover:text-hueso">{m.texto}</a>
+          </li>
+        ))}
+      </ul>
+      <a href={contacto.whatsapp} target="_blank" rel="noopener" class="boton boton-linea min-h-11 px-5 text-sm text-hueso hover:bg-hueso hover:text-carbon">{d.comunes.pideTurno}</a>
+    </nav>
+
+    <details class="menu-movil relative lg:hidden">
+      <summary class="etiqueta flex min-h-11 cursor-pointer list-none items-center gap-3 border border-hueso/40 px-4 text-hueso [&::-webkit-details-marker]:hidden">
+        <span>{d.comunes.menu}</span>
+        <span class="flex w-4 flex-col gap-1" aria-hidden="true">
+          <span class="h-px w-full bg-current"></span>
+          <span class="h-px w-full bg-current"></span>
+          <span class="h-px w-3/4 bg-current"></span>
+        </span>
+      </summary>
+      <nav class="absolute right-0 top-[calc(100%+0.5rem)] w-72 border border-laton/50 bg-carbon-3 p-2 shadow-[0_18px_40px_rgb(0_0_0/0.5)]" aria-label={d.comunes.menu}>
+        <ul>
+          {d.menu.map((m, i) => (
+            <li class:list={[i > 0 && 'border-t border-hueso/10']}>
+              <a href={enlace(m.ancla)} class="flex min-h-12 items-center justify-between px-3 font-serif text-xl text-hueso hover:bg-carbon-2">
+                {m.texto}
+                <span class="font-sans text-xs text-laton" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href={contacto.whatsapp} target="_blank" rel="noopener" class="boton boton-vino mt-2 w-full">{d.comunes.botonWhatsApp}</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<script>
+  // Cierra el menú del celular al elegir una sección o al pulsar Escape.
+  document.querySelectorAll<HTMLDetailsElement>('.menu-movil').forEach((menu) => {
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => (menu.open = false)));
+    menu.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  });
+</script>

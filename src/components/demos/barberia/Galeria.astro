@@ -1,0 +1,65 @@
+---
+// Galería de 8 fotos en mosaico de proporciones fijas (verticales 4:5, cuadradas y horizontales).
+import Imagen from '../../../base/Imagen.astro';
+import Icono from './Icono.astro';
+import { d, contacto } from './datos';
+
+const g = d.galeria;
+const formas = {
+  horizontal: { caja: 'col-span-2 aspect-[3/2] lg:aspect-auto', proporcion: '3/2', sizes: '(min-width: 1024px) 50vw, 100vw', anchos: [640, 960, 1280] },
+  vertical: { caja: 'aspect-[4/5]', proporcion: '4/5', sizes: '(min-width: 1024px) 25vw, 50vw', anchos: [400, 640, 800] },
+  cuadrada: { caja: 'aspect-square', proporcion: '1/1', sizes: '(min-width: 1024px) 25vw, 50vw', anchos: [400, 640, 800] },
+} as const;
+// El mosaico de computador cierra la tercera fila con el enlace a Instagram en el centro.
+const antesDeInstagram = 7;
+---
+
+<section id="galeria" class="relative bg-carbon py-20 sm:py-28 lg:py-36" data-incluye={d.incluye.galeria}>
+  <div class="contenedor">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p class="etiqueta flex items-center gap-3 text-laton">
+          <span class="h-px w-8 bg-laton" aria-hidden="true"></span>{g.etiqueta}
+        </p>
+        <h2 class="mt-5 text-[clamp(3rem,13vw,5.75rem)] leading-[0.92]">
+          {g.titulo} <span class="italic text-hueso/75">{g.tituloCursiva}</span>
+        </h2>
+      </div>
+      <p class="max-w-xs text-hueso/75 lg:pb-3 lg:text-right">{g.intro}</p>
+    </div>
+
+    <div class="mt-10 grid grid-flow-row-dense grid-cols-2 gap-2 sm:mt-14 sm:gap-3 lg:grid-cols-4">
+      {g.fotos.map((f, i) => {
+        const forma = formas[f.forma as keyof typeof formas];
+        return (
+          <>
+            {i === antesDeInstagram && (
+              <div class="relative col-span-2 flex flex-col justify-between gap-6 bg-vino p-6 pt-8 sm:p-8 sm:pt-10">
+                <div class="poste absolute inset-x-0 top-0 h-2" aria-hidden="true"></div>
+                <div>
+                  <p class="font-serif text-[2rem] leading-none italic sm:text-[2.5rem]">{g.instagramTitulo}</p>
+                  <p class="mt-3 max-w-xs text-hueso/90">{g.instagramTexto}</p>
+                </div>
+                <a href={contacto.instagram} target="_blank" rel="noopener" class="boton self-start bg-hueso text-carbon hover:bg-hueso-2">
+                  <Icono nombre="instagram" />
+                  {g.instagramBoton}
+                </a>
+              </div>
+            )}
+            <figure class:list={['group relative overflow-hidden bg-carbon-2', forma.caja]}>
+              <Imagen
+                ruta={`demos/barberia/${f.slot}`}
+                alt={f.alt}
+                anchos={[...forma.anchos]}
+                sizes={forma.sizes}
+                proporcion={forma.proporcion}
+                claseMarco="absolute inset-0 block h-full w-full"
+                class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              />
+            </figure>
+          </>
+        );
+      })}
+    </div>
+  </div>
+</section>
