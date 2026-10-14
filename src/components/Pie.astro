@@ -11,6 +11,7 @@ const ig = `https://www.instagram.com/${site.instagram}/`;
     <img src={`${r}brand/logotipo-cream.svg`} alt="Chymera Studios" width="165" height="40" class="h-6 w-auto" />
     <div class="flex flex-col gap-1 sm:items-end">
       <a href={`${r}planes/`} class="hover:text-crema">{site.detallePlanes.titulo}</a>
+      {site.legal.enlaces.map((e) => <a href={`${r}${e.slug}/`} class="hover:text-crema">{e.texto}</a>)}
       <a href={ig} class="hover:text-crema" target="_blank" rel="noopener">Instagram @{site.instagram}</a>
       <p>© {new Date().getFullYear()} {site.nombre} · {site.ciudad}, Colombia</p>
     </div>
