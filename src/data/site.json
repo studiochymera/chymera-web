@@ -129,6 +129,7 @@
     "intro": "Todo lo que recibes, punto por punto, para que sepas exactamente qué compras. Lo que no aparece aquí se cotiza aparte, con precio fijo.",
     "verDetalle": "Ver todo lo que incluye",
     "comparar": "Comparar los planes",
+    "verDemo": "Ver la demo de este plan",
     "comparacion": [
       { "titulo": "Instalación (pago único)", "valores": ["$690.000", "$1.150.000", "$1.790.000"] },
       { "titulo": "Plan mensual", "valores": ["Base · $49.000", "Base · $49.000", "Activo · $95.000"] },

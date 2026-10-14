@@ -46,13 +46,17 @@ if (imagen && anchosValidos.length === 0) anchosValidos.push(imagen.width);
     pictureAttributes={{ class: claseMarco }}
   />
 ) : (
-  <div class:list={['imagen-pendiente', claseMarco, clase]} style={`aspect-ratio: ${proporcion}`} role="img" aria-label={alt} data-falta-foto={ruta}></div>
+  <div class:list={['marco-pendiente', claseMarco]}>
+    <div class:list={['imagen-pendiente', clase]} style={`aspect-ratio: ${proporcion}`} role="img" aria-label={alt} data-falta-foto={ruta}></div>
+  </div>
 )}
 
 <style>
+  .marco-pendiente {
+    display: block;
+  }
   .imagen-pendiente {
     display: block;
-    width: 100%;
     background-color: color-mix(in srgb, currentColor 12%, transparent);
     background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, currentColor 7%, transparent) 14px 28px);
   }
