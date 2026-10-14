@@ -82,7 +82,7 @@
             "titulo": "Técnica antes que peso",
             "texto": "Antes de cargar la barra aprendes a moverte. Tu entrenador revisa cada patrón: sentadilla, bisagra de cadera, empuje y tracción, y solo sube el peso cuando el movimiento está limpio.",
             "foto": "diferencial-1",
-            "alt": "Entrenador corrigiendo la técnica de una sentadilla con barra"
+            "alt": "Entrenador asistiendo una sentadilla pesada mientras otro carga los discos"
           },
           {
             "titulo": "Grupos de máximo 8",
@@ -94,7 +94,7 @@
             "titulo": "Hierro de verdad",
             "texto": "4 plataformas de levantamiento, 6 jaulas de sentadilla, barras olímpicas, pesas rusas de 8 a 32 kilos, trineo y remos. Llegas y entrenas, sin esperar turno.",
             "foto": "diferencial-3",
-            "alt": "Persona entrenando con una pesa rusa en el piso de caucho del gimnasio"
+            "alt": "Persona sosteniendo una pesa rusa en el gimnasio"
           }
         ]
       },
@@ -124,7 +124,7 @@
       "etiqueta": "Planes y precios",
       "h1": ["Planes de gimnasio", "en Cedritos"],
       "entrada": "Cuatro membresías que se pagan mes a mes, sin inscripción ni permanencia, y 25 servicios sueltos para cuando los necesites.",
-      "altFoto": "Estructura de entrenamiento funcional con barras, anillas y discos en Forja",
+      "altFoto": "Zona funcional de Forja con un trineo cargado, saco de boxeo y máquinas al fondo",
       "tituloMembresias": "Membresías",
       "textoMembresias": "Todas incluyen la sala de fuerza en todo el horario. Compara y elige según cuánto acompañamiento quieres.",
       "destacada": "La más elegida",
@@ -145,7 +145,7 @@
       "etiqueta": "Nosotros",
       "h1": ["Entrenadores", "personales", "en Cedritos"],
       "entrada": "Seis entrenadores certificados, un método claro y una sala hecha para levantar. Esta es la gente que te va a corregir la sentadilla.",
-      "altFoto": "Sala de fuerza de Forja vacía, con jaulas, barras y discos ordenados",
+      "altFoto": "Sala de fuerza de Forja vacía, con bancos y mancuernas ordenadas",
       "historia": {
         "etiqueta": "Nuestra historia",
         "titulo": "Empezamos en una bodega con 2 jaulas",
@@ -175,10 +175,10 @@
         "titulo": "Tus entrenadores",
         "texto": "Todos tienen formación profesional y certificación vigente. Rotan por los grupos para que conozcas a varios, pero tu programa siempre tiene un responsable.",
         "lista": [
-          { "nombre": "Valentina Ríos", "rol": "Cofundadora · Halterofilia", "certificacion": "Profesional en Ciencias del Deporte, entrenadora de halterofilia nivel 2", "foto": "coach-01", "alt": "Retrato de Valentina Ríos, entrenadora de Forja, en la sala de pesas" },
-          { "nombre": "Andrés Galindo", "rol": "Cofundador · Fuerza máxima", "certificacion": "Licenciado en Educación Física, especialista en entrenamiento de fuerza", "foto": "coach-02", "alt": "Retrato de Andrés Galindo, entrenador de Forja, junto a una jaula de sentadilla" },
+          { "nombre": "Valentina Ríos", "rol": "Cofundadora · Halterofilia", "certificacion": "Profesional en Ciencias del Deporte, entrenadora de halterofilia nivel 2", "foto": "coach-01", "alt": "Retrato de Valentina Ríos, entrenadora de Forja, con una cuerda de batalla al hombro" },
+          { "nombre": "Andrés Galindo", "rol": "Cofundador · Fuerza máxima", "certificacion": "Licenciado en Educación Física, especialista en entrenamiento de fuerza", "foto": "coach-02", "alt": "Retrato de Andrés Galindo, entrenador de Forja" },
           { "nombre": "Laura Méndez", "rol": "Grupos y acondicionamiento", "certificacion": "Profesional en Cultura Física, certificada en entrenamiento funcional", "foto": "coach-03", "alt": "Retrato de Laura Méndez, entrenadora de Forja, en el gimnasio" },
-          { "nombre": "Sebastián Cárdenas", "rol": "Semipersonalizado", "certificacion": "Profesional en Deporte, certificado en fuerza y acondicionamiento", "foto": "coach-04", "alt": "Retrato de Sebastián Cárdenas, entrenador de Forja, en la zona de barras" },
+          { "nombre": "Sebastián Cárdenas", "rol": "Semipersonalizado", "certificacion": "Profesional en Deporte, certificado en fuerza y acondicionamiento", "foto": "coach-04", "alt": "Retrato de Sebastián Cárdenas, entrenador de Forja, con una toalla al hombro" },
           { "nombre": "Daniela Rojas", "rol": "Nutrición y entrenamiento", "certificacion": "Nutricionista dietista, especialista en nutrición deportiva", "foto": "coach-05", "alt": "Retrato de Daniela Rojas, nutricionista y entrenadora de Forja" },
           { "nombre": "Felipe Moreno", "rol": "Movilidad y regreso al entrenamiento", "certificacion": "Fisioterapeuta, especialista en rehabilitación deportiva", "foto": "coach-06", "alt": "Retrato de Felipe Moreno, fisioterapeuta y entrenador de Forja" }
         ]
@@ -192,18 +192,18 @@
       "h1": ["Fotos del", "gimnasio Forja"],
       "entrada": "Así se ve un día normal en la sala: hierro, tiza, grupos pequeños y entrenadores encima de cada repetición.",
       "fotos": [
-        {"foto": "galeria-04", "forma": "grande", "rotulo": "Zona de remos", "alt": "Fila de máquinas de remo listas para la clase de acondicionamiento"},
-        {"foto": "galeria-01", "forma": "alta", "rotulo": "Discos olímpicos", "alt": "Discos de pesas apilados junto a la plataforma de levantamiento"},
+        {"foto": "galeria-04", "forma": "grande", "rotulo": "Remo", "alt": "Piernas de una persona remando en una máquina de remo, vistas desde arriba"},
+        {"foto": "galeria-01", "forma": "alta", "rotulo": "Discos olímpicos", "alt": "Barras cargadas con discos sobre el piso de caucho, vistas desde arriba"},
         {"foto": "galeria-03", "forma": "alta", "rotulo": "Trepa de cuerda", "alt": "Persona subiendo por una cuerda colgada del techo del gimnasio"},
-        {"foto": "galeria-06", "forma": "ancha", "rotulo": "Jaulas de sentadilla", "alt": "Jaula de sentadilla con barra olímpica cargada"},
-        {"foto": "galeria-02", "forma": "cuadrada", "rotulo": "Tiza y agarre", "alt": "Manos con tiza sujetando una barra olímpica"},
+        {"foto": "galeria-06", "forma": "ancha", "rotulo": "Jaulas de sentadilla", "alt": "Jaula de sentadilla y una barra olímpica cargada en el piso"},
+        {"foto": "galeria-02", "forma": "cuadrada", "rotulo": "Tiza y agarre", "alt": "Mano con tiza sujetando una pesa rusa"},
         {"foto": "galeria-05", "forma": "alta", "rotulo": "Saco de boxeo", "alt": "Saco de boxeo colgado en la zona de acondicionamiento"},
         {"foto": "galeria-11", "forma": "cuadrada", "rotulo": "Mancuernas", "alt": "Estante con mancuernas ordenadas por peso"},
-        {"foto": "galeria-07", "forma": "ancha", "rotulo": "Cuerdas de batalla", "alt": "Persona entrenando con cuerdas de batalla en el piso del gimnasio"},
+        {"foto": "galeria-07", "forma": "ancha", "rotulo": "Cuerdas de batalla", "alt": "Persona entrenando con cuerdas de batalla"},
         {"foto": "galeria-09", "forma": "alta", "rotulo": "Movilidad", "alt": "Persona haciendo ejercicios de movilidad y estiramiento en el gimnasio"},
         {"foto": "galeria-12", "forma": "alta", "rotulo": "Halterofilia", "alt": "Arrancada de halterofilia con barra olímpica"},
-        {"foto": "galeria-08", "forma": "ancha", "rotulo": "Trineo", "alt": "Persona empujando un trineo cargado con discos sobre el piso de caucho"},
-        {"foto": "galeria-10", "forma": "ancha", "rotulo": "Clase en grupo", "alt": "Grupo pequeño entrenando al mismo tiempo con su entrenador"}
+        {"foto": "galeria-08", "forma": "ancha", "rotulo": "Trineo", "alt": "Trineo cargado con discos sobre el piso de caucho"},
+        {"foto": "galeria-10", "forma": "ancha", "rotulo": "Clase en grupo", "alt": "Clase en grupo: una alumna con cuerdas de batalla y otros entrenando al fondo"}
       ]
     },
 

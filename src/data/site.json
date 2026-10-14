@@ -215,7 +215,7 @@
     "verDemo": "Ver la demo",
     "verPlan": "Qué incluye el plan",
     "suma": "Lo que suma frente al plan anterior",
-    "aviso": "Negocios ficticios. Las demos no se venden como plantilla: tu página tendrá su propio diseño."
+    "aviso": "Negocios ficticios: los nombres, precios, personas y testimonios son de ejemplo."
   },
   "demos": {
     "franja": {
@@ -232,7 +232,7 @@
       "verPlan": "Ver todo lo que incluye {plan}",
       "quiero": "Quiero una página así",
       "otras": "Ver las otras demos",
-      "nota": "Negocio ficticio: el nombre, los precios, las personas y los testimonios son de ejemplo. Los datos de contacto de esta demo son los de Chymera Studios y nada de lo que escribas aquí se envía. Tu página tendrá un diseño propio, hecho para tu marca."
+      "nota": "Negocio ficticio: el nombre, los precios, las personas y los testimonios son de ejemplo, y las fotos son de Unsplash. Los datos de contacto de esta demo son los de Chymera Studios y nada de lo que escribas aquí se envía. Tu página tendrá un diseño propio, hecho para tu marca."
     },
     "textosBase": {
       "formulario": {

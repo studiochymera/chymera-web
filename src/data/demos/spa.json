@@ -103,7 +103,7 @@
         "titulo": "Masajes",
         "intro": "Antes de empezar te preguntamos qué zonas quieres trabajar y qué tanta presión prefieres. Usamos aceites vegetales sin perfume añadido.",
         "foto": "servicio-masajes",
-        "alt": "Terapeuta dando un masaje de espalda a una persona cubierta con toalla blanca",
+        "alt": "Manos de una terapeuta dando un masaje de espalda",
         "items": [
           { "id": "masaje-relajante", "nombre": "Masaje relajante", "descripcion": "Movimientos largos y lentos con aceite tibio, de los pies a la cabeza.", "duracion": 60, "precio": 150000, "reservable": true },
           { "id": "tejido-profundo", "nombre": "Masaje de tejido profundo", "descripcion": "Presión firme y sostenida en espalda, cuello y hombros, donde más se acumula la tensión del día.", "duracion": 60, "precio": 170000, "reservable": true },
@@ -135,7 +135,7 @@
         "titulo": "Corporales",
         "intro": "Rituales para la piel de todo el cuerpo, con ducha tibia, bata y un rato en la sala de descanso al final.",
         "foto": "servicio-corporales",
-        "alt": "Exfoliación corporal con sal y aceite sobre la espalda en una camilla de spa",
+        "alt": "Exfoliante de sal en un cuenco, con toallas enrolladas al lado",
         "items": [
           { "id": "exfoliacion-corporal", "nombre": "Exfoliación corporal", "descripcion": "Sal marina y aceite de almendras en todo el cuerpo, con ducha y crema al final.", "duracion": 45, "precio": 130000, "reservable": true },
           { "id": "envoltura-chocolate", "nombre": "Envoltura de chocolate", "descripcion": "Cacao colombiano tibio sobre la piel mientras descansas entre mantas.", "duracion": 60, "precio": 150000, "reservable": false },
@@ -149,10 +149,10 @@
         "titulo": "Manos y pies",
         "intro": "Herramientas esterilizadas para cada cita y esmaltes de tonos naturales. Llega con las uñas sin esmalte o te lo retiramos aquí.",
         "foto": "servicio-manos",
-        "alt": "Manos sobre una toalla durante un manicure spa con frascos de aceite al lado",
+        "alt": "Manicurista pintando las uñas de una clienta, con esmaltes al lado",
         "items": [
-          { "id": "pedicure-spa", "nombre": "Pedicure spa", "descripcion": "Baño de pies con sales, exfoliación, limado, masaje y esmalte tradicional.", "duracion": 60, "precio": 65000, "reservable": true },
-          { "id": "manicure-spa", "nombre": "Manicure spa", "descripcion": "Baño de manos, cutícula, exfoliación, masaje y esmalte tradicional.", "duracion": 45, "precio": 55000, "reservable": false },
+          { "id": "pedicure-spa", "nombre": "Pedicure spa", "descripcion": "Baño de pies con sales, exfoliación, limado, masaje y esmalte tradicional.", "duracion": 60, "precio": 65000, "reservable": false },
+          { "id": "manicure-spa", "nombre": "Manicure spa", "descripcion": "Baño de manos, cutícula, exfoliación, masaje y esmalte tradicional.", "duracion": 45, "precio": 55000, "reservable": true },
           { "id": "manos-pies", "nombre": "Manicure y pedicure spa", "descripcion": "Los dos servicios en la misma cita, con té mientras esperas.", "duracion": 105, "precio": 110000, "reservable": false },
           { "id": "parafina", "nombre": "Parafina para manos", "descripcion": "Baño de parafina tibia y guantes térmicos. Puedes sumarla a tu manicure.", "duracion": 20, "precio": 40000, "reservable": false }
         ]
@@ -225,18 +225,18 @@
     { "texto": "Tengo la membresía hace seis meses. Es mi hora del mes sin celular y la cuido como cualquier otra cita importante.", "nombre": "Lucía H.", "servicio": "Membresía mensual" }
   ],
   "galeria": [
-    { "foto": "galeria-01", "forma": "arco", "pie": "Velas en la sala de masajes", "alt": "Velas encendidas sobre una repisa en la penumbra de la sala de masajes" },
-    { "foto": "galeria-02", "forma": "alta", "pie": "Toallas listas para cada cita", "alt": "Toallas blancas enrolladas y apiladas en una repisa de madera" },
-    { "foto": "galeria-05", "forma": "ancha", "pie": "Una de nuestras salas", "alt": "Camilla de masajes tendida con sábanas claras junto a una ventana con luz suave" },
-    { "foto": "galeria-03", "forma": "alta", "pie": "Ducha con eucalipto", "alt": "Ramas de eucalipto colgadas en la ducha del spa" },
-    { "foto": "galeria-04", "forma": "arco", "pie": "Aceites vegetales", "alt": "Frascos de vidrio con aceites para masaje sobre una bandeja de madera" },
-    { "foto": "galeria-07", "forma": "ancha", "pie": "Vapor antes del ritual", "alt": "Vapor suave en un cuarto de madera con luz tenue" },
-    { "foto": "galeria-08", "forma": "arco", "pie": "Té de la casa", "alt": "Taza de té de hierbas humeante sobre una mesa de madera" },
-    { "foto": "galeria-06", "forma": "alta", "pie": "Piedras volcánicas", "alt": "Piedras volcánicas lisas apiladas, listas para el masaje con piedras calientes" },
-    { "foto": "galeria-10", "forma": "ancha", "pie": "Baño de pies con flores", "alt": "Pétalos de flores flotando en agua tibia para el baño de pies" },
+    { "foto": "galeria-01", "forma": "arco", "pie": "Velas en la sala de masajes", "alt": "Velas y un difusor de varillas con humo suave en la penumbra" },
+    { "foto": "galeria-02", "forma": "alta", "pie": "Toallas listas para cada cita", "alt": "Toallas enrolladas junto a una vela, miel y piedras de masaje" },
+    { "foto": "galeria-05", "forma": "ancha", "pie": "Una de nuestras salas", "alt": "Sala de tratamiento con camilla, tina y biombos de madera calada" },
+    { "foto": "galeria-03", "forma": "alta", "pie": "Eucalipto fresco", "alt": "Ramas de eucalipto vistas de cerca" },
+    { "foto": "galeria-04", "forma": "arco", "pie": "Aceites vegetales", "alt": "Frasco de aceite para masaje y lavanda sobre una toalla" },
+    { "foto": "galeria-07", "forma": "ancha", "pie": "La sauna", "alt": "Sauna de madera con estufa de leña y una ventana grande hacia los árboles" },
+    { "foto": "galeria-08", "forma": "arco", "pie": "Té de la casa", "alt": "Tetera de vidrio con té de hierbas sobre un posavasos tejido" },
+    { "foto": "galeria-06", "forma": "alta", "pie": "Piedras de la sauna", "alt": "Piedras volcánicas en la estufa de la sauna, junto a una pared de madera" },
+    { "foto": "galeria-10", "forma": "ancha", "pie": "Baño de flores", "alt": "Tina con pétalos de flores, aceites y toallas enrolladas" },
     { "foto": "galeria-09", "forma": "alta", "pie": "Plantas en la entrada", "alt": "Plantas verdes junto a una pared clara con luz natural" },
-    { "foto": "galeria-11", "forma": "arco", "pie": "Bata y pantuflas para ti", "alt": "Bata blanca de algodón colgada junto a un espejo" },
-    { "foto": "galeria-12", "forma": "ancha", "pie": "Sala de descanso", "alt": "Sala de descanso con sillas cómodas, cojines y luz cálida" }
+    { "foto": "galeria-11", "forma": "arco", "pie": "Tu bata te espera", "alt": "Dos batas blancas colgadas en la pared" },
+    { "foto": "galeria-12", "forma": "ancha", "pie": "Sala de descanso", "alt": "Sala de descanso con tumbonas y luz cálida, detrás de una pared de vidrio" }
   ],
   "preguntas": [
     { "p": "¿Cómo reservo mi cita?", "r": "En la página de reservas eliges el servicio, el día y la hora, dejas tus datos y pagas el 30 % de anticipo. Te llega un correo con la confirmación. Si prefieres, también puedes reservar por WhatsApp." },
@@ -341,7 +341,7 @@
       "h1": ["Un spa en Usaquén", "para", "bajar el ritmo."],
       "entrada": "Masajes, faciales y rituales corporales con tiempo completo en la camilla. Reserva en línea en cuatro pasos y paga solo el 30 % para confirmar.",
       "foto": "portada",
-      "alt": "Sala de masajes con luz cálida, camilla tendida y toallas dobladas en Bruma Spa",
+      "alt": "Sala de masajes de Bruma Spa con la camilla tendida, cortinas y luz natural",
       "datos": [
         { "valor": "Mar a dom", "texto": "lunes cerrado" },
         { "valor": "8 servicios", "texto": "para reservar en línea" },
@@ -360,7 +360,7 @@
       "destacados": {
         "antetitulo": "Para empezar",
         "titulo": "Los más reservados",
-        "ids": ["masaje-relajante", "limpieza-facial", "exfoliacion-corporal", "pedicure-spa"]
+        "ids": ["masaje-relajante", "limpieza-facial", "exfoliacion-corporal", "manicure-spa"]
       },
       "testimonios": {
         "antetitulo": "Testimonios",
@@ -393,7 +393,7 @@
       "h1": "Nuestro equipo de terapeutas en Usaquén",
       "entrada": "Somos cinco personas que llegan temprano, ventilan las salas y calientan el aceite antes de que llegues. Así empezó Bruma y así seguimos.",
       "foto": "nosotros",
-      "alt": "Interior de Bruma Spa con plantas, muebles de madera clara y luz natural",
+      "alt": "Sala de masajes de Bruma Spa con camilla, persiana y luz natural",
       "historia": {
         "antetitulo": "Historia",
         "titulo": "Una casa, dos salas y mucho té",
@@ -451,7 +451,7 @@
       "h1": "Reserva tu cita en Usaquén",
       "entrada": "Elige servicio, día y hora. Pagas el 30 % para confirmar y el resto en el spa.",
       "foto": "reservas",
-      "alt": "Sala tranquila de Bruma Spa con luz natural, lista para recibirte",
+      "alt": "Sala de Bruma Spa con sillones, plantas y camillas al fondo",
       "comoTitulo": "Cómo funciona",
       "como": [
         "Eliges uno de los 8 servicios, el día y la hora que te sirven.",

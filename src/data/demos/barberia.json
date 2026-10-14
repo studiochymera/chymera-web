@@ -65,7 +65,7 @@
     "lema": "Barbería en Chapinero",
     "texto": "Corte a tijera, degradados limpios y afeitado con navaja y toalla caliente. Sin afanes, con buen pulso y como se hace el oficio.",
     "verPrecios": "Ver servicios y precios",
-    "alt": "Barbero cortando el pelo a un cliente en una barbería con luz cálida",
+    "alt": "Barbero afeitando con navaja a un cliente recostado en la silla, en penumbra",
     "horarioTitulo": "Abierto",
     "desde": "Desde 2014"
   },
@@ -117,7 +117,7 @@
     "selloAntes": "Desde",
     "sello": "2014",
     "selloLugar": "Chapinero",
-    "alt": "Barbero de pie junto a su silla de trabajo en la barbería"
+    "alt": "Barbero de gorro y gafas con las manos sobre la toalla caliente de un cliente"
   },
   "galeria": {
     "etiqueta": "Galería",
@@ -126,13 +126,13 @@
     "intro": "Tijera, navaja y toalla caliente en el día a día de la barbería.",
     "fotos": [
       { "slot": "galeria-05", "forma": "horizontal", "alt": "Cliente con toalla caliente en la cara antes del afeitado" },
-      { "slot": "galeria-01", "forma": "vertical", "alt": "Degradado bajo recién terminado, visto de cerca" },
-      { "slot": "galeria-02", "forma": "vertical", "alt": "Barbero perfilando una barba con navaja" },
+      { "slot": "galeria-01", "forma": "vertical", "alt": "Barbero haciendo un degradado con máquina, visto de cerca" },
+      { "slot": "galeria-02", "forma": "vertical", "alt": "Barbero de manos tatuadas perfilando la nuca con navaja" },
       { "slot": "galeria-03", "forma": "cuadrada", "alt": "Tijeras, peines y navaja sobre el mesón de trabajo" },
       { "slot": "galeria-06", "forma": "horizontal", "alt": "Interior de la barbería con sillas, espejos y luz cálida" },
       { "slot": "galeria-08", "forma": "cuadrada", "alt": "Barbero repasando un corte con máquina" },
       { "slot": "galeria-04", "forma": "vertical", "alt": "Silla de barbero clásica de cuero y metal" },
-      { "slot": "galeria-07", "forma": "vertical", "alt": "Cliente con el corte recién hecho y la barba arreglada" }
+      { "slot": "galeria-07", "forma": "vertical", "alt": "Barbero arreglando una barba con tijera" }
     ],
     "instagramTitulo": "Más cortes, todos los días",
     "instagramTexto": "Subimos el trabajo de la semana a Instagram.",
