@@ -1,0 +1,64 @@
+---
+// Base técnica de Chymera: <head> completo para SEO local y para compartir por WhatsApp.
+// No trae estilos: cada web importa su propia hoja de estilos en su layout.
+interface Props {
+  titulo: string; // máximo 60 caracteres: servicio, zona y nombre
+  descripcion: string; // máximo 155 caracteres
+  imagenSocial?: string; // ruta desde la raíz del sitio, 1200 × 630
+  icono?: string; // ruta relativa al favicon
+  colorTema?: string;
+  noIndexar?: boolean;
+  schemas?: object[];
+  tokenEstadisticas?: string; // Cloudflare Web Analytics, solo planes Negocio y Reservas
+}
+
+const {
+  titulo,
+  descripcion,
+  imagenSocial,
+  icono,
+  colorTema = '#ffffff',
+  noIndexar = false,
+  schemas = [],
+  tokenEstadisticas,
+} = Astro.props;
+
+if (import.meta.env.DEV) {
+  if (titulo.length > 60) console.warn(`[base] Título de ${titulo.length} caracteres (máximo 60): ${titulo}`);
+  if (descripcion.length > 155) console.warn(`[base] Descripción de ${descripcion.length} caracteres (máximo 155) en ${Astro.url.pathname}`);
+}
+
+const canonica = new URL(Astro.url.pathname, Astro.site).href;
+const imagen = imagenSocial ? new URL(imagenSocial, Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <meta name="theme-color" content={colorTema} />
+    {noIndexar && <meta name="robots" content="noindex, follow" />}
+    {icono && <link rel="icon" href={icono} />}
+    <link rel="canonical" href={canonica} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    {imagen && <meta property="og:image" content={imagen} />}
+    {imagen && <meta property="og:image:width" content="1200" />}
+    {imagen && <meta property="og:image:height" content="630" />}
+    <meta name="twitter:card" content={imagen ? 'summary_large_image' : 'summary'} />
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    <slot name="head" />
+    {tokenEstadisticas && (
+      <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: tokenEstadisticas })}></script>
+    )}
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

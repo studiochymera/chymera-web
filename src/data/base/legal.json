@@ -1,0 +1,30 @@
+{
+  "nota": "Plantillas legales de la base técnica de Chymera. Se llenan con los datos del negocio (formulario del cliente, secciones 2 y 7). Completa: planes Negocio y Reservas. Básica: plan Presencia (sin formulario ni estadísticas).",
+  "completa": {
+    "titulo": "Política de tratamiento de datos personales",
+    "descripcion": "Cómo {negocio} recoge, usa y protege tus datos personales, y cómo ejercer tus derechos según la Ley 1581 de 2012.",
+    "intro": "En {negocio} cuidamos los datos que nos compartes. Esta política explica qué datos recogemos, para qué los usamos y cómo puedes conocerlos, actualizarlos o pedir que los borremos, en cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013 (compilado en el Decreto 1074 de 2015).",
+    "secciones": [
+      { "titulo": "Responsable del tratamiento", "lista": ["{responsable}", "Dirección: {direccion}", "Correo: {correo}", "Teléfono y WhatsApp: {telefono}", "Sitio web: {web}"] },
+      { "titulo": "Qué datos recogemos", "texto": ["Solo los que nos das al escribirnos por el formulario, por WhatsApp o por redes: tu nombre, tu número de celular o tu correo y tu mensaje.", "{textoReservas}", "No pedimos datos sensibles ni datos de niños, niñas o adolescentes. Este sitio no usa cookies de seguimiento ni de publicidad; las visitas se cuentan sin cookies y sin identificarte."] },
+      { "titulo": "Para qué los usamos", "lista": "{finalidades}" },
+      { "titulo": "Con quién los compartimos", "texto": ["No vendemos ni alquilamos tus datos. Los compartimos solo con los proveedores que necesitamos para atenderte, que pueden estar fuera de Colombia: {proveedores}. También los entregaremos a una autoridad cuando la ley lo exija."] },
+      { "titulo": "Tus derechos", "lista": ["Conocer, actualizar y corregir tus datos.", "Pedir prueba de la autorización que nos diste.", "Saber cómo hemos usado tus datos.", "Revocar la autorización o pedir que borremos tus datos, cuando no tengamos un deber legal o contractual de conservarlos.", "Acceder gratis a tus datos.", "Presentar quejas ante la Superintendencia de Industria y Comercio después de haber hecho tu consulta o reclamo ante nosotros."] },
+      { "titulo": "Cómo ejercer tus derechos", "texto": ["Escríbenos a {correo} con tu nombre, tu número de contacto y lo que necesitas.", "Respondemos las consultas en máximo 10 días hábiles, prorrogables 5 días hábiles más si te avisamos el motivo. Los reclamos (corregir, actualizar, borrar o revocar) los respondemos en máximo 15 días hábiles, prorrogables 8 días hábiles más con aviso."] },
+      { "titulo": "Seguridad y conservación", "texto": ["Guardamos tus datos en servicios con acceso protegido y solo los usan las personas que te atienden. Los conservamos mientras sean necesarios para atenderte y luego el tiempo que exijan las normas contables y tributarias."] },
+      { "titulo": "Vigencia y cambios", "texto": ["Esta política rige desde el {fecha}. Si la cambiamos, publicaremos la nueva versión en esta página con su fecha."] }
+    ]
+  },
+  "basica": {
+    "titulo": "Aviso de privacidad",
+    "descripcion": "Cómo {negocio} usa los datos que le compartes al escribirle, según la Ley 1581 de 2012.",
+    "intro": "Este aviso explica cómo usa {negocio} los datos que le compartes al escribirle, en cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013 (compilado en el Decreto 1074 de 2015).",
+    "secciones": [
+      { "titulo": "Responsable del tratamiento", "lista": ["{responsable}", "Dirección: {direccion}", "Correo: {correo}", "Teléfono y WhatsApp: {telefono}"] },
+      { "titulo": "Qué datos usamos y para qué", "texto": ["Esta página no tiene formularios ni usa cookies. Si nos escribes por WhatsApp, redes o correo, usamos tu nombre, tu número y tu mensaje solo para responderte, agendar tu cita y atenderte. No vendemos ni compartimos tus datos, salvo con los servicios de mensajería que usas para escribirnos o cuando una autoridad lo exija."] },
+      { "titulo": "Tus derechos", "texto": ["Puedes conocer, actualizar, corregir y pedir que borremos tus datos, revocar tu autorización, pedir prueba de ella y presentar quejas ante la Superintendencia de Industria y Comercio después de habernos escrito. Acceder a tus datos es gratis."] },
+      { "titulo": "Cómo ejercerlos", "texto": ["Escríbenos a {correo} o por WhatsApp con tu nombre y lo que necesitas. Respondemos las consultas en máximo 10 días hábiles y los reclamos en máximo 15 días hábiles."] },
+      { "titulo": "Vigencia", "texto": ["Este aviso rige desde el {fecha}. Si lo cambiamos, publicaremos la nueva versión en esta página."] }
+    ]
+  }
+}

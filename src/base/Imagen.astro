@@ -1,0 +1,59 @@
+---
+// Base técnica de Chymera: foto optimizada (AVIF y WebP, varios tamaños, ancho y alto declarados).
+// Mientras la foto no exista en src/assets muestra un marcador del mismo tamaño, para no publicar huecos sin darse cuenta.
+import { Picture } from 'astro:assets';
+import { buscarImagen } from './imagenes';
+
+interface Props {
+  ruta: string; // por ejemplo 'demos/spa/portada', sin extensión
+  alt: string;
+  anchos?: number[];
+  sizes?: string;
+  class?: string;
+  claseMarco?: string;
+  prioridad?: boolean; // true solo para la foto principal de la página
+  proporcion?: string; // para el marcador, por ejemplo '4/5'
+}
+
+const {
+  ruta,
+  alt,
+  anchos = [480, 800, 1200],
+  sizes = '(min-width: 1024px) 50vw, 100vw',
+  class: clase,
+  claseMarco,
+  prioridad = false,
+  proporcion = '4/3',
+} = Astro.props;
+
+const imagen = await buscarImagen(ruta);
+const anchosValidos = imagen ? anchos.filter((a) => a <= imagen.width) : [];
+if (imagen && anchosValidos.length === 0) anchosValidos.push(imagen.width);
+---
+
+{imagen ? (
+  <Picture
+    src={imagen}
+    alt={alt}
+    widths={anchosValidos}
+    sizes={sizes}
+    formats={['avif', 'webp']}
+    quality={68}
+    loading={prioridad ? 'eager' : 'lazy'}
+    fetchpriority={prioridad ? 'high' : 'auto'}
+    decoding="async"
+    class={clase}
+    pictureAttributes={{ class: claseMarco }}
+  />
+) : (
+  <div class:list={['imagen-pendiente', claseMarco, clase]} style={`aspect-ratio: ${proporcion}`} role="img" aria-label={alt} data-falta-foto={ruta}></div>
+)}
+
+<style>
+  .imagen-pendiente {
+    display: block;
+    width: 100%;
+    background-color: color-mix(in srgb, currentColor 12%, transparent);
+    background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, currentColor 7%, transparent) 14px 28px);
+  }
+</style>

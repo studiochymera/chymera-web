@@ -1,0 +1,357 @@
+---
+// Franja de Chymera arriba de cada demo: plan, precio, qué se ve y qué suma el plan siguiente.
+// No es parte de la base técnica: solo existe en las demos del portafolio.
+// En la demo, cada bloque que muestra algo del plan lleva data-incluye="texto"; el botón
+// "Señalar" pone esa etiqueta encima del bloque.
+import site from '../../data/site.json';
+import { raiz, enlaceWhatsApp } from '../../base/formato';
+
+interface Props {
+  slug: 'barberia' | 'gimnasio' | 'spa';
+}
+
+const { slug } = Astro.props;
+const f = site.demos.franja;
+const demo = site.demos.lista.find((d) => d.slug === slug)!;
+const plan = site.paquetes.find((p) => p.slug === demo.plan)!;
+const siguiente = demo.siguiente ? site.paquetes.find((p) => p.slug === demo.siguiente) : undefined;
+const r = raiz(Astro.url.pathname);
+const precio = f.precio.replace('{precio}', plan.precio).replace('{mensual}', plan.mensual);
+const nombrePlan = f.plan.replace('{plan}', plan.nombre);
+---
+
+<div class="chy-franja" data-nosnippet>
+  <div class="chy-barra">
+    <img src={`${r}brand/isotipo-cream.svg`} alt="" width="900" height="674" class="chy-iso" />
+    <p class="chy-texto">
+      <span class="chy-marca">{f.marca}</span>
+      <span class="chy-plan"><strong>{nombrePlan}</strong> · {precio}</span>
+    </p>
+    <button type="button" class="chy-boton" data-chy-abrir aria-haspopup="dialog">{f.abrir}</button>
+  </div>
+</div>
+
+<button type="button" class="chy-pastilla" data-chy-abrir aria-haspopup="dialog" hidden>
+  <img src={`${r}brand/isotipo-cream.svg`} alt="" width="900" height="674" />
+  <span>{f.abrir} · {plan.nombre}</span>
+</button>
+
+<dialog class="chy-panel" aria-labelledby="chy-panel-titulo" data-nosnippet>
+  <div class="chy-cabeza">
+    <div>
+      <p class="chy-marca">{f.marca}</p>
+      <p id="chy-panel-titulo" class="chy-titulo">{nombrePlan}</p>
+      <p class="chy-precio">{precio}</p>
+    </div>
+    <button type="button" class="chy-cerrar" data-chy-cerrar>{f.cerrar}</button>
+  </div>
+
+  <p class="chy-subtitulo">{f.tituloVes}</p>
+  <ul class="chy-lista">{demo.ves.map((v) => <li>{v}</li>)}</ul>
+
+  {siguiente ? (
+    <>
+      <p class="chy-subtitulo">{f.tituloSiguiente.replace('{plan}', siguiente.nombre)} <span>· ${siguiente.precio}</span></p>
+      <ul class="chy-lista chy-suma">{demo.suma!.map((v) => <li>{v}</li>)}</ul>
+    </>
+  ) : (
+    <>
+      <p class="chy-subtitulo">{f.tituloTope}</p>
+      <p class="chy-tope">{demo.tope}</p>
+    </>
+  )}
+
+  <button type="button" class="chy-senalar" data-chy-senalar aria-pressed="false" data-on={f.quitarSenales} data-off={f.senalar}>{f.senalar}</button>
+
+  <div class="chy-acciones">
+    <a href={enlaceWhatsApp(site.whatsapp, demo.whatsappTexto)} target="_blank" rel="noopener" class="chy-primario">{f.quiero}</a>
+    <a href={`${r}planes/${plan.slug}/`} class="chy-secundario">{f.verPlan.replace('{plan}', plan.nombre)}</a>
+    <a href={`${r}#portafolio`} class="chy-secundario">{f.otras}</a>
+  </div>
+
+  <p class="chy-nota">{f.nota}</p>
+</dialog>
+
+<script>
+  const panel = document.querySelector<HTMLDialogElement>('.chy-panel')!;
+  const pastilla = document.querySelector<HTMLButtonElement>('.chy-pastilla')!;
+  const barra = document.querySelector('.chy-franja')!;
+  const senalar = document.querySelector<HTMLButtonElement>('[data-chy-senalar]')!;
+
+  document.querySelectorAll('[data-chy-abrir]').forEach((b) => b.addEventListener('click', () => panel.showModal()));
+  document.querySelector('[data-chy-cerrar]')!.addEventListener('click', () => panel.close());
+  panel.addEventListener('click', (e) => {
+    if (e.target === panel) panel.close();
+  });
+
+  new IntersectionObserver(([e]) => {
+    pastilla.hidden = e.isIntersecting;
+  }).observe(barra);
+
+  let activas = false;
+  senalar.addEventListener('click', () => {
+    activas = !activas;
+    document.documentElement.classList.toggle('chy-senales', activas);
+    senalar.setAttribute('aria-pressed', String(activas));
+    senalar.textContent = activas ? senalar.dataset.on! : senalar.dataset.off!;
+    document.querySelectorAll<HTMLElement>('[data-incluye]').forEach((el) => {
+      if (activas) {
+        if (getComputedStyle(el).position === 'static') {
+          el.style.position = 'relative';
+          el.dataset.chyPos = '1';
+        }
+        const etiqueta = document.createElement('span');
+        etiqueta.className = 'chy-senal';
+        etiqueta.textContent = el.dataset.incluye!;
+        el.prepend(etiqueta);
+      } else {
+        el.querySelector(':scope > .chy-senal')?.remove();
+        if (el.dataset.chyPos) {
+          el.style.position = '';
+          delete el.dataset.chyPos;
+        }
+      }
+    });
+    if (activas) panel.close();
+  });
+</script>
+
+<style>
+  .chy-franja,
+  .chy-pastilla,
+  .chy-panel {
+    --chy-azul: #1d2a3a;
+    --chy-azul-2: #26364a;
+    --chy-crema: #fdf8f4;
+    --chy-celeste: #279bf2;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: normal;
+    text-transform: none;
+    font-style: normal;
+  }
+  .chy-franja {
+    position: relative;
+    z-index: 70;
+    background: var(--chy-azul);
+    color: var(--chy-crema);
+  }
+  .chy-barra {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+  }
+  .chy-iso {
+    width: 1.75rem;
+    height: auto;
+    flex-shrink: 0;
+  }
+  .chy-texto {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+  .chy-marca {
+    color: rgb(253 248 244 / 0.7);
+  }
+  .chy-plan strong {
+    color: var(--chy-crema);
+    font-weight: 700;
+  }
+  .chy-boton {
+    margin-left: auto;
+    flex-shrink: 0;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--chy-crema);
+    color: var(--chy-azul);
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .chy-pastilla {
+    position: fixed;
+    z-index: 70;
+    left: calc(1rem + env(safe-area-inset-left));
+    bottom: calc(1.25rem + env(safe-area-inset-bottom));
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2.75rem;
+    padding: 0 1rem 0 0.75rem;
+    border: 1px solid rgb(253 248 244 / 0.25);
+    border-radius: 999px;
+    background: var(--chy-azul);
+    color: var(--chy-crema);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.3);
+    cursor: pointer;
+  }
+  .chy-pastilla[hidden] {
+    display: none;
+  }
+  .chy-pastilla img {
+    width: 1.25rem;
+    height: auto;
+  }
+  .chy-panel {
+    width: min(34rem, calc(100% - 1.5rem));
+    max-height: calc(100dvh - 1.5rem);
+    margin: auto;
+    padding: 1.5rem;
+    border: 0;
+    border-radius: 1.25rem;
+    background: var(--chy-azul);
+    color: var(--chy-crema);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    overflow-y: auto;
+  }
+  .chy-panel::backdrop {
+    background: rgb(4 5 7 / 0.6);
+  }
+  .chy-cabeza {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .chy-cabeza p {
+    margin: 0;
+  }
+  .chy-titulo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .chy-precio {
+    color: var(--chy-celeste);
+    font-weight: 600;
+  }
+  .chy-cerrar {
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    border: 1px solid rgb(253 248 244 / 0.3);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--chy-crema);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .chy-subtitulo {
+    margin: 1.5rem 0 0.5rem;
+    font-weight: 700;
+  }
+  .chy-subtitulo span {
+    color: rgb(253 248 244 / 0.7);
+    font-weight: 500;
+  }
+  .chy-lista {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: rgb(253 248 244 / 0.85);
+  }
+  .chy-lista li {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  .chy-lista li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--chy-celeste);
+    font-weight: 700;
+  }
+  .chy-suma li::before {
+    content: '+';
+  }
+  .chy-tope {
+    margin: 0;
+    color: rgb(253 248 244 / 0.85);
+  }
+  .chy-senalar {
+    width: 100%;
+    min-height: 2.75rem;
+    margin-top: 1.5rem;
+    border: 1px dashed var(--chy-celeste);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--chy-crema);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .chy-acciones {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .chy-acciones a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+  }
+  .chy-primario {
+    background: var(--chy-crema);
+    color: var(--chy-azul);
+  }
+  .chy-secundario {
+    border: 1px solid rgb(253 248 244 / 0.3);
+    color: var(--chy-crema);
+  }
+  .chy-nota {
+    margin: 1.25rem 0 0;
+    color: rgb(253 248 244 / 0.65);
+    font-size: 0.8125rem;
+  }
+  @media (min-width: 640px) {
+    .chy-texto {
+      flex-direction: row;
+      gap: 0.75rem;
+      font-size: 0.8125rem;
+    }
+  }
+</style>
+
+<style is:global>
+  html.chy-senales [data-incluye] {
+    outline: 2px dashed #279bf2;
+    outline-offset: -2px;
+  }
+  .chy-senal {
+    position: absolute;
+    z-index: 65;
+    top: 0.5rem;
+    left: 0.5rem;
+    max-width: calc(100% - 1rem);
+    padding: 0.375rem 0.75rem;
+    border-radius: 999px;
+    background: #1d2a3a;
+    color: #fdf8f4;
+    font: 600 0.75rem/1.3 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: normal;
+    text-transform: none;
+    font-style: normal;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.25);
+    pointer-events: none;
+  }
+</style>

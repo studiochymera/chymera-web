@@ -10,5 +10,12 @@ Sitio estático en Astro + Tailwind CSS v4. Se publica en Cloudflare (Workers co
 - Diseñar primero para celular. Botón de WhatsApp siempre visible.
 - Antes de terminar: `npm run build` sin errores.
 
+## Base técnica y demos del portafolio
+- `src/base/` es la base técnica de Chymera: lo que no se ve y se reutiliza en cada web de cliente (head con SEO, datos estructurados, botón de WhatsApp, mapa diferido, formulario con autorización, política de datos y aviso de privacidad, fotos optimizadas). No trae diseño: cada web pone el suyo. La copia para webs de clientes está en /mnt/project-files/plantilla-base; si cambias algo aquí, cámbialo allá también.
+- Plantillas legales de la base: `src/data/base/legal.json`.
+- Demos en `/demos/barberia/` (Presencia), `/demos/gimnasio/` (Negocio) y `/demos/spa/` (Reservas). Cada una tiene su diseño propio: textos en `src/data/demos/<demo>.json`, estilos en `src/styles/demos/<demo>.css` (no usan `global.css`), componentes en `src/components/demos/<demo>/`, fotos en `src/assets/demos/<demo>/`. Las demos no se indexan en Google y no van en `sitemap.xml`.
+- Cada demo muestra solo lo que incluye su plan (mismos límites que la ficha de planes). Los textos de la franja de Chymera y del portafolio están en `site.json` (claves `demos` y `portafolio`).
+- Los datos de contacto de las demos son los de Chymera; nada de teléfonos, correos o redes inventados.
+
 ## Comandos
 - `npm install` · `npm run dev` (http://localhost:4321) · `npm run build` (sale en `dist/`)

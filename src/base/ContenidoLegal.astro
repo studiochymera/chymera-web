@@ -1,0 +1,23 @@
+---
+// Base técnica de Chymera: texto de la política o del aviso, en HTML semántico.
+// La web le da estilo con su propia clase (prop class) y selectores :global.
+import type { DocumentoLegal } from './legal';
+
+interface Props {
+  documento: DocumentoLegal;
+  class?: string;
+}
+
+const { documento, class: clase } = Astro.props;
+---
+
+<div class:list={['contenido-legal', clase]}>
+  <p class="intro">{documento.intro}</p>
+  {documento.secciones.map((s, i) => (
+    <section>
+      <h2><span class="numero">{i + 1}.</span> {s.titulo}</h2>
+      {s.texto?.map((t) => <p>{t}</p>)}
+      {s.lista && s.lista.length > 0 && <ul>{s.lista.map((l) => <li>{l}</li>)}</ul>}
+    </section>
+  ))}
+</div>
