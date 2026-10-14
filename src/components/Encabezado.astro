@@ -1,0 +1,29 @@
+---
+import site from '../data/site.json';
+import { raiz, enlaceWhatsApp } from '../lib/rutas';
+
+const r = raiz(Astro.url.pathname);
+const enInicio = r === './';
+// En la portada los enlaces son anclas; en otras páginas vuelven a la portada.
+const pre = enInicio ? '' : r;
+const wa = enlaceWhatsApp(site.whatsapp, site.whatsappTexto);
+const nav = [
+  { href: `${pre}#servicios`, texto: 'Servicios' },
+  { href: `${r}planes/`, texto: 'Planes' },
+  { href: `${pre}#portafolio`, texto: 'Portafolio' },
+  { href: `${pre}#proceso`, texto: 'Proceso' },
+  { href: `${pre}#preguntas`, texto: 'Preguntas' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-azul/10 bg-crema/90 backdrop-blur">
+  <div class="contenedor flex h-16 items-center justify-between gap-4">
+    <a href={enInicio ? '#inicio' : r} class="flex items-center" aria-label="Chymera Studios, inicio">
+      <img src={`${r}brand/logotipo-navy.svg`} alt="Chymera Studios" width="165" height="40" class="h-7 w-auto sm:h-8" />
+    </a>
+    <nav class="hidden items-center gap-7 text-sm font-medium text-azul md:flex" aria-label="Principal">
+      {nav.map((n) => <a href={n.href} class="hover:text-celeste">{n.texto}</a>)}
+    </nav>
+    <a href={wa} class="boton-azul px-4 py-2 sm:px-5" target="_blank" rel="noopener">Escríbenos</a>
+  </div>
+</header>

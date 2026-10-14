@@ -1,0 +1,204 @@
+---
+import Base from '../../layouts/Base.astro';
+import Encabezado from '../../components/Encabezado.astro';
+import Pie from '../../components/Pie.astro';
+import BotonWhatsApp from '../../components/BotonWhatsApp.astro';
+import Valor from '../../components/Valor.astro';
+import CierrePlanes from '../../components/CierrePlanes.astro';
+import site from '../../data/site.json';
+import { enlaceWhatsApp } from '../../lib/rutas';
+
+export function getStaticPaths() {
+  return site.paquetes.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+
+const { p } = Astro.props;
+const d = site.detallePlanes;
+const mensual = site.planes.find((pl) => pl.nombre === p.planMensual)!;
+const otros = site.paquetes.filter((o) => o.slug !== p.slug);
+const textoWa = d.whatsappPlan.replace('{plan}', p.nombre);
+const wa = enlaceWhatsApp(site.whatsapp, textoWa);
+
+const titulo = `Plan ${p.nombre}: qué incluye · ${site.nombre}`;
+const descripcion = `${p.resumen} Instalación COP ${p.precio} + ${p.mensual} al mes. ${p.idealPara}`;
+const schemaExtra = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `Página web plan ${p.nombre}`,
+  description: p.resumen,
+  provider: { '@type': 'ProfessionalService', name: site.nombre },
+  areaServed: site.ciudad,
+  offers: {
+    '@type': 'Offer',
+    price: p.precio.replaceAll('.', ''),
+    priceCurrency: 'COP',
+  },
+};
+---
+
+<Base titulo={titulo} descripcion={descripcion} schemaExtra={schemaExtra}>
+  <Encabezado />
+
+  <main>
+    <!-- Portada del plan -->
+    <section class="bg-azul text-crema">
+      <div class="contenedor grid gap-10 py-14 sm:py-20 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+        <div>
+          <nav aria-label="Ruta" class="text-sm text-crema/60">
+            <a href="../../" class="hover:text-crema">Inicio</a>
+            <span aria-hidden="true" class="mx-2">/</span>
+            <a href="../" class="hover:text-crema">Planes</a>
+            <span aria-hidden="true" class="mx-2">/</span>
+            <span class="text-crema">{p.nombre}</span>
+          </nav>
+          <p class="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-celeste">
+            Plan {p.destacado ? '· Más elegido' : ''}
+          </p>
+          <h1 class="mt-2 text-5xl font-semibold leading-tight text-crema sm:text-6xl">{p.nombre}</h1>
+          <p class="mt-5 max-w-xl text-lg text-crema/80">{p.resumen}</p>
+        </div>
+
+        <div class="rounded-2xl bg-crema p-6 text-azul sm:p-7">
+          <p>
+            <span class="font-display text-4xl font-semibold">${p.precio}</span>
+            <span class="ml-1 text-sm text-tinta/60">COP</span>
+          </p>
+          <p class="text-sm text-tinta/70">Instalación, pago único · + ${p.mensual} al mes (plan {p.planMensual})</p>
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
+            <a href={wa} class="boton-azul" target="_blank" rel="noopener">Quiero {p.nombre}</a>
+            <a href="../#comparar" class="boton border border-azul/25 text-azul hover:border-azul">{d.comparar}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-crema/15">
+        <dl class="contenedor grid grid-cols-3 divide-x divide-crema/15 py-6 text-center">
+          {p.datos.map((dato) => (
+            <div class="px-2">
+              <dt class="sr-only">{dato.texto}</dt>
+              <dd>
+                <span class="block font-display text-xl font-semibold text-crema sm:text-2xl">{dato.valor}</span>
+                <span class="mt-1 block text-xs text-crema/70 sm:text-sm">{dato.texto}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <!-- Ideal para y secciones -->
+    <section class="py-16 sm:py-24">
+      <div class="contenedor">
+        <div class="max-w-3xl">
+          <h2 class="text-sm font-semibold uppercase tracking-[0.2em] text-azul/70">{d.idealTitulo}</h2>
+          <p class="mt-3 font-display text-2xl leading-snug font-medium text-azul sm:text-3xl">{p.idealPara}</p>
+        </div>
+
+        <h2 class="mt-16 text-3xl font-semibold sm:text-4xl">{d.seccionesTitulo}</h2>
+        <ol class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {p.secciones.map((sec, i) => (
+            <li class="rounded-2xl border border-azul/10 bg-white/60 p-6">
+              <span class="font-display text-sm font-semibold text-azul/60">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="mt-2 text-xl font-semibold">{sec.titulo}</h3>
+              <p class="mt-2 text-sm text-tinta/75">{sec.texto}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Todo lo que incluye -->
+    <section class="bg-crema-2 py-16 sm:py-24">
+      <div class="contenedor">
+        <h2 class="text-3xl font-semibold sm:text-4xl">{d.incluyeTitulo}</h2>
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {p.grupos.map((g) => (
+            <article class="rounded-2xl border border-azul/10 bg-crema p-6 sm:p-7">
+              <h3 class="text-lg font-semibold">{g.titulo}</h3>
+              <ul class="mt-4 space-y-3 text-sm">
+                {g.items.map((it) => <li class="flex gap-3"><Valor valor="Sí" /><span>{it}</span></li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-5 rounded-2xl border border-dashed border-azul/30 p-6 sm:p-7">
+          <h3 class="text-lg font-semibold">{d.noIncluyeTitulo}</h3>
+          <ul class="mt-4 grid gap-3 text-sm text-tinta/75 md:grid-cols-2">
+            {p.noIncluye.map((n) => <li class="flex gap-3"><Valor valor="No" /><span>{n}</span></li>)}
+          </ul>
+          <p class="mt-5 text-sm text-azul">
+            {d.noIncluyeNota} <a href="#extras" class="font-semibold underline underline-offset-4">{d.extrasTitulo}</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pago y plan mensual -->
+    <section class="py-16 sm:py-24">
+      <div class="contenedor grid gap-10 lg:grid-cols-2">
+        <div>
+          <h2 class="text-3xl font-semibold sm:text-4xl">{d.pagoTitulo}</h2>
+          <ol class="mt-8 space-y-4">
+            {d.pago.map((paso, i) => (
+              <li class="flex gap-4">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-azul font-display font-semibold text-crema">{i + 1}</span>
+                <div>
+                  <h3 class="text-lg font-semibold">{paso.titulo}</h3>
+                  <p class="text-sm text-tinta/75">{paso.texto}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          {p.sinInicial && (
+            <div class="mt-8 rounded-2xl bg-crema-2 p-6">
+              <h3 class="text-lg font-semibold">{d.sinInicialTitulo}</h3>
+              <p class="mt-2 text-sm text-tinta/80">
+                <strong class="font-display text-azul">{p.nombre} por ${p.sinInicial}</strong> {d.sinInicialTexto}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <article class="self-start rounded-2xl bg-azul p-6 text-crema sm:p-8">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-celeste">{d.mensualTitulo}</p>
+          <div class="mt-3 flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="text-2xl font-semibold text-crema">Plan {mensual.nombre}</h3>
+            <p><span class="font-display text-2xl font-semibold">${mensual.precio}</span> <span class="text-sm text-crema/70">al mes</span></p>
+          </div>
+          <ul class="mt-6 space-y-3 text-sm">
+            {mensual.items.map((it) => <li class="flex gap-3"><Valor valor="Sí" claro /><span>{it}</span></li>)}
+          </ul>
+          <a href="../#mensuales" class="mt-6 inline-block text-sm font-semibold text-celeste underline underline-offset-4">{d.verCambios}</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Otros planes -->
+    <section class="border-t border-azul/10 py-16 sm:py-20">
+      <div class="contenedor">
+        <h2 class="text-2xl font-semibold sm:text-3xl">{d.otrosTitulo}</h2>
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          {otros.map((o) => (
+            <a href={`../${o.slug}/`} class="group flex items-center justify-between gap-4 rounded-2xl border border-azul/10 bg-white/60 p-6 transition hover:border-azul/40">
+              <span>
+                <span class="block font-display text-xl font-semibold text-azul">{o.nombre}</span>
+                <span class="mt-1 block text-sm text-tinta/70">{o.resumen}</span>
+              </span>
+              <span class="shrink-0 text-right">
+                <span class="block font-display text-lg font-semibold text-azul">${o.precio}</span>
+                <span class="block text-xs text-tinta/60">+ ${o.mensual} al mes</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CierrePlanes textoWhatsApp={textoWa} />
+  </main>
+
+  <Pie />
+
+  <BotonWhatsApp texto={textoWa} />
+</Base>

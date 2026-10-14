@@ -1,0 +1,48 @@
+---
+// Extras con precio fijo, pedidos especiales y llamado final. Se usa en las páginas de planes.
+import site from '../data/site.json';
+import { enlaceWhatsApp } from '../lib/rutas';
+
+interface Props {
+  textoWhatsApp?: string;
+}
+
+const { textoWhatsApp = site.whatsappTexto } = Astro.props;
+const d = site.detallePlanes;
+---
+
+<section id="extras" class="bg-crema-2 py-16 sm:py-24">
+  <div class="contenedor grid gap-10 lg:grid-cols-[1fr_1.3fr]">
+    <div>
+      <h2 class="text-3xl font-semibold sm:text-4xl">{d.extrasTitulo}</h2>
+      <p class="mt-3 text-tinta/75">{d.extrasIntro}</p>
+      <p class="mt-6 rounded-2xl border border-azul/15 bg-crema p-5 text-sm text-azul">{d.especiales}</p>
+    </div>
+    <div class="overflow-hidden rounded-2xl border border-azul/10 bg-crema">
+      <table class="w-full border-collapse text-left text-sm">
+        <caption class="sr-only">{d.extrasTitulo}</caption>
+        <thead class="sr-only">
+          <tr><th scope="col">Extra</th><th scope="col">Precio</th></tr>
+        </thead>
+        <tbody>
+          {d.extras.map((e, i) => (
+            <tr class:list={[i > 0 && 'border-t border-azul/10']}>
+              <th scope="row" class="px-5 py-4 font-medium text-tinta/85">{e.nombre}</th>
+              <td class="px-5 py-4 text-right font-display font-semibold text-azul">{e.precio}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="bg-azul text-crema">
+  <div class="contenedor flex flex-col items-start gap-6 py-16 sm:py-20 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h2 class="text-3xl font-semibold text-crema sm:text-4xl">{d.ctaTitulo}</h2>
+      <p class="mt-3 max-w-xl text-crema/80">{d.ctaTexto}</p>
+    </div>
+    <a href={enlaceWhatsApp(site.whatsapp, textoWhatsApp)} class="boton-claro" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+  </div>
+</section>

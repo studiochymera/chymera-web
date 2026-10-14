@@ -1,16 +1,21 @@
 ---
 import '../styles/global.css';
 import site from '../data/site.json';
+import { raiz } from '../lib/rutas';
 
 interface Props {
   titulo?: string;
   descripcion?: string;
+  schemaExtra?: object;
 }
 
 const {
   titulo = `${site.nombre} · Páginas web para negocios en ${site.ciudad}`,
   descripcion = site.hero.subtitulo,
+  schemaExtra,
 } = Astro.props;
+
+const r = raiz(Astro.url.pathname);
 
 const canonica = new URL(Astro.url.pathname, Astro.site).href;
 const imagenSocial = new URL('og.jpg', Astro.site).href;
@@ -37,8 +42,8 @@ const schema = {
     <title>{titulo}</title>
     <meta name="description" content={descripcion} />
     <meta name="theme-color" content="#1D2A3A" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href={`${r}favicon.png`} />
+    <link rel="apple-touch-icon" href={`${r}apple-touch-icon.png`} />
     <link rel="canonical" href={canonica} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonica} />
@@ -50,6 +55,7 @@ const schema = {
     <meta property="og:locale" content="es_CO" />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    {schemaExtra && <script type="application/ld+json" set:html={JSON.stringify(schemaExtra)} />}
   </head>
   <body>
     <slot />

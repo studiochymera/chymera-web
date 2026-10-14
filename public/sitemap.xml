@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://chymerastudios.com/</loc></url>
+  <url><loc>https://chymerastudios.com/planes/</loc></url>
+  <url><loc>https://chymerastudios.com/planes/presencia/</loc></url>
+  <url><loc>https://chymerastudios.com/planes/negocio/</loc></url>
+  <url><loc>https://chymerastudios.com/planes/reservas/</loc></url>
 </urlset>
