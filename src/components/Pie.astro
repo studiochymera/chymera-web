@@ -1,0 +1,18 @@
+---
+import site from '../data/site.json';
+import { raiz } from '../lib/rutas';
+
+const r = raiz(Astro.url.pathname);
+const ig = `https://www.instagram.com/${site.instagram}/`;
+---
+
+<footer class="bg-tinta py-10 text-sm text-crema/60">
+  <div class="contenedor flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+    <img src={`${r}brand/logotipo-cream.svg`} alt="Chymera Studios" width="165" height="40" class="h-6 w-auto" />
+    <div class="flex flex-col gap-1 sm:items-end">
+      <a href={`${r}planes/`} class="hover:text-crema">{site.detallePlanes.titulo}</a>
+      <a href={ig} class="hover:text-crema" target="_blank" rel="noopener">Instagram @{site.instagram}</a>
+      <p>© {new Date().getFullYear()} {site.nombre} · {site.ciudad}, Colombia</p>
+    </div>
+  </div>
+</footer>
