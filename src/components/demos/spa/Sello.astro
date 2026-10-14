@@ -1,0 +1,48 @@
+---
+// Sello circular decorativo con el nombre y el barrio, girando muy despacio.
+interface Props {
+  texto: string;
+  class?: string;
+}
+const { texto, class: clase } = Astro.props;
+const id = `sello-${Math.random().toString(36).slice(2, 7)}`;
+---
+
+<div class:list={['sello', clase]} aria-hidden="true">
+  <svg viewBox="0 0 120 120" class="h-full w-full">
+    <defs>
+      <path id={id} d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" />
+    </defs>
+    <circle cx="60" cy="60" r="59" class="fondo" />
+    <g class="giro">
+      <text class="letras"><textPath href={`#${id}`} textLength="289">{texto}</textPath></text>
+    </g>
+    <path d="M50 74 V60 a10 10 0 0 1 20 0 V74" class="arquito" />
+  </svg>
+</div>
+
+<style>
+  .sello {
+    border-radius: 9999px;
+  }
+  .fondo {
+    fill: var(--color-oliva);
+  }
+  .letras {
+    fill: var(--color-arena);
+    font-family: var(--font-sans);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .arquito {
+    fill: none;
+    stroke: var(--color-arcilla-clara);
+    stroke-width: 1.5;
+  }
+  .giro {
+    transform-origin: 60px 60px;
+    animation: girar 40s linear infinite;
+  }
+</style>

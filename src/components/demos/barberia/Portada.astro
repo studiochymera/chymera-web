@@ -1,0 +1,75 @@
+---
+// Portada: foto oscura a sangre, el nombre en grande y un corte diagonal con las franjas del poste.
+import Imagen from '../../../base/Imagen.astro';
+import Poste from './Poste.astro';
+import Icono from './Icono.astro';
+import { d, contacto, horario } from './datos';
+
+const p = d.portada;
+---
+
+<section id="inicio" class="relative isolate flex min-h-[calc(100svh-4.25rem)] flex-col overflow-hidden bg-carbon lg:min-h-[min(calc(100svh-4.25rem),56rem)]">
+  <div class="absolute inset-0 -z-10 [clip-path:polygon(0_0,100%_0,100%_calc(100%-3.5rem),0_calc(100%-0.875rem))]">
+    <Imagen
+      ruta="demos/barberia/portada"
+      alt={p.alt}
+      prioridad={true}
+      anchos={[640, 960, 1280, 1600, 2000]}
+      sizes="100vw"
+      proporcion="3/2"
+      claseMarco="block h-full w-full"
+      class="h-full w-full object-cover object-[60%_center]"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgb(20_18_16/0.75)_0%,rgb(20_18_16/0.35)_15%,rgb(20_18_16/0.74)_27%,rgb(20_18_16/0.84)_40%,rgb(20_18_16/0.9)_60%,rgb(20_18_16/0.96)_100%)] lg:bg-[linear-gradient(90deg,rgb(20_18_16/0.96)_0%,rgb(20_18_16/0.86)_40%,rgb(20_18_16/0.3)_72%,rgb(20_18_16/0.55)_100%)]"></div>
+    <div class="absolute inset-x-0 top-0 hidden h-40 bg-[linear-gradient(180deg,rgb(20_18_16/0.7),transparent)] lg:block"></div>
+  </div>
+
+  <div class="poste absolute inset-x-0 bottom-0 -z-10 h-14 [clip-path:polygon(0_calc(100%-0.875rem),100%_0,100%_0.875rem,0_100%)]" aria-hidden="true"></div>
+
+  <div class="contenedor flex flex-1 flex-col justify-end pt-28 pb-24 sm:pb-28 lg:justify-center lg:pt-36 lg:pb-36">
+    <div class="lg:grid lg:grid-cols-12 lg:items-end lg:gap-8">
+      <div class="lg:col-span-7" data-incluye={d.incluye.portada}>
+        <p class="etiqueta flex items-center gap-3 text-hueso/90 motion-safe:animate-subir">
+          <span class="h-px w-8 bg-laton" aria-hidden="true"></span>
+          {p.oficios.map((o, i) => (
+            <>
+              {i > 0 && <span class="text-laton" aria-hidden="true">·</span>}
+              <span>{o}</span>
+            </>
+          ))}
+        </p>
+        <h1 class="mt-5 sm:mt-6">
+          <span class="block font-serif text-[clamp(7rem,41vw,14rem)] leading-[0.8] tracking-[-0.035em] motion-safe:animate-subir motion-safe:[animation-delay:80ms]">{p.nombre}</span>
+          <span class="mt-3 block font-serif text-[clamp(1.75rem,7.6vw,3.5rem)] leading-[1.05] italic motion-safe:animate-subir motion-safe:[animation-delay:160ms] lg:mt-5">{p.lema}</span>
+        </h1>
+        <p class="mt-5 max-w-[28rem] text-[1.0625rem] leading-relaxed text-hueso/85 motion-safe:animate-subir motion-safe:[animation-delay:240ms] sm:mt-7 sm:text-lg">{p.texto}</p>
+        <div class="mt-7 flex flex-col gap-3 motion-safe:animate-subir motion-safe:[animation-delay:320ms] sm:mt-9 sm:flex-row">
+          <a href={contacto.whatsapp} target="_blank" rel="noopener" class="boton boton-vino">
+            <Icono nombre="whatsapp" />
+            {d.comunes.botonWhatsApp}
+          </a>
+          <a href="#servicios" class="boton boton-linea text-hueso hover:bg-hueso/10">{p.verPrecios}</a>
+        </div>
+      </div>
+
+      <div class="hidden lg:col-span-4 lg:col-start-9 lg:flex lg:items-end lg:justify-end lg:gap-7">
+        <div class="marco-doble bg-carbon/85 px-7 py-6 backdrop-blur-sm">
+          <p class="etiqueta flex items-center gap-3 text-laton">
+            {p.horarioTitulo}
+            <span class="h-px flex-1 bg-laton/40" aria-hidden="true"></span>
+          </p>
+          <ul class="mt-4 space-y-3">
+            {horario.map((h) => (
+              <li>
+                <span class="block font-serif text-xl leading-tight">{h.dias}</span>
+                <span class="text-sm whitespace-nowrap text-hueso/80 tabular-nums">{h.rango}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="etiqueta mt-5 border-t border-laton/30 pt-4 text-[0.6875rem] text-laton">{p.desde}</p>
+        </div>
+        <Poste class="h-72 w-6" />
+      </div>
+    </div>
+  </div>
+</section>

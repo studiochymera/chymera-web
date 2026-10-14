@@ -1,0 +1,65 @@
+---
+import Icono from './Icono.astro';
+import { datos as d, contacto, rutas, textosBase, rangoHora } from './datos';
+
+const r = rutas(Astro.url.pathname);
+---
+
+<footer class="oscuro relative overflow-hidden border-t-4 border-voltio pt-14 lg:pt-20">
+  <div class="contenedor relative" data-incluye={d.incluye.pie}>
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr] lg:gap-12">
+      <div>
+        <a href={r.a('')} aria-label={d.comun.logoEtiqueta} class="inline-flex min-h-11 items-center gap-1.5">
+          <Icono nombre="marca" class="h-10 w-10 text-voltio" />
+          <span class="font-display text-5xl font-extrabold uppercase italic leading-none">{d.nombre}</span>
+        </a>
+        <p class="mt-3 max-w-xs text-humo">{d.pie.lema}</p>
+      </div>
+
+      <div>
+        <h2 class="etiqueta mb-4 not-italic">{d.pie.tituloVisitanos}</h2>
+        <p>{d.nombre}</p>
+        <p>{d.barrio}, {d.ciudad}</p>
+        <h2 class="etiqueta mb-3 mt-7 not-italic">{d.pie.tituloContacto}</h2>
+        <ul class="grid">
+          <li><a class="enlace inline-flex min-h-11 items-center" href={contacto.enlaceTelefono}>{contacto.telefono}</a></li>
+          <li><a class="enlace inline-flex min-h-11 items-center break-all" href={`mailto:${contacto.correo}`}>{contacto.correo}</a></li>
+          <li>
+            <a class="enlace inline-flex min-h-11 items-center gap-2" href={contacto.instagram} target="_blank" rel="noopener">
+              <Icono nombre="instagram" class="h-5 w-5" />{d.pie.instagram}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="etiqueta mb-4 not-italic">{d.pie.tituloHorario}</h2>
+        <dl class="grid gap-3">
+          {d.horario.map((h) => (
+            <div>
+              <dt class="text-humo">{h.corto}</dt>
+              <dd class="font-semibold">{rangoHora(h.abre, h.cierra)}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div>
+        <h2 class="etiqueta mb-3 not-italic">{d.pie.tituloPaginas}</h2>
+        <ul class="grid">
+          {d.nav.map((n) => (
+            <li><a class="inline-flex min-h-11 items-center font-display text-2xl font-extrabold uppercase italic hover:text-voltio" href={r.a(n.ruta)}>{n.texto}</a></li>
+          ))}
+          <li><a class="enlace inline-flex min-h-11 items-center" href={r.a('privacidad/')}>{d.pie.politica}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-2 border-t border-negro-3 pt-6 text-sm text-humo sm:flex-row sm:items-center sm:justify-between">
+      <p>{d.pie.derechos}</p>
+      <a class="enlace inline-flex min-h-11 items-center text-tiza" href={r.sitio}>{textosBase.hechoPor}</a>
+    </div>
+  </div>
+
+  <div class="cifra contorno pointer-events-none -mb-[3vw] mt-8 select-none whitespace-nowrap text-center text-[34vw] uppercase leading-[0.9] text-negro-3 [--trazo:2px] after:content-[attr(data-texto)] lg:mt-12 lg:text-[26vw]" data-texto={d.nombre} aria-hidden="true"></div>
+</footer>

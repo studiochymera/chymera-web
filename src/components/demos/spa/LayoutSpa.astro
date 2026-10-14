@@ -1,0 +1,54 @@
+---
+// Layout de la demo Bruma Spa: base técnica de Chymera + franja del plan + diseño propio del spa.
+import '../../../styles/demos/spa.css';
+import Layout from '../../../base/Layout.astro';
+import BotonWhatsApp from '../../../base/BotonWhatsApp.astro';
+import FranjaDemo from '../FranjaDemo.astro';
+import Encabezado from './Encabezado.astro';
+import Pie from './Pie.astro';
+import { spa, demo, rutas, schemaSpa } from './datos';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  conServicios?: boolean; // agrega el catálogo de servicios al schema del negocio
+  schemas?: object[];
+}
+
+const { titulo, descripcion, conServicios = false, schemas = [] } = Astro.props;
+const r = rutas(Astro.url.pathname);
+const url = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<Layout
+  titulo={titulo}
+  descripcion={descripcion}
+  noIndexar={true}
+  icono={`${r.base}icono.svg`}
+  colorTema={spa.negocio.colorTema}
+  imagenSocial="demos/spa/og.jpg"
+  schemas={[schemaSpa(url, Astro.site, conServicios), ...schemas]}
+>
+  <FranjaDemo slug="spa" />
+  <Encabezado />
+  <main id="contenido">
+    <slot />
+  </main>
+  <Pie />
+  <div class="wa">
+    <BotonWhatsApp numero={spa.contacto.whatsapp} texto={demo.whatsappTexto} etiqueta={spa.contacto.whatsappEtiqueta} />
+  </div>
+</Layout>
+
+<style>
+  .wa {
+    --wa-fondo: var(--color-oliva);
+    --wa-icono: var(--color-arena);
+    --wa-foco: var(--color-oliva);
+  }
+  .wa :global(.wa-flotante) {
+    box-shadow:
+      0 0 0 3px rgb(244 238 230 / 0.9),
+      0 10px 28px rgb(47 58 46 / 0.35);
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import LayoutForja from '../../../../components/demos/gimnasio/LayoutForja.astro';
+import CabeceraPagina from '../../../../components/demos/gimnasio/CabeceraPagina.astro';
+import ContenidoLegal from '../../../../base/ContenidoLegal.astro';
+import { documentoLegal } from '../../../../base/legal';
+import { datos as d, contacto, textosBase } from '../../../../components/demos/gimnasio/datos';
+
+const p = d.paginas.privacidad;
+const documento = documentoLegal('completa', {
+  negocio: d.nombre,
+  responsable: `${d.nombre} (${textosBase.ficticio})`,
+  direccion: `${d.barrio}, ${d.region}`,
+  correo: contacto.correo,
+  telefono: contacto.telefono,
+  fecha: textosBase.fechaLegal,
+  finalidades: p.finalidades,
+  proveedores: p.proveedores,
+});
+---
+
+<LayoutForja pagina="privacidad" titulo={p.titulo} descripcion={documento.descripcion}>
+  <CabeceraPagina
+    etiqueta={p.etiqueta}
+    lineas={[documento.titulo]}
+    entrada={`${textosBase.actualizado}: ${textosBase.fechaLegal}`}
+    incluye={d.incluye.privacidad}
+    pequena={true}
+  />
+
+  <section class="claro corte pb-20 pt-[calc(var(--corte)+3.5rem)] lg:pb-28 lg:pt-[calc(var(--corte)+5rem)]">
+    <div class="contenedor">
+      <ContenidoLegal documento={documento} class="legal-forja" />
+    </div>
+  </section>
+</LayoutForja>

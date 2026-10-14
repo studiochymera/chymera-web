@@ -129,6 +129,7 @@
     "intro": "Todo lo que recibes, punto por punto, para que sepas exactamente qué compras. Lo que no aparece aquí se cotiza aparte, con precio fijo.",
     "verDetalle": "Ver todo lo que incluye",
     "comparar": "Comparar los planes",
+    "verDemo": "Ver la demo de este plan",
     "comparacion": [
       { "titulo": "Instalación (pago único)", "valores": ["$690.000", "$1.150.000", "$1.790.000"] },
       { "titulo": "Plan mensual", "valores": ["Base · $49.000", "Base · $49.000", "Activo · $95.000"] },
@@ -207,11 +208,121 @@
     "ctaTitulo": "¿Listo para empezar?",
     "ctaTexto": "Escríbenos por WhatsApp. Te mostramos cómo se vería tu página antes de que decidas."
   },
-  "portafolio": [
-    { "titulo": "Gimnasio de fuerza", "tipo": "Paquete Negocio" },
-    { "titulo": "Spa y bienestar", "tipo": "Paquete Negocio" },
-    { "titulo": "Complejo de canchas", "tipo": "Paquete Reservas" }
-  ],
+  "portafolio": {
+    "titulo": "Portafolio: una demo por plan",
+    "intro": "Tres negocios de ejemplo, uno por plan, para que veas en tu celular qué recibes por lo que pagas. Son muestras: cada cliente recibe un diseño propio, hecho para su marca.",
+    "muestra": "Lo que muestra",
+    "verDemo": "Ver la demo",
+    "verPlan": "Qué incluye el plan",
+    "suma": "Lo que suma frente al plan anterior",
+    "aviso": "Negocios ficticios: los nombres, precios, personas y testimonios son de ejemplo."
+  },
+  "demos": {
+    "franja": {
+      "marca": "Demo de Chymera Studios",
+      "plan": "Plan {plan}",
+      "precio": "${precio} + ${mensual} al mes",
+      "abrir": "Qué incluye",
+      "cerrar": "Cerrar",
+      "tituloVes": "Lo que ves en esta demo",
+      "tituloSiguiente": "Lo que suma el plan {plan}",
+      "tituloTope": "El plan más completo",
+      "senalar": "Señalar en la página qué incluye el plan",
+      "quitarSenales": "Quitar las señales",
+      "verPlan": "Ver todo lo que incluye {plan}",
+      "quiero": "Quiero una página así",
+      "otras": "Ver las otras demos",
+      "nota": "Negocio ficticio: el nombre, los precios, las personas y los testimonios son de ejemplo, y las fotos son de Unsplash. Los datos de contacto de esta demo son los de Chymera Studios y nada de lo que escribas aquí se envía. Tu página tendrá un diseño propio, hecho para tu marca."
+    },
+    "textosBase": {
+      "formulario": {
+        "nombre": "Nombre",
+        "contacto": "WhatsApp o correo",
+        "mensaje": "Mensaje",
+        "autorizacion": "Autorizo a {negocio} a usar mis datos para responder mi mensaje, según su",
+        "politica": "política de tratamiento de datos",
+        "enviar": "Enviar mensaje",
+        "enviando": "Enviando…",
+        "exito": "¡Gracias! Recibimos tu mensaje y te respondemos pronto.",
+        "error": "No pudimos enviar tu mensaje. Escríbenos por WhatsApp.",
+        "demo": "Esto es una demo y tu mensaje no se envió. En tu página, cada mensaje llega directo a tu correo."
+      },
+      "mapaAbrir": "Abrir en Google Maps",
+      "actualizado": "Última actualización",
+      "fechaLegal": "14 de octubre de 2026",
+      "hechoPor": "Sitio hecho por Chymera Studios",
+      "ficticio": "negocio ficticio, demo de Chymera Studios"
+    },
+    "lista": [
+      {
+        "slug": "barberia",
+        "plan": "presencia",
+        "nombre": "Filo Barbería",
+        "sector": "Barbería en Chapinero",
+        "resumen": "Una sola página con lo esencial para que te encuentren y te escriban.",
+        "muestra": ["Una página con 5 secciones", "10 servicios con precio", "Mapa, horario y WhatsApp"],
+        "ves": [
+          "Una sola página con 5 secciones: portada, servicios, nosotros, galería y ubicación",
+          "10 servicios con su precio",
+          "Galería de 8 fotos (el plan permite hasta 10)",
+          "Mapa que carga al llegar a su sección, horario, WhatsApp y redes",
+          "Aviso de privacidad básico",
+          "Diseño hecho para la marca, primero para celular"
+        ],
+        "siguiente": "negocio",
+        "suma": [
+          "Hasta 5 páginas, cada una pensada para una búsqueda distinta en Google",
+          "Hasta 25 servicios y 4 planes o membresías en tarjetas",
+          "Equipo, testimonios y preguntas frecuentes",
+          "Formulario de contacto que llega a tu correo",
+          "Perfil de Google Business optimizado y estadísticas de visitas"
+        ],
+        "whatsappTexto": "Hola Chymera, vi la demo de la barbería (plan Presencia) y quiero una página así para mi negocio."
+      },
+      {
+        "slug": "gimnasio",
+        "plan": "negocio",
+        "nombre": "Forja",
+        "sector": "Gimnasio de fuerza en Cedritos",
+        "resumen": "Un sitio de 5 páginas para verse serio frente a las cadenas.",
+        "muestra": ["5 páginas, cada una para una búsqueda", "25 servicios y 4 membresías", "Equipo, testimonios, preguntas y formulario"],
+        "ves": [
+          "5 páginas: inicio, servicios y planes, nosotros, galería y contacto",
+          "25 servicios con precio y 4 membresías en tarjetas que se comparan",
+          "6 entrenadores y 6 testimonios",
+          "10 preguntas frecuentes y formulario de contacto con autorización de datos",
+          "Galería de 12 fotos (el plan permite hasta 25)",
+          "Política de datos completa"
+        ],
+        "siguiente": "reservas",
+        "suma": [
+          "Página de reservas: tus clientes eligen servicio, día y hora sin escribirte",
+          "Cobro del anticipo con tu link de Mercado Pago, Wompi o Bold",
+          "Condiciones de reserva y devolución visibles antes de pagar",
+          "Plan Activo incluido: 60 minutos de cambios al mes, una landing de promoción cada trimestre y reporte mensual de visitas"
+        ],
+        "whatsappTexto": "Hola Chymera, vi la demo del gimnasio (plan Negocio) y quiero una página así para mi negocio."
+      },
+      {
+        "slug": "spa",
+        "plan": "reservas",
+        "nombre": "Bruma Spa",
+        "sector": "Spa en Usaquén",
+        "resumen": "Todo lo de Negocio, más reservas en línea con pago del anticipo.",
+        "muestra": ["Todo lo de Negocio", "Reservas con día y hora", "Anticipo con link de pago"],
+        "ves": [
+          "Todo lo de Negocio: 5 páginas, servicios, paquetes, equipo, testimonios, preguntas y formulario",
+          "Página de reservas con 8 servicios, día y hora",
+          "Anticipo del 30 % con link de pago y el saldo en el spa",
+          "Condiciones de reserva, devolución y retracto antes de pagar, con enlace a la SIC",
+          "En tu página, las reservas se conectan a Cal.com o a la herramienta que ya uses"
+        ],
+        "siguiente": null,
+        "tope": "Es el plan más completo e incluye el plan mensual Activo: 60 minutos de cambios al mes, una landing de promoción cada trimestre y reporte mensual de visitas.",
+        "whatsappTexto": "Hola Chymera, vi la demo del spa (plan Reservas) y quiero una página así para mi negocio."
+      }
+    ]
+  },
   "proceso": [
     { "titulo": "Hablamos", "texto": "Nos cuentas de tu negocio y llenas un formulario corto con tus datos, fotos y precios." },
     { "titulo": "Te mostramos un borrador", "texto": "Recibes un link para ver tu página en el celular antes de pagar el saldo." },

@@ -1,0 +1,479 @@
+{
+  "nota": "Demo del plan Reservas: Bruma Spa es un negocio ficticio. Los datos de contacto son los de Chymera Studios.",
+  "negocio": {
+    "nombre": "Bruma Spa",
+    "marca": "Bruma",
+    "apellido": "spa",
+    "barrio": "Usaquén",
+    "ciudad": "Bogotá",
+    "region": "Bogotá D.C.",
+    "tipoSchema": "DaySpa",
+    "descripcionSchema": "Spa de masajes, faciales y rituales corporales en Usaquén, Bogotá, con reservas en línea y anticipo del 30 %.",
+    "rangoPrecios": "COP 40.000 a 390.000",
+    "colorTema": "#F4EEE6",
+    "sello": "Bruma Spa · Usaquén · Bogotá · "
+  },
+  "contacto": {
+    "whatsapp": "573203357408",
+    "telefono": "+57 320 335 7408",
+    "telefonoEnlace": "+573203357408",
+    "correo": "studio.chymera@gmail.com",
+    "instagram": "https://www.instagram.com/chymera_studios/",
+    "instagramTexto": "Instagram",
+    "whatsappEtiqueta": "Escríbele a Bruma Spa por WhatsApp",
+    "mapaConsulta": "Usaquén, Bogotá",
+    "mapaTitulo": "Mapa de Usaquén, Bogotá, donde queda Bruma Spa"
+  },
+  "horario": [
+    { "dias": "Martes a sábado", "corto": "Mar a sáb", "numeros": [2, 3, 4, 5, 6], "schema": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "abre": "09:00", "cierra": "19:00" },
+    { "dias": "Domingos y festivos", "corto": "Dom y festivos", "numeros": [0], "festivos": true, "schema": ["Sunday"], "abre": "10:00", "cierra": "16:00" },
+    { "dias": "Lunes", "corto": "Lunes", "numeros": [1], "cerrado": true }
+  ],
+  "festivos": [
+    "2026-01-01", "2026-04-02", "2026-04-03", "2026-05-01", "2026-08-07", "2026-12-08", "2026-12-25",
+    "2027-01-01", "2027-03-25", "2027-03-26", "2027-05-01", "2027-07-20", "2027-08-07", "2027-12-08", "2027-12-25"
+  ],
+  "textosHorario": {
+    "rango": "{abre} a {cierra}",
+    "cerrado": "Cerrado"
+  },
+  "incluye": {
+    "portada": "Portada con botón para reservar y WhatsApp · Reservas",
+    "diferencias": "Lo que te diferencia · desde Negocio",
+    "destacados": "Servicios destacados con botón Reservar · Reservas",
+    "testimonios": "6 testimonios (hasta 6) · desde Negocio",
+    "llamado": "Llamado a reservar en línea · Reservas",
+    "servicios": "20 servicios con duración y precio (hasta 25) · desde Negocio",
+    "paquetes": "4 paquetes y membresía en tarjetas que se comparan · desde Negocio",
+    "historia": "Historia y filosofía del negocio · desde Negocio",
+    "equipo": "Equipo de 5 personas con foto (hasta 6) · desde Negocio",
+    "galeria": "Galería de 12 fotos (hasta 25) · desde Negocio",
+    "contacto": "WhatsApp, teléfono, correo, redes y horario · desde Presencia",
+    "formulario": "Formulario con autorización de datos · desde Negocio",
+    "mapa": "Mapa que carga al llegar a su sección · desde Presencia",
+    "preguntas": "10 preguntas frecuentes (hasta 10) · desde Negocio",
+    "reservas": "Reservas en línea: 8 servicios, día y hora · Reservas",
+    "pago": "Anticipo con link de pago y condiciones antes de pagar · Reservas",
+    "privacidad": "Política de datos completa con reservas y pagos · Reservas",
+    "pie": "Datos del negocio y enlace a la SIC en el pie · Reservas"
+  },
+  "encabezado": {
+    "inicio": "Bruma Spa, ir al inicio",
+    "lema": "Usaquén · Bogotá",
+    "navegacion": "Principal",
+    "menu": "Menú",
+    "reservar": "Reservar",
+    "enlaces": [
+      { "texto": "Inicio", "ruta": "" },
+      { "texto": "Servicios", "ruta": "servicios/" },
+      { "texto": "Nosotros", "ruta": "nosotros/" },
+      { "texto": "Galería", "ruta": "galeria/" },
+      { "texto": "Contacto", "ruta": "contacto/" }
+    ]
+  },
+  "pie": {
+    "frase": "Masajes, faciales y rituales corporales sin afán, en Usaquén.",
+    "visitanos": "Visítanos",
+    "escribenos": "Escríbenos",
+    "legal": "Legal",
+    "ubicacion": "Usaquén, Bogotá",
+    "whatsapp": "WhatsApp",
+    "telefono": "Teléfono",
+    "correo": "Correo",
+    "privacidad": "Política de tratamiento de datos",
+    "condiciones": "Reservas, cambios y devoluciones",
+    "sic": "Superintendencia de Industria y Comercio",
+    "sicUrl": "https://www.sic.gov.co",
+    "sicTexto": "Si tienes una queja, puedes acudir a la",
+    "precios": "Precios en pesos colombianos con impuestos incluidos."
+  },
+  "botones": {
+    "reservar": "Reservar cita",
+    "reservarCorto": "Reservar",
+    "whatsapp": "Escríbenos por WhatsApp",
+    "whatsappCorto": "WhatsApp",
+    "verServicios": "Ver los 20 servicios",
+    "agendarWhatsapp": "Agendar por WhatsApp"
+  },
+  "servicios": {
+    "grupos": [
+      {
+        "id": "masajes",
+        "numero": "01",
+        "titulo": "Masajes",
+        "intro": "Antes de empezar te preguntamos qué zonas quieres trabajar y qué tanta presión prefieres. Usamos aceites vegetales sin perfume añadido.",
+        "foto": "servicio-masajes",
+        "alt": "Manos de una terapeuta dando un masaje de espalda",
+        "items": [
+          { "id": "masaje-relajante", "nombre": "Masaje relajante", "descripcion": "Movimientos largos y lentos con aceite tibio, de los pies a la cabeza.", "duracion": 60, "precio": 150000, "reservable": true },
+          { "id": "tejido-profundo", "nombre": "Masaje de tejido profundo", "descripcion": "Presión firme y sostenida en espalda, cuello y hombros, donde más se acumula la tensión del día.", "duracion": 60, "precio": 170000, "reservable": true },
+          { "id": "piedras-calientes", "nombre": "Masaje con piedras calientes", "descripcion": "Piedras volcánicas tibias que acompañan el masaje y sueltan el cuerpo poco a poco.", "duracion": 90, "precio": 210000, "reservable": true },
+          { "id": "reflexologia", "nombre": "Reflexología podal", "descripcion": "Presión en puntos de los pies, con un baño tibio de sales al comienzo.", "duracion": 45, "precio": 110000, "reservable": true },
+          { "id": "drenaje-linfatico", "nombre": "Drenaje linfático manual", "descripcion": "Movimientos suaves y rítmicos, con las piernas un poco elevadas.", "duracion": 60, "precio": 160000, "reservable": false },
+          { "id": "masaje-prenatal", "nombre": "Masaje prenatal", "descripcion": "Desde el segundo trimestre, de lado y con cojines especiales. Lo agendamos por WhatsApp para conocerte antes.", "duracion": 60, "precio": 160000, "reservable": false },
+          { "id": "espalda-cuello", "nombre": "Masaje de espalda y cuello", "descripcion": "Media hora enfocada en la parte alta de la espalda. Cabe en tu hora de almuerzo.", "duracion": 30, "precio": 95000, "reservable": false }
+        ]
+      },
+      {
+        "id": "faciales",
+        "numero": "02",
+        "titulo": "Faciales",
+        "intro": "Miramos tu piel con buena luz antes de elegir los productos. Si algo te incomoda, paramos y lo ajustamos.",
+        "foto": "servicio-faciales",
+        "alt": "Esteticista aplicando un tratamiento facial a una clienta recostada en la camilla",
+        "items": [
+          { "id": "limpieza-facial", "nombre": "Limpieza facial profunda", "descripcion": "Vapor, extracción cuidadosa, mascarilla según tu tipo de piel y masaje facial.", "duracion": 75, "precio": 140000, "reservable": true },
+          { "id": "facial-hidratante", "nombre": "Facial hidratante", "descripcion": "Limpieza suave, sérum y mascarilla hidratante, con masaje de cuello y hombros.", "duracion": 60, "precio": 120000, "reservable": true },
+          { "id": "facial-sensible", "nombre": "Facial para piel sensible", "descripcion": "Productos sin perfume y pasos cortos, pensado para pieles que se irritan con facilidad.", "duracion": 60, "precio": 130000, "reservable": false },
+          { "id": "kobido", "nombre": "Masaje facial kobido", "descripcion": "Técnica japonesa de masaje facial, de ritmo rápido y preciso, sin productos pesados.", "duracion": 45, "precio": 115000, "reservable": false },
+          { "id": "facial-express", "nombre": "Facial express", "descripcion": "Limpieza, mascarilla e hidratación en media hora.", "duracion": 30, "precio": 75000, "reservable": false }
+        ]
+      },
+      {
+        "id": "corporales",
+        "numero": "03",
+        "titulo": "Corporales",
+        "intro": "Rituales para la piel de todo el cuerpo, con ducha tibia, bata y un rato en la sala de descanso al final.",
+        "foto": "servicio-corporales",
+        "alt": "Exfoliante de sal en un cuenco, con toallas enrolladas al lado",
+        "items": [
+          { "id": "exfoliacion-corporal", "nombre": "Exfoliación corporal", "descripcion": "Sal marina y aceite de almendras en todo el cuerpo, con ducha y crema al final.", "duracion": 45, "precio": 130000, "reservable": true },
+          { "id": "envoltura-chocolate", "nombre": "Envoltura de chocolate", "descripcion": "Cacao colombiano tibio sobre la piel mientras descansas entre mantas.", "duracion": 60, "precio": 150000, "reservable": false },
+          { "id": "envoltura-arcilla", "nombre": "Envoltura de arcilla y salvia", "descripcion": "Arcilla verde con hojas de salvia, seguida de un masaje corto con aceite.", "duracion": 60, "precio": 155000, "reservable": false },
+          { "id": "hidratacion-corporal", "nombre": "Hidratación corporal", "descripcion": "Crema tibia de karité aplicada con masaje, muy agradable después de unos días de sol.", "duracion": 45, "precio": 120000, "reservable": false }
+        ]
+      },
+      {
+        "id": "manos-y-pies",
+        "numero": "04",
+        "titulo": "Manos y pies",
+        "intro": "Herramientas esterilizadas para cada cita y esmaltes de tonos naturales. Llega con las uñas sin esmalte o te lo retiramos aquí.",
+        "foto": "servicio-manos",
+        "alt": "Manicurista pintando las uñas de una clienta, con esmaltes al lado",
+        "items": [
+          { "id": "pedicure-spa", "nombre": "Pedicure spa", "descripcion": "Baño de pies con sales, exfoliación, limado, masaje y esmalte tradicional.", "duracion": 60, "precio": 65000, "reservable": false },
+          { "id": "manicure-spa", "nombre": "Manicure spa", "descripcion": "Baño de manos, cutícula, exfoliación, masaje y esmalte tradicional.", "duracion": 45, "precio": 55000, "reservable": true },
+          { "id": "manos-pies", "nombre": "Manicure y pedicure spa", "descripcion": "Los dos servicios en la misma cita, con té mientras esperas.", "duracion": 105, "precio": 110000, "reservable": false },
+          { "id": "parafina", "nombre": "Parafina para manos", "descripcion": "Baño de parafina tibia y guantes térmicos. Puedes sumarla a tu manicure.", "duracion": 20, "precio": 40000, "reservable": false }
+        ]
+      }
+    ],
+    "minutos": "{n} min",
+    "soloWhatsapp": "Se agenda por WhatsApp",
+    "reservarEtiqueta": "Reservar",
+    "agendarEtiqueta": "Agendar por WhatsApp"
+  },
+  "paquetes": [
+    {
+      "id": "pausa-express",
+      "nombre": "Pausa express",
+      "duracion": "60 min",
+      "precio": 150000,
+      "unidad": "por persona",
+      "incluye": ["Masaje de espalda y cuello (30 min)", "Facial express (30 min)", "Té de la casa"],
+      "ideal": "Una pausa a la hora del almuerzo, sin salir de Usaquén."
+    },
+    {
+      "id": "dia-de-bruma",
+      "nombre": "Día de Bruma",
+      "duracion": "3 horas",
+      "precio": 340000,
+      "unidad": "por persona",
+      "destacado": true,
+      "etiqueta": "El más pedido",
+      "incluye": ["Exfoliación corporal (45 min)", "Masaje relajante (60 min)", "Facial hidratante (60 min)", "Té y fruta en la sala de descanso"],
+      "ideal": "Regalarte una tarde entera o regalársela a alguien."
+    },
+    {
+      "id": "ritual-en-pareja",
+      "nombre": "Ritual en pareja",
+      "duracion": "90 min",
+      "precio": 390000,
+      "unidad": "para dos personas",
+      "incluye": ["Baño de pies con sales (15 min)", "Masaje relajante lado a lado (60 min)", "Chocolate caliente y té de la casa"],
+      "ideal": "Aniversarios, cumpleaños o una tarde para los dos."
+    },
+    {
+      "id": "membresia-mensual",
+      "nombre": "Membresía mensual",
+      "duracion": "Cada mes",
+      "precio": 139000,
+      "unidad": "al mes",
+      "incluye": ["Un masaje de 60 min al mes, relajante o de tejido profundo", "10 % menos en faciales, corporales y manos y pies", "Si un mes no puedes venir, tu masaje pasa al siguiente"],
+      "ideal": "Hacer del masaje un hábito. Sin permanencia: la pagas mes a mes en el spa."
+    }
+  ],
+  "textosPaquetes": {
+    "duracion": "Duración",
+    "incluye": "Incluye",
+    "ideal": "Ideal para",
+    "precio": "Precio"
+  },
+  "terapeutas": [
+    { "foto": "terapeuta-01", "nombre": "Mariana Ospina", "rol": "Fundadora y terapeuta de masaje", "texto": "12 años dando masajes. Se encarga del tejido profundo y de las piedras calientes.", "alt": "Retrato de Mariana Ospina, fundadora y terapeuta de Bruma Spa" },
+    { "foto": "terapeuta-02", "nombre": "Andrés Cifuentes", "rol": "Terapeuta de masaje", "texto": "Viene del masaje deportivo. Es quien más pide la gente que trabaja sentada todo el día.", "alt": "Retrato de Andrés Cifuentes, terapeuta de masaje de Bruma Spa" },
+    { "foto": "terapeuta-03", "nombre": "Laura Benítez", "rol": "Esteticista", "texto": "Cosmetóloga. Hace los faciales y el masaje kobido, con paciencia para las pieles sensibles.", "alt": "Retrato de Laura Benítez, esteticista de Bruma Spa" },
+    { "foto": "terapeuta-04", "nombre": "Camila Rojas", "rol": "Terapeuta corporal", "texto": "Exfoliaciones, envolturas y drenaje linfático manual. Siempre llega con el té listo.", "alt": "Retrato de Camila Rojas, terapeuta corporal de Bruma Spa" },
+    { "foto": "terapeuta-05", "nombre": "Sara Muñoz", "rol": "Manos y pies", "texto": "Manicure y pedicure spa. Esteriliza cada herramienta frente a ti antes de empezar.", "alt": "Retrato de Sara Muñoz, encargada de manos y pies en Bruma Spa" }
+  ],
+  "testimonios": [
+    { "texto": "Reservé un martes por la noche desde el celular y al otro día ya tenía mi masaje. Todo fue puntual, sin afán y con un té esperándome al salir.", "nombre": "Paola R.", "servicio": "Masaje relajante" },
+    { "texto": "Mariana me preguntó qué zonas quería trabajar y respetó la presión que le pedí. Se nota que escucha antes de empezar.", "nombre": "Juan Felipe M.", "servicio": "Masaje de tejido profundo" },
+    { "texto": "Me explicaron cada paso de la limpieza y nadie intentó venderme productos al final. Volví al mes.", "nombre": "Catalina V.", "servicio": "Limpieza facial profunda" },
+    { "texto": "Tuve que mover mi cita por un viaje y fue facilísimo: me cambiaron la fecha sin cobrarme nada.", "nombre": "Daniela S.", "servicio": "Facial hidratante" },
+    { "texto": "Le regalé el ritual a mi esposa por el aniversario. La sala, la música bajita y el chocolate al final: un plan perfecto para los dos.", "nombre": "Sebastián L.", "servicio": "Ritual en pareja" },
+    { "texto": "Tengo la membresía hace seis meses. Es mi hora del mes sin celular y la cuido como cualquier otra cita importante.", "nombre": "Lucía H.", "servicio": "Membresía mensual" }
+  ],
+  "galeria": [
+    { "foto": "galeria-01", "forma": "arco", "pie": "Velas en la sala de masajes", "alt": "Velas y un difusor de varillas con humo suave en la penumbra" },
+    { "foto": "galeria-02", "forma": "alta", "pie": "Toallas listas para cada cita", "alt": "Toallas enrolladas junto a una vela, miel y piedras de masaje" },
+    { "foto": "galeria-05", "forma": "ancha", "pie": "Una de nuestras salas", "alt": "Sala de tratamiento con camilla, tina y biombos de madera calada" },
+    { "foto": "galeria-03", "forma": "alta", "pie": "Eucalipto fresco", "alt": "Ramas de eucalipto vistas de cerca" },
+    { "foto": "galeria-04", "forma": "arco", "pie": "Aceites vegetales", "alt": "Frasco de aceite para masaje y lavanda sobre una toalla" },
+    { "foto": "galeria-07", "forma": "ancha", "pie": "La sauna", "alt": "Sauna de madera con estufa de leña y una ventana grande hacia los árboles" },
+    { "foto": "galeria-08", "forma": "arco", "pie": "Té de la casa", "alt": "Tetera de vidrio con té de hierbas sobre un posavasos tejido" },
+    { "foto": "galeria-06", "forma": "alta", "pie": "Piedras de la sauna", "alt": "Piedras volcánicas en la estufa de la sauna, junto a una pared de madera" },
+    { "foto": "galeria-10", "forma": "ancha", "pie": "Baño de flores", "alt": "Tina con pétalos de flores, aceites y toallas enrolladas" },
+    { "foto": "galeria-09", "forma": "alta", "pie": "Plantas en la entrada", "alt": "Plantas verdes junto a una pared clara con luz natural" },
+    { "foto": "galeria-11", "forma": "arco", "pie": "Tu bata te espera", "alt": "Dos batas blancas colgadas en la pared" },
+    { "foto": "galeria-12", "forma": "ancha", "pie": "Sala de descanso", "alt": "Sala de descanso con tumbonas y luz cálida, detrás de una pared de vidrio" }
+  ],
+  "preguntas": [
+    { "p": "¿Cómo reservo mi cita?", "r": "En la página de reservas eliges el servicio, el día y la hora, dejas tus datos y pagas el 30 % de anticipo. Te llega un correo con la confirmación. Si prefieres, también puedes reservar por WhatsApp." },
+    { "p": "¿Cuánto es el anticipo y cuándo pago el resto?", "r": "El anticipo es el 30 % del precio del servicio y confirma tu cita. El saldo lo pagas en el spa el día de tu cita, en efectivo, con tarjeta o por transferencia." },
+    { "p": "¿Puedo cancelar o cambiar mi cita?", "r": "Sí. Hasta 24 horas antes lo haces sin costo: te devolvemos todo el anticipo o lo usas en otra fecha, como prefieras." },
+    { "p": "¿Qué pasa si cancelo con menos de 24 horas o no llego?", "r": "El anticipo no se pierde: queda como saldo a favor para una cita en los siguientes 60 días." },
+    { "p": "¿Puedo retractarme después de pagar?", "r": "Sí. Si pagaste por la página, puedes retractarte dentro de los 5 días hábiles siguientes al pago, siempre que el servicio no se haya empezado a prestar, y te devolvemos todo (Ley 1480 de 2011, artículo 47)." },
+    { "p": "¿Cómo y cuándo me devuelven la plata?", "r": "Al mismo medio con el que pagaste, en máximo 30 días calendario." },
+    { "p": "¿Qué medios de pago reciben?", "r": "El anticipo se paga con tarjeta débito o crédito o por PSE a través de Mercado Pago. En el spa recibimos efectivo, tarjeta y transferencia. Todos los precios están en pesos e incluyen impuestos." },
+    { "p": "¿Con cuánto tiempo debo llegar?", "r": "Unos 10 minutos antes, para cambiarte con calma. Tu servicio dura completo el tiempo que reservaste: el té y el cambio de ropa van aparte." },
+    { "p": "¿Atienden a mujeres embarazadas?", "r": "Sí, con el masaje prenatal desde el segundo trimestre. Lo agendamos por WhatsApp para conocerte antes y saber cómo te sientes." },
+    { "p": "¿Qué debo llevar?", "r": "Nada. Te damos bata, pantuflas, toallas y un casillero para tus cosas." }
+  ],
+  "condiciones": {
+    "titulo": "Condiciones de reserva",
+    "lista": [
+      { "titulo": "Anticipo", "texto": "Pagas el 30 % del servicio para confirmar tu cita. El saldo lo pagas en el spa el día de la cita." },
+      { "titulo": "Cancelar o cambiar", "texto": "Sin costo hasta 24 horas antes: te devolvemos todo el anticipo o lo usas en otra fecha." },
+      { "titulo": "Menos de 24 horas o si no llegas", "texto": "El anticipo queda como saldo a favor para una cita en los siguientes 60 días." },
+      { "titulo": "Derecho de retracto", "texto": "Si pagaste por esta página, puedes retractarte dentro de los 5 días hábiles siguientes al pago, siempre que el servicio no se haya empezado a prestar, y te devolvemos todo (Ley 1480 de 2011, artículo 47)." },
+      { "titulo": "Devoluciones", "texto": "Al mismo medio de pago, en máximo 30 días calendario." },
+      { "titulo": "Medios de pago", "texto": "Anticipo con tarjeta débito o crédito y PSE, por Mercado Pago. Saldo en el spa en efectivo, tarjeta o transferencia." },
+      { "titulo": "Precios", "texto": "En pesos colombianos, con impuestos incluidos." }
+    ],
+    "sicTexto": "Si algo no sale bien, escríbenos primero. También puedes presentar tu queja ante la",
+    "sic": "Superintendencia de Industria y Comercio",
+    "sicUrl": "https://www.sic.gov.co"
+  },
+  "reservas": {
+    "porcentajeAnticipo": 30,
+    "ocupacion": 30,
+    "dias": 14,
+    "intervalo": 30,
+    "pasos": ["Servicio", "Día y hora", "Tus datos", "Pagar"],
+    "indicador": "Pasos de la reserva",
+    "anuncioPaso": "Paso {n} de 4: {titulo}",
+    "pasoDe": "Paso {n} de 4",
+    "titulos": ["Elige tu servicio", "Elige día y hora", "Tus datos", "Confirma y paga el anticipo"],
+    "continuar": "Continuar",
+    "volver": "Volver",
+    "servicioLeyenda": "Servicios que puedes reservar en línea",
+    "otrosServicios": "¿Buscas otro servicio o un paquete? Los agendamos por",
+    "errorServicio": "Elige un servicio para seguir.",
+    "elegiste": "Elegiste",
+    "cambiar": "Cambiar",
+    "diaLeyenda": "Día",
+    "horaLeyenda": "Hora",
+    "manana": "Mañana",
+    "tarde": "Tarde",
+    "diasCortos": ["L", "M", "M", "J", "V", "S", "D"],
+    "diasSemana": ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
+    "meses": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+    "fechaLarga": "{dia} {numero} de {mes}",
+    "cerrado": "cerrado",
+    "festivo": "festivo",
+    "ocupado": "ocupado",
+    "leyendaLibre": "Libre",
+    "leyendaOcupado": "Ocupado",
+    "leyendaCerrado": "Cerrado",
+    "elegirDia": "Elige un día para ver las horas libres.",
+    "sinHoras": "Ese día ya no quedan horas para este servicio. Prueba con otro día.",
+    "turnos": "Turnos cada 30 minutos. Tu servicio dura {duracion} y termina antes del cierre.",
+    "notaHoy": "Las reservas en línea empiezan desde mañana. ¿Es para hoy? Escríbenos por WhatsApp y te contamos si queda un espacio.",
+    "errorDia": "Elige un día.",
+    "errorHora": "Elige una hora.",
+    "nombre": "Nombre y apellido",
+    "celular": "Celular",
+    "celularAyuda": "Te escribimos por WhatsApp un día antes para recordarte la cita.",
+    "correo": "Correo",
+    "correoAyuda": "Ahí te llega la confirmación de la reserva.",
+    "errorNombre": "Escribe tu nombre y apellido.",
+    "errorCelular": "Escribe un celular de 10 dígitos que empiece por 3.",
+    "errorCorreo": "Escribe un correo válido, por ejemplo nombre@correo.com.",
+    "autorizacion": "Autorizo a Bruma Spa a usar mis datos para agendar y confirmar mi cita y recordármela, según su",
+    "politica": "política de tratamiento de datos",
+    "errorAutorizacion": "Para reservar necesitamos tu autorización.",
+    "novedades": "Quiero recibir novedades de Bruma Spa por correo (opcional).",
+    "resumenTitulo": "Tu reserva",
+    "resumenServicio": "Servicio",
+    "resumenFecha": "Fecha",
+    "resumenHora": "Hora",
+    "resumenDuracion": "Duración",
+    "resumenTotal": "Precio total",
+    "resumenAnticipo": "Anticipo para confirmar (30 %)",
+    "resumenSaldo": "Saldo a pagar en el spa",
+    "resumenDatos": "A nombre de",
+    "horaRango": "{inicio} a {fin}",
+    "acepto": "Leí y acepto las condiciones de reserva",
+    "errorAcepto": "Para pagar, marca que leíste y aceptas las condiciones de reserva.",
+    "pagar": "Pagar anticipo de {monto}",
+    "pagoSeguro": "Pago seguro con Mercado Pago: tarjeta débito, crédito o PSE.",
+    "demoTitulo": "Esta es una demo: no se cobró nada.",
+    "demoTexto": "En la página real, este botón abre el link de pago de Mercado Pago de Bruma Spa. Al pagar, la cita queda en el calendario del spa (Cal.com o la herramienta que ya use el negocio) y te llega un correo de confirmación con todos los detalles.",
+    "otraReserva": "Hacer otra reserva",
+    "sinJs": "Para reservar en línea necesitas activar JavaScript en tu navegador. También puedes reservar por WhatsApp."
+  },
+  "paginas": {
+    "inicio": {
+      "titulo": "Spa en Usaquén, Bogotá · Bruma Spa",
+      "descripcion": "Spa en Usaquén, Bogotá: masajes, faciales y rituales corporales sin afán. Reserva en línea en 4 pasos y paga solo el 30 % para confirmar.",
+      "antetitulo": "Spa de masajes y faciales · Usaquén, Bogotá",
+      "h1": ["Un spa en Usaquén", "para", "bajar el ritmo."],
+      "entrada": "Masajes, faciales y rituales corporales con tiempo completo en la camilla. Reserva en línea en cuatro pasos y paga solo el 30 % para confirmar.",
+      "foto": "portada",
+      "alt": "Sala de masajes de Bruma Spa con la camilla tendida, cortinas y luz natural",
+      "datos": [
+        { "valor": "Mar a dom", "texto": "lunes cerrado" },
+        { "valor": "8 servicios", "texto": "para reservar en línea" },
+        { "valor": "30 %", "texto": "de anticipo; el resto, en el spa" }
+      ],
+      "diferencias": {
+        "antetitulo": "Por qué Bruma",
+        "titulo": "Lo que cuidamos en cada visita",
+        "items": [
+          { "titulo": "Una sala, una persona", "texto": "Nadie comparte sala contigo, salvo que reserves el ritual en pareja. La puerta se cierra y el ruido de la calle se queda afuera." },
+          { "titulo": "Tiempo completo", "texto": "Si reservas 60 minutos, son 60 minutos en la camilla. Llegar, cambiarte y tomarte el té van por aparte." },
+          { "titulo": "Escuchamos primero", "texto": "Antes de empezar hablamos dos minutos: qué zonas te molestan, qué presión te gusta y qué prefieres evitar." },
+          { "titulo": "Reservas sin llamar", "texto": "Eliges día y hora en la página, pagas el 30 % y listo. Si te surge algo, cambias la cita sin costo hasta 24 horas antes." }
+        ]
+      },
+      "destacados": {
+        "antetitulo": "Para empezar",
+        "titulo": "Los más reservados",
+        "ids": ["masaje-relajante", "limpieza-facial", "exfoliacion-corporal", "manicure-spa"]
+      },
+      "testimonios": {
+        "antetitulo": "Testimonios",
+        "titulo": "Lo que cuentan quienes ya vinieron"
+      },
+      "llamado": {
+        "antetitulo": "Reserva en línea",
+        "titulo": "Elige tu hora y paga solo el 30 %",
+        "texto": "Cuatro pasos y unos tres minutos. El resto lo pagas en el spa, y si te surge algo cambias la cita sin costo hasta 24 horas antes.",
+        "pasos": ["Servicio", "Día y hora", "Tus datos", "Anticipo"]
+      }
+    },
+    "servicios": {
+      "titulo": "Masajes y faciales en Usaquén · Bruma Spa",
+      "descripcion": "Masajes y faciales en Usaquén con duración y precio: relajante, tejido profundo, piedras calientes, limpieza facial y más. Paquetes desde $139.000.",
+      "antetitulo": "Menú de servicios",
+      "h1": "Masajes y faciales en Usaquén",
+      "entrada": "Veinte servicios con su duración y su precio final, en pesos y con impuestos incluidos. Los que dicen «Reservar» se agendan en línea; los demás, por WhatsApp.",
+      "saltar": "Ir a",
+      "paquetes": {
+        "antetitulo": "Paquetes y membresía",
+        "titulo": "Para quedarte más rato",
+        "texto": "Combinaciones que ya probamos y funcionan. Se agendan por WhatsApp para preparar la sala con tiempo."
+      }
+    },
+    "nosotros": {
+      "titulo": "Terapeutas de masaje en Usaquén · Bruma Spa",
+      "descripcion": "Conoce al equipo de terapeutas de Bruma Spa en Usaquén: quién te atiende en cada servicio, cómo trabajamos y cómo empezó el spa.",
+      "antetitulo": "Nosotros",
+      "h1": "Nuestro equipo de terapeutas en Usaquén",
+      "entrada": "Somos cinco personas que llegan temprano, ventilan las salas y calientan el aceite antes de que llegues. Así empezó Bruma y así seguimos.",
+      "foto": "nosotros",
+      "alt": "Sala de masajes de Bruma Spa con camilla, persiana y luz natural",
+      "historia": {
+        "antetitulo": "Historia",
+        "titulo": "Una casa, dos salas y mucho té",
+        "parrafos": [
+          "Mariana abrió Bruma en 2019 con dos salas y una idea sencilla: un masaje debería durar lo que dice que dura, en un lugar tranquilo y sin que nadie te apure al salir.",
+          "Con los años llegaron Andrés, Laura, Camila y Sara, cada uno con su oficio. Hoy tenemos cuatro salas, una sala de descanso y una agenda que puedes ver y reservar desde el celular."
+        ],
+        "hitos": [
+          { "año": "2019", "texto": "Abrimos en Usaquén con dos salas de masaje." },
+          { "año": "2022", "texto": "Sumamos faciales, corporales y el ritual en pareja." },
+          { "año": "2026", "texto": "Reservas en línea con anticipo, sin tener que llamar." }
+        ]
+      },
+      "filosofia": {
+        "antetitulo": "Cómo trabajamos",
+        "titulo": "Tres reglas de la casa",
+        "items": [
+          { "titulo": "Escuchar antes de tocar", "texto": "Cada sesión empieza con una conversación corta sobre cómo llegas y qué prefieres." },
+          { "titulo": "Menos, pero mejor", "texto": "Pocos productos, de buena calidad y sin perfumes fuertes. Si no quieres aroma, no lo usamos." },
+          { "titulo": "Sin promesas raras", "texto": "Te ofrecemos un buen rato y manos con oficio. No prometemos resultados médicos ni vendemos milagros." }
+        ]
+      },
+      "equipo": {
+        "antetitulo": "El equipo",
+        "titulo": "Quién te atiende"
+      }
+    },
+    "galeria": {
+      "titulo": "Fotos del spa en Usaquén · Bruma Spa",
+      "descripcion": "Fotos de Bruma Spa en Usaquén: salas de masaje, sala de descanso, piedras, aceites y los detalles que te esperan en tu visita.",
+      "antetitulo": "Galería",
+      "h1": "Fotos de nuestro spa en Usaquén",
+      "entrada": "Luz suave, madera clara y plantas. Así se ve Bruma por dentro, antes de que llegues.",
+      "cierre": "¿Te imaginas aquí?"
+    },
+    "contacto": {
+      "titulo": "Contacto y horario del spa en Usaquén · Bruma Spa",
+      "descripcion": "Horario, ubicación en Usaquén, WhatsApp y correo de Bruma Spa. Escríbenos o resuelve tus dudas sobre reservas, anticipos y cancelaciones.",
+      "antetitulo": "Contacto",
+      "h1": "Contacto y horario en Usaquén",
+      "entrada": "Escríbenos por WhatsApp para lo que sea urgente; por el formulario te respondemos el mismo día en horario de atención.",
+      "canales": "Canales",
+      "etiquetas": { "whatsapp": "WhatsApp", "telefono": "Teléfono", "correo": "Correo", "redes": "Redes" },
+      "whatsappValor": "Escríbenos ahora",
+      "horarioTitulo": "Horario",
+      "formularioTitulo": "Déjanos un mensaje",
+      "mapaTitulo": "Dónde estamos",
+      "mapaTexto": "En Usaquén, Bogotá. Te enviamos la dirección exacta y cómo llegar al confirmar tu cita.",
+      "preguntasTitulo": "Preguntas frecuentes"
+    },
+    "reservas": {
+      "titulo": "Reservar masaje o facial en Usaquén · Bruma Spa",
+      "descripcion": "Reserva tu masaje o facial en Usaquén: elige servicio, día y hora, y paga el 30 % de anticipo. Cancela sin costo hasta 24 horas antes.",
+      "antetitulo": "Reserva en línea",
+      "h1": "Reserva tu cita en Usaquén",
+      "entrada": "Elige servicio, día y hora. Pagas el 30 % para confirmar y el resto en el spa.",
+      "foto": "reservas",
+      "alt": "Sala de Bruma Spa con sillones, plantas y camillas al fondo",
+      "comoTitulo": "Cómo funciona",
+      "como": [
+        "Eliges uno de los 8 servicios, el día y la hora que te sirven.",
+        "Pagas el 30 % con Mercado Pago y te llega la confirmación al correo.",
+        "El día de tu cita pagas el saldo en el spa como prefieras."
+      ],
+      "ayudaTitulo": "¿Prefieres hablar con alguien?",
+      "ayudaTexto": "Para paquetes, masaje prenatal o citas para hoy, escríbenos por WhatsApp."
+    },
+    "privacidad": {
+      "antetitulo": "Legal"
+    }
+  },
+  "privacidad": {
+    "textoReservas": "Al reservar también guardamos el servicio, la fecha y la hora que eliges. El anticipo lo procesa Mercado Pago: no vemos ni guardamos los datos de tu tarjeta.",
+    "finalidades": [
+      "Responder tus mensajes.",
+      "Agendar y confirmar tus citas.",
+      "Recordarte tu cita.",
+      "Gestionar anticipos y devoluciones.",
+      "Enviarte novedades solo si lo autorizas."
+    ],
+    "proveedores": "Cloudflare (alojamiento del sitio y envío del formulario), Cal.com (agenda de reservas), Mercado Pago (pago de anticipos), Google (correo y mapas) y Meta (WhatsApp e Instagram)"
+  }
+}

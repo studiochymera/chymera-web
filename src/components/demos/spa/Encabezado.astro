@@ -1,0 +1,123 @@
+---
+// Encabezado fijo de Bruma Spa: marca, menú y botón Reservar siempre a mano.
+import { spa, rutas } from './datos';
+
+const e = spa.encabezado;
+const r = rutas(Astro.url.pathname);
+const actual = Astro.url.pathname.replace(/^.*\/demos\/spa\//, '');
+const esActual = (ruta: string) => (ruta === '' ? actual === '' : actual.startsWith(ruta));
+---
+
+<header class="encabezado sticky top-0 z-50 border-b border-oliva/10 bg-arena/90 backdrop-blur-md">
+  <div class="contenedor flex h-16 items-center gap-3 lg:h-20">
+    <a href={r.base} class="marca mr-auto flex min-h-11 items-baseline gap-2 rounded-sm" aria-label={e.inicio}>
+      <span class="font-titulo text-[1.75rem] leading-none font-[420] tracking-[-0.03em] lg:text-[2rem]">{spa.negocio.marca}</span>
+      <span class="numeral text-lg leading-none text-oliva-suave">{spa.negocio.apellido}</span>
+      <span class="ml-2 hidden border-l border-oliva/20 pl-3 text-[0.6875rem] font-semibold tracking-[0.16em] text-oliva-suave uppercase sm:inline">{e.lema}</span>
+    </a>
+
+    <nav aria-label={e.navegacion} class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {e.enlaces.map((l) => (
+          <li>
+            <a
+              href={r.a(l.ruta)}
+              aria-current={esActual(l.ruta) ? 'page' : undefined}
+              class="enlace-menu relative inline-flex min-h-11 items-center px-3.5 text-[0.9375rem] font-medium text-oliva-suave transition-colors hover:text-oliva aria-[current=page]:text-oliva"
+            >
+              {l.texto}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href={r.reservar()} class="boton boton-oliva min-h-11 px-5 text-sm lg:ml-4" aria-current={actual.startsWith('reservas') ? 'page' : undefined}>
+      {e.reservar}
+    </a>
+
+    <details class="menu-movil relative lg:hidden">
+      <summary class="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center gap-2 rounded-full border border-oliva/25 px-3.5 text-sm font-semibold">
+        <span class="lineas" aria-hidden="true"><span></span><span></span></span>
+        <span>{e.menu}</span>
+      </summary>
+      <nav aria-label={e.menu} class="panel absolute top-[calc(100%+0.75rem)] right-0 w-[min(18rem,calc(100vw-2rem))] border border-oliva/10 bg-arena p-2 shadow-[0_18px_40px_-12px_rgb(47_58_46/0.35)]">
+        <ul>
+          {e.enlaces.map((l, i) => (
+            <li>
+              <a
+                href={r.a(l.ruta)}
+                aria-current={esActual(l.ruta) ? 'page' : undefined}
+                class="flex min-h-12 items-baseline gap-4 rounded-sm px-3 py-2.5 font-titulo text-xl hover:bg-arena-2 aria-[current=page]:bg-arena-2"
+              >
+                <span class="numeral w-5 text-sm text-barro" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                {l.texto}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<script>
+  // Cierra el menú del celular con Escape o al tocar fuera.
+  const menu = document.querySelector<HTMLDetailsElement>('.menu-movil');
+  if (menu) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+    });
+  }
+</script>
+
+<style>
+  .menu-movil summary::-webkit-details-marker {
+    display: none;
+  }
+  .lineas {
+    display: grid;
+    gap: 5px;
+    width: 1rem;
+  }
+  .lineas span {
+    display: block;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.25s ease;
+  }
+  .menu-movil[open] .lineas span:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+  .menu-movil[open] .lineas span:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+  .menu-movil[open] .panel {
+    animation: subir 0.3s var(--ease-bruma) both;
+  }
+  .panel {
+    border-radius: 2px;
+  }
+  .enlace-menu::after {
+    content: '';
+    position: absolute;
+    left: 0.875rem;
+    right: 0.875rem;
+    bottom: 0.55rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease-bruma);
+  }
+  .enlace-menu:hover::after,
+  .enlace-menu[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+</style>

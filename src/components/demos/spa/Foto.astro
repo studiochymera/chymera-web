@@ -1,0 +1,34 @@
+---
+// Foto de Bruma Spa con marco de proporción fija: en arco (elemento distintivo) o recto.
+// La foto llena el marco con object-cover, así encaja cuando llegue la definitiva.
+import Imagen from '../../../base/Imagen.astro';
+
+interface Props {
+  foto: string; // slot de la foto: 'portada', 'galeria-01'...
+  alt: string;
+  proporcion?: string; // '3/4'
+  forma?: 'arco' | 'recto';
+  prioridad?: boolean;
+  sizes?: string;
+  anchos?: number[];
+  class?: string; // clases del marco (ancho, posición)
+}
+
+const { foto, alt, proporcion = '3/4', forma = 'arco', prioridad = false, sizes, anchos, class: clase } = Astro.props;
+---
+
+<div
+  class:list={['foto-marco relative overflow-hidden bg-arena-2 text-oliva', forma === 'arco' ? 'arco' : 'rounded-[3px]', clase]}
+  style={`aspect-ratio: ${proporcion}`}
+>
+  <Imagen
+    ruta={`demos/spa/${foto}`}
+    alt={alt}
+    proporcion={proporcion}
+    prioridad={prioridad}
+    sizes={sizes}
+    anchos={anchos}
+    claseMarco="block h-full w-full"
+    class="h-full w-full object-cover"
+  />
+</div>

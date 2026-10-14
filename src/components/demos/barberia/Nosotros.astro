@@ -1,0 +1,45 @@
+---
+// Sobre nosotros: historia y diferencial sobre hueso, con la foto montada sobre las franjas del poste.
+import Imagen from '../../../base/Imagen.astro';
+import { d } from './datos';
+
+const n = d.nosotros;
+---
+
+<section id="nosotros" class="claro relative overflow-hidden py-20 sm:py-28 lg:py-36" data-incluye={d.incluye.nosotros}>
+  <div class="contenedor grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-16">
+    <div class="relative mx-auto w-full max-w-sm pl-4 pb-4 sm:max-w-md sm:pl-6 sm:pb-6 lg:col-span-5 lg:max-w-none">
+      <div class="poste absolute bottom-0 left-0 h-3/4 w-3/4" aria-hidden="true"></div>
+      <div class="relative aspect-[4/5] overflow-hidden bg-carbon text-hueso">
+        <Imagen
+          ruta="demos/barberia/nosotros"
+          alt={n.alt}
+          anchos={[400, 640, 960]}
+          sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw"
+          proporcion="4/5"
+          claseMarco="block h-full w-full"
+          class="h-full w-full object-cover"
+        />
+      </div>
+      <p class="absolute -top-6 -right-2 flex h-28 w-28 rotate-[-10deg] flex-col items-center justify-center rounded-full bg-carbon text-center text-hueso shadow-[0_10px_30px_rgb(0_0_0/0.35)] outline outline-1 outline-offset-[-6px] outline-laton/70 sm:-right-6 sm:h-32 sm:w-32">
+        <span class="etiqueta text-[0.5625rem] text-hueso/80">{n.selloAntes}</span>
+        <span class="font-serif text-[2rem] leading-none italic sm:text-[2.375rem]">{n.sello}</span>
+        <span class="etiqueta mt-1 text-[0.5625rem] text-laton">{n.selloLugar}</span>
+      </p>
+    </div>
+
+    <div class="lg:col-span-6 lg:col-start-7">
+      <p class="etiqueta flex items-center gap-3 text-vino">
+        <span class="h-px w-8 bg-vino" aria-hidden="true"></span>{n.etiqueta}
+      </p>
+      <h2 class="mt-5 text-[clamp(2.5rem,11vw,4.25rem)] leading-[0.98] text-carbon">
+        {n.titulo} <span class="italic text-vino">{n.tituloCursiva}</span>
+      </h2>
+      <div class="mt-8 max-w-xl space-y-5 text-[1.0625rem] leading-[1.75] text-carbon/80 sm:mt-10">
+        {n.parrafos.map((t, i) => (
+          <p class:list={[i === 0 && 'first-letter:float-left first-letter:mt-1.5 first-letter:mr-3 first-letter:font-serif first-letter:text-[4.25rem] first-letter:leading-[0.8] first-letter:text-vino']}>{t}</p>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

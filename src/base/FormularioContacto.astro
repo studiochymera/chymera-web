@@ -1,0 +1,190 @@
+---
+// Base técnica de Chymera: formulario de contacto (planes Negocio y Reservas).
+// Solo los campos necesarios, casilla de autorización sin marcar con enlace a la política,
+// campo trampa contra spam y Cloudflare Turnstile cuando hay llave.
+// modo 'envio': manda el mensaje al Worker (worker/contacto.ts), que lo reenvía al correo del negocio.
+// modo 'demo': no envía nada; muestra textos.demo (para las demos del portafolio).
+// Colores y bordes: --form-campo, --form-borde, --form-texto, --form-acento, --form-acento-texto, --form-radio.
+
+export interface TextosFormulario {
+  nombre: string;
+  contacto: string;
+  mensaje: string;
+  autorizacion: string; // "Autorizo a {negocio} a usar mis datos para responder mi mensaje, según su"
+  politica: string; // "política de tratamiento de datos"
+  enviar: string;
+  enviando: string;
+  exito: string;
+  error: string;
+  demo?: string;
+}
+
+interface Props {
+  textos: TextosFormulario;
+  negocio: string;
+  enlacePolitica: string;
+  modo: 'envio' | 'demo';
+  accion?: string; // ruta relativa al Worker, p. ej. '../api/contacto'
+  llaveTurnstile?: string;
+  class?: string;
+}
+
+const { textos, negocio, enlacePolitica, modo, accion = 'api/contacto', llaveTurnstile, class: clase } = Astro.props;
+const id = `f${Math.random().toString(36).slice(2, 8)}`;
+const autorizacion = textos.autorizacion.replace('{negocio}', negocio);
+---
+
+<formulario-contacto data-modo={modo} data-enviando={textos.enviando} data-exito={textos.exito} data-error={textos.error} data-demo={textos.demo ?? ''} class:list={['formulario', clase]}>
+  <form action={accion} method="post" novalidate={false}>
+    <div class="campo">
+      <label for={`${id}-nombre`}>{textos.nombre}</label>
+      <input id={`${id}-nombre`} name="nombre" type="text" autocomplete="name" required maxlength="80" />
+    </div>
+    <div class="campo">
+      <label for={`${id}-contacto`}>{textos.contacto}</label>
+      <input id={`${id}-contacto`} name="contacto" type="text" autocomplete="tel" required maxlength="120" />
+    </div>
+    <div class="campo">
+      <label for={`${id}-mensaje`}>{textos.mensaje}</label>
+      <textarea id={`${id}-mensaje`} name="mensaje" rows="4" required maxlength="1500"></textarea>
+    </div>
+    <div class="trampa" aria-hidden="true">
+      <label for={`${id}-web`}>Web</label>
+      <input id={`${id}-web`} name="sitio_web" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <div class="autoriza">
+      <input id={`${id}-autoriza`} name="autorizacion" type="checkbox" value="si" required />
+      <label for={`${id}-autoriza`}>{autorizacion} <a href={enlacePolitica}>{textos.politica}</a>.</label>
+    </div>
+    {llaveTurnstile && <div class="cf-turnstile" data-sitekey={llaveTurnstile} data-language="es"></div>}
+    <button type="submit" class="enviar">{textos.enviar}</button>
+    <p class="estado" role="status" aria-live="polite"></p>
+  </form>
+</formulario-contacto>
+
+{llaveTurnstile && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+
+<script>
+  class FormularioContacto extends HTMLElement {
+    connectedCallback() {
+      const form = this.querySelector('form')!;
+      const estado = this.querySelector<HTMLElement>('.estado')!;
+      const boton = this.querySelector<HTMLButtonElement>('.enviar')!;
+      const textoBoton = boton.textContent;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+        estado.dataset.tipo = '';
+        if (this.dataset.modo === 'demo') {
+          estado.textContent = this.dataset.demo!;
+          estado.dataset.tipo = 'ok';
+          form.reset();
+          return;
+        }
+        boton.disabled = true;
+        boton.textContent = this.dataset.enviando!;
+        try {
+          const r = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+          const datos = await r.json().catch(() => ({}));
+          if (!r.ok || !datos.ok) throw new Error();
+          estado.textContent = this.dataset.exito!;
+          estado.dataset.tipo = 'ok';
+          form.reset();
+        } catch {
+          estado.textContent = this.dataset.error!;
+          estado.dataset.tipo = 'error';
+        } finally {
+          boton.disabled = false;
+          boton.textContent = textoBoton;
+          (window as any).turnstile?.reset();
+        }
+      });
+    }
+  }
+  customElements.define('formulario-contacto', FormularioContacto);
+</script>
+
+<style>
+  .formulario form {
+    display: grid;
+    gap: 1rem;
+  }
+  .campo {
+    display: grid;
+    gap: 0.375rem;
+  }
+  .campo label {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .campo input,
+  .campo textarea {
+    width: 100%;
+    min-height: 2.875rem;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid var(--form-borde, currentColor);
+    border-radius: var(--form-radio, 0.5rem);
+    background: var(--form-campo, transparent);
+    color: var(--form-texto, inherit);
+    font: inherit;
+  }
+  .campo input:focus-visible,
+  .campo textarea:focus-visible,
+  .autoriza input:focus-visible,
+  .enviar:focus-visible {
+    outline: 2px solid var(--form-acento, currentColor);
+    outline-offset: 2px;
+  }
+  .trampa {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .autoriza {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+  .autoriza input {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.1rem;
+    accent-color: var(--form-acento, currentColor);
+  }
+  .autoriza a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .enviar {
+    justify-self: start;
+    min-height: 2.875rem;
+    padding: 0 1.5rem;
+    border: 0;
+    border-radius: var(--form-radio, 0.5rem);
+    background: var(--form-acento, #111);
+    color: var(--form-acento-texto, #fff);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .enviar:disabled {
+    opacity: 0.6;
+  }
+  .estado:empty {
+    display: none;
+  }
+  .estado {
+    padding: 0.75rem 1rem;
+    border-radius: var(--form-radio, 0.5rem);
+    background: color-mix(in srgb, var(--form-acento, currentColor) 14%, transparent);
+    font-size: 0.875rem;
+  }
+  .estado[data-tipo='error'] {
+    background: color-mix(in srgb, #c0392b 16%, transparent);
+  }
+</style>

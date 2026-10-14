@@ -16,6 +16,7 @@ const { p } = Astro.props;
 const d = site.detallePlanes;
 const mensual = site.planes.find((pl) => pl.nombre === p.planMensual)!;
 const otros = site.paquetes.filter((o) => o.slug !== p.slug);
+const demo = site.demos.lista.find((dm) => dm.plan === p.slug);
 const textoWa = d.whatsappPlan.replace('{plan}', p.nombre);
 const wa = enlaceWhatsApp(site.whatsapp, textoWa);
 
@@ -64,9 +65,10 @@ const schemaExtra = {
             <span class="ml-1 text-sm text-tinta/60">COP</span>
           </p>
           <p class="text-sm text-tinta/70">Instalación, pago único · + ${p.mensual} al mes (plan {p.planMensual})</p>
-          <div class="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:flex-col">
             <a href={wa} class="boton-azul" target="_blank" rel="noopener">Quiero {p.nombre}</a>
             <a href="../#comparar" class="boton border border-azul/25 text-azul hover:border-azul">{d.comparar}</a>
+            {demo && <a href={`../../demos/${demo.slug}/`} class="boton border border-azul/25 text-azul hover:border-azul">{d.verDemo}</a>}
           </div>
         </div>
       </div>

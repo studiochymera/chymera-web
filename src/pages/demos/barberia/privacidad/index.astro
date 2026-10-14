@@ -1,0 +1,39 @@
+---
+// Aviso de privacidad básico de Filo Barbería (plan Presencia), con la plantilla de la base técnica.
+import LayoutBarberia from '../../../../components/demos/barberia/LayoutBarberia.astro';
+import ContenidoLegal from '../../../../base/ContenidoLegal.astro';
+import { documentoLegal } from '../../../../base/legal';
+import { d, contacto, textosBase } from '../../../../components/demos/barberia/datos';
+import { raiz } from '../../../../base/formato';
+
+const documento = documentoLegal('basica', {
+  negocio: d.negocio.nombre,
+  responsable: `${d.negocio.nombre} (${textosBase.ficticio})`,
+  direccion: d.negocio.direccion,
+  correo: contacto.correo,
+  telefono: contacto.telefono,
+  fecha: textosBase.fechaLegal,
+});
+const inicio = `${raiz(Astro.url.pathname)}demos/barberia/`;
+---
+
+<LayoutBarberia titulo={d.seo.tituloPrivacidad} descripcion={documento.descripcion}>
+  <div class="bg-carbon">
+    <div class="contenedor pt-14 pb-12 sm:pt-20 sm:pb-16">
+      <a href={inicio} class="etiqueta inline-flex min-h-11 items-center gap-3 text-laton hover:text-hueso">
+        <span aria-hidden="true">←</span>{d.privacidad.volver}
+      </a>
+      <h1 class="mt-6 text-[clamp(3rem,13vw,5.5rem)] leading-[0.92]">{documento.titulo}</h1>
+      <p class="mt-5 text-hueso/75">{textosBase.actualizado}: {textosBase.fechaLegal}</p>
+    </div>
+    <div class="poste h-2.5" aria-hidden="true"></div>
+  </div>
+  <div class="claro py-14 sm:py-20">
+    <div class="contenedor">
+      <div class="max-w-2xl" data-incluye={d.incluye.privacidad}>
+        <ContenidoLegal documento={documento} class="legal-filo" />
+      </div>
+    </div>
+  </div>
+</LayoutBarberia>
+

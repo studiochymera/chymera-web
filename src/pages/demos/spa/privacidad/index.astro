@@ -1,0 +1,87 @@
+---
+import LayoutSpa from '../../../../components/demos/spa/LayoutSpa.astro';
+import Cabecera from '../../../../components/demos/spa/Cabecera.astro';
+import ContenidoLegal from '../../../../base/ContenidoLegal.astro';
+import { documentoLegal } from '../../../../base/legal';
+import { spa, site } from '../../../../components/demos/spa/datos';
+
+const tb = site.demos.textosBase;
+const doc = documentoLegal('completa', {
+  negocio: spa.negocio.nombre,
+  responsable: `${spa.negocio.nombre} (${tb.ficticio})`,
+  direccion: `${spa.negocio.barrio}, ${spa.negocio.region}`,
+  correo: spa.contacto.correo,
+  telefono: spa.contacto.telefono,
+  fecha: tb.fechaLegal,
+  finalidades: spa.privacidad.finalidades,
+  proveedores: spa.privacidad.proveedores,
+  textoReservas: spa.privacidad.textoReservas,
+});
+---
+
+<LayoutSpa titulo={`${doc.titulo} · ${spa.negocio.nombre}`} descripcion={doc.descripcion}>
+  <Cabecera antetitulo={spa.paginas.privacidad.antetitulo} titulo={doc.titulo}>
+    <p slot="abajo" class="mt-6 text-sm text-oliva-suave">{tb.actualizado}: {tb.fechaLegal}</p>
+  </Cabecera>
+
+  <section class="py-16 lg:py-24" data-incluye={spa.incluye.privacidad}>
+    <div class="contenedor">
+      <ContenidoLegal documento={doc} class="legal-spa mx-auto max-w-3xl" />
+    </div>
+  </section>
+</LayoutSpa>
+
+<style>
+  :global(.legal-spa) {
+    color: var(--color-oliva-suave);
+    font-size: 1.0625rem;
+  }
+  :global(.legal-spa .intro) {
+    font-family: var(--font-titulo);
+    font-size: 1.375rem;
+    font-weight: 340;
+    line-height: 1.45;
+    color: var(--color-oliva);
+  }
+  :global(.legal-spa section) {
+    margin-top: 2.75rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgb(47 58 46 / 0.15);
+  }
+  :global(.legal-spa h2) {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    font-size: 1.625rem;
+    color: var(--color-oliva);
+  }
+  :global(.legal-spa .numero) {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--color-barro);
+  }
+  :global(.legal-spa p + p) {
+    margin-top: 0.875rem;
+  }
+  :global(.legal-spa h2 + p),
+  :global(.legal-spa h2 + ul) {
+    margin-top: 1rem;
+  }
+  :global(.legal-spa ul) {
+    display: grid;
+    gap: 0.5rem;
+  }
+  :global(.legal-spa li) {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  :global(.legal-spa li)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.75rem;
+    height: 1px;
+    background: var(--color-barro);
+  }
+</style>

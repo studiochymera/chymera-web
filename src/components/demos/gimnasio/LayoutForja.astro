@@ -1,0 +1,42 @@
+---
+// Layout de la demo Forja: head de la base, franja de Chymera, encabezado, pie y WhatsApp flotante.
+import '../../../styles/demos/gimnasio.css';
+import Layout from '../../../base/Layout.astro';
+import BotonWhatsApp from '../../../base/BotonWhatsApp.astro';
+import FranjaDemo from '../FranjaDemo.astro';
+import Encabezado from './Encabezado.astro';
+import Pie from './Pie.astro';
+import { datos as d, contacto, rutas, schemaForja } from './datos';
+
+interface Props {
+  pagina: string;
+  titulo: string;
+  descripcion: string;
+  conServicios?: boolean;
+  schemasExtra?: object[];
+}
+
+const { pagina, titulo, descripcion, conServicios = false, schemasExtra = [] } = Astro.props;
+const r = rutas(Astro.url.pathname);
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const schemas = [schemaForja(url, conServicios), ...schemasExtra];
+---
+
+<Layout
+  titulo={titulo}
+  descripcion={descripcion}
+  noIndexar={true}
+  icono={r.a('icono.svg')}
+  colorTema={d.colorTema}
+  imagenSocial="demos/gimnasio/og.jpg"
+  schemas={schemas}
+>
+  <FranjaDemo slug="gimnasio" />
+  <a href="#contenido" class="sr-only z-[80] bg-voltio px-4 py-3 font-semibold text-negro focus:not-sr-only focus:fixed focus:left-3 focus:top-3">{d.comun.saltar}</a>
+  <Encabezado actual={pagina} />
+  <main id="contenido" class="overflow-x-clip">
+    <slot />
+  </main>
+  <Pie />
+  <BotonWhatsApp numero={contacto.whatsapp} texto={contacto.whatsappTexto} etiqueta={d.comun.waEtiqueta} />
+</Layout>

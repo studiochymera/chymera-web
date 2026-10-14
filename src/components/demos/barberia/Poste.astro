@@ -1,0 +1,18 @@
+---
+// Poste de barbero dibujado en CSS: tapas de latón y tubo con franjas vino y hueso que giran.
+interface Props {
+  class?: string;
+  animado?: boolean;
+}
+const { class: clase, animado = true } = Astro.props;
+---
+
+<span aria-hidden="true" class:list={['inline-flex flex-col items-center', clase]}>
+  <span class="block h-[7%] min-h-1.5 w-full rounded-t-full bg-laton"></span>
+  <span class="block h-[3%] min-h-0.5 w-[82%] bg-laton/70"></span>
+  <span class:list={['poste relative block w-[72%] flex-1 overflow-hidden', animado && 'motion-safe:animate-poste']}>
+    <span class="absolute inset-0 bg-[linear-gradient(90deg,rgb(0_0_0/0.45),transparent_38%,rgb(255_255_255/0.18)_58%,rgb(0_0_0/0.4))]"></span>
+  </span>
+  <span class="block h-[3%] min-h-0.5 w-[82%] bg-laton/70"></span>
+  <span class="block h-[7%] min-h-1.5 w-full rounded-b-full bg-laton"></span>
+</span>

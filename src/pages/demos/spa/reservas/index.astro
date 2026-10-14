@@ -1,0 +1,70 @@
+---
+import LayoutSpa from '../../../../components/demos/spa/LayoutSpa.astro';
+import Foto from '../../../../components/demos/spa/Foto.astro';
+import Reserva from '../../../../components/demos/spa/Reserva.astro';
+import { spa, whatsapp } from '../../../../components/demos/spa/datos';
+
+const p = spa.paginas.reservas;
+---
+
+<LayoutSpa titulo={p.titulo} descripcion={p.descripcion}>
+  <section class="bruma relative overflow-hidden border-b border-oliva/10">
+    <div class="cabecera-reservas contenedor pt-10 pb-10 sm:pt-14 lg:pt-16 lg:pb-14">
+      <p class="antetitulo aparece [grid-area:a]">{p.antetitulo}</p>
+      <h1 class="aparece mt-5 max-w-[14ch] text-[2.5rem] [grid-area:t] sm:text-6xl lg:text-[4.75rem] lg:leading-[1]">{p.h1}</h1>
+      <p class="aparece mt-5 max-w-[34rem] self-end text-[1.0625rem] text-oliva-suave [grid-area:e] lg:text-lg">{p.entrada}</p>
+      <div class="aparece w-[6.25rem] self-end [grid-area:f] [animation-delay:120ms] sm:w-36 lg:w-full">
+        <Foto foto={p.foto} alt={p.alt} proporcion="3/4" prioridad={true} sizes="(min-width: 1024px) 26vw, 144px" anchos={[200, 480, 800]} class="lg:aspect-[5/4]!" />
+      </div>
+    </div>
+  </section>
+
+  <section class="pt-8 pb-20 sm:pt-12 lg:pt-14 lg:pb-28">
+    <div class="contenedor grid gap-14 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-8">
+        <Reserva />
+      </div>
+
+      <aside class="lg:col-span-4" aria-labelledby="como-titulo">
+        <div class="grid gap-10 sm:grid-cols-2 lg:sticky lg:top-28 lg:grid-cols-1">
+          <div>
+            <h2 id="como-titulo" class="text-3xl">{p.comoTitulo}</h2>
+            <ol class="mt-5">
+              {p.como.map((x, i) => (
+                <li class="flex gap-4 border-t border-oliva/15 py-4">
+                  <span class="numeral w-5 shrink-0 text-2xl leading-none text-barro" aria-hidden="true">{i + 1}</span>
+                  <span class="text-[0.9375rem]">{x}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div class="border-t border-oliva/15 pt-6 sm:border-t-0 sm:pt-0 lg:border-t lg:pt-6">
+            <h2 class="text-2xl">{p.ayudaTitulo}</h2>
+            <p class="mt-3 text-[0.9375rem] text-oliva-suave">{p.ayudaTexto}</p>
+            <a class="boton boton-borde mt-5" href={whatsapp} target="_blank" rel="noopener">{spa.botones.whatsapp}</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</LayoutSpa>
+
+<style>
+  .cabecera-reservas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'a a' 't t' 'e f';
+    column-gap: 1.25rem;
+  }
+  @media (width >= 64rem) {
+    .cabecera-reservas {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-template-areas:
+        'a a a a a a a a f f f f'
+        't t t t t t t t f f f f'
+        'e e e e e e e e f f f f';
+      column-gap: 3rem;
+      align-items: end;
+    }
+  }
+</style>

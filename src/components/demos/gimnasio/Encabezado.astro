@@ -1,0 +1,91 @@
+---
+import Icono from './Icono.astro';
+import { datos as d, contacto, rutas } from './datos';
+
+interface Props {
+  actual: string;
+}
+
+const { actual } = Astro.props;
+const r = rutas(Astro.url.pathname);
+---
+
+<header class="oscuro sticky top-0 z-50 border-b border-negro-3 bg-negro">
+  <div class="contenedor flex h-16 items-center gap-2 sm:gap-3 lg:h-20" data-incluye={d.incluye.encabezado}>
+    <a href={r.a('')} aria-label={d.comun.logoEtiqueta} class="group -ml-1 flex min-h-11 items-center gap-1 px-1">
+      <Icono nombre="marca" class="h-7 w-7 text-voltio transition-transform duration-300 group-hover:-translate-y-0.5 sm:h-8 sm:w-8 lg:h-9 lg:w-9" />
+      <span class="font-display text-[1.75rem] font-extrabold uppercase italic leading-none tracking-tight sm:text-[2rem] lg:text-[2.25rem]">{d.nombre}</span>
+    </a>
+
+    <nav aria-label={d.comun.menuEtiqueta} class="ml-auto hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {d.nav.map((n) => (
+          <li>
+            <a
+              href={r.a(n.ruta)}
+              aria-current={n.clave === actual ? 'page' : undefined}
+              class:list={[
+                'relative flex min-h-11 items-center px-3 font-display text-[1.3rem] font-extrabold uppercase italic tracking-wide transition-colors hover:text-voltio',
+                'after:absolute after:inset-x-3 after:bottom-1.5 after:h-1 after:-skew-x-12 after:bg-voltio after:transition-transform after:duration-300',
+                n.clave === actual ? 'text-voltio after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100',
+              ]}
+            >
+              {n.texto}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href={contacto.enlaceWhatsApp} target="_blank" rel="noopener" class="boton boton-voltio boton-chico ml-auto lg:ml-5">
+      <Icono nombre="whatsapp" class="h-5 w-5" />
+      <span>{d.comun.botonWa}</span>
+    </a>
+
+    <details class="menu-movil lg:hidden">
+      <summary class="flex h-11 min-w-11 items-center justify-center gap-2 border-2 border-tiza/40 px-2.5 font-display text-lg font-extrabold uppercase italic transition-colors hover:border-voltio">
+        <Icono nombre="menu" class="icono-abrir h-6 w-6" />
+        <Icono nombre="cerrar" class="icono-cerrar h-6 w-6" />
+        <span class="sr-only sm:not-sr-only">{d.comun.menu}</span>
+      </summary>
+      <div class="absolute inset-x-0 top-full border-b-4 border-voltio bg-negro pb-8 pt-4 shadow-[0_24px_48px_rgb(0_0_0/0.5)]">
+        <nav aria-label={d.comun.menuEtiqueta} class="contenedor">
+          <ul class="grid">
+            {d.nav.map((n, i) => (
+              <li class="border-b border-negro-3">
+                <a
+                  href={r.a(n.ruta)}
+                  aria-current={n.clave === actual ? 'page' : undefined}
+                  class:list={[
+                    'flex min-h-16 items-center gap-4 font-display text-[2.6rem] font-extrabold uppercase italic leading-none',
+                    n.clave === actual ? 'text-voltio' : 'text-tiza',
+                  ]}
+                >
+                  <span class="cifra contorno w-10 text-[1.4rem] text-humo [--trazo:1px]" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  {n.texto}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </details>
+  </div>
+</header>
+
+<script>
+  // Menú del celular: se cierra con Escape, al tocar fuera o al elegir una página.
+  const menu = document.querySelector<HTMLDetailsElement>('.menu-movil');
+  if (menu) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+    });
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => (menu.open = false)));
+  }
+</script>

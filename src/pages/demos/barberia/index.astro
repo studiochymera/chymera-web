@@ -1,0 +1,18 @@
+---
+// Demo del plan Presencia: Filo Barbería, una sola página con 5 secciones y navegación por anclas.
+import LayoutBarberia from '../../../components/demos/barberia/LayoutBarberia.astro';
+import Portada from '../../../components/demos/barberia/Portada.astro';
+import Servicios from '../../../components/demos/barberia/Servicios.astro';
+import Nosotros from '../../../components/demos/barberia/Nosotros.astro';
+import Galeria from '../../../components/demos/barberia/Galeria.astro';
+import Contacto from '../../../components/demos/barberia/Contacto.astro';
+import { d } from '../../../components/demos/barberia/datos';
+---
+
+<LayoutBarberia titulo={d.seo.titulo} descripcion={d.seo.descripcion} sobrePortada={true}>
+  <Portada />
+  <Servicios />
+  <Nosotros />
+  <Galeria />
+  <Contacto />
+</LayoutBarberia>

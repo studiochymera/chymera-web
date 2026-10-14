@@ -1,0 +1,113 @@
+---
+import LayoutForja from '../../../../components/demos/gimnasio/LayoutForja.astro';
+import CabeceraPagina from '../../../../components/demos/gimnasio/CabeceraPagina.astro';
+import Icono from '../../../../components/demos/gimnasio/Icono.astro';
+import FormularioContacto from '../../../../base/FormularioContacto.astro';
+import MapaDiferido from '../../../../base/MapaDiferido.astro';
+import { schemaPreguntas } from '../../../../base/schema';
+import { datos as d, contacto, rutas, textosBase, rangoHora } from '../../../../components/demos/gimnasio/datos';
+
+const p = d.paginas.contacto;
+const r = rutas(Astro.url.pathname);
+
+const canales = [
+  { icono: 'whatsapp' as const, rotulo: p.canales.whatsapp, valor: contacto.telefono, href: contacto.enlaceWhatsApp, externo: true },
+  { icono: 'telefono' as const, rotulo: p.canales.telefono, valor: contacto.telefono, href: contacto.enlaceTelefono, externo: false },
+  { icono: 'correo' as const, rotulo: p.canales.correo, valor: contacto.correo, href: `mailto:${contacto.correo}`, externo: false },
+  { icono: 'instagram' as const, rotulo: p.canales.redes, valor: d.pie.instagram, href: contacto.instagram, externo: true },
+];
+---
+
+<LayoutForja pagina="contacto" titulo={p.titulo} descripcion={p.descripcion} schemasExtra={[schemaPreguntas(p.preguntas)]}>
+  <CabeceraPagina etiqueta={p.etiqueta} lineas={p.h1} entrada={p.entrada} incluye={d.incluye.paginaContacto}>
+    <a href={contacto.enlaceWhatsApp} target="_blank" rel="noopener" class="boton boton-voltio entra mt-9" style="--i:5">
+      <Icono nombre="whatsapp" class="h-6 w-6" />{d.comun.botonWaLargo}
+    </a>
+  </CabeceraPagina>
+
+  <section class="claro corte pb-20 pt-[calc(var(--corte)+3.5rem)] lg:pb-28 lg:pt-[calc(var(--corte)+5.5rem)]">
+    <div class="contenedor grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-5">
+        <div data-incluye={d.incluye.canales}>
+        <ul class="border-t-4 border-negro">
+          {canales.map((c) => (
+            <li class="border-b-2 border-negro/15">
+              <a
+                href={c.href}
+                target={c.externo ? '_blank' : undefined}
+                rel={c.externo ? 'noopener' : undefined}
+                class="group flex min-h-20 items-center gap-4 py-3"
+              >
+                <span class="grid h-12 w-12 shrink-0 -skew-x-12 place-items-center bg-negro text-voltio transition-transform duration-200 group-hover:-translate-y-0.5">
+                  <Icono nombre={c.icono} class="h-6 w-6 skew-x-12" />
+                </span>
+                <span class="min-w-0">
+                  <span class="block text-[0.8125rem] font-semibold uppercase tracking-[0.14em] text-grafito">{c.rotulo}</span>
+                  <span class="block break-words font-display text-[1.6rem] font-extrabold italic leading-tight group-hover:underline sm:text-[1.9rem]">{c.valor}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        </div>
+
+        <div class="mt-14" data-incluye={d.incluye.mapa}>
+          <h2 class="text-[2.6rem]">{p.tituloHorario}</h2>
+          <dl class="mt-5 border-t-4 border-negro">
+            {d.horario.map((h) => (
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4 border-b-2 border-negro/15 py-3">
+                <dt class="font-semibold">{h.dias}</dt>
+                <dd class="font-display text-[1.45rem] font-extrabold italic">{rangoHora(h.abre, h.cierra)}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="mt-4 text-[0.9375rem] text-grafito">{p.notaHorario}</p>
+
+          <h2 class="mt-12 text-[2.6rem]">{p.tituloVisitanos}</h2>
+          <p class="mt-3 text-grafito">{p.textoVisitanos}</p>
+          <div class="relative mt-5 mr-2.5">
+            <div class="absolute -bottom-2.5 -right-2.5 h-full w-full bg-negro" aria-hidden="true"></div>
+            <div class="relative bg-tiza-2">
+              <MapaDiferido consulta={d.consultaMapa} titulo={p.tituloMapa} textoAbrir={textosBase.mapaAbrir} class="aspect-[4/3] [&_iframe]:grayscale" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="formulario" class="lg:col-span-6 lg:col-start-7">
+        <div class="border-2 border-negro bg-white p-6 shadow-[10px_10px_0_var(--color-negro)] sm:p-8 lg:sticky lg:top-28 lg:p-10" data-incluye={d.incluye.formulario}>
+          <h2 class="text-[2.6rem] sm:text-[3.25rem]">{p.tituloFormulario}</h2>
+          <p class="mt-3 text-grafito">{p.textoFormulario}</p>
+          <FormularioContacto
+            textos={textosBase.formulario}
+            negocio={d.nombre}
+            enlacePolitica={r.a('privacidad/')}
+            modo="demo"
+            class="formulario-forja mt-7 block"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas frecuentes -->
+  <section class="oscuro corte-inverso pb-[calc(var(--corte)+4rem)] pt-[calc(var(--corte)+4rem)] lg:pb-[calc(var(--corte)+6rem)] lg:pt-[calc(var(--corte)+6rem)]">
+    <div class="contenedor grid grid-cols-1 gap-10 lg:grid-cols-12" data-incluye={d.incluye.preguntas}>
+      <div class="lg:col-span-4">
+        <h2 class="titulo-seccion lg:sticky lg:top-28">{p.tituloPreguntas}</h2>
+      </div>
+      <div class="border-t-2 border-negro-3 lg:col-span-8">
+        {p.preguntas.map((q, i) => (
+          <details class="pregunta group border-b-2 border-negro-3">
+            <summary class="flex min-h-16 items-center gap-4 py-4 hover:text-voltio">
+              <span class="cifra contorno w-10 shrink-0 text-[1.9rem] text-voltio" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span class="flex-1 text-lg font-semibold leading-snug">{q.p}</span>
+              <Icono nombre="mas" class="signo h-5 w-5 shrink-0 text-voltio" />
+            </summary>
+            <p class="pb-6 pl-14 pr-8 text-tiza/85">{q.r}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</LayoutForja>
