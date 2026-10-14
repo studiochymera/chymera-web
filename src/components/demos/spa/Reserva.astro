@@ -1,0 +1,1036 @@
+---
+// Reserva en línea de Bruma Spa en 4 pasos: servicio, día y hora, datos, confirmar y pagar el anticipo.
+// En la demo no se cobra nada: al pagar se explica qué pasa en la página real.
+// Los datos (servicios, horario, festivos y textos) llegan al script por el atributo data-reserva.
+import { spa, reservables, rutas, whatsapp, minutos } from './datos';
+import { pesos, rellenar } from '../../../base/formato';
+
+const t = spa.reservas;
+const c = spa.condiciones;
+const r = rutas(Astro.url.pathname);
+
+const config = {
+  servicios: reservables.map((s) => ({ id: s.id, nombre: s.nombre, grupo: s.grupo, duracion: s.duracion, precio: s.precio })),
+  horario: spa.horario.map((f) => ({ numeros: f.numeros, festivos: Boolean(f.festivos), abre: f.abre ?? null, cierra: f.cierra ?? null })),
+  festivos: spa.festivos,
+  minutos: spa.servicios.minutos,
+  textos: t,
+};
+const paso = (n: number) => rellenar(t.pasoDe, { n: String(n) });
+---
+
+<div class="reserva" data-reserva={JSON.stringify(config)} data-incluye={spa.incluye.reservas}>
+  <noscript>
+    <p class="sin-js">{t.sinJs} <a class="enlace font-semibold" href={whatsapp} target="_blank" rel="noopener">{spa.botones.whatsapp}</a></p>
+  </noscript>
+
+  <ol class="indicador" aria-label={t.indicador}>
+    {t.pasos.map((nombre, i) => (
+      <li data-indicador={i + 1} aria-current={i === 0 ? 'step' : undefined}>
+        <span class="punto" aria-hidden="true">{i + 1}</span>
+        <span class="nombre">{nombre}</span>
+      </li>
+    ))}
+  </ol>
+  <p class="sr-only" aria-live="polite" aria-atomic="true" data-anuncio></p>
+
+  <form class="flujo" data-flujo novalidate>
+    <!-- 1. Servicio -->
+    <section class="paso" data-paso="1" aria-labelledby="paso-1-titulo">
+      <p class="paso-de">{paso(1)}</p>
+      <h2 id="paso-1-titulo" class="paso-titulo" tabindex="-1">{t.titulos[0]}</h2>
+      <fieldset class="mt-6" aria-describedby="error-servicio">
+        <legend class="sr-only">{t.servicioLeyenda}</legend>
+        <div class="servicios">
+          {reservables.map((s) => (
+            <label class="opcion">
+              <input type="radio" name="servicio" value={s.id} class="sr-only" />
+              <span class="opcion-grupo">{s.grupo}</span>
+              <span class="opcion-nombre">{s.nombre}</span>
+              <span class="opcion-meta">{minutos(s.duracion)} · {pesos(s.precio)}</span>
+              <span class="opcion-marca" aria-hidden="true"></span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <p class="error" id="error-servicio" data-error="servicio"></p>
+      <p class="nota mt-5">{t.otrosServicios} <a class="enlace font-semibold" href={whatsapp} target="_blank" rel="noopener">{spa.botones.whatsappCorto}</a>.</p>
+      <div class="acciones">
+        <button type="button" class="boton boton-oliva" data-siguiente>{t.continuar} <span class="flecha" aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <!-- 2. Día y hora -->
+    <section class="paso" data-paso="2" aria-labelledby="paso-2-titulo" hidden>
+      <p class="paso-de">{paso(2)}</p>
+      <h2 id="paso-2-titulo" class="paso-titulo" tabindex="-1">{t.titulos[1]}</h2>
+      <p class="elegido">
+        <span>{t.elegiste}: <strong data-elegido></strong></span>
+        <button type="button" class="enlace cambiar" data-ir="1">{t.cambiar}<span class="sr-only"> {t.resumenServicio}</span></button>
+      </p>
+
+      <fieldset class="mt-7" aria-describedby="nota-hoy error-dia">
+        <legend class="leyenda">{t.diaLeyenda} <span class="leyenda-mes" data-mes></span></legend>
+        <div class="calendario">
+          <div class="semana" aria-hidden="true">{t.diasCortos.map((d) => <span>{d}</span>)}</div>
+          <div class="dias" data-dias></div>
+        </div>
+        <p class="nota mt-4" id="nota-hoy">{t.notaHoy}</p>
+      </fieldset>
+      <p class="error" id="error-dia" data-error="dia"></p>
+
+      <fieldset class="mt-8" aria-describedby="turnos error-hora">
+        <legend class="leyenda">{t.horaLeyenda}</legend>
+        <p class="nota" id="turnos" data-turnos></p>
+        <div class="horas" data-horas><p class="vacio">{t.elegirDia}</p></div>
+        <p class="claves" aria-hidden="true">
+          <span><i class="clave-libre"></i>{t.leyendaLibre}</span>
+          <span><i class="clave-ocupado"></i>{t.leyendaOcupado}</span>
+          <span><i class="clave-cerrado"></i>{t.leyendaCerrado}</span>
+        </p>
+      </fieldset>
+      <p class="error" id="error-hora" data-error="hora"></p>
+
+      <div class="acciones">
+        <button type="button" class="boton boton-borde" data-atras>{t.volver}</button>
+        <button type="button" class="boton boton-oliva" data-siguiente>{t.continuar} <span class="flecha" aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <!-- 3. Tus datos -->
+    <section class="paso" data-paso="3" aria-labelledby="paso-3-titulo" hidden>
+      <p class="paso-de">{paso(3)}</p>
+      <h2 id="paso-3-titulo" class="paso-titulo" tabindex="-1">{t.titulos[2]}</h2>
+      <div class="campos">
+        <div class="campo">
+          <label for="r-nombre">{t.nombre}</label>
+          <input id="r-nombre" name="nombre" type="text" autocomplete="name" maxlength="80" required aria-describedby="error-nombre" />
+          <p class="error" id="error-nombre" data-error="nombre"></p>
+        </div>
+        <div class="campo">
+          <label for="r-celular">{t.celular}</label>
+          <input id="r-celular" name="celular" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="16" required aria-describedby="ayuda-celular error-celular" />
+          <p class="ayuda" id="ayuda-celular">{t.celularAyuda}</p>
+          <p class="error" id="error-celular" data-error="celular"></p>
+        </div>
+        <div class="campo">
+          <label for="r-correo">{t.correo}</label>
+          <input id="r-correo" name="correo" type="email" autocomplete="email" maxlength="120" required aria-describedby="ayuda-correo error-correo" />
+          <p class="ayuda" id="ayuda-correo">{t.correoAyuda}</p>
+          <p class="error" id="error-correo" data-error="correo"></p>
+        </div>
+        <div>
+          <div class="casilla">
+            <input id="r-autoriza" name="autorizacion" type="checkbox" value="si" required aria-describedby="error-autoriza" />
+            <label for="r-autoriza">{t.autorizacion} <a class="enlace font-semibold" href={r.a('privacidad/')}>{t.politica}</a>.</label>
+          </div>
+          <p class="error" id="error-autoriza" data-error="autoriza"></p>
+        </div>
+        <div class="casilla">
+          <input id="r-novedades" name="novedades" type="checkbox" value="si" />
+          <label for="r-novedades">{t.novedades}</label>
+        </div>
+      </div>
+      <div class="acciones">
+        <button type="button" class="boton boton-borde" data-atras>{t.volver}</button>
+        <button type="button" class="boton boton-oliva" data-siguiente>{t.continuar} <span class="flecha" aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <!-- 4. Confirmar y pagar -->
+    <section class="paso" data-paso="4" aria-labelledby="paso-4-titulo" hidden>
+      <p class="paso-de">{paso(4)}</p>
+      <h2 id="paso-4-titulo" class="paso-titulo" tabindex="-1">{t.titulos[3]}</h2>
+
+      <div class="resumen">
+        <h3 class="resumen-titulo">{t.resumenTitulo}</h3>
+        <dl>
+          <div><dt>{t.resumenServicio}</dt><dd><span data-r="servicio"></span> <button type="button" class="enlace cambiar" data-ir="1">{t.cambiar}<span class="sr-only"> {t.resumenServicio}</span></button></dd></div>
+          <div><dt>{t.resumenFecha}</dt><dd><span data-r="fecha"></span> <button type="button" class="enlace cambiar" data-ir="2">{t.cambiar}<span class="sr-only"> {t.resumenFecha}</span></button></dd></div>
+          <div><dt>{t.resumenHora}</dt><dd data-r="hora"></dd></div>
+          <div><dt>{t.resumenDuracion}</dt><dd data-r="duracion"></dd></div>
+          <div><dt>{t.resumenDatos}</dt><dd><span data-r="datos"></span> <button type="button" class="enlace cambiar" data-ir="3">{t.cambiar}<span class="sr-only"> {t.resumenDatos}</span></button></dd></div>
+          <div class="total"><dt>{t.resumenTotal}</dt><dd data-r="total"></dd></div>
+          <div class="anticipo"><dt>{t.resumenAnticipo}</dt><dd data-r="anticipo"></dd></div>
+          <div><dt>{t.resumenSaldo}</dt><dd data-r="saldo"></dd></div>
+        </dl>
+      </div>
+
+      <div class="condiciones" id="condiciones" data-incluye={spa.incluye.pago}>
+        <h3 class="condiciones-titulo">{c.titulo}</h3>
+        <ul>
+          {c.lista.map((x) => (
+            <li><strong>{x.titulo}.</strong> {x.texto}</li>
+          ))}
+        </ul>
+        <p class="sic">{c.sicTexto} <a class="enlace font-semibold" href={c.sicUrl} target="_blank" rel="noopener">{c.sic}</a>.</p>
+      </div>
+
+      <div class="casilla mt-7">
+        <input id="r-acepto" name="acepto" type="checkbox" value="si" required aria-describedby="error-acepto" />
+        <label for="r-acepto" class="font-semibold">{t.acepto}</label>
+      </div>
+      <p class="error" id="error-acepto" data-error="acepto"></p>
+
+      <div class="acciones">
+        <button type="button" class="boton boton-borde" data-atras>{t.volver}</button>
+        <button type="submit" class="boton boton-oliva pagar" data-pagar>{t.pagar}</button>
+      </div>
+      <p class="nota mt-4">{t.pagoSeguro}</p>
+
+      <div class="estado" role="status" data-estado></div>
+      <button type="button" class="enlace otra" data-otra hidden>{t.otraReserva}</button>
+    </section>
+  </form>
+</div>
+
+<script>
+  import { pesos, hora, rellenar } from '../../../base/formato';
+
+  type Servicio = { id: string; nombre: string; grupo: string; duracion: number; precio: number };
+  type Fila = { numeros: number[]; festivos: boolean; abre: string | null; cierra: string | null };
+
+  const raiz = document.querySelector<HTMLElement>('[data-reserva]');
+  if (raiz) iniciar(raiz);
+
+  function iniciar(raiz: HTMLElement) {
+    const cfg = JSON.parse(raiz.dataset.reserva!) as {
+      servicios: Servicio[];
+      horario: Fila[];
+      festivos: string[];
+      minutos: string;
+      textos: Record<string, any>;
+    };
+    const t = cfg.textos;
+    const form = raiz.querySelector<HTMLFormElement>('[data-flujo]')!;
+    const pasos = [...raiz.querySelectorAll<HTMLElement>('[data-paso]')];
+    const indicadores = [...raiz.querySelectorAll<HTMLElement>('[data-indicador]')];
+    const anuncio = raiz.querySelector<HTMLElement>('[data-anuncio]')!;
+    const cajaDias = raiz.querySelector<HTMLElement>('[data-dias]')!;
+    const cajaHoras = raiz.querySelector<HTMLElement>('[data-horas]')!;
+    const turnos = raiz.querySelector<HTMLElement>('[data-turnos]')!;
+    const estado = raiz.querySelector<HTMLElement>('[data-estado]')!;
+    const otra = raiz.querySelector<HTMLButtonElement>('[data-otra]')!;
+    const botonPagar = raiz.querySelector<HTMLButtonElement>('[data-pagar]')!;
+    let actual = 1;
+
+    const dos = (n: number) => String(n).padStart(2, '0');
+    const clave = (d: Date) => `${d.getFullYear()}-${dos(d.getMonth() + 1)}-${dos(d.getDate())}`;
+    const aMin = (hhmm: string) => {
+      const [h, m] = hhmm.split(':').map(Number);
+      return h * 60 + m;
+    };
+    const aHhmm = (min: number) => `${dos(Math.floor(min / 60))}:${dos(min % 60)}`;
+    const minutos = (n: number) => rellenar(cfg.minutos, { n: String(n) });
+    const anticipo = (precio: number) => Math.round((precio * t.porcentajeAnticipo) / 100);
+    const fechaDe = (k: string) => {
+      const [a, m, d] = k.split('-').map(Number);
+      return new Date(a, m - 1, d);
+    };
+    const fechaLarga = (d: Date) => rellenar(t.fechaLarga, { dia: t.diasSemana[d.getDay()], numero: String(d.getDate()), mes: t.meses[d.getMonth()] });
+
+    // Turnos ocupados de forma determinista (cerca del 30 %): hash FNV-1a de fecha y hora.
+    const ocupado = (fecha: string, hhmm: string) => {
+      let h = 2166136261;
+      for (const ch of `${fecha}T${hhmm}`) {
+        h ^= ch.charCodeAt(0);
+        h = Math.imul(h, 16777619);
+      }
+      return (h >>> 0) % 100 < t.ocupacion;
+    };
+
+    // Horario del día: lunes cerrado; festivos (que no caen en lunes) con horario de domingo.
+    const horarioDe = (d: Date): Fila | null => {
+      const dia = d.getDay();
+      if (cfg.festivos.includes(clave(d)) && dia !== 1) return cfg.horario.find((f) => f.festivos) ?? null;
+      const fila = cfg.horario.find((f) => f.numeros.includes(dia));
+      return fila && fila.abre ? fila : null;
+    };
+
+    const valor = (nombre: string) => (form.elements.namedItem(nombre) as RadioNodeList | HTMLInputElement | null)?.value ?? '';
+    const servicio = () => cfg.servicios.find((s) => s.id === valor('servicio'));
+
+    function error(nombre: string, texto = '') {
+      const p = raiz.querySelector<HTMLElement>(`[data-error="${nombre}"]`);
+      if (p) p.textContent = texto;
+      const campo = form.querySelector<HTMLInputElement>(`input[aria-describedby~="error-${nombre}"]`);
+      if (campo && texto) campo.setAttribute('aria-invalid', 'true');
+      else campo?.removeAttribute('aria-invalid');
+    }
+
+    // ----- Calendario de los próximos días (desde mañana) -----
+    const inicio = new Date();
+    inicio.setHours(0, 0, 0, 0);
+    const dias = Array.from({ length: t.dias }, (_, i) => new Date(inicio.getFullYear(), inicio.getMonth(), inicio.getDate() + 1 + i));
+    const meses = [...new Set(dias.map((d) => d.getMonth()))].map((m) => t.meses[m]);
+    raiz.querySelector('[data-mes]')!.textContent = `· ${meses.join(' y ')} ${dias[dias.length - 1].getFullYear()}`;
+
+    const vacios = (dias[0].getDay() + 6) % 7;
+    cajaDias.innerHTML = '<span class="dia-vacio"></span>'.repeat(vacios);
+    dias.forEach((d, i) => {
+      const k = clave(d);
+      const h = horarioDe(d);
+      const festivo = cfg.festivos.includes(k);
+      const mesCorto = i === 0 || d.getDate() === 1 ? `<span class="dia-mes" aria-hidden="true">${t.meses[d.getMonth()].slice(0, 3)}</span>` : '';
+      const nombre = `${fechaLarga(d)}${festivo ? `, ${t.festivo}` : ''}`;
+      if (!h) {
+        cajaDias.insertAdjacentHTML('beforeend', `<span class="dia dia-cerrado">${mesCorto}<span class="dia-num" aria-hidden="true">${d.getDate()}</span><span class="sr-only">${nombre}, ${t.cerrado}</span></span>`);
+      } else {
+        cajaDias.insertAdjacentHTML(
+          'beforeend',
+          `<label class="dia${festivo ? ' dia-festivo' : ''}"><input type="radio" name="dia" value="${k}" class="sr-only">${mesCorto}<span class="dia-num" aria-hidden="true">${d.getDate()}</span><span class="sr-only">${nombre}</span></label>`,
+        );
+      }
+    });
+
+    // ----- Horas del día elegido -----
+    function pintarHoras() {
+      const s = servicio();
+      const dia = valor('dia');
+      const elegida = valor('hora');
+      if (s) turnos.textContent = rellenar(t.turnos, { duracion: minutos(s.duracion) });
+      if (!s || !dia) {
+        cajaHoras.innerHTML = `<p class="vacio">${t.elegirDia}</p>`;
+        return;
+      }
+      const h = horarioDe(fechaDe(dia))!;
+      const lista: { hhmm: string; libre: boolean }[] = [];
+      for (let m = aMin(h.abre!); m + s.duracion <= aMin(h.cierra!); m += t.intervalo) {
+        const hhmm = aHhmm(m);
+        lista.push({ hhmm, libre: !ocupado(dia, hhmm) });
+      }
+      if (!lista.some((x) => x.libre)) {
+        cajaHoras.innerHTML = `<p class="vacio">${t.sinHoras}</p>`;
+        return;
+      }
+      const grupo = (titulo: string, items: typeof lista) =>
+        items.length
+          ? `<div class="horas-grupo"><p class="horas-titulo">${titulo}</p><div class="horas-lista">${items
+              .map(
+                (x) =>
+                  `<label class="hora${x.libre ? '' : ' hora-ocupada'}"><input type="radio" name="hora" value="${x.hhmm}" class="sr-only"${x.libre ? '' : ' disabled'}${x.libre && x.hhmm === elegida ? ' checked' : ''}><span>${hora(x.hhmm)}</span>${x.libre ? '' : `<span class="sr-only">, ${t.ocupado}</span>`}</label>`,
+              )
+              .join('')}</div></div>`
+          : '';
+      cajaHoras.innerHTML = grupo(t.manana, lista.filter((x) => aMin(x.hhmm) < 720)) + grupo(t.tarde, lista.filter((x) => aMin(x.hhmm) >= 720));
+    }
+
+    // ----- Resumen y pago -----
+    function pintarResumen() {
+      const s = servicio()!;
+      const dia = fechaDe(valor('dia'));
+      const inicioMin = aMin(valor('hora'));
+      const celular = valor('celular').replace(/\D/g, '').replace(/^57(?=3\d{9}$)/, '');
+      const datos = [valor('nombre').trim(), celular.replace(/^(\d{3})(\d{3})(\d{4})$/, '$1 $2 $3'), valor('correo').trim()];
+      const pon = (k: string, v: string) => (raiz.querySelector(`[data-r="${k}"]`)!.textContent = v);
+      pon('servicio', s.nombre);
+      pon('fecha', fechaLarga(dia));
+      const fija = (hhmm: string) => hora(hhmm).replace(/ /g, '\u00a0');
+      pon('hora', rellenar(t.horaRango, { inicio: fija(aHhmm(inicioMin)), fin: fija(aHhmm(inicioMin + s.duracion)) }));
+      pon('duracion', minutos(s.duracion));
+      pon('datos', datos.join('\n'));
+      pon('total', pesos(s.precio));
+      pon('anticipo', pesos(anticipo(s.precio)));
+      pon('saldo', pesos(s.precio - anticipo(s.precio)));
+      botonPagar.textContent = rellenar(t.pagar, { monto: pesos(anticipo(s.precio)) });
+    }
+
+    // ----- Validación de cada paso -----
+    function validar(n: number): HTMLElement | null {
+      let primero: HTMLElement | null = null;
+      const marca = (nombre: string, texto: string, foco: HTMLElement | null) => {
+        error(nombre, texto);
+        if (texto && !primero) primero = foco;
+      };
+      if (n === 1) {
+        marca('servicio', servicio() ? '' : t.errorServicio, form.querySelector('input[name="servicio"]'));
+      }
+      if (n === 2) {
+        marca('dia', valor('dia') ? '' : t.errorDia, form.querySelector('input[name="dia"]'));
+        marca('hora', !valor('dia') || valor('hora') ? '' : t.errorHora, form.querySelector('input[name="hora"]:not(:disabled)'));
+      }
+      if (n === 3) {
+        const nombre = valor('nombre').trim();
+        const celular = valor('celular').replace(/\D/g, '').replace(/^57(?=3\d{9}$)/, '');
+        const correo = valor('correo').trim();
+        marca('nombre', nombre.length >= 3 && /\S\s+\S/.test(nombre) ? '' : t.errorNombre, form.querySelector('#r-nombre'));
+        marca('celular', /^3\d{9}$/.test(celular) ? '' : t.errorCelular, form.querySelector('#r-celular'));
+        marca('correo', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo) ? '' : t.errorCorreo, form.querySelector('#r-correo'));
+        marca('autoriza', form.querySelector<HTMLInputElement>('#r-autoriza')!.checked ? '' : t.errorAutorizacion, form.querySelector('#r-autoriza'));
+      }
+      if (n === 4) {
+        marca('acepto', form.querySelector<HTMLInputElement>('#r-acepto')!.checked ? '' : t.errorAcepto, form.querySelector('#r-acepto'));
+      }
+      return primero;
+    }
+
+    // ----- Navegación entre pasos -----
+    function irA(n: number, foco = true) {
+      actual = n;
+      pasos.forEach((p) => (p.hidden = Number(p.dataset.paso) !== n));
+      indicadores.forEach((li) => {
+        const i = Number(li.dataset.indicador);
+        if (i === n) li.setAttribute('aria-current', 'step');
+        else li.removeAttribute('aria-current');
+        li.dataset.fase = i < n ? 'hecho' : i === n ? 'actual' : '';
+      });
+      if (n === 2) {
+        raiz.querySelector('[data-elegido]')!.textContent = servicio()?.nombre ?? '';
+        pintarHoras();
+      }
+      if (n === 4) pintarResumen();
+      anuncio.textContent = rellenar(t.anuncioPaso, { n: String(n), titulo: t.titulos[n - 1] });
+      if (foco) {
+        const titulo = raiz.querySelector<HTMLElement>(`#paso-${n}-titulo`)!;
+        titulo.focus({ preventScroll: true });
+        const arriba = raiz.getBoundingClientRect().top + window.scrollY - 96;
+        if (window.scrollY > arriba) window.scrollTo({ top: arriba, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      }
+    }
+
+    function siguiente() {
+      const invalido = validar(actual);
+      if (invalido) {
+        invalido.focus();
+        return;
+      }
+      if (actual < 4) irA(actual + 1);
+    }
+
+    function pagar() {
+      const invalido = validar(4);
+      if (invalido) {
+        invalido.focus();
+        return;
+      }
+      estado.innerHTML = '';
+      const titulo = document.createElement('p');
+      titulo.className = 'estado-titulo';
+      titulo.textContent = t.demoTitulo;
+      const texto = document.createElement('p');
+      texto.textContent = t.demoTexto;
+      estado.append(titulo, texto);
+      otra.hidden = false;
+    }
+
+    raiz.addEventListener('click', (e) => {
+      const el = (e.target as HTMLElement).closest<HTMLElement>('[data-siguiente], [data-atras], [data-ir], [data-otra]');
+      if (!el) return;
+      if (el.matches('[data-siguiente]')) siguiente();
+      else if (el.matches('[data-atras]')) irA(Math.max(1, actual - 1));
+      else if (el.matches('[data-ir]')) irA(Number(el.dataset.ir));
+      else if (el.matches('[data-otra]')) {
+        form.reset();
+        estado.innerHTML = '';
+        otra.hidden = true;
+        raiz.querySelectorAll<HTMLElement>('[data-error]').forEach((p) => error(p.dataset.error!));
+        irA(1);
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (actual === 4) pagar();
+      else siguiente();
+    });
+
+    form.addEventListener('change', (e) => {
+      const el = e.target as HTMLInputElement;
+      if (el.name === 'servicio') {
+        error('servicio');
+        if (valor('dia')) pintarHoras();
+      }
+      if (el.name === 'dia') {
+        error('dia');
+        error('hora');
+        pintarHoras();
+      }
+      if (el.name === 'hora') error('hora');
+      if (el.id === 'r-autoriza' && el.checked) error('autoriza');
+      if (el.id === 'r-acepto' && el.checked) error('acepto');
+    });
+
+    // Si llega ?servicio=<id>, se elige ese servicio y se pasa al paso 2.
+    const pedido = new URLSearchParams(location.search).get('servicio');
+    const radio = pedido ? form.querySelector<HTMLInputElement>(`input[name="servicio"][value="${CSS.escape(pedido)}"]`) : null;
+    if (radio) {
+      radio.checked = true;
+      irA(2, false);
+    } else {
+      irA(1, false);
+      anuncio.textContent = '';
+    }
+  }
+</script>
+
+<style is:global>
+  .reserva {
+    --panel: #faf6f0;
+    --linea: rgb(47 58 46 / 0.16);
+    --borde-campo: #6f766a;
+    --error: #9a3324;
+    background: var(--panel);
+    border: 1px solid var(--linea);
+    padding: 1.5rem 1rem 2rem;
+  }
+  @media (width >= 40rem) {
+    .reserva {
+      padding: 2.25rem 2.5rem 2.75rem;
+    }
+  }
+  .reserva .sin-js {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--color-salvia-claro);
+  }
+
+  /* Indicador de pasos */
+  .reserva .indicador {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0 0 2rem;
+    padding: 0 0 1.5rem;
+    border-bottom: 1px solid var(--linea);
+    counter-reset: paso;
+  }
+  .reserva .indicador li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    color: var(--color-oliva-suave);
+  }
+  .reserva .indicador li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: calc(50% + 1.25rem);
+    right: calc(-50% + 1.25rem);
+    height: 1px;
+    background: var(--linea);
+  }
+  .reserva .indicador li[data-fase='hecho']::after {
+    background: var(--color-salvia);
+  }
+  .reserva .punto {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid rgb(47 58 46 / 0.3);
+    border-radius: 9999px;
+    font-family: var(--font-titulo);
+    font-style: italic;
+    font-size: 0.9375rem;
+    line-height: 1;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .reserva .indicador .nombre {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .reserva .indicador li[aria-current='step'] {
+    color: var(--color-oliva);
+  }
+  .reserva .indicador li[aria-current='step'] .punto {
+    border-color: var(--color-oliva);
+    background: var(--color-oliva);
+    color: var(--color-arena);
+  }
+  .reserva .indicador li[data-fase='hecho'] .punto {
+    border-color: var(--color-salvia);
+    background: var(--color-salvia-claro);
+    color: var(--color-oliva);
+  }
+
+  /* Pasos */
+  .reserva .paso:not([hidden]) {
+    animation: subir 0.5s var(--ease-bruma) both;
+  }
+  .reserva .paso-de {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-barro);
+  }
+  .reserva .paso-titulo {
+    margin-top: 0.5rem;
+    font-size: 2rem;
+  }
+  /* El título recibe el foco al cambiar de paso para el lector de pantalla; no es un control, no lleva anillo. */
+  .reserva .paso-titulo:focus,
+  .reserva .paso-titulo:focus-visible {
+    outline: none;
+  }
+  @media (width >= 40rem) {
+    .reserva .paso-titulo {
+      font-size: 2.5rem;
+    }
+  }
+  .reserva .nota,
+  .reserva .ayuda {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-oliva-suave);
+  }
+  .reserva .error {
+    color: var(--error);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .reserva .error:not(:empty) {
+    margin-top: 0.75rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--error);
+  }
+  .reserva .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--linea);
+  }
+  .reserva .acciones [data-siguiente]:only-child,
+  .reserva .acciones .pagar {
+    margin-left: auto;
+  }
+  .reserva .leyenda {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .reserva .leyenda-mes {
+    font-weight: 500;
+    color: var(--color-oliva-suave);
+  }
+  .reserva .elegido {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    margin-top: 1.25rem;
+    padding: 0.5rem 0 0.5rem 1rem;
+    border-left: 2px solid var(--color-salvia);
+  }
+  .reserva .cambiar {
+    min-height: 2.75rem;
+    padding: 0 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Opciones de servicio */
+  .reserva .servicios {
+    display: grid;
+    gap: 0.625rem;
+  }
+  @media (width >= 40rem) {
+    .reserva .servicios {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .reserva .opcion {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.125rem 1rem;
+    min-height: 4.5rem;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--linea);
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+  }
+  .reserva .opcion:hover {
+    border-color: var(--color-oliva);
+  }
+  .reserva .opcion-grupo {
+    grid-column: 1;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-barro);
+  }
+  .reserva .opcion-nombre {
+    grid-column: 1;
+    font-family: var(--font-titulo);
+    font-size: 1.1875rem;
+    line-height: 1.2;
+  }
+  .reserva .opcion-meta {
+    grid-column: 1;
+    font-size: 0.875rem;
+    color: var(--color-oliva-suave);
+  }
+  .reserva .opcion-marca {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 1px solid var(--borde-campo);
+    border-radius: 9999px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .reserva .opcion:has(input:checked) {
+    border-color: var(--color-oliva);
+    background: color-mix(in srgb, var(--color-salvia-claro) 55%, #fff);
+    box-shadow: inset 0 0 0 1px var(--color-oliva);
+  }
+  .reserva .opcion:has(input:checked) .opcion-marca {
+    border-color: var(--color-oliva);
+    box-shadow: inset 0 0 0 4px #fff, inset 0 0 0 10px var(--color-oliva);
+  }
+  .reserva .opcion:has(input:focus-visible),
+  .reserva .dia:has(input:focus-visible),
+  .reserva .hora:has(input:focus-visible) {
+    outline: 2px solid var(--color-oliva);
+    outline-offset: 2px;
+  }
+
+  /* Calendario */
+  .reserva .semana,
+  .reserva .dias {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.3rem;
+  }
+  .reserva .semana {
+    margin-bottom: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-oliva-suave);
+  }
+  .reserva .dia {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 3.5rem;
+    padding: 0.875rem 0 0.5rem;
+    border: 1px solid var(--linea);
+    border-radius: 9999px 9999px 3px 3px;
+    background: #fff;
+    font-variant-numeric: lining-nums tabular-nums;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .reserva label.dia:hover {
+    border-color: var(--color-oliva);
+  }
+  .reserva .dia-num {
+    font-family: var(--font-titulo);
+    font-size: 1.125rem;
+    line-height: 1;
+  }
+  .reserva .dia-mes {
+    position: absolute;
+    top: 0.3rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-barro);
+  }
+  .reserva .dia-festivo::after {
+    content: '';
+    position: absolute;
+    bottom: 0.2rem;
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 9999px;
+    background: var(--color-arcilla);
+  }
+  .reserva .dia-cerrado {
+    cursor: default;
+    background: transparent;
+    border-style: dashed;
+    color: rgb(47 58 46 / 0.45);
+  }
+  .reserva .dia-cerrado .dia-num {
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+  .reserva .dia:has(input:checked) {
+    border-color: var(--color-oliva);
+    background: var(--color-oliva);
+    color: var(--color-arena);
+  }
+  .reserva .dia:has(input:checked) .dia-mes {
+    color: var(--color-arcilla-clara);
+  }
+
+  /* Horas */
+  .reserva .horas {
+    margin-top: 1rem;
+  }
+  .reserva .vacio {
+    padding: 1.25rem;
+    border: 1px dashed var(--linea);
+    font-size: 0.9375rem;
+    color: var(--color-oliva-suave);
+    text-align: center;
+  }
+  .reserva .horas-grupo + .horas-grupo {
+    margin-top: 1.25rem;
+  }
+  .reserva .horas-titulo {
+    margin-bottom: 0.5rem;
+    font-family: var(--font-titulo);
+    font-style: italic;
+    color: var(--color-oliva-suave);
+  }
+  .reserva .horas-lista {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+  @media (width >= 40rem) {
+    .reserva .horas-lista {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+  .reserva .hora {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0 0.25rem;
+    border: 1px solid var(--linea);
+    border-radius: 9999px;
+    background: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .reserva .hora:hover {
+    border-color: var(--color-oliva);
+  }
+  .reserva .hora:has(input:checked) {
+    border-color: var(--color-oliva);
+    background: var(--color-oliva);
+    color: var(--color-arena);
+  }
+  .reserva .hora-ocupada {
+    cursor: not-allowed;
+    background: transparent;
+    border-style: dashed;
+    color: rgb(47 58 46 / 0.45);
+    font-weight: 500;
+    text-decoration: line-through;
+  }
+  .reserva .hora-ocupada:hover {
+    border-color: var(--linea);
+  }
+  .reserva .claves {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin-top: 1rem;
+    font-size: 0.8125rem;
+    color: var(--color-oliva-suave);
+  }
+  .reserva .claves span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .reserva .claves i {
+    width: 0.875rem;
+    height: 0.875rem;
+    border-radius: 9999px;
+    border: 1px solid var(--linea);
+    background: #fff;
+  }
+  .reserva .claves .clave-ocupado,
+  .reserva .claves .clave-cerrado {
+    background: transparent;
+    border-style: dashed;
+    border-color: rgb(47 58 46 / 0.4);
+  }
+  .reserva .claves .clave-cerrado {
+    border-radius: 9999px 9999px 2px 2px;
+  }
+
+  /* Datos */
+  .reserva .campos {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.75rem;
+  }
+  .reserva .campo {
+    display: grid;
+    gap: 0.375rem;
+  }
+  .reserva .campo label {
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+  .reserva .campo input {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid var(--borde-campo);
+    border-radius: 2px;
+    background: #fff;
+    color: var(--color-oliva);
+    font: inherit;
+  }
+  .reserva .campo input[aria-invalid='true'] {
+    border-color: var(--error);
+    box-shadow: inset 0 0 0 1px var(--error);
+  }
+  .reserva .campo .error:not(:empty) {
+    margin-top: 0.25rem;
+  }
+  .reserva .casilla {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .reserva .casilla input {
+    flex-shrink: 0;
+    width: 1.375rem;
+    height: 1.375rem;
+    margin-top: 0.05rem;
+    accent-color: var(--color-oliva);
+    cursor: pointer;
+  }
+  .reserva .casilla label {
+    cursor: pointer;
+  }
+
+  /* Resumen */
+  .reserva .resumen {
+    margin-top: 1.75rem;
+    padding: 1.25rem 1rem;
+    border: 1px solid var(--linea);
+    background: #fff;
+  }
+  @media (width >= 40rem) {
+    .reserva .resumen {
+      padding: 1.5rem 1.75rem;
+    }
+  }
+  .reserva .resumen-titulo,
+  .reserva .condiciones-titulo {
+    font-size: 1.375rem;
+  }
+  .reserva .resumen dl {
+    margin-top: 0.75rem;
+  }
+  .reserva .resumen dl > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--linea);
+    font-size: 0.9375rem;
+  }
+  .reserva .resumen dt {
+    flex: 0 0 auto;
+    max-width: 48%;
+    color: var(--color-oliva-suave);
+  }
+  .reserva .resumen dd {
+    flex: 1 1 auto;
+    font-weight: 600;
+    text-align: right;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+  .reserva .resumen dd .cambiar {
+    min-height: 2rem;
+    margin-left: 0.25rem;
+  }
+  .reserva .resumen .total {
+    margin-top: 0.5rem;
+    border-top-color: var(--color-oliva);
+  }
+  .reserva .resumen .anticipo {
+    margin: 0.25rem -0.5rem;
+    padding: 0.75rem 0.5rem;
+    border-top: 0;
+    background: var(--color-salvia-claro);
+  }
+  .reserva .resumen .anticipo dt {
+    color: var(--color-oliva);
+    font-weight: 600;
+  }
+  .reserva .resumen .anticipo dd {
+    font-family: var(--font-titulo);
+    font-size: 1.5rem;
+    font-weight: 450;
+    line-height: 1;
+  }
+
+  /* Condiciones */
+  .reserva .condiciones {
+    margin-top: 1.75rem;
+    padding: 1.25rem 0 0.25rem 1.25rem;
+    border-left: 2px solid var(--color-arcilla);
+  }
+  .reserva .condiciones ul {
+    display: grid;
+    gap: 0.625rem;
+    margin-top: 0.875rem;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--color-oliva-suave);
+  }
+  .reserva .condiciones strong {
+    color: var(--color-oliva);
+  }
+  .reserva .sic {
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+  }
+
+  /* Pago (demo) */
+  .reserva .pagar {
+    flex: 1 1 16rem;
+    min-height: 3.5rem;
+    font-size: 1rem;
+  }
+  .reserva .estado:empty {
+    display: none;
+  }
+  .reserva .estado {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+    border-left: 3px solid var(--color-oliva);
+    background: var(--color-salvia-claro);
+    animation: subir 0.5s var(--ease-bruma) both;
+  }
+  .reserva .estado-titulo {
+    font-family: var(--font-titulo);
+    font-size: 1.375rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .reserva .otra {
+    min-height: 2.75rem;
+    margin-top: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>

@@ -1,0 +1,140 @@
+---
+import LayoutSpa from '../../../../components/demos/spa/LayoutSpa.astro';
+import Cabecera from '../../../../components/demos/spa/Cabecera.astro';
+import Foto from '../../../../components/demos/spa/Foto.astro';
+import { spa, rutas, whatsapp, minutos } from '../../../../components/demos/spa/datos';
+import { pesos } from '../../../../base/formato';
+
+const p = spa.paginas.servicios;
+const r = rutas(Astro.url.pathname);
+const tp = spa.textosPaquetes;
+---
+
+<LayoutSpa titulo={p.titulo} descripcion={p.descripcion} conServicios={true}>
+  <Cabecera antetitulo={p.antetitulo} titulo={p.h1} entrada={p.entrada}>
+    <nav slot="abajo" aria-label={p.saltar} class="mt-9 flex flex-wrap gap-2">
+      {spa.servicios.grupos.map((g) => (
+        <a href={`#${g.id}`} class="inline-flex min-h-11 items-center gap-2 rounded-full border border-oliva/20 bg-arena/60 px-4 text-sm font-semibold transition-colors hover:border-oliva">
+          <span class="numeral font-normal text-barro" aria-hidden="true">{g.numero}</span>{g.titulo}
+        </a>
+      ))}
+    </nav>
+  </Cabecera>
+
+  <div data-incluye={spa.incluye.servicios}>
+    {spa.servicios.grupos.map((g, gi) => (
+      <section id={g.id} aria-labelledby={`t-${g.id}`} class="border-b border-oliva/10 py-16 lg:py-24">
+        <div class="contenedor grid gap-8 lg:grid-cols-12 lg:gap-16">
+          <div class:list={['lg:col-span-4', gi % 2 === 1 && 'lg:order-2']}>
+            <div class="lg:sticky lg:top-28">
+              <div class="flex items-end justify-between gap-6 lg:block">
+                <div>
+                  <span class="numeral block text-5xl leading-none text-barro" aria-hidden="true">{g.numero}</span>
+                  <h2 id={`t-${g.id}`} class="mt-3 text-[2.5rem] sm:text-5xl">{g.titulo}</h2>
+                </div>
+                <Foto
+                  foto={g.foto}
+                  alt={g.alt}
+                  proporcion="3/4"
+                  prioridad={gi === 0}
+                  sizes="(min-width: 1024px) 28vw, 36vw"
+                  anchos={[320, 640, 900]}
+                  class="w-[36%] shrink-0 lg:mt-8 lg:w-full"
+                />
+              </div>
+              <p class="mt-6 max-w-md text-oliva-suave">{g.intro}</p>
+            </div>
+          </div>
+
+          <ul class="lg:col-span-8">
+            {g.items.map((s) => (
+              <li class="servicio border-t border-oliva/15 py-6 first:border-t-0 lg:first:border-t lg:first:pt-6">
+                <div class="flex items-baseline gap-3">
+                  <h3 class="text-[1.375rem] leading-tight sm:text-2xl">{s.nombre}</h3>
+                  <span class="hilo hidden flex-1 sm:block" aria-hidden="true"></span>
+                  <span class="ml-auto shrink-0 font-titulo text-xl whitespace-nowrap sm:ml-0">{pesos(s.precio)}</span>
+                </div>
+                <p class="mt-2 max-w-xl text-oliva-suave">{s.descripcion}</p>
+                <div class="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                  <span class="text-sm font-semibold tracking-wide">{minutos(s.duracion)}</span>
+                  {s.reservable ? (
+                    <a href={r.reservar(s.id)} class="boton boton-oliva min-h-11 px-5 text-sm">
+                      {spa.servicios.reservarEtiqueta}<span class="sr-only"> {s.nombre}</span> <span class="flecha" aria-hidden="true">→</span>
+                    </a>
+                  ) : (
+                    <a href={whatsapp} target="_blank" rel="noopener" class="enlace inline-flex min-h-11 items-center text-sm font-semibold">
+                      {spa.servicios.agendarEtiqueta}<span class="sr-only"> {s.nombre}</span>
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <section id="paquetes" class="bg-arena-2 py-20 lg:py-28" data-incluye={spa.incluye.paquetes}>
+    <div class="contenedor">
+      <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-7">
+          <p class="antetitulo">{p.paquetes.antetitulo}</p>
+          <h2 class="mt-5 text-4xl sm:text-5xl">{p.paquetes.titulo}</h2>
+        </div>
+        <p class="text-oliva-suave lg:col-span-5">{p.paquetes.texto}</p>
+      </div>
+
+      <ul class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+        {spa.paquetes.map((k) => (
+          <li class:list={['paquete grid gap-y-0 border px-6 pt-16 pb-7 sm:row-span-5 sm:grid-rows-subgrid', k.destacado ? 'oscuro border-oliva' : 'border-oliva/20 bg-arena']}>
+            <div class="text-center">
+              {k.etiqueta ? (
+                <p class="text-xs font-semibold tracking-[0.16em] text-arcilla-clara uppercase">{k.etiqueta}</p>
+              ) : (
+                <p class="text-xs font-semibold tracking-[0.16em] uppercase opacity-0" aria-hidden="true">·</p>
+              )}
+              <h3 class="mt-3 text-[1.75rem]">{k.nombre}</h3>
+              <p class:list={['mt-1 text-sm', k.destacado ? 'text-arena/80' : 'text-oliva-suave']}>
+                <span class="sr-only">{tp.duracion}: </span>{k.duracion}
+              </p>
+            </div>
+            <p class:list={['mt-6 border-y py-5 text-center', k.destacado ? 'border-arena/20' : 'border-oliva/15']}>
+              <span class="sr-only">{tp.precio}: </span>
+              <span class="block font-titulo text-[2.5rem] leading-none font-[340]">{pesos(k.precio)}</span>
+              <span class:list={['mt-2 block text-sm', k.destacado ? 'text-arena/80' : 'text-oliva-suave']}>{k.unidad}</span>
+            </p>
+            <div class="mt-6">
+              <p class:list={['text-xs font-semibold tracking-[0.14em] uppercase', k.destacado ? 'text-arcilla-clara' : 'text-barro']}>{tp.incluye}</p>
+              <ul class="mt-3 space-y-2 text-[0.9375rem]">
+                {k.incluye.map((x) => (
+                  <li class="flex gap-3">
+                    <span class:list={['mt-[0.6em] h-px w-3 shrink-0', k.destacado ? 'bg-arcilla-clara' : 'bg-barro']} aria-hidden="true"></span>
+                    {x}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="mt-6">
+              <p class:list={['text-xs font-semibold tracking-[0.14em] uppercase', k.destacado ? 'text-arcilla-clara' : 'text-barro']}>{tp.ideal}</p>
+              <p class:list={['mt-2 text-[0.9375rem]', k.destacado ? 'text-arena/85' : 'text-oliva-suave']}>{k.ideal}</p>
+            </div>
+            <a href={whatsapp} target="_blank" rel="noopener" class:list={['boton mt-7 w-full self-end text-sm', k.destacado ? 'boton-arena' : 'boton-borde']}>
+              {spa.botones.agendarWhatsapp}<span class="sr-only"> {k.nombre}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</LayoutSpa>
+
+<style>
+  .hilo {
+    border-bottom: 1px dotted rgb(47 58 46 / 0.4);
+    transform: translateY(-0.35em);
+  }
+  .paquete {
+    border-radius: 9999px 9999px 4px 4px;
+  }
+</style>

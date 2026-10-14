@@ -1,0 +1,29 @@
+---
+// Cabecera de las páginas internas: antetítulo, H1 y entrada sobre el degradado de bruma.
+// El slot "lado" recibe una foto (opcional): debajo del texto en el celular, a la derecha en el computador.
+interface Props {
+  antetitulo: string;
+  titulo: string;
+  entrada?: string;
+  incluye?: string;
+}
+
+const { antetitulo, titulo, entrada, incluye } = Astro.props;
+const conLado = Astro.slots.has('lado');
+---
+
+<section class="bruma relative overflow-hidden border-b border-oliva/10" data-incluye={incluye}>
+  <div class:list={['contenedor grid gap-10 pt-12 pb-14 lg:pt-20 lg:pb-20', conLado && 'lg:grid-cols-12 lg:items-end']}>
+    <div class:list={['aparece', conLado && 'lg:col-span-7']}>
+      <p class="antetitulo">{antetitulo}</p>
+      <h1 class="mt-5 max-w-[15ch] text-[2.5rem] sm:text-6xl lg:text-[5rem] lg:leading-[1]">{titulo}</h1>
+      {entrada && <p class="mt-6 max-w-[38rem] text-[1.0625rem] text-oliva-suave lg:text-lg">{entrada}</p>}
+      <slot name="abajo" />
+    </div>
+    {conLado && (
+      <div class="aparece [animation-delay:120ms] lg:col-span-5">
+        <slot name="lado" />
+      </div>
+    )}
+  </div>
+</section>

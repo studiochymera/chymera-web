@@ -1,0 +1,260 @@
+@import "tailwindcss" source(none);
+@source "../../pages/demos/spa";
+@source "../../components/demos/spa";
+
+/* Fraunces con eje óptico (títulos grandes más finos) y su itálica; Manrope para el texto. */
+@import "@fontsource-variable/fraunces/opsz.css";
+@import "@fontsource-variable/fraunces/opsz-italic.css";
+@import "@fontsource-variable/manrope/wght.css";
+
+/*
+  Bruma Spa. Contrastes (WCAG):
+  oliva sobre arena 10,3 · oliva-suave sobre arena 5,9 y sobre arena-2 5,4 · barro sobre arena 5,7 y sobre arena-2 5,2
+  arena sobre oliva 10,3 · arcilla-clara sobre oliva 6,2 · oliva sobre salvia-claro 8,7
+  salvia (3,1 sobre arena) y arcilla (2,6 sobre arena; 4,0 sobre oliva) solo en detalles o títulos grandes sobre oliva.
+*/
+@theme static {
+  --color-arena: #F4EEE6;
+  --color-arena-2: #EBE3D7;
+  --color-salvia: #7C8B74;
+  --color-salvia-claro: #D9DFD2;
+  --color-oliva: #2F3A2E;
+  --color-oliva-2: #3A4739;
+  --color-oliva-hondo: #26302A;
+  --color-oliva-suave: #565D52;
+  --color-arcilla: #C08A6B;
+  --color-arcilla-clara: #DDB297;
+  --color-barro: #82513A;
+
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-titulo: "Fraunces Variable", Georgia, "Times New Roman", serif;
+
+  --ease-bruma: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-arena);
+    color: var(--color-oliva);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-titulo);
+    font-weight: 380;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-salvia-claro);
+    color: var(--color-oliva);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--foco, var(--color-oliva));
+    outline-offset: 3px;
+  }
+
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+/* Fondos oscuros: el foco y los enlaces pasan a arena. */
+@utility oscuro {
+  --foco: var(--color-arena);
+  background-color: var(--color-oliva);
+  color: var(--color-arena);
+}
+
+@utility contenedor {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 80rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Elemento distintivo: marco en arco (borde superior completamente redondeado). */
+@utility arco {
+  border-radius: 9999px 9999px 0 0;
+  overflow: hidden;
+}
+
+/* Degradado de bruma, muy sutil. */
+@utility bruma {
+  background-image:
+    radial-gradient(58% 46% at 88% 8%, rgb(124 139 116 / 0.2), transparent 70%),
+    radial-gradient(48% 40% at 6% 72%, rgb(192 138 107 / 0.13), transparent 72%);
+}
+
+/* Antetítulo con numeración delicada. */
+@utility antetitulo {
+  display: inline-flex;
+  font-family: var(--font-sans);
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-barro);
+  &::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+}
+
+@utility numeral {
+  font-family: var(--font-titulo);
+  font-style: italic;
+  font-weight: 300;
+  font-variant-numeric: lining-nums;
+  letter-spacing: 0;
+}
+
+@utility boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.625rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--ease-bruma),
+    color 0.25s var(--ease-bruma),
+    border-color 0.25s var(--ease-bruma),
+    transform 0.25s var(--ease-bruma);
+  & .flecha {
+    transition: transform 0.25s var(--ease-bruma);
+  }
+  &:hover .flecha {
+    transform: translateX(3px);
+  }
+}
+
+@utility boton-oliva {
+  background-color: var(--color-oliva);
+  color: var(--color-arena);
+  &:hover {
+    background-color: var(--color-oliva-2);
+  }
+}
+
+@utility boton-arena {
+  background-color: var(--color-arena);
+  color: var(--color-oliva);
+  &:hover {
+    background-color: #fff;
+  }
+}
+
+@utility boton-borde {
+  border: 1px solid rgb(47 58 46 / 0.35);
+  color: var(--color-oliva);
+  &:hover {
+    border-color: var(--color-oliva);
+    background-color: rgb(47 58 46 / 0.05);
+  }
+}
+
+@utility boton-borde-claro {
+  border: 1px solid rgb(244 238 230 / 0.4);
+  color: var(--color-arena);
+  &:hover {
+    border-color: var(--color-arena);
+    background-color: rgb(244 238 230 / 0.08);
+  }
+}
+
+/* Enlace de texto con subrayado fino que crece al pasar. */
+@utility enlace {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  transition: text-decoration-color 0.2s;
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* Aparición suave al cargar. */
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes respirar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-2%, 1.5%, 0) scale(1.04);
+  }
+}
+
+@utility aparece {
+  animation: subir 0.9s var(--ease-bruma) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

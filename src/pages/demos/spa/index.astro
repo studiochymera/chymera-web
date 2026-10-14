@@ -1,0 +1,175 @@
+---
+import LayoutSpa from '../../../components/demos/spa/LayoutSpa.astro';
+import Foto from '../../../components/demos/spa/Foto.astro';
+import Sello from '../../../components/demos/spa/Sello.astro';
+import { spa, rutas, whatsapp, servicios, minutos } from '../../../components/demos/spa/datos';
+import { pesos } from '../../../base/formato';
+
+const p = spa.paginas.inicio;
+const r = rutas(Astro.url.pathname);
+const destacados = p.destacados.ids.map((id) => {
+  const s = servicios.find((x) => x.id === id)!;
+  const g = spa.servicios.grupos.find((x) => x.titulo === s.grupo)!;
+  return { ...s, foto: g.foto, alt: g.alt };
+});
+const n = (i: number) => String(i + 1).padStart(2, '0');
+---
+
+<LayoutSpa titulo={p.titulo} descripcion={p.descripcion}>
+  <!-- Portada -->
+  <section class="portada bruma relative overflow-hidden" data-incluye={spa.incluye.portada}>
+    <div class="neblina" aria-hidden="true"></div>
+    <div class="contenedor relative grid gap-x-12 pt-10 pb-16 sm:pt-14 lg:grid-cols-12 lg:pt-16 lg:pb-24">
+      <div class="aparece lg:col-span-7 lg:pt-12">
+        <p class="antetitulo">{p.antetitulo}</p>
+        <h1 class="mt-6 text-[3.05rem] leading-[0.98] tracking-[-0.03em] sm:text-7xl lg:text-[6rem] lg:leading-[0.95]">
+          {p.h1[0]} {p.h1[1]} <em class="font-[330] text-barro">{p.h1[2]}</em>
+        </h1>
+        <p class="mt-7 max-w-[33rem] text-[1.0625rem] text-oliva-suave sm:text-lg">{p.entrada}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a class="boton boton-oliva" href={r.reservar()}>{spa.botones.reservar} <span class="flecha" aria-hidden="true">→</span></a>
+          <a class="boton boton-borde" href={whatsapp} target="_blank" rel="noopener">{spa.botones.whatsapp}</a>
+        </div>
+        <dl class="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-oliva/15 pt-6">
+          {p.datos.map((d) => (
+            <div>
+              <dt class="font-titulo text-xl leading-tight sm:text-2xl">{d.valor}</dt>
+              <dd class="mt-1 text-[0.8125rem] leading-snug text-oliva-suave">{d.texto}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div class="aparece relative mt-14 [animation-delay:150ms] lg:col-span-5 lg:mt-0">
+        <p class="vertical numeral absolute top-6 left-0 text-sm text-oliva-suave lg:-left-8" aria-hidden="true">{spa.encabezado.lema}</p>
+        <div class="relative ml-auto w-[80%] sm:w-[62%] lg:w-full">
+          <Foto foto="portada" alt={p.alt} proporcion="3/4" prioridad={true} sizes="(min-width: 1024px) 34vw, 80vw" anchos={[480, 800, 1200]} />
+          <Sello texto={spa.negocio.sello} class="absolute bottom-8 -left-12 h-24 w-24 sm:h-28 sm:w-28 lg:bottom-14 lg:-left-16 lg:h-32 lg:w-32" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lo que nos diferencia -->
+  <section class="py-20 lg:py-32" data-incluye={spa.incluye.diferencias}>
+    <div class="contenedor grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="antetitulo">{p.diferencias.antetitulo}</p>
+        <h2 class="mt-5 max-w-[12ch] text-4xl sm:text-5xl">{p.diferencias.titulo}</h2>
+      </div>
+      <ol class="grid gap-x-12 sm:grid-cols-2 lg:col-span-8">
+        {p.diferencias.items.map((d, i) => (
+          <li class="border-t border-oliva/15 pt-6 pb-10">
+            <span class="numeral text-2xl text-barro" aria-hidden="true">{n(i)}</span>
+            <h3 class="mt-3 text-2xl">{d.titulo}</h3>
+            <p class="mt-3 text-oliva-suave">{d.texto}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Servicios destacados -->
+  <section class="oscuro relative overflow-hidden py-20 lg:py-28" data-incluye={spa.incluye.destacados}>
+    <div class="contenedor">
+      <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="antetitulo text-arcilla-clara">{p.destacados.antetitulo}</p>
+          <h2 class="mt-5 text-4xl sm:text-5xl">{p.destacados.titulo}</h2>
+        </div>
+        <a href={r.a('servicios/')} class="enlace inline-flex min-h-11 items-center gap-2 font-semibold">{spa.botones.verServicios} <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="mt-12 grid sm:grid-cols-2 sm:gap-x-8 lg:grid-cols-4 lg:gap-x-6">
+        {destacados.map((s, i) => (
+          <li class="grid grid-cols-[5.5rem_1fr] gap-x-5 border-t border-arena/15 py-7 sm:block lg:border-0 lg:py-0 lg:even:mt-16">
+            <Foto foto={s.foto} alt={s.alt} proporcion="3/4" sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 88px" anchos={[200, 480, 800]} class="sm:mb-6" />
+            <div class="flex flex-col">
+              <span class="numeral text-sm text-arcilla-clara" aria-hidden="true">{n(i)} · {s.grupo}</span>
+              <h3 class="mt-1.5 text-2xl">{s.nombre}</h3>
+              <p class="mt-2 text-sm text-arena/75">{s.descripcion}</p>
+              <p class="mt-3 text-sm font-semibold">{minutos(s.duracion)} · {pesos(s.precio)}</p>
+              <a href={r.reservar(s.id)} class="boton boton-arena mt-4 min-h-11 self-start px-5 text-sm">
+                {spa.botones.reservarCorto}<span class="sr-only"> {s.nombre}</span> <span class="flecha" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section class="py-20 lg:py-32" data-incluye={spa.incluye.testimonios}>
+    <div class="contenedor">
+      <p class="antetitulo">{p.testimonios.antetitulo}</p>
+      <h2 class="mt-5 max-w-[16ch] text-4xl sm:text-5xl">{p.testimonios.titulo}</h2>
+      <ul class="mt-12 gap-x-12 md:columns-2 lg:mt-16 lg:columns-3">
+        {spa.testimonios.map((t, i) => (
+          <li class="mb-10 break-inside-avoid border-t border-oliva/15 pt-6">
+            <figure>
+              <div class="flex items-start justify-between gap-4">
+                <span class="font-titulo text-5xl leading-[0.6] text-arcilla" aria-hidden="true">“</span>
+                <span class="numeral text-sm text-oliva-suave" aria-hidden="true">{n(i)}/{n(spa.testimonios.length - 1)}</span>
+              </div>
+              <blockquote class="mt-4 font-titulo text-[1.3125rem] leading-snug font-[360]">
+                <p>{t.texto}</p>
+              </blockquote>
+              <figcaption class="mt-5 text-sm">
+                <span class="font-semibold">{t.nombre}</span>
+                <span class="text-oliva-suave"> · {t.servicio}</span>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Llamado a reservar -->
+  <section class="pb-24 lg:pb-32" data-incluye={spa.incluye.llamado}>
+    <div class="contenedor">
+      <div class="ventana relative mx-auto max-w-4xl overflow-hidden bg-salvia-claro px-6 pt-28 pb-14 text-center sm:px-12 lg:pt-44 lg:pb-20">
+        <div class="bruma absolute inset-0" aria-hidden="true"></div>
+        <div class="relative">
+          <p class="antetitulo">{p.llamado.antetitulo}</p>
+          <h2 class="mx-auto mt-5 max-w-[14ch] text-4xl sm:text-6xl">{p.llamado.titulo}</h2>
+          <p class="mx-auto mt-6 max-w-lg text-oliva-suave">{p.llamado.texto}</p>
+          <ol class="mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-y-6 border-y border-oliva/15 py-6 sm:grid-cols-4">
+            {p.llamado.pasos.map((paso, i) => (
+              <li class="flex flex-col items-center gap-1">
+                <span class="numeral text-3xl text-barro" aria-hidden="true">{i + 1}</span>
+                <span class="text-sm font-semibold">{paso}</span>
+              </li>
+            ))}
+          </ol>
+          <div class="mt-10 flex flex-wrap justify-center gap-3">
+            <a class="boton boton-oliva" href={r.reservar()}>{spa.botones.reservar} <span class="flecha" aria-hidden="true">→</span></a>
+            <a class="boton boton-borde" href={whatsapp} target="_blank" rel="noopener">{spa.botones.whatsapp}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</LayoutSpa>
+
+<style>
+  .neblina {
+    position: absolute;
+    top: -12rem;
+    right: -14rem;
+    width: 52rem;
+    height: 52rem;
+    border-radius: 9999px;
+    background: radial-gradient(closest-side, rgb(217 223 210 / 0.75), rgb(217 223 210 / 0.25) 55%, transparent);
+    animation: respirar 18s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .vertical {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    letter-spacing: 0.04em;
+  }
+  .ventana {
+    border-radius: 9999px 9999px 4px 4px;
+  }
+</style>

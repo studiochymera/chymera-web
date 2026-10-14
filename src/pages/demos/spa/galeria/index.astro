@@ -1,0 +1,54 @@
+---
+import LayoutSpa from '../../../../components/demos/spa/LayoutSpa.astro';
+import Cabecera from '../../../../components/demos/spa/Cabecera.astro';
+import Foto from '../../../../components/demos/spa/Foto.astro';
+import { spa, rutas, whatsapp } from '../../../../components/demos/spa/datos';
+
+const p = spa.paginas.galeria;
+const r = rutas(Astro.url.pathname);
+const n = (i: number) => String(i + 1).padStart(2, '0');
+
+// Filas de 3 en el computador: dos verticales y una horizontal; en las filas pares la horizontal va a la izquierda.
+const posicion = (i: number) => {
+  if (Math.floor(i / 3) % 2 === 0) return '';
+  return ['lg:col-start-3', 'lg:col-start-4', 'lg:col-start-1'][i % 3];
+};
+---
+
+<LayoutSpa titulo={p.titulo} descripcion={p.descripcion}>
+  <Cabecera antetitulo={p.antetitulo} titulo={p.h1} entrada={p.entrada} />
+
+  <section class="py-14 lg:py-24" data-incluye={spa.incluye.galeria}>
+    <ul class="contenedor grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 lg:grid-flow-dense lg:grid-cols-4 lg:gap-x-6 lg:gap-y-12">
+      {spa.galeria.map((g, i) => (
+        <li class:list={[g.forma === 'ancha' && 'col-span-2', posicion(i)]}>
+          <figure>
+            <Foto
+              foto={g.foto}
+              alt={g.alt}
+              forma={g.forma === 'arco' ? 'arco' : 'recto'}
+              proporcion={g.forma === 'ancha' ? '3/2' : '3/4'}
+              prioridad={i === 0}
+              sizes={g.forma === 'ancha' ? '(min-width: 1024px) 48vw, 92vw' : '(min-width: 1024px) 24vw, 46vw'}
+              anchos={g.forma === 'ancha' ? [480, 800, 1200] : [320, 640, 900]}
+            />
+            <figcaption class="mt-3 flex items-baseline gap-2.5 text-sm text-oliva-suave">
+              <span class="numeral text-barro" aria-hidden="true">{n(i)}</span>
+              {g.pie}
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="pb-24 lg:pb-32">
+    <div class="contenedor flex flex-col items-start gap-6 border-t border-oliva/15 pt-12 sm:flex-row sm:items-center sm:justify-between">
+      <h2 class="text-4xl sm:text-5xl">{p.cierre}</h2>
+      <div class="flex flex-wrap gap-3">
+        <a class="boton boton-oliva" href={r.reservar()}>{spa.botones.reservar} <span class="flecha" aria-hidden="true">→</span></a>
+        <a class="boton boton-borde" href={whatsapp} target="_blank" rel="noopener">{spa.botones.whatsappCorto}</a>
+      </div>
+    </div>
+  </section>
+</LayoutSpa>
