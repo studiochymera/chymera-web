@@ -50,7 +50,7 @@
         { "titulo": "Ubicación y contacto", "texto": "Dirección con mapa, horario de atención, WhatsApp, teléfono y redes." }
       ],
       "grupos": [
-        { "titulo": "Diseño y contenido", "items": ["Plantilla de Chymera para tu sector, adaptada a tu logo, colores y fotos", "Textos escritos por nosotros a partir de tu formulario", "Diseño pensado primero para el celular", "Galería de hasta 10 fotos"] },
+        { "titulo": "Diseño y contenido", "items": ["Diseño hecho para tu negocio, con tu logo, colores y fotos", "Textos escritos por nosotros a partir de tu formulario", "Diseño pensado primero para el celular", "Galería de hasta 10 fotos"] },
         { "titulo": "Google y visibilidad", "items": ["Dominio .com o .com.co registrado a tu nombre", "Título y descripción optimizados para Google", "Ficha de negocio para Google con tu dirección, horario y teléfono", "Mapa del sitio y alta en Google Search Console"] },
         { "titulo": "Contacto", "items": ["Botón de WhatsApp siempre visible, con el mensaje listo", "Enlaces a tus redes sociales", "Mapa de ubicación y horario de atención"] },
         { "titulo": "Entrega", "items": ["Candado de seguridad (https)", "Aviso de privacidad básico", "1 ronda de cambios sobre el borrador", "Página publicada en 3 a 5 días hábiles"] }
@@ -164,8 +164,8 @@
       { "titulo": "Textos", "texto": "Los escribimos nosotros. Tú revisas que precios, horarios y datos estén correctos." },
       { "titulo": "Fotos", "texto": "Las tuyas o de bancos gratuitos. Una sesión de fotos se cotiza con un fotógrafo aliado." },
       { "titulo": "Logo", "texto": "Usamos el tuyo. Si no tienes, ponemos el nombre de tu negocio en una tipografía limpia." },
-      { "titulo": "Ronda de cambios", "texto": "Una sola lista de ajustes sobre el borrador: textos, fotos, colores y orden. No incluye secciones nuevas ni cambiar de plantilla." },
-      { "titulo": "Diseño", "texto": "Partimos de nuestra plantilla para tu sector y la adaptamos a tu marca. Por eso es rápido y a buen precio." }
+      { "titulo": "Ronda de cambios", "texto": "Una sola lista de ajustes sobre el borrador: textos, fotos, colores y orden. No incluye secciones nuevas ni cambiar el diseño." },
+      { "titulo": "Diseño", "texto": "Cada página tiene un diseño hecho para tu marca, sobre la base técnica propia de Chymera. Por eso es rápida y a buen precio." }
     ],
     "siempreTitulo": "Siempre incluido",
     "siempre": ["Diseño pensado para el celular", "Candado de seguridad (https)", "Botón de WhatsApp siempre visible", "Enlaces a tus redes", "Aviso de privacidad básico"],
@@ -177,7 +177,7 @@
     "verCambios": "Qué cuenta como cambio del mes",
     "cambiosSi": ["Actualizar precios, horarios, fotos o textos", "Agregar un servicio en una sección que ya existe", "Poner un banner de temporada"],
     "cambiosNoTitulo": "Se cotiza aparte",
-    "cambiosNo": ["Una página o sección nueva", "Cambiar de plantilla o rediseñar", "Funciones nuevas, como reservas o formularios", "Cambios que pasen del tiempo del mes"],
+    "cambiosNo": ["Una página o sección nueva", "Rediseñar la página", "Funciones nuevas, como reservas o formularios", "Cambios que pasen del tiempo del mes"],
     "extrasTitulo": "Extras con precio fijo",
     "extrasIntro": "Si necesitas algo más, ya sabes cuánto cuesta. Precios en pesos colombianos.",
     "extras": [
@@ -345,7 +345,7 @@
           "titulo": "Plazos, cambios y aprobación",
           "lista": [
             "Los días de entrega cuentan desde que recibimos el anticipo y todo el material: formulario, logo, fotos y precios.",
-            "Una ronda de cambios es una sola lista de ajustes sobre el borrador. Agregar secciones o páginas, o cambiar de plantilla, se cotiza aparte.",
+            "Una ronda de cambios es una sola lista de ajustes sobre el borrador. Agregar secciones o páginas, o cambiar el diseño, se cotiza aparte.",
             "Si no recibimos respuesta 5 días hábiles después de enviar un borrador, se entiende aprobado."
           ]
         },
@@ -358,7 +358,7 @@
         {
           "titulo": "Propiedad del código",
           "texto": [
-            "La plantilla, el código y el diseño de las páginas son de Chymera Studios. Mientras tu plan mensual esté al día, tienes una licencia para usar tu página. Si quieres quedarte con el código y el diseño de tu página, puedes comprarlos por el 50 % del valor de instalación."
+            "La base técnica, el código y el diseño de las páginas son de Chymera Studios. Mientras tu plan mensual esté al día, tienes una licencia para usar tu página. Si quieres quedarte con el código y el diseño de tu página, puedes comprarlos por el 50 % del valor de instalación."
           ]
         },
         {
