@@ -232,5 +232,170 @@
     { "p": "¿Necesito tener fotos y textos?", "r": "Los textos los escribimos nosotros a partir de lo que nos cuentes. Las fotos pueden ser tuyas, de bancos gratuitos o de un fotógrafo aliado." },
     { "p": "¿Hacen páginas que no sean para negocios?", "r": "Sí. Hacemos portafolios personales, hojas de vida en línea, páginas para semilleros de investigación, eventos y otros proyectos a la medida. El precio depende de lo que necesites: escríbenos y te cotizamos sin compromiso." },
     { "p": "¿Cuánto tardan los cambios?", "r": "Los cambios pequeños del plan mensual quedan listos en 1 a 2 días hábiles." }
-  ]
+  ],
+  "legal": {
+    "actualizado": "14 de octubre de 2026",
+    "actualizadoTexto": "Última actualización",
+    "enlaces": [
+      {
+        "slug": "privacidad",
+        "texto": "Política de datos"
+      },
+      {
+        "slug": "terminos",
+        "texto": "Términos del servicio"
+      }
+    ],
+    "privacidad": {
+      "titulo": "Política de tratamiento de datos personales",
+      "descripcion": "Cómo Chymera Studios recoge, usa y protege tus datos personales, y cómo ejercer tus derechos según la Ley 1581 de 2012.",
+      "intro": "En Chymera Studios cuidamos los datos que nos compartes. Esta política explica qué datos recogemos, para qué los usamos y cómo puedes conocerlos, actualizarlos o pedir que los borremos, en cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013 (compilado en el Decreto 1074 de 2015).",
+      "secciones": [
+        {
+          "titulo": "Responsable del tratamiento",
+          "lista": [
+            "Chymera Studios, estudio de páginas web con domicilio en Bogotá D.C., Colombia.",
+            "Correo: studio.chymera@gmail.com",
+            "WhatsApp: +57 320 335 7408",
+            "Sitio web: chymerastudios.com"
+          ]
+        },
+        {
+          "titulo": "Qué datos recogemos",
+          "texto": [
+            "Solo los que nos das al escribirnos o contratarnos: nombre, número de celular, correo, nombre y datos de tu negocio (dirección, NIT, horarios, precios), y el material que nos envías para tu página (logo, fotos y textos). Para facturar y cobrar también podemos pedir tu cédula o NIT.",
+            "No pedimos datos sensibles ni datos de niños, niñas o adolescentes. Este sitio no usa cookies de seguimiento ni publicidad."
+          ]
+        },
+        {
+          "titulo": "Para qué los usamos",
+          "lista": [
+            "Responder tus mensajes y enviarte cotizaciones.",
+            "Preparar, publicar y mantener tu página web.",
+            "Enviarte cuentas de cobro, recordatorios de pago y avisos sobre tu servicio.",
+            "Darte soporte y atender tus solicitudes.",
+            "Enviarte novedades de Chymera Studios, solo si lo autorizas; puedes pedir que no te escribamos más en cualquier momento.",
+            "Cumplir obligaciones legales, contables y tributarias."
+          ]
+        },
+        {
+          "titulo": "Con quién los compartimos",
+          "texto": [
+            "No vendemos ni alquilamos tus datos. Los compartimos solo con proveedores que necesitamos para prestar el servicio, que pueden estar fuera de Colombia: Cloudflare (alojamiento y dominios), Google (correo y Google Business), Meta (WhatsApp e Instagram) y GitHub (código de las páginas). También los entregaremos a una autoridad cuando la ley lo exija."
+          ]
+        },
+        {
+          "titulo": "Tus derechos",
+          "lista": [
+            "Conocer, actualizar y corregir tus datos.",
+            "Pedir prueba de la autorización que nos diste.",
+            "Saber cómo hemos usado tus datos.",
+            "Revocar la autorización o pedir que borremos tus datos, cuando no tengamos un deber legal o contractual de conservarlos.",
+            "Acceder gratis a tus datos.",
+            "Presentar quejas ante la Superintendencia de Industria y Comercio después de haber hecho tu consulta o reclamo ante nosotros."
+          ]
+        },
+        {
+          "titulo": "Cómo ejercer tus derechos",
+          "texto": [
+            "Escríbenos a studio.chymera@gmail.com o por WhatsApp con tu nombre, tu número de contacto y lo que necesitas.",
+            "Respondemos las consultas en máximo 10 días hábiles, prorrogables 5 días hábiles más si te avisamos el motivo. Los reclamos (corregir, actualizar, borrar o revocar) los respondemos en máximo 15 días hábiles, prorrogables 8 días hábiles más con aviso."
+          ]
+        },
+        {
+          "titulo": "Datos de los usuarios de las páginas que hacemos",
+          "texto": [
+            "Cuando hacemos la página de un negocio, ese negocio es el responsable de los datos que recoja por su página (formularios, reservas, mensajes) y debe tener su propia política. Chymera Studios actúa como encargado: usa esos datos solo para prestar el servicio y según las instrucciones del negocio."
+          ]
+        },
+        {
+          "titulo": "Seguridad y conservación",
+          "texto": [
+            "Guardamos tus datos en servicios con acceso protegido y solo los usamos quienes trabajamos en tu proyecto. Los conservamos mientras tengamos una relación contigo y luego el tiempo que exijan las normas contables y tributarias."
+          ]
+        },
+        {
+          "titulo": "Vigencia y cambios",
+          "texto": [
+            "Esta política rige desde el 14 de octubre de 2026. Si la cambiamos, publicaremos la nueva versión en esta página con su fecha."
+          ]
+        }
+      ]
+    },
+    "terminos": {
+      "titulo": "Términos del servicio",
+      "descripcion": "Condiciones con las que Chymera Studios diseña, publica y mantiene páginas web: planes, pagos, plazos, dominio, propiedad del código y cancelación.",
+      "intro": "Estos términos resumen cómo trabajamos. Cada proyecto se formaliza con un contrato escrito; si algo de este resumen y el contrato no coincide, manda el contrato.",
+      "secciones": [
+        {
+          "titulo": "Quiénes somos",
+          "texto": [
+            "Chymera Studios es un estudio de páginas web con domicilio en Bogotá D.C., Colombia. Contacto: studio.chymera@gmail.com y WhatsApp +57 320 335 7408."
+          ]
+        },
+        {
+          "titulo": "Qué ofrecemos",
+          "texto": [
+            "Diseño, publicación y mantenimiento de páginas web según los planes Presencia, Negocio y Reservas y los planes mensuales Base y Activo. Lo que incluye y no incluye cada plan está detallado en la página de planes. Lo que no aparece allí se cotiza aparte, con precio fijo o con una cotización escrita."
+          ]
+        },
+        {
+          "titulo": "Precios y pagos",
+          "lista": [
+            "Los precios están en pesos colombianos. Chymera Studios no es responsable de IVA, así que no se cobra IVA.",
+            "La instalación se paga 50 % para empezar y 50 % al aprobar el borrador, antes de publicar.",
+            "El plan mensual se paga por adelantado desde el mes en que se publica la página, o el año completo con 2 meses gratis.",
+            "En la opción sin pago de instalación, hay una permanencia mínima de 12 meses."
+          ]
+        },
+        {
+          "titulo": "Plazos, cambios y aprobación",
+          "lista": [
+            "Los días de entrega cuentan desde que recibimos el anticipo y todo el material: formulario, logo, fotos y precios.",
+            "Una ronda de cambios es una sola lista de ajustes sobre el borrador. Agregar secciones o páginas, o cambiar de plantilla, se cotiza aparte.",
+            "Si no recibimos respuesta 5 días hábiles después de enviar un borrador, se entiende aprobado."
+          ]
+        },
+        {
+          "titulo": "Tu dominio y tu contenido",
+          "texto": [
+            "El dominio se registra a tu nombre y es tuyo. Tu marca, logo, fotos, información y los textos que escribimos para tu negocio también son tuyos. Tú respondes por que la información publicada sea correcta y por tener derecho a usar el material que nos envías."
+          ]
+        },
+        {
+          "titulo": "Propiedad del código",
+          "texto": [
+            "La plantilla, el código y el diseño de las páginas son de Chymera Studios. Mientras tu plan mensual esté al día, tienes una licencia para usar tu página. Si quieres quedarte con el código y el diseño de tu página, puedes comprarlos por el 50 % del valor de instalación."
+          ]
+        },
+        {
+          "titulo": "Cancelación y suspensión",
+          "lista": [
+            "Puedes cancelar el plan mensual avisándonos por escrito con 30 días de anticipación.",
+            "Si un pago mensual se atrasa 30 días, te avisamos y luego podemos suspender la publicación hasta que te pongas al día.",
+            "Al terminar, te entregamos el control de tu dominio y tu contenido, siempre que estés a paz y salvo.",
+            "Si cancelas después de empezar el trabajo y antes de publicar, el anticipo no se devuelve porque corresponde al trabajo hecho."
+          ]
+        },
+        {
+          "titulo": "Responsabilidad",
+          "texto": [
+            "Trabajamos con cuidado profesional, pero no garantizamos un número de visitas, ventas ni un puesto específico en Google. No respondemos por fallas de proveedores externos como Cloudflare, Google, Meta, herramientas de reserva o pasarelas de pago."
+          ]
+        },
+        {
+          "titulo": "Datos personales",
+          "texto": [
+            "Tratamos tus datos según nuestra política de tratamiento de datos personales."
+          ]
+        },
+        {
+          "titulo": "Ley aplicable",
+          "texto": [
+            "Estos términos se rigen por la ley colombiana. Si hay un desacuerdo, primero buscamos un arreglo directo; si no se logra, lo resuelven los jueces de Bogotá D.C."
+          ]
+        }
+      ]
+    }
+  }
 }
