@@ -50,7 +50,6 @@ const otras = site.legal.enlaces.filter((e) => e.slug !== slug);
 
       <div class="mt-14 flex flex-wrap gap-3 border-t border-azul/10 pt-8">
         {otras.map((o) => <a href={`../${o.slug}/`} class="boton-azul">{o.texto}</a>)}
-        <a href="../planes/" class="boton border border-azul/25 text-azul hover:border-azul">{site.detallePlanes.titulo}</a>
       </div>
     </article>
   </main>
