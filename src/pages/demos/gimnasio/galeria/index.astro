@@ -1,0 +1,52 @@
+---
+import LayoutForja from '../../../../components/demos/gimnasio/LayoutForja.astro';
+import CabeceraPagina from '../../../../components/demos/gimnasio/CabeceraPagina.astro';
+import Llamado from '../../../../components/demos/gimnasio/Llamado.astro';
+import Imagen from '../../../../base/Imagen.astro';
+import { datos as d } from '../../../../components/demos/gimnasio/datos';
+
+const p = d.paginas.galeria;
+
+// Forma de cada recuadro en la cuadrícula (2 columnas en celular, 4 en computador)
+const formas: Record<string, { clase: string; proporcion: string; sizes: string; anchos: number[] }> = {
+  grande: { clase: 'col-span-2 row-span-2', proporcion: '1/1', sizes: '(min-width: 1024px) 50vw, 100vw', anchos: [480, 800, 1200] },
+  alta: { clase: 'row-span-2', proporcion: '1/2', sizes: '(min-width: 1024px) 25vw, 50vw', anchos: [360, 600] },
+  ancha: { clase: 'col-span-2', proporcion: '2/1', sizes: '(min-width: 1024px) 50vw, 100vw', anchos: [480, 800, 1200] },
+  cuadrada: { clase: '', proporcion: '1/1', sizes: '(min-width: 1024px) 25vw, 50vw', anchos: [360, 600] },
+};
+---
+
+<LayoutForja pagina="galeria" titulo={p.titulo} descripcion={p.descripcion}>
+  <CabeceraPagina etiqueta={p.etiqueta} lineas={p.h1} entrada={p.entrada} incluye={d.incluye.paginaGaleria} />
+
+  <section class="oscuro relative -mt-[calc(var(--corte)+1rem)] pb-[calc(var(--corte)+4rem)] lg:pb-[calc(var(--corte)+6rem)]">
+    <div class="contenedor" data-incluye={d.incluye.galeria}>
+      <ul class="grid auto-rows-[44vw] grid-cols-2 gap-2 sm:auto-rows-[13rem] sm:gap-3 lg:auto-rows-[15.5rem] lg:grid-cols-4 lg:gap-4">
+        {p.fotos.map((f, i) => {
+          const forma = formas[f.forma];
+          return (
+            <li class:list={['foto-viva group relative overflow-hidden bg-negro-2', forma.clase]}>
+              <figure class="h-full w-full">
+                <Imagen
+                  ruta={`demos/gimnasio/${f.foto}`}
+                  alt={f.alt}
+                  proporcion={forma.proporcion}
+                  sizes={forma.sizes}
+                  anchos={forma.anchos}
+                  claseMarco="block h-full w-full"
+                  class="foto h-full w-full object-cover"
+                />
+                <figcaption class="absolute bottom-0 left-0 flex items-center gap-2 bg-negro py-1.5 pl-2 pr-3 text-[0.8125rem] font-semibold uppercase tracking-[0.08em] sm:text-sm">
+                  <span class="cifra text-lg text-voltio" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  {f.rotulo}
+                </figcaption>
+              </figure>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <Llamado />
+</LayoutForja>

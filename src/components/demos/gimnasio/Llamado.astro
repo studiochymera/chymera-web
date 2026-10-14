@@ -1,0 +1,42 @@
+---
+// Llamado a escribir: bloque voltio con corte inclinado. Lleva a WhatsApp o al formulario.
+import Icono from './Icono.astro';
+import { datos as d, contacto, rutas } from './datos';
+
+interface Props {
+  etiqueta?: string;
+  titulo?: string;
+  texto?: string;
+  boton?: string;
+  conFormulario?: boolean;
+}
+
+const {
+  etiqueta = d.llamado.etiqueta,
+  titulo = d.llamado.titulo,
+  texto = d.llamado.texto,
+  boton = d.llamado.boton,
+  conFormulario = true,
+} = Astro.props;
+const r = rutas(Astro.url.pathname);
+---
+
+<section class="electrico corte-inverso pb-16 pt-[calc(var(--corte)+3rem)] lg:pb-24 lg:pt-[calc(var(--corte)+4.5rem)]">
+  <div class="contenedor grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end" data-incluye={d.incluye.llamado}>
+    <div class="lg:col-span-7">
+      <p class="etiqueta">{etiqueta}</p>
+      <h2 class="titulo-seccion mt-4">{titulo}</h2>
+    </div>
+    <div class="lg:col-span-5">
+      <p class="max-w-md text-lg font-semibold">{texto}</p>
+      <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <a href={contacto.enlaceWhatsApp} target="_blank" rel="noopener" class="boton boton-negro">
+          <Icono nombre="whatsapp" class="h-6 w-6" />{boton}
+        </a>
+        {conFormulario && (
+          <a href={`${r.a('contacto/')}#formulario`} class="enlace inline-flex min-h-11 items-center font-semibold">{d.llamado.formulario}</a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

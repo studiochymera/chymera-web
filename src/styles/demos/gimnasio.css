@@ -1,0 +1,492 @@
+@import "tailwindcss" source(none);
+@source "../../pages/demos/gimnasio";
+@source "../../components/demos/gimnasio";
+@import "@fontsource/barlow-condensed/latin-800-italic.css";
+@import "@fontsource/barlow/latin-400.css";
+@import "@fontsource/barlow/latin-600.css";
+
+/* Forja · gimnasio de fuerza en Cedritos (demo plan Negocio).
+   Contraste calculado: tiza/negro 17,1 · voltio/negro 16,6 · humo/negro 7,9 · grafito/tiza 6,6.
+   Voltio sobre tiza da 1,03: nunca como texto sobre tiza, solo como fondo de texto negro. */
+@theme {
+  --color-negro: #0E0F0C;
+  --color-negro-2: #1A1B17;
+  --color-negro-3: #25261F;
+  --color-tiza: #F2F2EC;
+  --color-tiza-2: #E4E4DA;
+  --color-voltio: #D4FF3A;
+  --color-humo: #A6A79E;
+  --color-grafito: #55564F;
+
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Barlow", system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    --corte: clamp(1.75rem, 6vw, 5.5rem);
+    --wa-fondo: #D4FF3A;
+    --wa-icono: #0E0F0C;
+    --wa-foco: #F2F2EC;
+    --form-campo: #FFFFFF;
+    --form-borde: #0E0F0C;
+    --form-texto: #0E0F0C;
+    --form-acento: #0E0F0C;
+    --form-acento-texto: #D4FF3A;
+    --form-radio: 0;
+    --mapa-radio: 0;
+    --mapa-boton-fondo: #D4FF3A;
+    --mapa-boton-texto: #0E0F0C;
+  }
+
+  html {
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--color-negro);
+    color: var(--color-tiza);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+
+  strong,
+  b {
+    font-weight: 600;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--foco, var(--color-voltio));
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-voltio);
+    color: var(--color-negro);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Zonas de color: definen el color del foco y del acento de cada sección */
+  .oscuro {
+    background-color: var(--color-negro);
+    color: var(--color-tiza);
+    --foco: var(--color-voltio);
+    --acento: var(--color-voltio);
+  }
+  .claro {
+    background-color: var(--color-tiza);
+    color: var(--color-negro);
+    --foco: var(--color-negro);
+    --acento: var(--color-negro);
+  }
+  .electrico {
+    background-color: var(--color-voltio);
+    color: var(--color-negro);
+    --foco: var(--color-negro);
+    --acento: var(--color-negro);
+  }
+
+  .contenedor {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .contenedor {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .contenedor {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Rótulo pequeño sobre los títulos, con barra inclinada */
+  .etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .etiqueta::before {
+    content: '';
+    width: 1.75rem;
+    height: 0.45rem;
+    background: var(--acento);
+    transform: skewX(-20deg);
+  }
+
+  /* Títulos de sección */
+  .titulo-seccion {
+    font-size: clamp(2.75rem, 12vw, 6.5rem);
+  }
+
+  /* Palabra resaltada con marcador voltio (solo detrás de texto negro) */
+  .marcador {
+    padding-inline: 0.08em;
+    background: linear-gradient(transparent 52%, var(--color-voltio) 52% 94%, transparent 94%);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  /* Números grandes en contorno: el color del texto es el del trazo */
+  .contorno {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: var(--trazo, 2px) currentColor;
+  }
+  .cifra {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-style: italic;
+    line-height: 0.85;
+    letter-spacing: -0.01em;
+  }
+
+  /* Botones: fondo inclinado como placa de competencia */
+  .boton {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    min-height: 3.25rem;
+    padding: 0.25rem 1.6rem;
+    color: var(--boton-texto, var(--color-negro));
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .boton::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border: 2px solid var(--boton-borde, transparent);
+    background: var(--boton-fondo, var(--color-voltio));
+    transform: skewX(-12deg);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .boton:hover::before {
+    box-shadow: 5px 5px 0 var(--boton-sombra, var(--color-tiza));
+    transform: skewX(-12deg) translate(-2px, -2px);
+  }
+  .boton .flecha {
+    transition: transform 0.2s ease;
+  }
+  .boton:hover .flecha {
+    transform: translateX(4px);
+  }
+  .boton-voltio {
+    --boton-fondo: var(--color-voltio);
+    --boton-texto: var(--color-negro);
+    --boton-sombra: var(--color-tiza);
+  }
+  .boton-negro {
+    --boton-fondo: var(--color-negro);
+    --boton-texto: var(--color-tiza);
+    --boton-sombra: var(--color-negro-3);
+  }
+  .claro .boton-negro {
+    --boton-sombra: var(--color-grafito);
+  }
+  .boton-linea {
+    --boton-fondo: transparent;
+    --boton-borde: currentColor;
+    --boton-texto: currentColor;
+    --boton-sombra: var(--acento);
+  }
+  .boton-chico {
+    min-height: 2.75rem;
+    padding: 0.25rem 1.1rem;
+    font-size: 1.1rem;
+  }
+
+  /* Enlace de texto con subrayado grueso */
+  .enlace {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+    text-decoration-color: var(--acento);
+    transition: text-underline-offset 0.2s ease;
+  }
+  .enlace:hover {
+    text-underline-offset: 0.45em;
+  }
+
+  /* Fotos con tratamiento de alto contraste */
+  .foto {
+    filter: grayscale(1) contrast(1.18) brightness(0.94);
+    transition: filter 0.5s ease, transform 0.6s ease;
+  }
+  .foto-viva:hover .foto {
+    filter: grayscale(0.15) contrast(1.08);
+    transform: scale(1.03);
+  }
+
+  /* Divisores inclinados entre secciones */
+  .corte {
+    position: relative;
+    margin-top: calc(var(--corte) * -1);
+    clip-path: polygon(0 0, 100% var(--corte), 100% 100%, 0 100%);
+  }
+  .corte-inverso {
+    position: relative;
+    margin-top: calc(var(--corte) * -1);
+    clip-path: polygon(0 var(--corte), 100% 0, 100% 100%, 0 100%);
+  }
+  .corte-abajo {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--corte)), 0 100%);
+  }
+
+  /* Cinta de texto tipo marcador de competencia */
+  .cinta {
+    position: relative;
+    z-index: 10;
+    overflow-x: clip;
+    overflow-y: visible;
+    pointer-events: none;
+  }
+  .cinta-banda {
+    display: flex;
+    width: max-content;
+    margin-left: -10vw;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transform-origin: 60vw 50%;
+  }
+  .cinta-banda > * {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .cinta-principal {
+    padding-block: 0.7rem;
+    background: var(--color-voltio);
+    color: var(--color-negro);
+    font-size: clamp(1.35rem, 5vw, 2.25rem);
+    transform: rotate(-3deg);
+  }
+  .cinta-fondo {
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    padding-block: 0.45rem;
+    background: var(--color-negro-3);
+    color: var(--color-tiza);
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
+    transform: translateY(-50%) rotate(4.5deg);
+    transform-origin: 30vw 50%;
+  }
+  .cinta-separador {
+    display: inline-block;
+    width: 0.9em;
+    height: 0.22em;
+    margin-inline: 0.7em;
+    background: currentColor;
+    transform: skewX(-20deg);
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .cinta-principal .cinta-pista {
+        animation: cinta-izquierda linear both;
+        animation-timeline: view();
+      }
+      .cinta-fondo .cinta-pista {
+        animation: cinta-derecha linear both;
+        animation-timeline: view();
+      }
+    }
+  }
+
+  /* Entrada suave de la portada */
+  @media (prefers-reduced-motion: no-preference) {
+    .entra {
+      animation: entra 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      animation-delay: calc(var(--i, 0) * 90ms);
+    }
+  }
+
+  /* Preguntas frecuentes */
+  .pregunta summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .pregunta summary::-webkit-details-marker {
+    display: none;
+  }
+  .pregunta .signo {
+    transition: transform 0.25s ease;
+  }
+  .pregunta[open] .signo {
+    transform: rotate(45deg);
+  }
+
+  /* Menú del celular */
+  .menu-movil summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .menu-movil summary::-webkit-details-marker {
+    display: none;
+  }
+  .menu-movil .icono-cerrar,
+  .menu-movil[open] .icono-abrir {
+    display: none;
+  }
+  .menu-movil[open] .icono-cerrar {
+    display: block;
+  }
+
+  /* Texto legal de la base */
+  .legal-forja {
+    max-width: 46rem;
+  }
+  .legal-forja .intro {
+    margin-bottom: 2.5rem;
+    font-size: 1.1875rem;
+    line-height: 1.6;
+  }
+  .legal-forja section {
+    padding-block: 1.75rem;
+    border-top: 2px solid var(--color-negro);
+  }
+  .legal-forja h2 {
+    margin-bottom: 0.9rem;
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+  .legal-forja .numero {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.5px currentColor;
+  }
+  .legal-forja p + p {
+    margin-top: 0.75rem;
+  }
+  .legal-forja ul {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .legal-forja li {
+    position: relative;
+    padding-left: 1.6rem;
+  }
+  .legal-forja li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 0.8rem;
+    height: 0.3rem;
+    background: var(--color-negro);
+    transform: skewX(-20deg);
+  }
+
+}
+
+/* Ajustes a componentes de la base. Van fuera de capas y con más especificidad
+   porque los estilos con alcance de Astro no están en capas. */
+.formulario-forja.formulario-forja .campo.campo label {
+  font-size: 0.9375rem;
+}
+.formulario-forja.formulario-forja .campo.campo input,
+.formulario-forja.formulario-forja .campo.campo textarea {
+  border-width: 2px;
+}
+.formulario-forja .enviar.enviar {
+  min-height: 3.25rem;
+  padding-inline: 1.75rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.formulario-forja .enviar.enviar:hover {
+  box-shadow: 5px 5px 0 var(--color-grafito);
+}
+.formulario-forja .autoriza.autoriza a {
+  font-weight: 600;
+}
+
+/* Botón flotante de la base: anillo de foco visible sobre fondo claro y oscuro */
+.wa-flotante.wa-flotante:focus-visible {
+  box-shadow: 0 0 0 6px #0E0F0C;
+}
+
+@keyframes cinta-izquierda {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: -14% 0;
+  }
+}
+
+@keyframes cinta-derecha {
+  from {
+    translate: -14% 0;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+@keyframes entra {
+  from {
+    opacity: 0;
+    translate: 0 1.25rem;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}

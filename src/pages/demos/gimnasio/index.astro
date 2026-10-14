@@ -1,0 +1,157 @@
+---
+import LayoutForja from '../../../components/demos/gimnasio/LayoutForja.astro';
+import Cinta from '../../../components/demos/gimnasio/Cinta.astro';
+import Llamado from '../../../components/demos/gimnasio/Llamado.astro';
+import Icono from '../../../components/demos/gimnasio/Icono.astro';
+import Imagen from '../../../base/Imagen.astro';
+import { datos as d, contacto, rutas, cifraPesos } from '../../../components/demos/gimnasio/datos';
+
+const p = d.paginas.inicio;
+const r = rutas(Astro.url.pathname);
+
+// La última palabra del título va resaltada con marcador
+const partir = (t: string) => {
+  const i = t.lastIndexOf(' ');
+  return [t.slice(0, i + 1), t.slice(i + 1)];
+};
+const [difA, difB] = partir(p.diferencial.titulo);
+const [tesA, tesB] = partir(p.testimonios.titulo);
+---
+
+<LayoutForja pagina="inicio" titulo={p.titulo} descripcion={p.descripcion}>
+  <!-- Portada: foto a sangre, título enorme y datos clave -->
+  <section class="oscuro relative isolate">
+    <div class="absolute inset-x-0 top-0 -z-10 h-[64svh] min-h-[26rem] overflow-hidden lg:inset-y-0 lg:left-[30%] lg:h-auto">
+      <Imagen
+        ruta="demos/gimnasio/portada"
+        alt={p.altPortada}
+        prioridad={true}
+        proporcion="3/2"
+        sizes="(min-width: 1024px) 70vw, 100vw"
+        anchos={[640, 960, 1280, 1700]}
+        claseMarco="block h-full w-full"
+        class="foto h-full w-full object-cover object-[62%_center]"
+      />
+      <div class="absolute inset-0 bg-linear-to-t from-negro via-negro/55 to-negro/5 lg:bg-linear-to-r lg:from-negro lg:from-10% lg:via-negro/65 lg:to-negro/0"></div>
+      <div class="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-negro to-transparent lg:hidden"></div>
+    </div>
+
+    <div class="contenedor relative pb-[calc(var(--corte)+4.5rem)] pt-[40svh] lg:pb-[calc(var(--corte)+5.5rem)] lg:pt-24" data-incluye={d.incluye.portada}>
+      <p class="etiqueta entra">{p.etiqueta}</p>
+      <h1 class="mt-4 text-[clamp(3.6rem,18vw,10.75rem)] leading-[0.82]">
+        {p.h1.map((l, i) => (
+          <>
+            <span class:list={['entra block', i === 1 && 'text-voltio']} style={`--i:${i + 1}`}>{l}</span>{' '}
+          </>
+        ))}
+      </h1>
+      <p class="entra mt-7 max-w-md text-lg text-tiza/90 lg:max-w-lg lg:text-xl" style="--i:4">{p.entrada}</p>
+      <div class="entra mt-9 flex flex-wrap items-center gap-x-7 gap-y-4" style="--i:5">
+        <a href={contacto.enlaceWhatsApp} target="_blank" rel="noopener" class="boton boton-voltio">
+          <Icono nombre="whatsapp" class="h-6 w-6" />{d.comun.botonWaLargo}
+        </a>
+        <a href={r.a('servicios/')} class="enlace inline-flex min-h-11 items-center gap-2 font-semibold">{d.comun.verPlanes}</a>
+      </div>
+
+      <ul class="mt-14 grid grid-cols-2 border-t-2 border-tiza/15 lg:mt-20 lg:max-w-5xl lg:grid-cols-4">
+        {p.datos.map((x, i) => (
+          <li class:list={['flex flex-col gap-2 border-tiza/15 py-6 pr-4 lg:border-r-2 lg:pl-6 lg:first:pl-0 lg:last:border-r-0', i % 2 === 0 ? 'border-r-2' : 'pl-5', i < 2 && 'border-b-2 lg:border-b-0']}>
+            <span class="cifra contorno text-[3.6rem] text-voltio lg:text-[5rem]">{x.valor}</span>
+            <span class="max-w-[11rem] text-[0.9375rem] leading-snug text-tiza/85">{x.texto}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Cinta class="-my-12 lg:-my-14" />
+
+  <!-- Lo que nos diferencia -->
+  <section class="claro corte pb-20 pt-[calc(var(--corte)+5rem)] lg:pb-32 lg:pt-[calc(var(--corte)+7rem)]">
+    <div class="contenedor" data-incluye={d.incluye.diferencial}>
+      <p class="etiqueta">{p.diferencial.etiqueta}</p>
+      <h2 class="titulo-seccion mt-4 max-w-4xl">{difA}<span class="marcador">{difB}</span></h2>
+      <ol class="mt-14 grid gap-16 md:grid-cols-3 md:gap-8 lg:mt-20 lg:gap-12">
+        {p.diferencial.puntos.map((x, i) => (
+          <li class:list={['foto-viva', i === 1 && 'md:mt-16', i === 2 && 'md:mt-32']}>
+            <div class="relative mr-2">
+              <div class="absolute -bottom-2 -right-2 h-full w-full bg-negro" aria-hidden="true"></div>
+              <div class="relative aspect-[4/3] overflow-hidden md:aspect-[4/5]">
+                <Imagen
+                  ruta={`demos/gimnasio/${x.foto}`}
+                  alt={x.alt}
+                  proporcion="4/3"
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  anchos={[480, 800]}
+                  claseMarco="block h-full w-full"
+                  class="foto h-full w-full object-cover"
+                />
+              </div>
+            </div>
+            <div class="mt-7 flex items-start gap-4">
+              <span class="cifra contorno -mt-1 text-[4.25rem] text-negro" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3 class="text-[2.1rem]">{x.titulo}</h3>
+                <p class="mt-3 text-grafito">{x.texto}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Vista corta de membresías -->
+  <section class="oscuro corte-inverso pb-[calc(var(--corte)+4rem)] pt-[calc(var(--corte)+4rem)] lg:pb-[calc(var(--corte)+6rem)] lg:pt-[calc(var(--corte)+6rem)]">
+    <div class="contenedor grid grid-cols-1 gap-10 lg:grid-cols-12" data-incluye={d.incluye.membresiasCorto}>
+      <div class="lg:col-span-4">
+        <p class="etiqueta">{p.membresias.etiqueta}</p>
+        <h2 class="titulo-seccion mt-4 lg:text-[5rem]">{p.membresias.titulo}</h2>
+        <p class="mt-6 max-w-sm text-tiza/85">{p.membresias.texto}</p>
+        <a href={`${r.a('servicios/')}#membresias`} class="boton boton-voltio mt-8 hidden lg:inline-flex">{p.membresias.enlace}<Icono nombre="flecha" /></a>
+      </div>
+      <ul class="border-t-2 border-negro-3 lg:col-span-8">
+        {d.membresias.planes.map((m) => (
+          <li class:list={['relative grid grid-cols-1 gap-y-2 border-b-2 border-negro-3 py-6 sm:grid-cols-[1fr_auto] sm:items-end sm:gap-x-6 lg:gap-x-10 lg:py-7', m.destacada && 'before:absolute before:inset-y-0 before:-left-4 before:w-1.5 before:bg-voltio lg:before:-left-6']}>
+            <div>
+              {m.destacada && <p class="mb-2 inline-block -skew-x-12 bg-voltio px-2 py-0.5 text-xs font-semibold uppercase tracking-[0.14em] text-negro">{d.paginas.servicios.destacada}</p>}
+              <h3 class="text-[2.25rem] sm:text-[2.5rem] lg:text-[2.75rem]">{m.nombre}</h3>
+            </div>
+            <p class="flex items-baseline gap-2 sm:block sm:text-right">
+              <span class="cifra contorno block text-[2.9rem] text-voltio sm:text-[3.25rem] lg:text-[3.75rem]"><span class="align-top text-[0.55em]">{d.comun.abreviaturaPesos}</span>{cifraPesos(m.precio)}</span>
+              <span class="text-sm text-humo">{d.comun.alMes}</span>
+            </p>
+            <p class="text-tiza/80 sm:col-span-2">{m.resumen}</p>
+          </li>
+        ))}
+      </ul>
+      <a href={`${r.a('servicios/')}#membresias`} class="boton boton-voltio justify-self-start lg:hidden">{p.membresias.enlace}<Icono nombre="flecha" /></a>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section class="claro corte pb-20 pt-[calc(var(--corte)+4rem)] lg:pb-28 lg:pt-[calc(var(--corte)+6rem)]">
+    <div class="contenedor" data-incluye={d.incluye.testimonios}>
+      <p class="etiqueta">{p.testimonios.etiqueta}</p>
+      <h2 class="titulo-seccion mt-4">{tesA}<span class="marcador">{tesB}</span></h2>
+      <ul class="mt-12 grid gap-x-10 gap-y-12 md:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+        {p.testimonios.lista.map((t, i) => (
+          <li class:list={['border-t-4 border-negro pt-6', i % 3 === 1 && 'lg:mt-10']}>
+            <figure>
+              <span class="cifra block h-11 text-[5.5rem] leading-[0.9] text-negro" aria-hidden="true">“</span>
+              <blockquote class="text-lg leading-relaxed">
+                <p>{t.texto}</p>
+              </blockquote>
+              <figcaption class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span class="font-display text-2xl font-extrabold uppercase italic">{t.nombre}</span>
+                <span class="-skew-x-12 bg-negro px-2 py-0.5 text-xs font-semibold uppercase tracking-[0.12em] text-tiza">{t.desde}</span>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Llamado />
+</LayoutForja>

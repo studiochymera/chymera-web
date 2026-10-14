@@ -1,0 +1,367 @@
+{
+  "nombre": "Forja",
+  "barrio": "Cedritos",
+  "ciudad": "Bogotá",
+  "region": "Bogotá D.C.",
+  "tipoSchema": "ExerciseGym",
+  "colorTema": "#0E0F0C",
+  "rangoPrecios": "$$",
+  "descripcionNegocio": "Gimnasio de fuerza y entrenamiento en grupos pequeños en Cedritos, Bogotá. Grupos de máximo 8 personas, entrenadores certificados y sala abierta desde las 5:00 a. m.",
+  "telefonoVisible": "+57 320 335 7408",
+  "telefonoEnlace": "+573203357408",
+  "consultaMapa": "Cedritos, Bogotá",
+
+  "horario": [
+    { "dias": "Lunes a viernes", "corto": "Lun a vie", "abre": "05:00", "cierra": "22:00", "schema": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] },
+    { "dias": "Sábados", "corto": "Sáb", "abre": "07:00", "cierra": "16:00", "schema": ["Saturday"] },
+    { "dias": "Domingos y festivos", "corto": "Dom y festivos", "abre": "08:00", "cierra": "13:00", "schema": ["Sunday", "PublicHolidays"] }
+  ],
+
+  "comun": {
+    "saltar": "Saltar al contenido",
+    "logoEtiqueta": "Forja, ir al inicio",
+    "menu": "Menú",
+    "menuEtiqueta": "Páginas del sitio",
+    "botonWa": "Escríbenos",
+    "botonWaLargo": "Agenda por WhatsApp",
+    "waEtiqueta": "Escribir a Forja por WhatsApp",
+    "verPlanes": "Ver planes y precios",
+    "alMes": "al mes",
+    "desde": "Desde",
+    "abreviaturaPesos": "$"
+  },
+
+  "nav": [
+    { "clave": "inicio", "texto": "Inicio", "ruta": "" },
+    { "clave": "servicios", "texto": "Planes", "ruta": "servicios/" },
+    { "clave": "nosotros", "texto": "Entrenadores", "ruta": "nosotros/" },
+    { "clave": "galeria", "texto": "Galería", "ruta": "galeria/" },
+    { "clave": "contacto", "texto": "Contacto", "ruta": "contacto/" }
+  ],
+
+  "cinta": ["Grupos de máximo 8", "Desde las 5:00 a. m.", "Clase de prueba gratis", "Cedritos, Bogotá", "Técnica antes que peso"],
+
+  "llamado": {
+    "etiqueta": "Primera clase gratis",
+    "titulo": "Agenda tu clase de prueba",
+    "texto": "Escríbenos, cuéntanos cómo entrenas hoy y en qué horario puedes venir. Te asignamos un grupo con cupo y un entrenador te espera en la puerta.",
+    "boton": "Agenda por WhatsApp",
+    "formulario": "Prefiero dejar mis datos"
+  },
+
+  "pie": {
+    "lema": "Fuerza en grupos pequeños. Cedritos, Bogotá.",
+    "tituloVisitanos": "Visítanos",
+    "tituloContacto": "Escríbenos",
+    "tituloHorario": "Horario",
+    "tituloPaginas": "Páginas",
+    "politica": "Política de tratamiento de datos",
+    "instagram": "Instagram",
+    "derechos": "Forja · Gimnasio de fuerza en Cedritos"
+  },
+
+  "paginas": {
+    "inicio": {
+      "titulo": "Gimnasio en Cedritos · Forja, fuerza en grupos pequeños",
+      "descripcion": "Gimnasio de fuerza en Cedritos, Bogotá: grupos de máximo 8, entrenadores certificados y sala abierta desde las 5:00 a. m. Tu primera clase es gratis.",
+      "etiqueta": "Cedritos · Bogotá",
+      "h1": ["Gimnasio", "de fuerza", "en Cedritos"],
+      "entrada": "Entrenamiento de fuerza en grupos de máximo 8 personas, con un entrenador que corrige cada repetición. Sin filas para las jaulas y sin espejos para posar.",
+      "altPortada": "Persona levantando una barra olímpica en peso muerto dentro de un gimnasio oscuro",
+      "datos": [
+        { "valor": "8", "texto": "personas máximo por grupo" },
+        { "valor": "5:00", "texto": "a. m., abrimos de lunes a viernes" },
+        { "valor": "6", "texto": "entrenadores certificados" },
+        { "valor": "1.ª", "texto": "clase gratis para conocernos" }
+      ],
+      "diferencial": {
+        "etiqueta": "Por qué Forja",
+        "titulo": "Aquí se entrena distinto",
+        "puntos": [
+          {
+            "titulo": "Técnica antes que peso",
+            "texto": "Antes de cargar la barra aprendes a moverte. Tu entrenador revisa cada patrón: sentadilla, bisagra de cadera, empuje y tracción, y solo sube el peso cuando el movimiento está limpio.",
+            "foto": "diferencial-1",
+            "alt": "Entrenador corrigiendo la técnica de una sentadilla con barra"
+          },
+          {
+            "titulo": "Grupos de máximo 8",
+            "texto": "Las clases tienen cupo cerrado: nunca más de 8 personas por entrenador. Te ven, te corrigen, saben tu nombre y saben qué levantaste la semana pasada.",
+            "foto": "diferencial-2",
+            "alt": "Grupo pequeño entrenando fuerza con barras y discos al mismo tiempo"
+          },
+          {
+            "titulo": "Hierro de verdad",
+            "texto": "4 plataformas de levantamiento, 6 jaulas de sentadilla, barras olímpicas, pesas rusas de 8 a 32 kilos, trineo y remos. Llegas y entrenas, sin esperar turno.",
+            "foto": "diferencial-3",
+            "alt": "Persona entrenando con una pesa rusa en el piso de caucho del gimnasio"
+          }
+        ]
+      },
+      "membresias": {
+        "etiqueta": "Membresías",
+        "titulo": "Elige cómo quieres entrenar",
+        "texto": "Cuatro formas de entrenar en Forja. Todas incluyen la sala de fuerza en todo el horario, sin inscripción ni permanencia mínima.",
+        "enlace": "Compara los 4 planes"
+      },
+      "testimonios": {
+        "etiqueta": "Lo que dicen en la sala",
+        "titulo": "Socios de Forja",
+        "lista": [
+          { "texto": "Llegué sin saber hacer una sentadilla. En el grupo de las 6:00 a. m. me corrigieron desde el primer día y hoy entreno con confianza.", "nombre": "Carolina M.", "desde": "Socia desde 2024" },
+          { "texto": "Lo que más valoro es que somos pocos. El entrenador sabe qué levanté la semana pasada y qué toca hoy.", "nombre": "Julián R.", "desde": "Socio desde 2023" },
+          { "texto": "Entreno a las 5:30 a. m. antes de la oficina y nunca he tenido que hacer fila para usar una jaula.", "nombre": "Natalia G.", "desde": "Socia desde 2025" },
+          { "texto": "Volví a entrenar después de una lesión de rodilla. Felipe me armó un trabajo de movilidad y fuimos subiendo la carga con calma.", "nombre": "Andrés T.", "desde": "Socio desde 2024" },
+          { "texto": "El semipersonalizado de 4 personas es lo mejor que he pagado: tienes al entrenador encima, pero con ambiente de grupo.", "nombre": "Mateo P.", "desde": "Socio desde 2024" },
+          { "texto": "Los sábados de halterofilia son mi momento de la semana. Técnica, buena música y mucha tiza.", "nombre": "Paula V.", "desde": "Socia desde 2022" }
+        ]
+      }
+    },
+
+    "servicios": {
+      "titulo": "Planes de gimnasio en Cedritos · Forja",
+      "descripcion": "Membresías desde $159.000 al mes en Cedritos: sala libre, grupos de máximo 8, semipersonalizado y personalizado. Mira los 25 servicios con precio.",
+      "etiqueta": "Planes y precios",
+      "h1": ["Planes de gimnasio", "en Cedritos"],
+      "entrada": "Cuatro membresías que se pagan mes a mes, sin inscripción ni permanencia, y 25 servicios sueltos para cuando los necesites.",
+      "altFoto": "Estructura de entrenamiento funcional con barras, anillas y discos en Forja",
+      "tituloMembresias": "Membresías",
+      "textoMembresias": "Todas incluyen la sala de fuerza en todo el horario. Compara y elige según cuánto acompañamiento quieres.",
+      "destacada": "La más elegida",
+      "botonPlan": "Agenda tu clase de prueba",
+      "notaPrecios": "Precios en pesos colombianos con IVA incluido. Sin inscripción ni permanencia mínima: pagas mes a mes.",
+      "etiquetaServicios": "{n} servicios",
+      "tituloServicios": "Servicios con precio",
+      "textoServicios": "Para socios y para quien quiere venir sin membresía. Pregúntanos por WhatsApp cualquier duda antes de venir.",
+      "gratis": "Gratis",
+      "dudaTitulo": "¿No sabes qué plan elegir?",
+      "dudaTexto": "Ven a una clase de prueba y al final tu entrenador te recomienda el plan según tu experiencia y tu horario.",
+      "dudaBoton": "Pregúntanos por WhatsApp"
+    },
+
+    "nosotros": {
+      "titulo": "Entrenadores personales en Cedritos · Forja",
+      "descripcion": "Conoce a los 6 entrenadores de Forja en Cedritos: fuerza, halterofilia, movilidad y nutrición. Así trabajamos contigo cada repetición.",
+      "etiqueta": "Nosotros",
+      "h1": ["Entrenadores", "personales", "en Cedritos"],
+      "entrada": "Seis entrenadores certificados, un método claro y una sala hecha para levantar. Esta es la gente que te va a corregir la sentadilla.",
+      "altFoto": "Sala de fuerza de Forja vacía, con jaulas, barras y discos ordenados",
+      "historia": {
+        "etiqueta": "Nuestra historia",
+        "titulo": "Empezamos en una bodega con 2 jaulas",
+        "parrafos": [
+          "Forja abrió en 2019 en una bodega de Cedritos con 2 jaulas, una plataforma y 11 socios que entrenaban con Valentina y Andrés en un parque del barrio.",
+          "Queríamos un lugar donde entrenar fuerza en serio sin sentirse perdido entre máquinas: grupos pequeños, un entrenador que te conoce y un programa que se escribe por ciclos, no al azar.",
+          "Hoy somos 6 entrenadores, tenemos 4 plataformas y 6 jaulas, y seguimos con la misma regla del primer día: nunca más de 8 personas por grupo."
+        ],
+        "cifras": [
+          { "valor": "2019", "texto": "abrimos en Cedritos" },
+          { "valor": "4", "texto": "plataformas de levantamiento" },
+          { "valor": "6", "texto": "jaulas de sentadilla" }
+        ]
+      },
+      "metodo": {
+        "etiqueta": "El método Forja",
+        "titulo": "Cuatro pasos, siempre los mismos",
+        "pasos": [
+          { "titulo": "Valoración", "texto": "Medimos movilidad, fuerza de base y composición corporal, y hablamos de tu historia de lesiones y de tu horario." },
+          { "titulo": "Técnica", "texto": "Las primeras semanas aprendes los patrones básicos con cargas bajas y correcciones constantes." },
+          { "titulo": "Progresión", "texto": "Entrenas por ciclos de 6 semanas con cargas registradas: sabes qué toca hoy y por qué." },
+          { "titulo": "Revisión", "texto": "Al cerrar cada ciclo revisamos contigo cómo te sentiste, qué cambió y qué ajustamos para el siguiente." }
+        ]
+      },
+      "equipo": {
+        "etiqueta": "El equipo",
+        "titulo": "Tus entrenadores",
+        "texto": "Todos tienen formación profesional y certificación vigente. Rotan por los grupos para que conozcas a varios, pero tu programa siempre tiene un responsable.",
+        "lista": [
+          { "nombre": "Valentina Ríos", "rol": "Cofundadora · Halterofilia", "certificacion": "Profesional en Ciencias del Deporte, entrenadora de halterofilia nivel 2", "foto": "coach-01", "alt": "Retrato de Valentina Ríos, entrenadora de Forja, en la sala de pesas" },
+          { "nombre": "Andrés Galindo", "rol": "Cofundador · Fuerza máxima", "certificacion": "Licenciado en Educación Física, especialista en entrenamiento de fuerza", "foto": "coach-02", "alt": "Retrato de Andrés Galindo, entrenador de Forja, junto a una jaula de sentadilla" },
+          { "nombre": "Laura Méndez", "rol": "Grupos y acondicionamiento", "certificacion": "Profesional en Cultura Física, certificada en entrenamiento funcional", "foto": "coach-03", "alt": "Retrato de Laura Méndez, entrenadora de Forja, en el gimnasio" },
+          { "nombre": "Sebastián Cárdenas", "rol": "Semipersonalizado", "certificacion": "Profesional en Deporte, certificado en fuerza y acondicionamiento", "foto": "coach-04", "alt": "Retrato de Sebastián Cárdenas, entrenador de Forja, en la zona de barras" },
+          { "nombre": "Daniela Rojas", "rol": "Nutrición y entrenamiento", "certificacion": "Nutricionista dietista, especialista en nutrición deportiva", "foto": "coach-05", "alt": "Retrato de Daniela Rojas, nutricionista y entrenadora de Forja" },
+          { "nombre": "Felipe Moreno", "rol": "Movilidad y regreso al entrenamiento", "certificacion": "Fisioterapeuta, especialista en rehabilitación deportiva", "foto": "coach-06", "alt": "Retrato de Felipe Moreno, fisioterapeuta y entrenador de Forja" }
+        ]
+      }
+    },
+
+    "galeria": {
+      "titulo": "Fotos del gimnasio Forja en Cedritos",
+      "descripcion": "Mira por dentro el gimnasio Forja en Cedritos: plataformas, jaulas, barras olímpicas, pesas rusas y clases en grupos de máximo 8 personas.",
+      "etiqueta": "Galería",
+      "h1": ["Fotos del", "gimnasio Forja"],
+      "entrada": "Así se ve un día normal en la sala: hierro, tiza, grupos pequeños y entrenadores encima de cada repetición.",
+      "fotos": [
+        {"foto": "galeria-04", "forma": "grande", "rotulo": "Zona de remos", "alt": "Fila de máquinas de remo listas para la clase de acondicionamiento"},
+        {"foto": "galeria-01", "forma": "alta", "rotulo": "Discos olímpicos", "alt": "Discos de pesas apilados junto a la plataforma de levantamiento"},
+        {"foto": "galeria-03", "forma": "alta", "rotulo": "Trepa de cuerda", "alt": "Persona subiendo por una cuerda colgada del techo del gimnasio"},
+        {"foto": "galeria-06", "forma": "ancha", "rotulo": "Jaulas de sentadilla", "alt": "Jaula de sentadilla con barra olímpica cargada"},
+        {"foto": "galeria-02", "forma": "cuadrada", "rotulo": "Tiza y agarre", "alt": "Manos con tiza sujetando una barra olímpica"},
+        {"foto": "galeria-05", "forma": "alta", "rotulo": "Saco de boxeo", "alt": "Saco de boxeo colgado en la zona de acondicionamiento"},
+        {"foto": "galeria-11", "forma": "cuadrada", "rotulo": "Mancuernas", "alt": "Estante con mancuernas ordenadas por peso"},
+        {"foto": "galeria-07", "forma": "ancha", "rotulo": "Cuerdas de batalla", "alt": "Persona entrenando con cuerdas de batalla en el piso del gimnasio"},
+        {"foto": "galeria-09", "forma": "alta", "rotulo": "Movilidad", "alt": "Persona haciendo ejercicios de movilidad y estiramiento en el gimnasio"},
+        {"foto": "galeria-12", "forma": "alta", "rotulo": "Halterofilia", "alt": "Arrancada de halterofilia con barra olímpica"},
+        {"foto": "galeria-08", "forma": "ancha", "rotulo": "Trineo", "alt": "Persona empujando un trineo cargado con discos sobre el piso de caucho"},
+        {"foto": "galeria-10", "forma": "ancha", "rotulo": "Clase en grupo", "alt": "Grupo pequeño entrenando al mismo tiempo con su entrenador"}
+      ]
+    },
+
+    "contacto": {
+      "titulo": "Contacto gimnasio Cedritos · Forja",
+      "descripcion": "Escríbenos por WhatsApp o por el formulario y agenda tu clase de prueba gratis en Forja, Cedritos. Horario, mapa y preguntas frecuentes.",
+      "etiqueta": "Contacto",
+      "h1": ["Contacto", "gimnasio Forja", "en Cedritos"],
+      "entrada": "La forma más rápida de agendar tu clase de prueba es WhatsApp: respondemos en el horario del gimnasio. También puedes llamarnos, escribirnos al correo o dejar tus datos.",
+      "canales": {
+        "whatsapp": "WhatsApp",
+        "telefono": "Teléfono",
+        "correo": "Correo",
+        "redes": "Redes"
+      },
+      "tituloFormulario": "Déjanos tus datos",
+      "textoFormulario": "Cuéntanos tu experiencia entrenando y qué horario te sirve. Te respondemos para agendar tu clase de prueba y tu valoración.",
+      "tituloVisitanos": "Dónde estamos",
+      "textoVisitanos": "En Cedritos, al norte de Bogotá. Te enviamos la ubicación exacta por WhatsApp al agendar.",
+      "tituloMapa": "Mapa de Cedritos, Bogotá",
+      "tituloHorario": "Horario",
+      "notaHorario": "Las clases en grupo van de lunes a sábado. Domingos y festivos, solo sala libre.",
+      "tituloPreguntas": "Preguntas frecuentes",
+      "preguntas": [
+        { "p": "¿La clase de prueba tiene costo?", "r": "No, es gratis. Escríbenos por WhatsApp o por el formulario, te preguntamos tu experiencia y tu horario, y te asignamos un grupo con cupo." },
+        { "p": "¿Necesito experiencia para entrenar en Forja?", "r": "No. La mayoría de nuestros socios llegó sin haber levantado una barra. Las primeras semanas trabajas técnica con cargas bajas y un entrenador al lado." },
+        { "p": "¿Cuántas personas hay en cada clase?", "r": "Máximo 8 personas en las clases en grupo y máximo 4 en el semipersonalizado, siempre con un entrenador a cargo." },
+        { "p": "¿En qué horarios hay clases en grupo?", "r": "De lunes a viernes a las 5:00, 6:00 y 7:00 a. m., a las 12:00 m. y a las 5:00, 6:00, 7:00 y 8:00 p. m. Los sábados a las 8:00, 9:00 y 10:00 a. m." },
+        { "p": "¿Cobran inscripción o piden permanencia mínima?", "r": "No. Pagas mes a mes y puedes congelar tu membresía hasta 30 días al año por viaje o incapacidad médica." },
+        { "p": "¿Qué medios de pago reciben?", "r": "Efectivo, tarjeta débito y crédito, Nequi y transferencia bancaria. Todos los precios incluyen IVA." },
+        { "p": "¿Puedo entrenar si tengo una lesión?", "r": "Sí, después de una valoración física. Si estás en tratamiento, trae el concepto de tu médico o fisioterapeuta para ajustar el trabajo contigo." },
+        { "p": "¿Qué debo llevar a mi primera clase?", "r": "Ropa cómoda, tenis de suela plana, una botella de agua y una toalla. La tiza la ponemos nosotros." },
+        { "p": "¿Desde qué edad se puede entrenar?", "r": "Desde los 16 años. Los menores de edad entrenan con autorización firmada de su acudiente." },
+        { "p": "¿Tienen parqueadero?", "r": "No tenemos parqueadero propio. Hay parqueaderos públicos a pocas cuadras y un bicicletero dentro del gimnasio." }
+      ]
+    },
+
+    "privacidad": {
+      "titulo": "Política de datos · Forja, gimnasio en Cedritos",
+      "etiqueta": "Legal",
+      "finalidades": [
+        "Responder tus mensajes.",
+        "Agendar tu clase de prueba y tu valoración.",
+        "Gestionar tu membresía y tus pagos.",
+        "Enviarte novedades del gimnasio, solo si lo autorizas."
+      ],
+      "proveedores": "Cloudflare (alojamiento del sitio y envío del formulario), Google (correo y mapas) y Meta (WhatsApp e Instagram)"
+    }
+  },
+
+  "membresias": {
+    "filas": ["Sala de fuerza", "Entrenador", "Tamaño del grupo", "Valoración física", "Programa"],
+    "planes": [
+      {
+        "nombre": "Libre",
+        "precio": 159000,
+        "resumen": "Para quien ya sabe entrenar y quiere buen hierro.",
+        "valores": ["Todo el horario", "1 sesión de inducción", "Entrenas por tu cuenta", "Con costo aparte", "Plan base por ciclos"],
+        "destacada": false
+      },
+      {
+        "nombre": "Grupos",
+        "precio": 239000,
+        "resumen": "Clases guiadas todos los días, con cupo cerrado.",
+        "valores": ["Todo el horario", "Clases ilimitadas", "Máximo 8 personas", "Incluida al ingresar", "Ciclos de 6 semanas"],
+        "destacada": true
+      },
+      {
+        "nombre": "Semipersonalizado",
+        "precio": 349000,
+        "resumen": "Tu propio programa en un grupo de 4.",
+        "valores": ["Todo el horario", "3 sesiones por semana", "Máximo 4 personas", "Al ingresar y cada ciclo", "Individual, dentro del grupo"],
+        "destacada": false
+      },
+      {
+        "nombre": "Personalizado",
+        "precio": 720000,
+        "resumen": "12 sesiones al mes, solo tú y tu entrenador.",
+        "valores": ["Todo el horario", "12 sesiones 1 a 1", "Solo tú", "Al ingresar y cada ciclo", "100 % individual"],
+        "destacada": false
+      }
+    ]
+  },
+
+  "servicios": [
+    {
+      "grupo": "Entrenamiento",
+      "items": [
+        { "nombre": "Día de entrenamiento", "detalle": "Sala de fuerza por un día, sin membresía", "precio": 25000 },
+        { "nombre": "Tiquetera de 10 días", "detalle": "Sala de fuerza, vence en 2 meses", "precio": 200000 },
+        { "nombre": "Sesión personalizada", "detalle": "60 minutos, 1 a 1 con tu entrenador", "precio": 75000 },
+        { "nombre": "Paquete de 8 sesiones personalizadas", "detalle": "Vence en 6 semanas", "precio": 520000 },
+        { "nombre": "Sesión en pareja", "detalle": "60 minutos, 2 personas con un entrenador", "precio": 110000 },
+        { "nombre": "Programa de fuerza a distancia", "detalle": "Ciclo de 6 semanas con revisión de tus videos", "precio": 180000 }
+      ]
+    },
+    {
+      "grupo": "Clases",
+      "items": [
+        { "nombre": "Clase de prueba", "detalle": "60 minutos, la primera vez que vienes", "precio": "Gratis" },
+        { "nombre": "Clase suelta en grupo", "detalle": "60 minutos, máximo 8 personas", "precio": 35000 },
+        { "nombre": "Tiquetera de 8 clases en grupo", "detalle": "Vence en 6 semanas", "precio": 220000 },
+        { "nombre": "Clase de movilidad", "detalle": "45 minutos, martes y jueves", "precio": 30000 },
+        { "nombre": "Clínica de levantamientos básicos", "detalle": "Sentadilla, peso muerto y press, 2 horas", "precio": 70000 },
+        { "nombre": "Taller de halterofilia", "detalle": "Arrancada y envión, sábados, 3 horas", "precio": 90000 }
+      ]
+    },
+    {
+      "grupo": "Evaluaciones",
+      "items": [
+        { "nombre": "Valoración física", "detalle": "Composición corporal, movilidad y pruebas de fuerza", "precio": 60000 },
+        { "nombre": "Prueba de máximos con entrenador", "detalle": "Sentadilla, press de banca y peso muerto", "precio": 50000 },
+        { "nombre": "Análisis de técnica en video", "detalle": "3 levantamientos, con correcciones por escrito", "precio": 45000 },
+        { "nombre": "Valoración de movilidad y postura", "detalle": "Con fisioterapeuta, 45 minutos", "precio": 50000 },
+        { "nombre": "Reevaluación de seguimiento", "detalle": "Para socios, al cerrar un ciclo", "precio": 35000 }
+      ]
+    },
+    {
+      "grupo": "Nutrición",
+      "items": [
+        { "nombre": "Plan de nutrición", "detalle": "Consulta con nutricionista y plan para 4 semanas", "precio": 150000 },
+        { "nombre": "Control de nutrición", "detalle": "Seguimiento de 30 minutos", "precio": 70000 },
+        { "nombre": "Medición por bioimpedancia", "detalle": "Composición corporal con informe", "precio": 40000 },
+        { "nombre": "Taller de alimentación para entrenar", "detalle": "Grupal, 2 horas", "precio": 45000 }
+      ]
+    },
+    {
+      "grupo": "Extras",
+      "items": [
+        { "nombre": "Casillero mensual", "detalle": "Con candado propio", "precio": 30000 },
+        { "nombre": "Bloque de tiza", "detalle": "Carbonato de magnesio, 56 gramos", "precio": 12000 },
+        { "nombre": "Camiseta Forja", "detalle": "Algodón pesado, tallas S a XL", "precio": 65000 },
+        { "nombre": "Cinturón de levantamiento", "detalle": "Cuero de 10 milímetros", "precio": 180000 }
+      ]
+    }
+  ],
+
+  "incluye": {
+    "encabezado": "Menú de 5 páginas, cada una pensada para una búsqueda en Google · Negocio",
+    "portada": "Portada con lo esencial y botón de WhatsApp · desde Presencia",
+    "diferencial": "Lo que te diferencia, con fotos · Negocio",
+    "membresiasCorto": "Vista corta de las membresías con enlace a planes · Negocio",
+    "testimonios": "6 testimonios (el plan permite hasta 6) · Negocio",
+    "llamado": "Llamado claro a escribir por WhatsApp o al formulario · Negocio",
+    "paginaServicios": "Página propia para «planes de gimnasio en Cedritos» · Negocio",
+    "membresias": "4 membresías en tarjetas que se comparan (el plan permite hasta 4) · Negocio",
+    "servicios": "25 servicios con precio (el plan permite hasta 25) · Negocio",
+    "paginaNosotros": "Página propia para «entrenadores personales en Cedritos» · Negocio",
+    "historia": "Historia y método del negocio · desde Presencia",
+    "equipo": "Equipo de 6 personas con foto, especialidad y certificación · Negocio",
+    "paginaGaleria": "Página propia para «fotos del gimnasio Forja» · Negocio",
+    "galeria": "Galería de 12 fotos (el plan permite hasta 25) · Negocio",
+    "paginaContacto": "Página propia para «contacto gimnasio Cedritos» · Negocio",
+    "canales": "WhatsApp, teléfono, correo y redes · desde Presencia",
+    "formulario": "Formulario con autorización de datos que llega a tu correo · Negocio",
+    "mapa": "Mapa que carga al llegar y horario de atención · desde Presencia",
+    "preguntas": "10 preguntas frecuentes (el plan permite hasta 10) · Negocio",
+    "privacidad": "Política de tratamiento de datos completa · Negocio",
+    "pie": "Datos del negocio y enlace a la política en el pie · desde Presencia"
+  }
+}

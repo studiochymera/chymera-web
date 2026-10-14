@@ -1,0 +1,28 @@
+---
+// Cinta de texto tipo marcador de competencia, cruzada entre dos secciones.
+// La primera vuelta se lee; las repeticiones son decorativas.
+import { datos as d } from './datos';
+
+interface Props {
+  class?: string;
+}
+const { class: clase } = Astro.props;
+const frases = d.cinta;
+const vueltas = [0, 1, 2, 3];
+---
+
+<div class:list={['cinta py-6', clase]}>
+  <div class="cinta-banda cinta-fondo" aria-hidden="true">
+    <div class="cinta-pista">
+      {vueltas.map(() => frases.map((f) => <span class="contorno [--trazo:1px]">{f}<span class="cinta-separador"></span></span>))}
+    </div>
+  </div>
+  <div class="cinta-banda cinta-principal">
+    <div class="cinta-pista">
+      <p class="flex items-center">{frases.map((f) => <span class="flex items-center">{f}<span class="cinta-separador" aria-hidden="true"></span></span>)}</p>
+      {vueltas.slice(1).map(() => (
+        <span class="flex items-center" aria-hidden="true">{frases.map((f) => <span class="flex items-center">{f}<span class="cinta-separador"></span></span>)}</span>
+      ))}
+    </div>
+  </div>
+</div>
