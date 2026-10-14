@@ -55,8 +55,7 @@
         { "titulo": "Contacto", "items": ["Botón de WhatsApp siempre visible, con el mensaje listo", "Enlaces a tus redes sociales", "Mapa de ubicación y horario de atención"] },
         { "titulo": "Entrega", "items": ["Candado de seguridad (https)", "Aviso de privacidad básico", "1 ronda de cambios sobre el borrador", "Página publicada en 3 a 5 días hábiles"] }
       ],
-      "noIncluye": ["Más de una página", "Planes, paquetes o membresías en tarjetas comparativas", "Formulario de contacto", "Perfil de Google Business (se puede agregar por COP 120.000)", "Equipo, testimonios y preguntas frecuentes", "Estadísticas de visitas"],
-      "sinInicial": "115.000"
+      "noIncluye": ["Más de una página", "Planes, paquetes o membresías en tarjetas comparativas", "Formulario de contacto", "Perfil de Google Business (se puede agregar por COP 120.000)", "Equipo, testimonios y preguntas frecuentes", "Estadísticas de visitas"]
     },
     {
       "slug": "negocio",
@@ -86,8 +85,7 @@
         { "titulo": "Contacto", "items": ["Formulario de contacto que llega a tu correo", "Botón de WhatsApp, redes, mapa y horario"] },
         { "titulo": "Entrega", "items": ["2 rondas de cambios sobre el borrador", "Página publicada en 7 a 10 días hábiles"] }
       ],
-      "noIncluye": ["Reservas en línea y cobro de anticipos (plan Reservas)", "Reporte mensual de visitas (plan Activo)", "Más de 5 páginas (página adicional COP 150.000)", "Tienda en línea o blog"],
-      "sinInicial": "149.000"
+      "noIncluye": ["Reservas en línea y cobro de anticipos (plan Reservas)", "Reporte mensual de visitas (plan Activo)", "Más de 5 páginas (página adicional COP 150.000)", "Tienda en línea o blog"]
     },
     {
       "slug": "reservas",
@@ -118,8 +116,7 @@
         { "titulo": "Anticipos", "items": ["Link de pago de tu propia cuenta: Mercado Pago, Wompi o Bold", "La plata llega directo a ti; Chymera no la maneja", "Te guiamos para abrir la cuenta si no la tienes"] },
         { "titulo": "Plan Activo incluido", "items": ["60 minutos de cambios al mes", "Una landing de promoción cada trimestre", "Reporte mensual de visitas", "2 rondas de cambios y entrega en 10 a 14 días hábiles"] }
       ],
-      "noIncluye": ["Un sistema de reservas propio hecho a la medida", "Abrir la cuenta de la pasarela de pagos por ti (requiere tus documentos)", "Pagos recurrentes o membresías que se cobran solas", "Integración con software de facturación", "La suscripción de la herramienta de reservas, si es paga", "Las comisiones de la pasarela de pagos"],
-      "sinInicial": ""
+      "noIncluye": ["Un sistema de reservas propio hecho a la medida", "Abrir la cuenta de la pasarela de pagos por ti (requiere tus documentos)", "Pagos recurrentes o membresías que se cobran solas", "Integración con software de facturación", "La suscripción de la herramienta de reservas, si es paga", "Las comisiones de la pasarela de pagos"]
     }
   ],
   "planes": [
@@ -199,8 +196,6 @@
       { "titulo": "Al aprobar el borrador", "texto": "Ves tu página en el celular, pides tus cambios y pagas el otro 50 %." },
       { "titulo": "Desde que se publica", "texto": "Pagas el plan mensual por adelantado cada mes, o el año con 2 meses gratis." }
     ],
-    "sinInicialTitulo": "¿Prefieres no pagar la instalación?",
-    "sinInicialTexto": "al mes durante 12 meses, sin pago de instalación. Si cancelas antes, pagas lo que falte de la instalación.",
     "seccionesTitulo": "Así queda tu página",
     "incluyeTitulo": "Todo lo que incluye",
     "noIncluyeTitulo": "No incluye",
@@ -226,7 +221,6 @@
   ],
   "preguntas": [
     { "p": "¿De quién es el dominio?", "r": "Tuyo. Lo registramos a tu nombre. Mientras tengas el plan mensual, nosotros nos encargamos de renovarlo y mantenerlo." },
-    { "p": "¿Puedo empezar sin pagar la instalación?", "r": "Sí. Presencia por COP 115.000 al mes o Negocio por COP 149.000 al mes, con un compromiso de 12 meses." },
     { "p": "¿Cómo pago?", "r": "50 % para empezar y 50 % antes de publicar. La mensualidad se paga por adelantado cada mes, o el año completo con 2 meses gratis." },
     { "p": "¿Qué pasa si cancelo el plan mensual?", "r": "Nos avisas con 30 días. El dominio sigue siendo tuyo; si quieres llevarte el diseño y el código, se pueden comprar aparte." },
     { "p": "¿Necesito tener fotos y textos?", "r": "Los textos los escribimos nosotros a partir de lo que nos cuentes. Las fotos pueden ser tuyas, de bancos gratuitos o de un fotógrafo aliado." },
@@ -344,8 +338,7 @@
           "lista": [
             "Los precios están en pesos colombianos. Chymera Studios no es responsable de IVA, así que no se cobra IVA.",
             "La instalación se paga 50 % para empezar y 50 % al aprobar el borrador, antes de publicar.",
-            "El plan mensual se paga por adelantado desde el mes en que se publica la página, o el año completo con 2 meses gratis.",
-            "En la opción sin pago de instalación, hay una permanencia mínima de 12 meses."
+            "El plan mensual se paga por adelantado desde el mes en que se publica la página, o el año completo con 2 meses gratis."
           ]
         },
         {
