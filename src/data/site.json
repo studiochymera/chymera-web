@@ -221,6 +221,8 @@
   "demos": {
     "franja": {
       "marca": "Demo de Chymera Studios",
+      "volver": "Volver a la página de Chymera Studios",
+      "volverCorto": "Inicio",
       "plan": "Plan {plan}",
       "precio": "${precio} + ${mensual} al mes",
       "abrir": "Qué incluye",
