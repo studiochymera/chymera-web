@@ -27,8 +27,11 @@ const d = site.detallePlanes;
         <tbody>
           {d.extras.map((e, i) => (
             <tr class:list={[i > 0 && 'border-t border-azul/10']}>
-              <th scope="row" class="px-5 py-4 font-medium text-tinta/85">{e.nombre}</th>
-              <td class="px-5 py-4 text-right font-display font-semibold text-azul">{e.precio}</td>
+              <th scope="row" class="px-5 py-4 align-top font-medium text-tinta/85">
+                {e.nombre}
+                {'detalle' in e && <span class="mt-1 block text-xs font-normal leading-relaxed text-tinta/70">{e.detalle}</span>}
+              </th>
+              <td class="px-5 py-4 text-right align-top font-display font-semibold text-azul">{e.precio}</td>
             </tr>
           ))}
         </tbody>

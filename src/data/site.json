@@ -160,11 +160,11 @@
     "reglas": [
       { "titulo": "Pago en dos partes", "texto": "50 % para empezar y 50 % cuando apruebas el borrador, antes de publicar." },
       { "titulo": "Plan mensual", "texto": "Empieza el mes en que se publica tu página. Cubre hosting, dominio, seguridad y soporte." },
-      { "titulo": "Plazos", "texto": "Los días de entrega cuentan desde que nos envías todo el material: formulario, fotos, logo y precios." },
+      { "titulo": "Plazos", "texto": "Los días de entrega cuentan desde que nos envías todo el material: formulario, fotos, logo y precios. Si pides el Kit de marca, cuentan desde que apruebas tu logo." },
       { "titulo": "Dominio", "texto": "Un .com o .com.co a tu nombre, incluido. Si prefieres .co, pagas solo la diferencia." },
       { "titulo": "Textos", "texto": "Los escribimos nosotros. Tú revisas que precios, horarios y datos estén correctos." },
       { "titulo": "Fotos", "texto": "Las tuyas o de bancos gratuitos. Una sesión de fotos se cotiza con un fotógrafo aliado." },
-      { "titulo": "Logo", "texto": "Usamos el tuyo. Si no tienes, ponemos el nombre de tu negocio en una tipografía limpia." },
+      { "titulo": "Logo", "texto": "Usamos el tuyo, y si solo lo tienes en foto o en baja calidad, lo pasamos a vector gratis. Si no tienes, ponemos el nombre de tu negocio en una tipografía limpia o te lo diseñamos con el Kit de marca." },
       { "titulo": "Ronda de cambios", "texto": "Una sola lista de ajustes sobre el borrador: textos, fotos, colores y orden. No incluye secciones nuevas ni cambiar el diseño." },
       { "titulo": "Diseño", "texto": "Cada página tiene un diseño hecho para tu marca, sobre la base técnica propia de Chymera. Por eso es rápida y a buen precio." }
     ],
@@ -188,6 +188,7 @@
       { "nombre": "Ronda de cambios adicional", "precio": "$60.000" },
       { "nombre": "Perfil de Google Business (plan Presencia)", "precio": "$120.000" },
       { "nombre": "Correo con tu dominio", "precio": "$80.000" },
+      { "nombre": "Kit de marca: logo, colores y tipografías", "precio": "$450.000", "detalle": "Solo junto con un plan. Cuestionario y llamada de 20 minutos, 2 propuestas de logo, 2 rondas de ajustes, el logo horizontal, compacto e ícono a color, en negro y en blanco (SVG, PDF y PNG), paleta de 4 a 5 colores, 2 tipografías, favicon, fotos de perfil y portada para tus redes, guía de marca de una página y una búsqueda básica de marcas parecidas en la SIC. No incluye el registro de la marca." },
       { "nombre": "Entrega urgente, en la mitad del plazo", "precio": "+30 % de la instalación" },
       { "nombre": "Llevarte el código y el diseño si cancelas", "precio": "50 % de la instalación" }
     ],
@@ -334,6 +335,7 @@
     { "p": "¿De quién es el dominio?", "r": "Tuyo. Lo registramos a tu nombre. Mientras tengas el plan mensual, nosotros nos encargamos de renovarlo y mantenerlo." },
     { "p": "¿Cómo pago?", "r": "50 % para empezar y 50 % antes de publicar. La mensualidad se paga por adelantado cada mes, o el año completo con 2 meses gratis." },
     { "p": "¿Qué pasa si cancelo el plan mensual?", "r": "Nos avisas con 30 días. El dominio sigue siendo tuyo; si quieres llevarte el diseño y el código, se pueden comprar aparte." },
+    { "p": "¿Me pueden hacer el logo?", "r": "Sí, con el Kit de marca por $450.000, junto con cualquier plan: dos propuestas de logo, dos rondas de ajustes, el logo en todas sus versiones, colores, tipografías, imágenes para tus redes y una guía de marca. Si ya tienes logo pero solo en foto, lo pasamos a vector gratis." },
     { "p": "¿Necesito tener fotos y textos?", "r": "Los textos los escribimos nosotros a partir de lo que nos cuentes. Las fotos pueden ser tuyas, de bancos gratuitos o de un fotógrafo aliado." },
     { "p": "¿Hacen páginas que no sean para negocios?", "r": "Sí. Hacemos portafolios personales, hojas de vida en línea, páginas para semilleros de investigación, eventos y otros proyectos a la medida. El precio depende de lo que necesites: escríbenos y te cotizamos sin compromiso." },
     { "p": "¿Cuánto tardan los cambios?", "r": "Los cambios pequeños del plan mensual quedan listos en 1 a 2 días hábiles." }
@@ -455,7 +457,7 @@
         {
           "titulo": "Plazos, cambios y aprobación",
           "lista": [
-            "Los días de entrega cuentan desde que recibimos el anticipo y todo el material: formulario, logo, fotos y precios.",
+            "Los días de entrega cuentan desde que recibimos el anticipo y todo el material: formulario, logo, fotos y precios. Si contratas el Kit de marca, cuentan desde que apruebas el logo.",
             "Una ronda de cambios es una sola lista de ajustes sobre el borrador. Agregar secciones o páginas, o cambiar el diseño, se cotiza aparte.",
             "Si no recibimos respuesta 5 días hábiles después de enviar un borrador, se entiende aprobado."
           ]
@@ -463,7 +465,7 @@
         {
           "titulo": "Tu dominio y tu contenido",
           "texto": [
-            "El dominio se registra a tu nombre y es tuyo. Tu marca, logo, fotos, información y los textos que escribimos para tu negocio también son tuyos. Tú respondes por que la información publicada sea correcta y por tener derecho a usar el material que nos envías."
+            "El dominio se registra a tu nombre y es tuyo. Tu marca, logo, fotos, información y los textos que escribimos para tu negocio también son tuyos. Si te diseñamos el logo con el Kit de marca, el logo y todo el kit son tuyos cuando lo pagas completo. Tú respondes por que la información publicada sea correcta y por tener derecho a usar el material que nos envías."
           ]
         },
         {
