@@ -1,0 +1,117 @@
+---
+// Intro de la portada: la quimera se dibuja sobre crema y la cortina sube para mostrar la portada.
+// Solo la primera vez por sesión y solo si la persona no pidió reducir el movimiento.
+// Es pura CSS: no espera a ningún script, y el titular se pinta debajo desde el primer momento.
+import isotipo from '../../public/brand/isotipo-navy.svg?raw';
+
+const trazo = isotipo.match(/ d="([^"]+)"/)![1];
+const caja = isotipo.match(/viewBox="([^"]+)"/)![1];
+---
+
+<script is:inline>
+  (function () {
+    var html = document.documentElement;
+    var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var vista = false;
+    try {
+      vista = sessionStorage.getItem('chy-intro') === '1';
+      sessionStorage.setItem('chy-intro', '1');
+    } catch (e) {}
+    if (quieto || vista) html.classList.add('sin-intro');
+  })();
+</script>
+
+<div class="intro" aria-hidden="true">
+  <div class="intro-marca">
+    <svg class="intro-quimera" viewBox={caja} focusable="false">
+      <path d={trazo} pathLength="1" fill-rule="evenodd" />
+    </svg>
+    <span class="intro-nombre"><img src="brand/logotipo-navy.svg" alt="" width="165" height="40" /></span>
+  </div>
+</div>
+
+<style>
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    background: var(--color-crema);
+    pointer-events: none;
+    animation: cortina 1s cubic-bezier(0.76, 0, 0.24, 1) 1.25s forwards;
+  }
+  :global(html.sin-intro) .intro {
+    display: none;
+  }
+
+  .intro-marca {
+    display: grid;
+    justify-items: center;
+    gap: 1.25rem;
+    animation: alejarse 1s cubic-bezier(0.76, 0, 0.24, 1) 1.25s forwards;
+  }
+
+  .intro-quimera {
+    width: min(42vw, 11rem);
+    overflow: visible;
+  }
+  .intro-quimera path {
+    fill: var(--color-azul);
+    fill-opacity: 0;
+    stroke: var(--color-azul);
+    stroke-width: 2.5;
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    vector-effect: non-scaling-stroke;
+    animation:
+      intro-trazar 1.05s cubic-bezier(0.65, 0, 0.35, 1) 0.05s forwards,
+      intro-rellenar 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.85s forwards;
+  }
+
+  .intro-nombre {
+    display: block;
+    overflow: hidden;
+  }
+  .intro-nombre img {
+    display: block;
+    width: 8.5rem;
+    height: auto;
+    transform: translateY(105%);
+    animation: intro-subir 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+  }
+
+  @keyframes intro-trazar {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes intro-rellenar {
+    to {
+      fill-opacity: 1;
+    }
+  }
+  @keyframes intro-subir {
+    to {
+      transform: translateY(0);
+    }
+  }
+  @keyframes cortina {
+    to {
+      transform: translateY(-100%);
+      visibility: hidden;
+    }
+  }
+  @keyframes alejarse {
+    to {
+      transform: translateY(40vh) scale(0.9);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro {
+      display: none;
+    }
+  }
+</style>
