@@ -197,6 +197,9 @@ const waEspecial = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(sit
                 <span class="text-xl text-celeste transition group-open:rotate-45" aria-hidden="true">+</span>
               </summary>
               <p class="mt-3 text-tinta/75">{q.r}</p>
+              {'enlace' in q && (
+                <a href={q.enlace.href} class="mt-3 inline-block font-medium text-azul underline underline-offset-4 hover:text-tinta">{q.enlace.texto}</a>
+              )}
             </details>
           ))}
         </div>
