@@ -26,14 +26,14 @@ const otras = site.legal.enlaces.filter((e) => e.slug !== slug);
           <span class="text-crema">{pagina.titulo}</span>
         </nav>
         <h1 class="mt-5 text-3xl font-semibold leading-tight text-crema sm:text-5xl">{pagina.titulo}</h1>
-        <p class="mt-4 text-sm text-crema/60">{site.legal.actualizadoTexto}: {site.legal.actualizado}</p>
+        <p class="mt-4 text-sm text-crema/60">{site.legal.actualizadoTexto}: {pagina.actualizado}</p>
       </div>
     </section>
 
     <article class="contenedor max-w-3xl py-14 sm:py-20">
       <p class="text-lg text-tinta/80">{pagina.intro}</p>
       {pagina.secciones.map((sec, i) => (
-        <section class="mt-10 border-t border-azul/10 pt-8">
+        <section id={'id' in sec ? sec.id : undefined} class="mt-10 scroll-mt-24 border-t border-azul/10 pt-8">
           <h2 class="text-xl font-semibold sm:text-2xl">
             <span class="mr-2 font-display text-azul/50">{i + 1}.</span>{sec.titulo}
           </h2>

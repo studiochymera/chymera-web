@@ -336,12 +336,12 @@
     { "p": "¿Cómo pago?", "r": "50 % para empezar y 50 % antes de publicar. La mensualidad se paga por adelantado cada mes, o el año completo con 2 meses gratis." },
     { "p": "¿Qué pasa si cancelo el plan mensual?", "r": "Nos avisas con 30 días. El dominio sigue siendo tuyo; si quieres llevarte el diseño y el código, se pueden comprar aparte." },
     { "p": "¿Me pueden hacer el logo?", "r": "Sí, con el Kit de marca por $450.000, junto con cualquier plan: dos propuestas de logo, dos rondas de ajustes, el logo en todas sus versiones, colores, tipografías, imágenes para tus redes y una guía de marca. Si ya tienes logo pero solo en foto, lo pasamos a vector gratis." },
+    { "p": "¿Gano algo si los recomiendo?", "r": "Sí. Si ya eres cliente y nos recomiendas a alguien que publica su página con nosotros, tu siguiente mes del plan mensual es gratis, y esa persona también recibe su primer mes gratis.", "enlace": { "texto": "Ver las condiciones", "href": "terminos/#referidos" } },
     { "p": "¿Necesito tener fotos y textos?", "r": "Los textos los escribimos nosotros a partir de lo que nos cuentes. Las fotos pueden ser tuyas, de bancos gratuitos o de un fotógrafo aliado." },
     { "p": "¿Hacen páginas que no sean para negocios?", "r": "Sí. Hacemos portafolios personales, hojas de vida en línea, páginas para semilleros de investigación, eventos y otros proyectos a la medida. El precio depende de lo que necesites: escríbenos y te cotizamos sin compromiso." },
     { "p": "¿Cuánto tardan los cambios?", "r": "Los cambios pequeños del plan mensual quedan listos en 1 a 2 días hábiles." }
   ],
   "legal": {
-    "actualizado": "14 de octubre de 2026",
     "actualizadoTexto": "Última actualización",
     "enlaces": [
       {
@@ -355,6 +355,7 @@
     ],
     "privacidad": {
       "titulo": "Política de tratamiento de datos personales",
+      "actualizado": "14 de octubre de 2026",
       "descripcion": "Cómo Chymera Studios recoge, usa y protege tus datos personales, y cómo ejercer tus derechos según la Ley 1581 de 2012.",
       "intro": "En Chymera Studios cuidamos los datos que nos compartes. Esta política explica qué datos recogemos, para qué los usamos y cómo puedes conocerlos, actualizarlos o pedir que los borremos, en cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013 (compilado en el Decreto 1074 de 2015).",
       "secciones": [
@@ -431,6 +432,7 @@
     },
     "terminos": {
       "titulo": "Términos del servicio",
+      "actualizado": "15 de octubre de 2026",
       "descripcion": "Condiciones con las que Chymera Studios diseña, publica y mantiene páginas web: planes, pagos, plazos, dominio, propiedad del código y cancelación.",
       "intro": "Estos términos resumen cómo trabajamos. Cada proyecto se formaliza con un contrato escrito; si algo de este resumen y el contrato no coincide, manda el contrato.",
       "secciones": [
@@ -481,6 +483,24 @@
             "Si un pago mensual se atrasa 30 días, te avisamos y luego podemos suspender la publicación hasta que te pongas al día.",
             "Al terminar, te entregamos el control de tu dominio y tu contenido, siempre que estés a paz y salvo.",
             "Si cancelas después de empezar el trabajo y antes de publicar, el anticipo no se devuelve porque corresponde al trabajo hecho."
+          ]
+        },
+        {
+          "id": "referidos",
+          "titulo": "Programa de referidos",
+          "texto": [
+            "Si ya eres cliente y nos recomiendas a alguien que publica su página con nosotros, los dos ganan un mes gratis del plan mensual. Estas son las condiciones:"
+          ],
+          "lista": [
+            "Pueden recomendar los clientes con página publicada y plan mensual al día.",
+            "Cuenta como referido un negocio o persona nuevo que contrata cualquier plan, o un pedido especial con plan mensual, y nos escribe de tu parte. Si no te menciona, cuenta si nos avisas antes de que firme. No cuenta recomendarte a ti mismo, ni otra sede o negocio del mismo dueño.",
+            "El premio se gana el día que publicamos la página del referido, después de que paga el saldo. Si cancela antes de publicar, no hay premio.",
+            "Quien recomienda recibe gratis su siguiente mes del plan mensual por cada referido que publica, hasta 12 meses por año. Con pago anual, el mes gratis se suma al final del año pagado.",
+            "Quien llega recomendado recibe gratis su primer mes del plan mensual. No se suma a otro descuento en el plan mensual.",
+            "Los meses gratis se acumulan, pero no se cambian por dinero, no se pasan a otro negocio y se pierden si cancelas tu plan mensual.",
+            "Si dos clientes recomiendan al mismo negocio, cuenta el que el referido nombre primero o, si no nombra a nadie, el que nos avisó primero.",
+            "No hay sorteos ni pagos en efectivo.",
+            "El programa rige desde el 15 de octubre de 2026 y hasta que anunciemos su fin en esta misma página."
           ]
         },
         {
