@@ -22,7 +22,10 @@ const nombrePlan = f.plan.replace('{plan}', plan.nombre);
 
 <div class="chy-franja" data-nosnippet>
   <div class="chy-barra">
-    <img src={`${r}brand/isotipo-cream.svg`} alt="" width="900" height="674" class="chy-iso" />
+    <a href={r} class="chy-volver" aria-label={f.volver}>
+      <img src={`${r}brand/isotipo-cream.svg`} alt="" width="900" height="674" class="chy-iso" />
+      <span class="chy-volver-texto" aria-hidden="true">{f.volverCorto}</span>
+    </a>
     <p class="chy-texto">
       <span class="chy-marca">{f.marca}</span>
       <span class="chy-plan"><strong>{nombrePlan}</strong> · {precio}</span>
@@ -67,6 +70,7 @@ const nombrePlan = f.plan.replace('{plan}', plan.nombre);
     <a href={enlaceWhatsApp(site.whatsapp, demo.whatsappTexto)} target="_blank" rel="noopener" class="chy-primario">{f.quiero}</a>
     <a href={`${r}planes/${plan.slug}/`} class="chy-secundario">{f.verPlan.replace('{plan}', plan.nombre)}</a>
     <a href={`${r}#portafolio`} class="chy-secundario">{f.otras}</a>
+    <a href={r} class="chy-secundario">{f.volver}</a>
   </div>
 
   <p class="chy-nota">{f.nota}</p>
@@ -143,10 +147,47 @@ const nombrePlan = f.plan.replace('{plan}', plan.nombre);
     margin: 0 auto;
     padding: 0.5rem 1rem;
   }
+  .chy-volver {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    margin-left: -0.5rem;
+    padding: 0 0.75rem 0 0.5rem;
+    border-right: 1px solid rgb(253 248 244 / 0.2);
+    color: var(--chy-crema);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+  .chy-volver:focus-visible {
+    outline: 2px solid var(--chy-celeste);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
   .chy-iso {
     width: 1.75rem;
     height: auto;
     flex-shrink: 0;
+    transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .chy-volver-texto {
+    display: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .chy-volver:hover {
+      color: var(--chy-celeste);
+    }
+    .chy-volver:hover .chy-iso {
+      transform: translateX(-2px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chy-iso {
+      transition: none;
+    }
   }
   .chy-texto {
     display: flex;
@@ -324,6 +365,9 @@ const nombrePlan = f.plan.replace('{plan}', plan.nombre);
     font-size: 0.8125rem;
   }
   @media (min-width: 640px) {
+    .chy-volver-texto {
+      display: inline;
+    }
     .chy-texto {
       flex-direction: row;
       gap: 0.75rem;
