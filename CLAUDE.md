@@ -2,6 +2,15 @@
 
 Sitio estático en Astro + Tailwind CSS v4. Se publica en Cloudflare (Workers con archivos estáticos, ver `wrangler.jsonc`) cada vez que se sube un cambio a la rama main de GitHub (studiochymera/chymera-web).
 
+## Diseño: skills que se usan siempre
+Antes de diseñar o cambiar algo visual (una página, una sección, una demo, una pieza de marca), cargar y seguir estas skills, sin esperar a que nadie lo pida:
+- `diseno-web-chymera`: dirección de arte, composición, tipografía, animación y revisión con capturas.
+- `frontend-design`: para que el resultado no parezca una web hecha con IA.
+- `web-animation-design` y `make-interfaces-feel-better` (plugin audit-suite): animación y pulido fino. La animación va en CSS; JavaScript solo donde las reglas de esta web lo permiten.
+- Al terminar, `design-critique` y `accessibility-review` (plugin Design) sobre capturas a 360, 768 y 1440 px.
+
+Si alguna de estas skills no está disponible en la sesión, decirlo en la respuesta y seguir con las demás. Si chocan con las metas de velocidad o accesibilidad del Manual de calidad, mandan las metas del manual.
+
 ## Reglas de la casa
 - Todo texto, precio y dato de contacto vive en `src/data/site.json`. No escribir textos sueltos en los componentes.
 - Precios en pesos colombianos (COP), con punto de miles: 1.150.000.
