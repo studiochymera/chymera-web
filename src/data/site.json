@@ -7,7 +7,12 @@
   "instagram": "chymera_studios",
   "hero": {
     "titulo": "Tu negocio, fácil de encontrar y de reservar.",
-    "subtitulo": "Páginas web para gimnasios, estudios, spas y negocios de bienestar en Bogotá. Listas en días, con precio cerrado y alguien que las mantiene cada mes."
+    "subtitulo": "Páginas web para gimnasios, estudios, spas y negocios de bienestar en Bogotá. Listas en días, con precio cerrado y alguien que las mantiene cada mes.",
+    "etiqueta": "Estudio web en Bogotá",
+    "boton": "Pide tu propuesta por WhatsApp",
+    "botonDemos": "Mira 3 demos funcionando",
+    "kit": "¿Todavía no tienes logo? También lo diseñamos.",
+    "kitEnlace": "Mira el Kit de marca de muestra"
   },
   "beneficios": [
     { "titulo": "Te encuentran en Google", "texto": "Tu negocio aparece cuando buscan \"gimnasio cerca\" o \"spa en Usaquén\", con dirección, horarios y fotos." },
@@ -216,7 +221,14 @@
     "verDemo": "Ver la demo",
     "verPlan": "Qué incluye el plan",
     "suma": "Lo que suma frente al plan anterior",
-    "aviso": "Negocios ficticios: los nombres, precios, personas y testimonios son de ejemplo."
+    "aviso": "Negocios ficticios: los nombres, precios, personas y testimonios son de ejemplo.",
+    "kit": {
+      "etiqueta": "Kit de marca de muestra",
+      "titulo": "Filo Barbería, de cero a marca",
+      "texto": "La barbería de la demo no tenía logo, así que le hicimos uno con el Kit de marca: logo en tres versiones, paleta, tipografías, favicon, imágenes para redes y una guía de una página.",
+      "ver": "Ver el kit completo",
+      "precio": "Kit de marca · {precio}, junto con cualquier plan"
+    }
   },
   "demos": {
     "franja": {
@@ -343,6 +355,145 @@
     { "p": "¿Hacen páginas que no sean para negocios?", "r": "Sí. Hacemos portafolios personales, hojas de vida en línea, páginas para semilleros de investigación, eventos y otros proyectos a la medida. El precio depende de lo que necesites: escríbenos y te cotizamos sin compromiso." },
     { "p": "¿Cuánto tardan los cambios?", "r": "Los cambios pequeños del plan mensual quedan listos en 1 a 2 días hábiles." }
   ],
+  "servicios": {
+    "titulo": "Lo que hacemos",
+    "intro": "Diseñamos, publicamos y mantenemos la página de tu negocio. Si te falta la marca, también la hacemos.",
+    "web": {
+      "nombre": "Páginas web para negocios",
+      "texto": "Tu página con diseño propio, lista para Google y para recibir mensajes y reservas. Tres planes con precio cerrado.",
+      "precio": "Desde $690.000",
+      "enlace": "Ver precios"
+    },
+    "kit": {
+      "nombre": "Kit de marca",
+      "texto": "Logo, colores, tipografías e imágenes para tus redes, para que tu negocio se vea igual de serio en todas partes. Se pide junto con cualquier plan.",
+      "enlace": "Ver el kit de muestra"
+    }
+  },
+  "vitrina": {
+    "etiqueta": "Tres demos de Chymera en un celular",
+    "titulo": "Tres negocios, tres diseños, un mismo estudio.",
+    "pausar": "Pausar",
+    "reanudar": "Reanudar",
+    "ver": "Ver la demo de {nombre}"
+  },
+  "beneficiosTitulo": "Una página que trabaja por tu negocio, no solo una vitrina.",
+  "sectoresTitulo": "Hechas para tu sector",
+  "ctaSecciones": {
+    "beneficios": {
+      "boton": "Cuéntanos de tu negocio",
+      "whatsappTexto": "Hola Chymera, quiero una página que me ayude a conseguir clientes. Mi negocio es: "
+    },
+    "proceso": {
+      "boton": "Empezar por el paso 1",
+      "whatsappTexto": "Hola Chymera, quiero empezar mi página. ¿Qué necesitan de mí?"
+    },
+    "preguntas": {
+      "boton": "Hacer otra pregunta por WhatsApp",
+      "whatsappTexto": "Hola Chymera, tengo una pregunta sobre las páginas web: "
+    }
+  },
+  "procesoTitulo": "Así trabajamos",
+  "precios": {
+    "titulo": "Precios claros, sin sorpresas",
+    "intro": "Pago único de instalación más un plan mensual que mantiene tu página en línea y al día. Precios en pesos colombianos."
+  },
+  "contacto": {
+    "titulo": "¿Hablamos de tu negocio?",
+    "texto": "Escríbenos por WhatsApp y te mostramos cómo se vería tu página antes de que decidas.",
+    "boton": "Pide tu propuesta por WhatsApp"
+  },
+  "kitMuestra": {
+    "tituloPagina": "Kit de marca de muestra: Filo Barbería",
+    "descripcion": "Ejemplo del Kit de marca de Chymera Studios: logo en tres versiones, paleta, tipografías, favicon, imágenes para redes y guía de marca para una barbería de Chapinero.",
+    "volver": "Volver al portafolio",
+    "etiqueta": "Kit de marca de muestra",
+    "titulo": "Filo Barbería",
+    "intro": "Así se ve lo que entregamos con el Kit de marca. Lo hicimos para Filo, la barbería de nuestra demo del plan Presencia: un negocio ficticio que necesitaba una marca seria antes de tener su página.",
+    "verDemo": "Ver la página de Filo",
+    "logoTitulo": "Logo en tres versiones",
+    "logoTexto": "Cada versión viene a color, en negro y en blanco, en SVG, PDF y PNG.",
+    "logos": [
+      {
+        "archivo": "filo-horizontal-color.svg",
+        "nombre": "Horizontal",
+        "uso": "La principal: web, avisos y documentos.",
+        "fondo": "claro"
+      },
+      {
+        "archivo": "filo-compacto-color-oscuro.svg",
+        "nombre": "Compacto",
+        "uso": "Espacios cuadrados o altos.",
+        "fondo": "oscuro"
+      },
+      {
+        "archivo": "filo-icono-color.svg",
+        "nombre": "Ícono",
+        "uso": "Perfiles, sellos y favicon.",
+        "fondo": "claro"
+      }
+    ],
+    "coloresTitulo": "Paleta de cuatro colores",
+    "colores": [
+      {
+        "nombre": "Carbón",
+        "hex": "#141210",
+        "uso": "Fondos oscuros y textos"
+      },
+      {
+        "nombre": "Hueso",
+        "hex": "#EDE6DA",
+        "uso": "Fondos claros y textos sobre carbón"
+      },
+      {
+        "nombre": "Vino",
+        "hex": "#7A1F1F",
+        "uso": "Acento sobre hueso y botones"
+      },
+      {
+        "nombre": "Latón",
+        "hex": "#B08D57",
+        "uso": "Acento solo sobre carbón"
+      }
+    ],
+    "tiposTitulo": "Dos tipografías gratis",
+    "tipos": [
+      {
+        "rol": "Títulos · DM Serif Display",
+        "muestra": "Corte a tijera",
+        "clase": "serif"
+      },
+      {
+        "rol": "Textos · DM Sans",
+        "muestra": "Degradado, barba y afeitado con navaja y toalla caliente.",
+        "clase": "sans"
+      }
+    ],
+    "redesTitulo": "Listo para tus redes",
+    "redesTexto": "Foto de perfil para WhatsApp, Instagram, Facebook y Google, portada de Facebook y favicon para la pestaña del navegador.",
+    "perfilAlt": "Foto de perfil de Filo: la F dentro de un círculo latón sobre fondo carbón",
+    "portadaAlt": "Portada de Facebook de Filo: logo horizontal sobre carbón con la frase Corte, barba, navaja, desde 2014",
+    "guiaTitulo": "Guía de marca de una página",
+    "guiaTexto": "Para que cualquiera use bien tu logo: tamaños mínimos, sobre qué fondo va cada versión, colores con sus códigos para pantalla e imprenta, y lo que no se hace.",
+    "guiaAlt": "Guía de marca de Filo en una página: logo, espacio y tamaño, fondos, colores, tipografías y usos incorrectos",
+    "guiaDescargar": "Descargar la guía en PDF",
+    "incluyeTitulo": "Lo que incluye el Kit de marca",
+    "incluye": [
+      "Cuestionario y llamada de 20 minutos",
+      "2 propuestas de logo y 2 rondas de ajustes",
+      "Logo horizontal, compacto e ícono a color, en negro y en blanco (SVG, PDF y PNG)",
+      "Paleta de 4 a 5 colores y 2 tipografías",
+      "Favicon, fotos de perfil y portada para tus redes",
+      "Guía de marca de una página",
+      "Búsqueda básica de marcas parecidas en la SIC"
+    ],
+    "noIncluye": "No incluye el registro de la marca.",
+    "precio": "{precio}, solo junto con un plan",
+    "boton": "Quiero mi Kit de marca",
+    "whatsappTexto": "Hola Chymera, vi el Kit de marca de muestra y quiero uno para mi negocio junto con mi página.",
+    "verPlanes": "Ver los planes",
+    "aviso": "Filo Barbería es un negocio ficticio creado para el portafolio de Chymera Studios."
+  },
   "legal": {
     "actualizadoTexto": "Última actualización",
     "enlaces": [

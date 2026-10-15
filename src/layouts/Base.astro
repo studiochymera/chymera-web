@@ -7,12 +7,14 @@ interface Props {
   titulo?: string;
   descripcion?: string;
   schemaExtra?: object;
+  noIndexar?: boolean;
 }
 
 const {
   titulo = `${site.nombre} · Páginas web para negocios en ${site.ciudad}`,
   descripcion = site.hero.subtitulo,
   schemaExtra,
+  noIndexar = false,
 } = Astro.props;
 
 const r = raiz(Astro.url.pathname);
@@ -45,6 +47,7 @@ const schema = {
     <link rel="icon" type="image/png" href={`${r}favicon.png`} />
     <link rel="apple-touch-icon" href={`${r}apple-touch-icon.png`} />
     <link rel="canonical" href={canonica} />
+    {noIndexar && <meta name="robots" content="noindex, follow" />}
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonica} />
     <meta property="og:title" content={titulo} />

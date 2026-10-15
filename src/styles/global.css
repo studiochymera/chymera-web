@@ -29,6 +29,17 @@
 
   h1, h2, h3 {
     @apply font-display text-azul tracking-tight;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: var(--color-azul);
+    color: var(--color-crema);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-celeste);
+    outline-offset: 3px;
   }
 }
 
@@ -37,7 +48,14 @@
 }
 
 @utility boton {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition;
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold;
+  transition-property: color, background-color, border-color, transform;
+  transition-duration: 160ms;
+  transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  &:active {
+    transform: scale(0.98);
+  }
 }
 
 @utility boton-claro {
