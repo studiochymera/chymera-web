@@ -188,7 +188,7 @@
       { "nombre": "Ronda de cambios adicional", "precio": "$60.000" },
       { "nombre": "Perfil de Google Business (plan Presencia)", "precio": "$120.000" },
       { "nombre": "Correo con tu dominio", "precio": "$80.000" },
-      { "nombre": "Kit de marca: logo, colores y tipografías", "precio": "$450.000" },
+      { "nombre": "Kit de marca: logo, colores y tipografías", "precio": "$450.000", "detalle": "Solo junto con un plan. Cuestionario y llamada de 20 minutos, 2 propuestas de logo, 2 rondas de ajustes, el logo horizontal, compacto e ícono a color, en negro y en blanco (SVG, PDF y PNG), paleta de 4 a 5 colores, 2 tipografías, favicon, fotos de perfil y portada para tus redes, guía de marca de una página y una búsqueda básica de marcas parecidas en la SIC. No incluye el registro de la marca." },
       { "nombre": "Entrega urgente, en la mitad del plazo", "precio": "+30 % de la instalación" },
       { "nombre": "Llevarte el código y el diseño si cancelas", "precio": "50 % de la instalación" }
     ],
