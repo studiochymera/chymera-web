@@ -1,11 +1,13 @@
-// La quimera del logo en 3D: cuando termina de trazarse en la portada, el dibujo toma volumen
-// y queda girando despacio, siguiendo al mouse y al desplazamiento.
+// La quimera en 3D: cuando termina de trazarse en la portada, aparece de perfil y aplanada, como el
+// logo, toma volumen y queda girando despacio, siguiendo al mouse y al desplazamiento.
+// La figura es una escultura de la quimera del logo hecha con Higgsfield (public/modelos/quimera.glb,
+// comprimida con meshopt).
 // Se carga aparte y solo después del trazo, para no frenar el primer pintado. Si el equipo no tiene
 // WebGL o algo falla, se queda la quimera en línea, que ya está en la página.
 import {
   ACESFilmicToneMapping,
+  Box3,
   DirectionalLight,
-  ExtrudeGeometry,
   Group,
   Mesh,
   MeshPhysicalMaterial,
@@ -15,9 +17,9 @@ import {
   SRGBColorSpace,
   WebGLRenderer,
 } from 'three';
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import { toCreasedNormals } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -28,13 +30,12 @@ const MARGEN = 1.5;
 // para que la página no se congele si la persona toca algo mientras tanto.
 const ceder = () => new Promise<void>((listo) => setTimeout(listo, 0));
 
-// origen: la quimera en línea, de donde sale la forma. destino: dónde va el lienzo
+// origen: la quimera en línea, que se queda si algo falla. destino: dónde va el lienzo
 // (encima del trazo en computador, detrás del celular en pantallas pequeñas).
 export async function montarQuimera(origen: HTMLElement, destino: HTMLElement) {
-  const trazo = origen.querySelector<SVGSVGElement>('svg');
-  const ruta = trazo?.querySelector('path')?.getAttribute('d');
-  if (!trazo || !ruta) return;
-  const caja = trazo.viewBox.baseVal;
+  // El modelo se pide antes que nada, mientras se prepara el resto.
+  const cargador = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+  const modelo = cargador.loadAsync(new URL('modelos/quimera.glb', document.baseURI).href);
 
   const lienzo = document.createElement('canvas');
   lienzo.className = 'quimera-3d';
@@ -55,41 +56,39 @@ export async function montarQuimera(origen: HTMLElement, destino: HTMLElement) {
   pmrem.dispose();
   await ceder();
 
-  // La figura: el mismo trazo del logo, extruido con bisel para que los bordes atrapen la luz.
-  const datos = new SVGLoader().parse(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${caja.x} ${caja.y} ${caja.width} ${caja.height}"><path fill-rule="evenodd" d="${ruta}"/></svg>`,
-  );
-  const formas = datos.paths.flatMap((p) => SVGLoader.createShapes(p));
-  await ceder();
-  const fondo = caja.width * 0.07;
-  const extruida = new ExtrudeGeometry(formas, {
-    depth: fondo,
-    bevelEnabled: true,
-    bevelThickness: fondo * 0.18,
-    bevelSize: caja.width * 0.005,
-    bevelSegments: tactil ? 2 : 3,
-    curveSegments: tactil ? 4 : 6,
-  });
-  extruida.translate(-(caja.x + caja.width / 2), -(caja.y + caja.height / 2), -fondo / 2);
-  await ceder();
-  // Curvas lisas y aristas vivas: suaviza la luz en las paredes curvas sin redondear los filos.
-  const geometria = toCreasedNormals(extruida, Math.PI / 5);
-  extruida.dispose();
+  let escultura: Group;
+  try {
+    escultura = (await modelo).scene;
+  } catch {
+    pintor.dispose();
+    return;
+  }
   await ceder();
 
-  // Azul de marca lacado: se ve oscuro y el contraluz celeste le dibuja los bordes.
+  // Cerámica satinada en azul de marca: el brillo justo para leer el volumen sin marcar las facetas
+  // de la malla. El contraluz celeste le dibuja los bordes sobre el fondo azul.
   const material = new MeshPhysicalMaterial({
     color: '#1d2a3a',
-    metalness: 0.6,
-    roughness: 0.34,
-    clearcoat: 1,
-    clearcoatRoughness: 0.12,
-    envMapIntensity: 0.55,
+    metalness: 0.35,
+    roughness: 0.4,
+    clearcoat: 0.6,
+    clearcoatRoughness: 0.28,
+    envMapIntensity: 0.65,
   });
-  const figura = new Mesh(geometria, material);
-  // El SVG cuenta y hacia abajo; en 3D va hacia arriba. La figura mide 2 de ancho.
-  const k = 2 / caja.width;
-  figura.scale.set(k, -k, k * 0.02);
+  escultura.traverse((o) => {
+    if (o instanceof Mesh) o.material = material;
+  });
+  // El modelo mira hacia +z; un cuarto de vuelta lo deja de perfil mirando a la derecha, como el logo.
+  const perfil = new Group();
+  perfil.rotation.y = Math.PI / 2;
+  perfil.add(escultura);
+  const caja = new Box3().setFromObject(perfil);
+  escultura.position.sub(caja.getCenter(escultura.position.clone()).applyAxisAngle(perfil.up, -Math.PI / 2));
+  // figura aplana la escultura hacia la cámara para la entrada. Mide 2 de ancho, como el trazo.
+  const k = 2 / (caja.max.x - caja.min.x);
+  const figura = new Group();
+  figura.add(perfil);
+  figura.scale.set(k, k, k * 0.02);
   const giro = new Group();
   giro.add(figura);
   escena.add(giro);
@@ -100,7 +99,7 @@ export async function montarQuimera(origen: HTMLElement, destino: HTMLElement) {
   contraluz.position.set(-4, 1.5, -3);
   escena.add(principal, contraluz);
 
-  // Cámara de lente larga: de frente, la figura plana calza exacto sobre el trazo.
+  // Cámara de lente larga: de frente, la figura plana queda sobre el trazo.
   const camara = new PerspectiveCamera(18, 1, 0.1, 50);
   const ajustar = () => {
     const ancho = lienzo.clientWidth;
