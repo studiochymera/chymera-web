@@ -75,7 +75,7 @@ if (!sinMovimiento) {
   // Las imágenes diferidas cambian alturas: recalcular las escenas cuando todo cargó.
   window.addEventListener('load', () => ScrollTrigger.refresh());
 
-  // La quimera en 3D reemplaza a su foto cuando la pieza ya se posó en la sala (después de la intro),
+  // El bodegón en 3D reemplaza a su foto cuando la pieza ya se posó en la sala (después de la intro),
   // la página terminó de cargar y la sala está cerca de la pantalla.
   // Se salta si el navegador no tiene WebGL 2 o si la persona pidió ahorrar datos: queda la foto.
   const sala = document.querySelector<HTMLElement>('[data-sala]');
@@ -99,8 +99,8 @@ if (!sinMovimiento) {
     });
     const enReposo = window.requestIdleCallback ?? ((f: () => void) => setTimeout(f, 1));
     const montar = () =>
-      import('./quimera3d')
-        .then(({ montarQuimera }) => montarQuimera(sala, escena))
+      import('./bodegon3d')
+        .then(({ montarBodegon }) => montarBodegon(sala, escena))
         .catch(() => {});
     Promise.all([...posada, cargada, cerca])
       .then(() => enReposo(montar))

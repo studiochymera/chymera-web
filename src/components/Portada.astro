@@ -1,7 +1,9 @@
 ---
-// Portada de Chymera: una sala clara con una sola pieza, la quimera de la marca esculpida en 3D.
-// Primero se ve una foto de la escultura (la misma pose y la misma luz); cuando el 3D carga, la
-// reemplaza sin salto y se puede girar con el mouse o el dedo. Si no hay WebGL, queda la foto.
+// Portada de Chymera: una sala clara con una sola pieza, un bodegón geométrico en 3D (arco, media
+// esfera, disco, escalera y una esfera celeste) en piedra crema y cerámica azul.
+// Primero se ve una foto del bodegón (la misma pose y la misma luz); cuando el 3D carga, la
+// reemplaza sin salto, la luz sigue al mouse y se puede girar un poco arrastrando. Si no hay
+// WebGL, queda la foto.
 // El titular y los botones se ven sin esperar ninguna animación.
 import site from '../data/site.json';
 import { enlaceWhatsApp } from '../lib/rutas';
@@ -30,9 +32,8 @@ const c = h.cartela;
 
     <figure class="sala" data-sala>
       <div class="sala-escena" data-sala-escena aria-hidden="true">
-        <span class="sala-sombra"></span>
         <Imagen
-          ruta="marca/quimera-escultura"
+          ruta="marca/bodegon"
           alt=""
           anchos={[560, 840, 1120, 1400]}
           sizes="(min-width: 1024px) 760px, 115vw"
@@ -197,18 +198,8 @@ const c = h.cartela;
     display: block;
     transition: opacity 0.9s var(--salida);
   }
-  .sala-sombra {
-    position: absolute;
-    left: 20%;
-    right: 18%;
-    top: 80%;
-    height: 9%;
-    border-radius: 50%;
-    background: radial-gradient(closest-side, rgb(29 42 58 / 0.28), rgb(29 42 58 / 0.08) 60%, transparent);
-    filter: blur(6px);
-  }
-  /* El lienzo lo crea quimera3d.ts (por eso va con :global). Aparece sobre la foto y la foto se va. */
-  .sala-escena :global(.quimera-3d) {
+  /* El lienzo lo crea bodegon3d.ts (por eso va con :global). Aparece sobre la foto y la foto se va. */
+  .sala-escena :global(.pieza-3d) {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -217,10 +208,10 @@ const c = h.cartela;
     cursor: grab;
     transition: opacity 0.9s var(--salida);
   }
-  .sala-escena :global(.quimera-3d:active) {
+  .sala-escena :global(.pieza-3d:active) {
     cursor: grabbing;
   }
-  .sala[data-estado='3d'] :global(.quimera-3d) {
+  .sala[data-estado='3d'] :global(.pieza-3d) {
     opacity: 1;
   }
   .sala[data-estado='3d'] :global(.sala-foto) {
@@ -279,15 +270,15 @@ const c = h.cartela;
     .sala {
       order: 0;
       width: auto;
-      grid-column: 6 / span 7;
+      grid-column: 7 / span 6;
       grid-row: 1;
       margin: 0 -6% 0 0;
     }
     .sala-escena {
-      margin: 0 0 0 -10%;
+      margin: 0 0 -6% 0;
     }
     .cartela {
-      margin-top: -1.5rem;
+      margin-top: -2.5rem;
       margin-right: 12%;
     }
   }
