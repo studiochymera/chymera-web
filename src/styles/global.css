@@ -23,6 +23,11 @@
     scroll-behavior: smooth;
   }
 
+  /* Con Lenis el desplazamiento suave lo hace el script. */
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
   body {
     @apply bg-crema text-tinta font-sans antialiased;
   }

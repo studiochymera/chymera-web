@@ -2,11 +2,13 @@
 import Base from '../layouts/Base.astro';
 import Encabezado from '../components/Encabezado.astro';
 import Portada from '../components/Portada.astro';
+import Intro from '../components/Intro.astro';
 import Pie from '../components/Pie.astro';
 import BotonWhatsApp from '../components/BotonWhatsApp.astro';
 import site from '../data/site.json';
 import { enlaceWhatsApp } from '../lib/rutas';
 import Imagen from '../base/Imagen.astro';
+import isotipo from '../../public/brand/isotipo-cream.svg?raw';
 
 const demos = site.demos.lista.map((d) => ({ d, plan: site.paquetes.find((p) => p.slug === d.plan)! }));
 const kitPrecio = site.detallePlanes.extras.find((e) => e.nombre.startsWith('Kit de marca'))!.precio;
@@ -14,6 +16,10 @@ const s = site.servicios;
 const k = site.portafolio.kit;
 const kitColores = site.kitMuestra.colores;
 const cta = site.ctaSecciones;
+const bv = site.beneficiosVisual;
+const [b1, b2, b3] = site.beneficios;
+const isoTrazo = isotipo.match(/ d="([^"]+)"/)![1];
+const isoCaja = isotipo.match(/viewBox="([^"]+)"/)![1];
 
 const wa = enlaceWhatsApp(site.whatsapp, site.whatsappTexto);
 const ig = `https://www.instagram.com/${site.instagram}/`;
@@ -21,152 +27,219 @@ const waEspecial = enlaceWhatsApp(site.whatsapp, site.especiales.whatsappTexto);
 ---
 
 <Base>
+  <Intro />
   <Encabezado />
 
   <main id="inicio">
     <Portada />
 
-    <!-- Lo que hacemos -->
-    <section id="servicios" class="py-16 sm:py-24" aria-labelledby="servicios-titulo">
+    <!-- Lo que hacemos: bento 1 + 2 (una celda grande y dos apiladas) -->
+    <section id="servicios" class="seccion" aria-labelledby="servicios-titulo">
       <div class="contenedor">
-        <div class="grid gap-4 lg:grid-cols-12">
-          <h2 id="servicios-titulo" class="titulo-seccion lg:col-span-5">{s.titulo}</h2>
-          <p class="max-w-xl text-tinta/75 lg:col-span-6 lg:col-start-7 lg:self-end">{s.intro}</p>
-        </div>
+        <header class="cabecera">
+          <h2 id="servicios-titulo" class="titulo-seccion">{s.titulo}</h2>
+          <p class="cabecera-texto">{s.intro}</p>
+        </header>
 
-        <ul class="mt-12 border-b border-azul/15">
-          <li class="servicio">
-            <h3 class="servicio-nombre">{s.web.nombre}</h3>
-            <p class="servicio-texto">{s.web.texto}</p>
-            <div class="servicio-cierre">
-              <p class="servicio-precio">{s.web.precio}</p>
-              <a href="#precios" class="enlace">{s.web.enlace}</a>
+        <div class="bento" data-bento>
+          <article class="celda celda-web">
+            <div class="celda-cuerpo">
+              <h3 class="celda-titulo">{s.web.nombre}</h3>
+              <p class="celda-texto">{s.web.texto}</p>
+              <div class="celda-pie">
+                <p class="celda-precio">{s.web.precio}</p>
+                <a href="#precios" class="enlace enlace-claro">{s.web.enlace}</a>
+              </div>
             </div>
-          </li>
-          <li class="servicio">
-            <h3 class="servicio-nombre">{s.kit.nombre}</h3>
-            <p class="servicio-texto">{s.kit.texto}</p>
-            <div class="servicio-cierre">
-              <p class="servicio-precio">{kitPrecio}</p>
-              <a href="portafolio/kit-de-marca/" class="enlace">{s.kit.enlace}</a>
+            <div class="abanico" aria-hidden="true">
+              {demos.map(({ d }, i) => (
+                <span class="abanico-tel" style={`--d:${i - 1}`} data-abanico>
+                  <Imagen ruta={`portafolio/${d.slug}`} alt="" anchos={[320, 480, 640]} sizes="(min-width: 1024px) 290px, 62vw" proporcion="390/700" claseMarco="block" class="block w-full" />
+                </span>
+              ))}
             </div>
-          </li>
-          <li id="especiales" class="servicio">
-            <h3 class="servicio-nombre">{site.especiales.titulo}</h3>
-            <div class="servicio-texto">
-              <p>{site.especiales.texto}</p>
-              <ul class="mt-4 flex flex-wrap gap-2">
-                {site.especiales.ejemplos.map((e) => (
-                  <li class="rounded-md border border-azul/20 px-2.5 py-1 text-sm text-azul">{e}</li>
-                ))}
+          </article>
+
+          <article class="celda celda-kit">
+            <a href="portafolio/kit-de-marca/" class="kit-placa" tabindex="-1" aria-hidden="true">
+              <img src="portafolio/kit-filo/filo-horizontal-color.svg" alt="" width="1129" height="335" loading="lazy" />
+            </a>
+            <div class="celda-cuerpo">
+              <h3 class="celda-titulo">{s.kit.nombre}</h3>
+              <p class="celda-texto">{s.kit.texto}</p>
+              <div class="celda-pie">
+                <p class="celda-precio">{kitPrecio}</p>
+                <a href="portafolio/kit-de-marca/" class="enlace">{s.kit.enlace}</a>
+              </div>
+            </div>
+          </article>
+
+          <article id="especiales" class="celda celda-especiales">
+            <div class="celda-cuerpo">
+              <h3 class="celda-titulo">{site.especiales.titulo}</h3>
+              <p class="celda-texto">{site.especiales.texto}</p>
+              <ul class="chips">
+                {site.especiales.ejemplos.map((e) => <li>{e}</li>)}
               </ul>
+              <div class="celda-pie">
+                <a href={waEspecial} class="boton-azul" target="_blank" rel="noopener">{site.especiales.boton}</a>
+              </div>
             </div>
-            <div class="servicio-cierre">
-              <a href={waEspecial} class="boton-azul" target="_blank" rel="noopener">{site.especiales.boton}</a>
-            </div>
-          </li>
-        </ul>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- Beneficios y sectores -->
-    <section class="bg-crema-2 py-16 sm:py-24" aria-labelledby="beneficios-titulo">
-      <div class="contenedor grid gap-10 lg:grid-cols-12">
-        <div class="lg:col-span-5">
-          <div class="lg:sticky lg:top-28">
-            <h2 id="beneficios-titulo" class="titulo-seccion">{site.beneficiosTitulo}</h2>
-            <a href={enlaceWhatsApp(site.whatsapp, cta.beneficios.whatsappTexto)} class="boton-azul mt-8" target="_blank" rel="noopener">{cta.beneficios.boton}</a>
+    <!-- Beneficios y sectores: bento 7/5 y 5/7 -->
+    <section class="seccion bg-crema-2" aria-labelledby="beneficios-titulo">
+      <div class="contenedor">
+        <header class="cabecera">
+          <h2 id="beneficios-titulo" class="titulo-seccion">{site.beneficiosTitulo}</h2>
+          <div class="cabecera-accion">
+            <a href={enlaceWhatsApp(site.whatsapp, cta.beneficios.whatsappTexto)} class="boton-azul" target="_blank" rel="noopener">{cta.beneficios.boton}</a>
           </div>
-        </div>
-        <div class="lg:col-span-6 lg:col-start-7">
-          <dl class="divide-y divide-azul/15 border-y border-azul/15">
-            {site.beneficios.map((b) => (
-              <div class="py-7">
-                <dt class="font-display text-xl font-semibold text-azul sm:text-2xl">{b.titulo}</dt>
-                <dd class="mt-2 text-tinta/75 [text-wrap:pretty]">{b.texto}</dd>
-              </div>
-            ))}
-          </dl>
+        </header>
 
-          <h3 class="mt-14 font-display text-lg font-semibold text-azul">{site.sectoresTitulo}</h3>
-          <dl class="mt-5 grid gap-6 sm:grid-cols-3 sm:gap-5">
-            {site.sectores.map((x) => (
-              <div class="border-t-2 border-azul pt-4">
-                <dt class="font-semibold text-azul">{x.titulo}</dt>
-                <dd class="mt-1.5 text-sm text-tinta/75">{x.texto}</dd>
-              </div>
-            ))}
-          </dl>
+        <div class="bento" data-bento>
+          <article class="celda celda-google">
+            <div class="busqueda" aria-hidden="true">
+              <span class="busqueda-campo">
+                <svg viewBox="0 0 24 24" width="18" height="18" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+                {bv.busqueda}
+              </span>
+              <span class="busqueda-resultado" data-destacado>
+                <span class="busqueda-pin"><img src="brand/isotipo-cream.svg" alt="" width="900" height="674" loading="lazy" /></span>
+                <span class="busqueda-datos">
+                  <strong>{bv.resultado}</strong>
+                  <span>{bv.detalle}</span>
+                </span>
+                <span class="busqueda-acciones">
+                  {bv.acciones.map((a) => <span>{a}</span>)}
+                </span>
+              </span>
+              <span class="busqueda-otro"><span></span><span></span></span>
+              <span class="busqueda-otro"><span></span><span></span></span>
+            </div>
+            <div class="celda-cuerpo">
+              <h3 class="celda-titulo">{b1.titulo}</h3>
+              <p class="celda-texto">{b1.texto}</p>
+            </div>
+          </article>
+
+          <article class="celda celda-whatsapp">
+            <div class="chat" aria-hidden="true">
+              <span class="chat-burbuja" data-burbuja>
+                {bv.mensaje}
+                <span class="chat-hora">{bv.hora} <span class="chat-visto">✓✓</span></span>
+              </span>
+            </div>
+            <div class="celda-cuerpo">
+              <h3 class="celda-titulo">{b2.titulo}</h3>
+              <p class="celda-texto">{b2.texto}</p>
+            </div>
+          </article>
+
+          <article class="celda celda-celular">
+            <div class="celda-cuerpo">
+              <h3 class="celda-titulo">{b3.titulo}</h3>
+              <p class="celda-texto">{b3.texto}</p>
+            </div>
+            <div class="asoma" aria-hidden="true">
+              <span class="asoma-tel">
+                <Imagen ruta="portafolio/spa" alt="" anchos={[320, 480, 640]} sizes="(min-width: 1024px) 290px, 62vw" proporcion="390/700" claseMarco="block" class="block w-full" />
+              </span>
+            </div>
+          </article>
+
+          <article class="celda celda-sectores">
+            <div class="celda-cuerpo">
+              <h3 class="celda-titulo">{site.sectoresTitulo}</h3>
+              <dl class="sectores">
+                {site.sectores.map((x) => (
+                  <div>
+                    <dt>{x.titulo}</dt>
+                    <dd>{x.texto}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Portafolio -->
-    <section id="portafolio" class="portafolio bg-azul py-16 text-crema sm:py-24" aria-labelledby="portafolio-titulo">
+    <!-- Portafolio: bento 7/5 y 5/7 con las tres demos y el Kit de marca -->
+    <section id="portafolio" class="seccion bg-azul text-crema" aria-labelledby="portafolio-titulo">
       <div class="contenedor">
-        <div class="grid gap-4 lg:grid-cols-12">
-          <h2 id="portafolio-titulo" class="titulo-seccion text-crema lg:col-span-6">{site.portafolio.titulo}</h2>
-          <p class="max-w-xl text-crema/75 lg:col-span-6 lg:self-end">{site.portafolio.intro}</p>
-        </div>
+        <header class="cabecera cabecera-clara">
+          <h2 id="portafolio-titulo" class="titulo-seccion text-crema">{site.portafolio.titulo}</h2>
+          <p class="cabecera-texto">{site.portafolio.intro}</p>
+        </header>
 
-        <div class="mt-12 grid gap-12 md:grid-cols-3 md:gap-6">
+        <div class="bento" data-bento>
           {demos.map(({ d, plan }) => (
-            <article class="demo flex flex-col">
-              <a href={`demos/${d.slug}/`} class="demo-marco" tabindex="-1" aria-hidden="true">
-                <Imagen
-                  ruta={`portafolio/${d.slug}`}
-                  alt=""
-                  anchos={[320, 480]}
-                  sizes="(min-width: 768px) 190px, 55vw"
-                  proporcion="390/700"
-                  claseMarco="demo-captura"
-                  class="block w-full"
-                />
+            <article class="celda celda-demo">
+              <a href={`demos/${d.slug}/`} class={`escenario escenario-${d.slug}`} tabindex="-1" aria-hidden="true" data-inclinar>
+                <span class="telefono" data-inclinar-objeto>
+                  <Imagen ruta={`portafolio/${d.slug}`} alt="" anchos={[320, 480, 640]} sizes="(min-width: 1024px) 290px, 62vw" proporcion="390/700" claseMarco="block" class="block w-full" />
+                  <span class="brillo"></span>
+                </span>
               </a>
-              <p class="mt-6 text-sm text-crema/70 [font-variant-numeric:tabular-nums]">Plan {plan.nombre} · ${plan.precio}</p>
-              <h3 class="mt-1 text-2xl font-semibold text-crema">{d.nombre}</h3>
-              <p class="text-sm text-crema/70">{d.sector}</p>
-              <p class="mt-4 text-crema/80">{d.resumen}</p>
-              <p class="mt-5 text-sm font-semibold text-crema">{site.portafolio.muestra}</p>
-              <ul class="mt-2 space-y-1.5 text-sm text-crema/80">
-                {d.muestra.map((m) => (
-                  <li class="flex gap-2"><span aria-hidden="true" class="text-celeste">✓</span><span>{m}</span></li>
-                ))}
-              </ul>
-              <div class="mt-auto flex flex-col gap-3 pt-7">
-                <a href={`demos/${d.slug}/`} class="boton-claro">{site.portafolio.verDemo}</a>
-                <a href={`planes/${plan.slug}/`} class="text-center text-sm font-semibold text-crema underline underline-offset-4 hover:text-celeste">{site.portafolio.verPlan}</a>
+              <div class="celda-cuerpo">
+                <h3 class="celda-titulo text-crema">{d.nombre}</h3>
+                <p class="demo-sector">{d.sector}</p>
+                <p class="celda-texto">{d.resumen}</p>
+                <p class="demo-muestra">{site.portafolio.muestra}</p>
+                <ul class="demo-lista">
+                  {d.muestra.map((m) => <li>{m}</li>)}
+                </ul>
+                <p class="demo-plan">
+                  <span>{site.demos.franja.plan.replace('{plan}', plan.nombre)}</span>
+                  <span class="demo-precio">${plan.precio}</span>
+                </p>
+                <div class="celda-pie demo-acciones">
+                  <a href={`demos/${d.slug}/`} class="boton-claro">{site.portafolio.verDemo}</a>
+                  <a href={`planes/${plan.slug}/`} class="enlace enlace-claro">{site.portafolio.verPlan}</a>
+                </div>
               </div>
             </article>
           ))}
-        </div>
 
-        <!-- Kit de marca de muestra -->
-        <article class="kit mt-16 grid overflow-hidden rounded-2xl bg-crema text-tinta lg:grid-cols-2" aria-labelledby="kit-titulo">
-          <div class="flex flex-col p-7 sm:p-10">
-            <p class="text-sm font-semibold text-azul">{k.etiqueta}</p>
-            <h3 id="kit-titulo" class="mt-2 text-3xl font-semibold sm:text-4xl">{k.titulo}</h3>
-            <p class="mt-4 max-w-md text-tinta/75 [text-wrap:pretty]">{k.texto}</p>
-            <p class="mt-5 text-sm font-semibold text-azul [font-variant-numeric:tabular-nums]">{k.precio.replace('{precio}', kitPrecio)}</p>
-            <div class="mt-8 lg:mt-auto lg:pt-8">
-              <a href="portafolio/kit-de-marca/" class="boton-azul">{k.ver}</a>
+          <article class="celda celda-demo celda-kitmuestra" aria-labelledby="kit-titulo">
+            <a href="portafolio/kit-de-marca/" class="escenario escenario-kit" tabindex="-1" aria-hidden="true" data-inclinar>
+              <span class="kit-lamina" data-inclinar-objeto>
+                <span class="kit-hueso">
+                  <img src="portafolio/kit-filo/filo-horizontal-color.svg" alt="" width="1129" height="335" loading="lazy" />
+                </span>
+                <span class="kit-carbon">
+                  <img src="portafolio/kit-filo/filo-compacto-color-oscuro.svg" alt="" width="676" height="440" loading="lazy" />
+                </span>
+                <span class="kit-icono">
+                  <img src="portafolio/kit-filo/filo-icono-color.svg" alt="" width="485" height="485" loading="lazy" />
+                </span>
+                <span class="kit-colores">
+                  {kitColores.map((c) => <span style={`background:${c.hex}`}></span>)}
+                </span>
+                <span class="brillo"></span>
+              </span>
+            </a>
+            <div class="celda-cuerpo">
+              <h3 id="kit-titulo" class="celda-titulo text-crema">{k.titulo}</h3>
+              <p class="celda-texto">{k.texto}</p>
+              <p class="demo-muestra">{k.incluyeTitulo}</p>
+              <ul class="demo-lista">
+                {k.incluye.map((m) => <li>{m}</li>)}
+              </ul>
+              <p class="demo-plan">
+                <span>{s.kit.nombre}</span>
+                <span class="demo-precio">{kitPrecio}</span>
+              </p>
+              <div class="celda-pie demo-acciones">
+                <a href="portafolio/kit-de-marca/" class="boton-claro">{k.ver}</a>
+              </div>
             </div>
-          </div>
-          <a href="portafolio/kit-de-marca/" class="kit-lamina" tabindex="-1" aria-hidden="true">
-            <span class="kit-hueso">
-              <img src="portafolio/kit-filo/filo-horizontal-color.svg" alt="" width="1129" height="335" loading="lazy" class="w-[78%]" />
-            </span>
-            <span class="kit-carbon">
-              <img src="portafolio/kit-filo/filo-compacto-color-oscuro.svg" alt="" width="676" height="440" loading="lazy" class="w-[72%]" />
-            </span>
-            <span class="kit-icono">
-              <img src="portafolio/kit-filo/filo-icono-color.svg" alt="" width="485" height="485" loading="lazy" class="w-[64%]" />
-            </span>
-            <span class="kit-colores">
-              {kitColores.map((c) => <span style={`background:${c.hex}`}></span>)}
-            </span>
-          </a>
-        </article>
+          </article>
+        </div>
 
         <p class="mt-6 text-sm text-crema/60">{site.portafolio.aviso}</p>
       </div>
@@ -268,17 +341,20 @@ const waEspecial = enlaceWhatsApp(site.whatsapp, site.especiales.whatsappTexto);
       </div>
     </section>
 
-    <!-- Contacto -->
-    <section id="contacto" class="bg-azul text-crema">
-      <div class="contenedor flex flex-col items-start gap-6 py-16 sm:py-20 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h2 class="titulo-seccion text-crema">{site.contacto.titulo}</h2>
-          <p class="mt-3 max-w-xl text-crema/80">{site.contacto.texto}</p>
-        </div>
-        <div class="flex flex-wrap gap-3">
-          <a href={wa} class="boton-claro" target="_blank" rel="noopener">{site.contacto.boton}</a>
-          <a href={`mailto:${site.correo}`} class="boton-borde">{site.correo}</a>
-          <a href={ig} class="boton-borde" target="_blank" rel="noopener">@{site.instagram}</a>
+    <!-- Contacto: cierre con la quimera de fondo -->
+    <section id="contacto" class="contacto bg-azul text-crema">
+      <svg class="contacto-quimera" viewBox={isoCaja} aria-hidden="true" focusable="false">
+        <path d={isoTrazo} fill-rule="evenodd" />
+      </svg>
+      <div class="contenedor relative py-20 sm:py-28">
+        <h2 class="contacto-titulo">{site.contacto.titulo}</h2>
+        <div class="mt-10 grid gap-8 md:grid-cols-12 md:items-end">
+          <p class="max-w-md text-lg text-crema/80 md:col-span-5">{site.contacto.texto}</p>
+          <div class="flex flex-wrap gap-3 md:col-span-7 md:justify-end">
+            <a href={wa} class="boton-claro" target="_blank" rel="noopener">{site.contacto.boton}</a>
+            <a href={`mailto:${site.correo}`} class="boton-borde">{site.correo}</a>
+            <a href={ig} class="boton-borde" target="_blank" rel="noopener">@{site.instagram}</a>
+          </div>
         </div>
       </div>
     </section>
@@ -289,6 +365,10 @@ const waEspecial = enlaceWhatsApp(site.whatsapp, site.especiales.whatsappTexto);
   <BotonWhatsApp />
 </Base>
 
+<script>
+  import '../scripts/movimiento';
+</script>
+
 <style>
   .titulo-seccion {
     font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
@@ -298,57 +378,125 @@ const waEspecial = enlaceWhatsApp(site.whatsapp, site.especiales.whatsappTexto);
     text-wrap: balance;
   }
 
-  /* Lo que hacemos: filas tipográficas, no tarjetas. */
-  .servicio {
+  .seccion {
+    padding-block: clamp(4rem, 2.5rem + 5vw, 7rem);
+  }
+
+  /* Cabecera de sección: título a la izquierda, texto o botón a la derecha. */
+  .cabecera {
+    display: grid;
+    gap: 1rem 1.5rem;
+    margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.25rem);
+  }
+  .cabecera-texto {
+    max-width: 34rem;
+    color: rgb(4 5 7 / 0.75);
+    text-wrap: pretty;
+  }
+  .cabecera-clara .cabecera-texto {
+    color: rgb(253 248 244 / 0.75);
+  }
+  @media (min-width: 1024px) {
+    .cabecera {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-items: end;
+    }
+    .cabecera > :first-child {
+      grid-column: span 7;
+    }
+    .cabecera-texto,
+    .cabecera-accion {
+      grid-column: 8 / span 5;
+    }
+    .cabecera-accion {
+      justify-self: end;
+    }
+  }
+
+  /* Bento: celdas asimétricas, tantas como piezas de contenido. */
+  .bento {
     display: grid;
     gap: 0.75rem;
-    padding-block: 2rem;
-    border-top: 1px solid rgb(29 42 58 / 0.15);
   }
-  .servicio-nombre {
-    font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem);
+  @media (min-width: 768px) {
+    .bento {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .bento > :nth-child(4n + 1),
+    .bento > :nth-child(4n + 4) {
+      grid-column: span 7;
+    }
+    .bento > :nth-child(4n + 2),
+    .bento > :nth-child(4n + 3) {
+      grid-column: span 5;
+    }
+    .bento > .celda-web {
+      grid-row: span 2;
+    }
+  }
+
+  .celda {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 1.75rem;
+    background: var(--color-crema);
+    box-shadow: inset 0 0 0 1px rgb(29 42 58 / 0.1);
+  }
+  .celda-cuerpo {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem);
+  }
+  .celda-titulo {
+    font-size: clamp(1.5rem, 1.15rem + 1.1vw, 2.1rem);
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.03em;
   }
-  .servicio-texto {
-    max-width: 36rem;
+  .celda-texto {
+    max-width: 34rem;
+    margin-top: 0.75rem;
     color: rgb(4 5 7 / 0.75);
     text-wrap: pretty;
   }
-  .servicio-cierre {
+  .celda-pie {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.5rem 1.25rem;
-    margin-top: 0.5rem;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-top: auto;
+    padding-top: 1.75rem;
   }
-  .servicio-precio {
+  .celda-precio {
     font-family: var(--font-display);
+    font-size: 1.125rem;
     font-weight: 600;
     color: var(--color-azul);
     font-variant-numeric: tabular-nums;
   }
-  @media (min-width: 1024px) {
-    .servicio {
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      column-gap: 1.5rem;
-      align-items: start;
-      padding-block: 2.5rem;
-    }
-    .servicio-nombre {
-      grid-column: span 5;
-    }
-    .servicio-texto {
-      grid-column: 6 / span 4;
-    }
-    .servicio-cierre {
-      grid-column: 10 / span 3;
-      flex-direction: column;
-      align-items: flex-end;
-      margin-top: 0;
-      text-align: right;
-    }
+
+  /* Celdas oscuras */
+  .celda-web,
+  .celda-whatsapp,
+  .celda-celular {
+    background: var(--color-azul);
+    color: var(--color-crema);
+    box-shadow: none;
+  }
+  .celda-web .celda-titulo,
+  .celda-whatsapp .celda-titulo,
+  .celda-celular .celda-titulo,
+  .celda-web .celda-precio {
+    color: var(--color-crema);
+  }
+  .celda-web .celda-texto,
+  .celda-whatsapp .celda-texto,
+  .celda-celular .celda-texto {
+    color: rgb(253 248 244 / 0.75);
   }
 
   .enlace {
@@ -357,51 +505,392 @@ const waEspecial = enlaceWhatsApp(site.whatsapp, site.especiales.whatsappTexto);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.3em;
-    transition: color 150ms ease;
+    transition: color 150ms ease, text-decoration-color 150ms ease;
   }
   .enlace:hover {
     color: var(--color-tinta);
   }
+  .enlace-claro {
+    color: var(--color-crema);
+    text-decoration-color: var(--color-celeste);
+  }
+  .enlace-claro:hover {
+    color: var(--color-celeste);
+  }
 
-  /* Portafolio */
-  .demo-marco {
+  /* Páginas web: las tres demos en abanico, asomando por el borde de la celda. */
+  .celda-web {
+    min-height: 34rem;
+  }
+  .celda-web .celda-cuerpo {
+    flex: none;
+  }
+  .abanico {
     position: relative;
-    display: grid;
-    place-items: end center;
-    aspect-ratio: 4 / 3.4;
-    overflow: hidden;
-    border-radius: 1rem;
-    background: var(--color-azul-2);
-    box-shadow: inset 0 0 0 1px rgb(253 248 244 / 0.08);
+    flex: 1;
+    min-height: 19rem;
   }
-  .demo-marco :global(.demo-captura) {
-    display: block;
-    width: 54%;
-    translate: 0 14%;
-    border-radius: 1.4rem 1.4rem 0 0;
+  .abanico-tel {
+    --ancho: clamp(9.5rem, 2rem + 20vw, 19rem);
+    position: absolute;
+    left: 50%;
+    top: clamp(1rem, 0.5rem + 3vw, 3.5rem);
+    z-index: calc(2 - var(--d) * var(--d));
+    width: var(--ancho);
+    margin-left: calc(var(--ancho) / -2);
+    overflow: hidden;
     border: 5px solid #0b1119;
-    border-bottom: 0;
-    overflow: hidden;
-    box-shadow: 0 24px 50px -16px rgb(0 0 0 / 0.6);
-    transition: translate 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: 1.6rem;
+    background: #0b1119;
+    box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.7);
+    transform: translateX(calc(var(--d) * 64%)) translateY(calc(var(--d) * var(--d) * 2.5rem)) rotate(calc(var(--d) * 8deg));
+    transform-origin: 50% 100%;
   }
-  @media (hover: hover) and (pointer: fine) {
-    .demo:hover .demo-marco :global(.demo-captura) {
-      translate: 0 9%;
+
+  /* Kit de marca: la placa con el logo de Filo. */
+  .kit-placa {
+    display: grid;
+    place-items: center;
+    margin: 0.5rem 0.5rem 0;
+    aspect-ratio: 16 / 7;
+    border-radius: 1.25rem;
+    background: #ede6da;
+  }
+  .kit-placa img {
+    width: 62%;
+    height: auto;
+  }
+
+  /* Pedidos especiales */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+  .chips li {
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px rgb(29 42 58 / 0.2);
+    font-size: 0.875rem;
+    color: var(--color-azul);
+  }
+
+  /* Te encuentran en Google: un resultado de búsqueda con tu negocio arriba. */
+  .busqueda {
+    display: grid;
+    gap: 0.625rem;
+    margin: 0.5rem 0.5rem 0;
+    padding: clamp(1rem, 0.75rem + 1vw, 1.5rem);
+    border-radius: 1.25rem;
+    background: var(--color-crema-2);
+  }
+  .busqueda-campo {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: 2.75rem;
+    padding-inline: 1rem;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgb(4 5 7 / 0.08), 0 6px 16px -8px rgb(4 5 7 / 0.18);
+    color: var(--color-tinta);
+    font-size: 0.9375rem;
+  }
+  .busqueda-campo svg {
+    flex: none;
+    color: rgb(4 5 7 / 0.55);
+  }
+  .busqueda-resultado {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem 0.875rem;
+    align-items: center;
+    padding: 0.875rem 1rem 1rem;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 1px 2px rgb(4 5 7 / 0.08), 0 10px 24px -12px rgb(4 5 7 / 0.25);
+  }
+  .busqueda-pin {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    background: var(--color-azul);
+  }
+  .busqueda-pin img {
+    width: 72%;
+    height: auto;
+  }
+  .busqueda-datos {
+    display: grid;
+    line-height: 1.3;
+  }
+  .busqueda-datos strong {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-azul);
+  }
+  .busqueda-datos span {
+    font-size: 0.8125rem;
+    color: #1d6b3a;
+  }
+  .busqueda-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    grid-column: 1 / -1;
+    gap: 0.375rem;
+  }
+  .busqueda-acciones span {
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px rgb(29 42 58 / 0.25);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-azul);
+  }
+  .busqueda-otro {
+    display: grid;
+    gap: 0.4rem;
+    padding: 0.875rem 1rem;
+    border-radius: 1rem;
+    background: rgb(255 255 255 / 0.55);
+  }
+  .busqueda-otro span {
+    height: 0.5rem;
+    border-radius: 999px;
+    background: rgb(29 42 58 / 0.12);
+  }
+  .busqueda-otro span:first-child {
+    width: 45%;
+    background: rgb(29 42 58 / 0.2);
+  }
+  .busqueda-otro span:last-child {
+    width: 75%;
+  }
+
+  /* Te escriben y reservan: el mensaje que llega por WhatsApp. */
+  .chat {
+    display: grid;
+    flex: 1;
+    align-items: end;
+    justify-items: end;
+    margin: 0.5rem 0.5rem 0;
+    padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    border-radius: 1.25rem;
+    background:
+      radial-gradient(120% 80% at 100% 0%, rgb(39 155 242 / 0.14), transparent 60%),
+      #17222f;
+    min-height: 11rem;
+  }
+  .chat-burbuja {
+    position: relative;
+    max-width: 17rem;
+    padding: 0.75rem 0.875rem 0.5rem;
+    border-radius: 1rem 1rem 0.25rem 1rem;
+    background: var(--color-crema);
+    color: var(--color-tinta);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    box-shadow: 0 16px 30px -16px rgb(0 0 0 / 0.6);
+    transform-origin: 100% 100%;
+  }
+  .chat-hora {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    text-align: right;
+    color: rgb(4 5 7 / 0.55);
+    font-variant-numeric: tabular-nums;
+  }
+  .chat-visto {
+    color: #1a7fd0;
+    letter-spacing: -0.2em;
+  }
+
+  /* Se ve profesional en el celular: una demo asoma desde abajo. */
+  .celda-celular .celda-cuerpo {
+    flex: none;
+  }
+  .asoma {
+    position: relative;
+    flex: 1;
+    min-height: 13rem;
+    overflow: hidden;
+  }
+  .asoma-tel {
+    position: absolute;
+    left: 50%;
+    top: 0.5rem;
+    width: min(62%, 14rem);
+    overflow: hidden;
+    border: 5px solid #0b1119;
+    border-radius: 1.6rem;
+    background: #0b1119;
+    box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.7);
+    translate: -50% 0;
+  }
+
+  /* Hechas para tu sector */
+  .sectores {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.75rem;
+  }
+  .sectores > div {
+    padding-top: 1rem;
+    border-top: 2px solid var(--color-azul);
+  }
+  .sectores dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-azul);
+  }
+  .sectores dd {
+    margin-top: 0.375rem;
+    font-size: 0.9375rem;
+    color: rgb(4 5 7 / 0.75);
+  }
+  /* Tres columnas solo cuando la celda es ancha: celular grande (una sola columna de celdas) o computador. */
+  @media (min-width: 640px) and (max-width: 767.98px), (min-width: 1024px) {
+    .sectores {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
-  /* Kit de marca: lámina con los colores de Filo. */
+  /* Portafolio: cada demo en su escenario, con el celular en falso 3D al pasar el mouse. */
+  .celda-demo {
+    background: var(--color-azul-2);
+    box-shadow: inset 0 0 0 1px rgb(253 248 244 / 0.08);
+  }
+  .celda-demo .celda-texto {
+    color: rgb(253 248 244 / 0.78);
+  }
+  .escenario {
+    position: relative;
+    display: grid;
+    place-items: end center;
+    height: clamp(17rem, 12rem + 12vw, 22rem);
+    margin: 0.5rem 0.5rem 0;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    background:
+      radial-gradient(90% 70% at 50% 0%, rgb(253 248 244 / 0.09), transparent 70%),
+      #1a2533;
+    perspective: 1100px;
+  }
+  /* Cada escenario toma la luz de la marca de su demo. */
+  .escenario-barberia {
+    background: radial-gradient(55% 75% at 50% 85%, rgb(122 31 31 / 0.85), transparent 72%), #1c1916;
+  }
+  .escenario-gimnasio {
+    background: radial-gradient(55% 75% at 50% 85%, rgb(212 255 58 / 0.3), transparent 72%), #1a1b17;
+  }
+  .escenario-spa {
+    background: radial-gradient(55% 75% at 50% 85%, rgb(192 138 107 / 0.6), transparent 72%), #2f3a2e;
+  }
+  .escenario-kit {
+    background: radial-gradient(80% 80% at 50% 0%, rgb(255 255 255 / 0.5), transparent 70%), #e3dacb;
+  }
+  .telefono {
+    position: relative;
+    display: block;
+    width: clamp(10rem, 7rem + 8vw, 13rem);
+    margin-bottom: -20%;
+    overflow: hidden;
+    border: 5px solid #0b1119;
+    border-radius: 1.6rem;
+    background: #0b1119;
+    box-shadow:
+      0 0 0 1px rgb(253 248 244 / 0.14),
+      0 30px 60px -18px rgb(0 0 0 / 0.75);
+  }
+  @media (min-width: 768px) {
+    .bento > :nth-child(4n + 1) .telefono {
+      width: clamp(11rem, 6rem + 9vw, 15rem);
+    }
+  }
+  .demo-sector {
+    margin-top: 0.25rem;
+    font-size: 0.9375rem;
+    color: rgb(253 248 244 / 0.65);
+  }
+  .demo-muestra {
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-crema);
+  }
+  .demo-lista {
+    display: grid;
+    gap: 0.375rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: rgb(253 248 244 / 0.8);
+  }
+  .demo-lista li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+  .demo-lista li::before {
+    content: '';
+    position: absolute;
+    left: 0.125rem;
+    top: 0.55em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: var(--color-celeste);
+  }
+  .demo-plan {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(253 248 244 / 0.12);
+    font-size: 0.9375rem;
+    color: rgb(253 248 244 / 0.75);
+  }
+  .demo-precio {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-crema);
+    font-variant-numeric: tabular-nums;
+  }
+  .demo-acciones {
+    padding-top: 1.5rem;
+  }
+
+  /* Kit de marca de muestra: lámina con las piezas de Filo. */
+  .celda-kitmuestra .escenario {
+    place-items: center;
+    padding: clamp(1.25rem, 0.5rem + 3vw, 2.5rem);
+  }
   .kit-lamina {
+    position: relative;
     display: grid;
     grid-template-columns: 1.4fr 1fr;
-    grid-template-rows: 1fr 1fr auto;
-    min-height: 20rem;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) auto;
+    width: min(100%, 27rem);
+    aspect-ratio: 16 / 11;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    box-shadow: 0 30px 60px -18px rgb(0 0 0 / 0.75);
   }
-  .kit-lamina > span {
+  .kit-lamina > span:not(.brillo) {
     display: grid;
     place-items: center;
-    padding: 1.5rem;
+    min-height: 0;
+    padding: 0.75rem;
+  }
+  .kit-lamina img {
+    width: auto;
+    max-width: 72%;
+    height: auto;
+    max-height: 72%;
   }
   .kit-hueso {
     grid-column: 1 / -1;
@@ -417,15 +906,24 @@ const waEspecial = enlaceWhatsApp(site.whatsapp, site.especiales.whatsappTexto);
     grid-column: 1 / -1;
     grid-template-columns: repeat(4, 1fr);
     place-items: stretch !important;
+    height: 1.25rem;
     padding: 0 !important;
-    height: 1.5rem;
   }
-  .kit-lamina img {
-    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Brillo que sigue al mouse sobre las maquetas (lo mueve movimiento.ts). */
+  .brillo {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--brillo-x, 50%) var(--brillo-y, 0%), rgb(255 255 255 / 0.3), transparent 55%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease;
   }
   @media (hover: hover) and (pointer: fine) {
-    .kit:hover .kit-lamina img {
-      transform: scale(1.03);
+    :global(html.con-movimiento) .escenario:hover .brillo {
+      opacity: 1;
     }
   }
 
@@ -483,5 +981,36 @@ const waEspecial = enlaceWhatsApp(site.whatsapp, site.especiales.whatsappTexto);
       width: auto;
       height: 1px;
     }
+  }
+
+  /* Cierre */
+  .contacto {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .contacto-quimera {
+    position: absolute;
+    z-index: -1;
+    right: -12%;
+    bottom: -18%;
+    width: min(110vw, 52rem);
+    overflow: visible;
+  }
+  .contacto-quimera path {
+    fill: var(--color-crema);
+    fill-opacity: 0.05;
+    stroke: var(--color-celeste);
+    stroke-width: 2;
+    stroke-opacity: 0.25;
+    vector-effect: non-scaling-stroke;
+  }
+  .contacto-titulo {
+    max-width: 14ch;
+    color: var(--color-crema);
+    font-size: clamp(2.8rem, 1.4rem + 6.4vw, 7.5rem);
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.05em;
   }
 </style>
