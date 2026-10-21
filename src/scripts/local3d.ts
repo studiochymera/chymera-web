@@ -313,9 +313,9 @@ export async function montarLocal(marco: HTMLElement, escenaHtml: HTMLElement, p
   media.add('(min-width: 1024px)', () => {
     const disparo = ScrollTrigger.create({
       trigger: pasos,
-      start: 'top 65%',
-      end: 'bottom 70%',
-      scrub: 0.6,
+      start: 'top 60%',
+      end: 'bottom 55%',
+      scrub: 1.2,
       onUpdate: (s) => (estado.progreso = s.progress * PASOS),
     });
     return () => disparo.kill();
