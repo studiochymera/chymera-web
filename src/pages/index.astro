@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Encabezado from '../components/Encabezado.astro';
 import Portada from '../components/Portada.astro';
+import Vitrina from '../components/Vitrina.astro';
 import Intro from '../components/Intro.astro';
 import Pie from '../components/Pie.astro';
 import BotonWhatsApp from '../components/BotonWhatsApp.astro';
@@ -29,6 +30,7 @@ const waEspecial = enlaceWhatsApp(site.whatsapp, site.especiales.whatsappTexto);
 
   <main id="inicio">
     <Portada />
+    <Vitrina />
 
     <!-- Lo que hacemos: bento 1 + 2 (una celda grande y dos apiladas) -->
     <section id="servicios" class="seccion" aria-labelledby="servicios-titulo">

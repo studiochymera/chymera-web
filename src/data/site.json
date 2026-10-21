@@ -12,7 +12,12 @@
     "boton": "Pide tu propuesta por WhatsApp",
     "botonDemos": "Mira 3 demos funcionando",
     "kit": "¿Todavía no tienes logo? También lo diseñamos.",
-    "kitEnlace": "Mira el Kit de marca de muestra"
+    "kitEnlace": "Mira el Kit de marca de muestra",
+    "cartela": {
+      "titulo": "Quimera",
+      "detalle": "La marca de Chymera Studios, esculpida en 3D.",
+      "gesto": "Arrástrala para girarla"
+    }
   },
   "beneficios": [
     { "titulo": "Te encuentran en Google", "texto": "Tu negocio aparece cuando buscan “gimnasio cerca” o “spa en Usaquén”, con dirección, horarios y fotos." },
@@ -375,6 +380,8 @@
   "vitrina": {
     "etiqueta": "Tres demos de Chymera en un celular",
     "titulo": "Tres negocios, tres diseños, un mismo estudio.",
+    "texto": "Una barbería, un gimnasio y un spa: cada demo es una web completa con su propio diseño. Toca una pestaña para cambiar de negocio o abre la demo desde el celular.",
+    "enlace": "Ver qué incluye cada demo",
     "pausar": "Pausar",
     "reanudar": "Reanudar",
     "ver": "Ver la demo de {nombre}"
