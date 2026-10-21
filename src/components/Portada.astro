@@ -1,16 +1,14 @@
 ---
-// Portada de Chymera: una sala clara con una sola pieza en 3D, tres páginas web flotando en
-// abanico (dos de vidrio esmerilado y una de cerámica azul con el botón celeste).
-// Primero se ve una foto de las pantallas (la misma pose y la misma luz); cuando el 3D carga, la
-// reemplaza sin salto, flotan, siguen al mouse y se giran un poco arrastrando. Si no hay WebGL,
-// queda la foto.
+// Portada de Chymera: titular a la izquierda y, a la derecha, saliéndose un poco de la página,
+// tres páginas web flotando en abanico en 3D (dos de vidrio esmerilado y una de cerámica azul
+// con el botón celeste). Primero se ve una foto de las pantallas (la misma pose y la misma luz);
+// cuando el 3D carga, la reemplaza sin salto. Si no hay WebGL, queda la foto.
 // El titular y los botones se ven sin esperar ninguna animación.
 import site from '../data/site.json';
 import { enlaceWhatsApp } from '../lib/rutas';
 import Imagen from '../base/Imagen.astro';
 
 const h = site.hero;
-const c = h.cartela;
 ---
 
 <section class="portada" aria-labelledby="portada-titulo">
@@ -30,25 +28,20 @@ const c = h.cartela;
       </p>
     </div>
 
-    <figure class="sala" data-sala>
+    <div class="sala" data-sala>
       <div class="sala-escena" data-sala-escena aria-hidden="true">
         <Imagen
           ruta="marca/pantallas"
           alt=""
           anchos={[560, 840, 1120, 1400]}
-          sizes="(min-width: 1024px) 760px, 115vw"
+          sizes="(min-width: 1024px) 900px, 130vw"
           proporcion="1400/1064"
           prioridad
           claseMarco="sala-foto"
           class="block h-full w-full"
         />
       </div>
-      <figcaption class="cartela">
-        <span class="cartela-titulo">{c.titulo}</span>
-        <span class="cartela-detalle">{c.detalle}</span>
-        <span class="cartela-gesto" aria-hidden="true">{c.gesto}</span>
-      </figcaption>
-    </figure>
+    </div>
   </div>
 </section>
 
@@ -170,19 +163,18 @@ const c = h.cartela;
     text-decoration-thickness: 2px;
   }
 
-  /* La sala: la pieza y su cartela. La escena es más ancha que la pieza para que no se corte al girar.
-     En celular y tableta la pieza va primero, encima del titular, para que se vea al entrar. */
+  /* La pieza: un acento que pasa a la derecha y se sale un poco de la página.
+     En celular y tableta va primero, encima del titular, para que se vea al entrar. */
   .sala {
     position: relative;
     order: -1;
-    width: 86%;
-    margin: -0.75rem auto 1.25rem;
+    width: 108%;
+    margin: -1.5rem -24% 0.5rem auto;
   }
   .sala-escena {
     position: relative;
     aspect-ratio: 1400 / 1064;
-    margin: -8% -12% -14%;
-    touch-action: pan-y;
+    margin: -8% -12% -2%;
   }
   .sala-escena :global(.sala-foto) {
     position: absolute;
@@ -197,11 +189,7 @@ const c = h.cartela;
     width: 100%;
     height: 100%;
     opacity: 0;
-    cursor: grab;
     transition: opacity 0.9s var(--salida);
-  }
-  .sala-escena :global(.pieza-3d:active) {
-    cursor: grabbing;
   }
   .sala[data-estado='3d'] :global(.pieza-3d) {
     opacity: 1;
@@ -210,52 +198,10 @@ const c = h.cartela;
     opacity: 0;
   }
 
-  /* Cartela de museo: nombre de la pieza, qué es y cómo se mira. */
-  .cartela {
-    position: relative;
-    display: grid;
-    gap: 0.15rem;
-    width: fit-content;
-    max-width: 17rem;
-    margin: -0.75rem -1rem 0 auto;
-    padding-top: 0.6rem;
-    border-top: 1px solid rgb(29 42 58 / 0.25);
-    font-size: 0.8125rem;
-    line-height: 1.45;
-    color: rgb(4 5 7 / 0.72);
-  }
-  .cartela-titulo {
-    font-family: var(--font-display);
-    font-size: 0.9375rem;
-    font-weight: 600;
-    color: var(--color-azul);
-  }
-  .cartela-detalle {
-    display: none;
-  }
-  .cartela-gesto {
-    font-size: 0.75rem;
-    color: rgb(4 5 7 / 0.6);
-    opacity: 0;
-    transition: opacity 0.6s var(--salida) 0.6s;
-  }
-  .sala[data-estado='3d'] .cartela-gesto {
-    opacity: 1;
-  }
-
   @media (min-width: 640px) {
     .sala {
-      width: min(100%, 30rem);
-      margin-bottom: 2rem;
-    }
-    .cartela {
-      margin-right: 0;
-    }
-    .cartela-detalle {
-      display: block;
-    }
-    .cartela-gesto {
-      margin-top: 0.35rem;
+      width: min(100%, 36rem);
+      margin-bottom: 1.5rem;
     }
   }
   @media (min-width: 1024px) {
@@ -264,14 +210,10 @@ const c = h.cartela;
       width: auto;
       grid-column: 7 / span 6;
       grid-row: 1;
-      margin: 0 -6% 0 0;
+      margin: 0 -34% 0 0;
     }
     .sala-escena {
-      margin: 0 0 -6% 0;
-    }
-    .cartela {
-      margin-top: 0;
-      margin-right: 12%;
+      margin: -6% 0 -10% 0;
     }
   }
 
@@ -285,8 +227,7 @@ const c = h.cartela;
     }
     .portada-etiqueta,
     .portada-botones,
-    .portada-kit,
-    .cartela {
+    .portada-kit {
       animation: aparecer 0.9s var(--salida) backwards;
     }
     /* El subtítulo y la foto de la pieza son lo más grande que pinta la portada: solo se mueven,
@@ -309,9 +250,6 @@ const c = h.cartela;
     }
     .portada-kit {
       animation-delay: calc(var(--tras-intro) + 0.45s);
-    }
-    .cartela {
-      animation-delay: calc(var(--tras-intro) + 0.7s);
     }
   }
 

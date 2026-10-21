@@ -1,8 +1,8 @@
 // Las pantallas en 3D de la portada: tres páginas web flotando en abanico, dos de vidrio
 // esmerilado y una de cerámica azul en el medio, con un solo botón celeste. Todo se arma aquí con
 // geometría (no hay modelo que descargar), así que se ve nítido en cualquier pantalla.
-// Las pantallas flotan despacio, se abren un poco con el desplazamiento, se asoman hacia el mouse
-// y se pueden girar un poco arrastrando; al soltar vuelven a su sitio.
+// Son un acento que pasa: flotan despacio, se asoman hacia el mouse y, al bajar por la página,
+// se abren y giran un poco mientras salen.
 // Se carga aparte y solo después de la intro. Si el equipo no tiene WebGL, queda la foto, que
 // se sacó de esta misma escena (armarPantallas) en la pose de reposo.
 import {
@@ -177,7 +177,7 @@ export function ambiente(pintor: WebGLRenderer, escena: Scene) {
 // Le devuelve el turno al navegador entre pasos pesados, para que la página no se congele.
 const ceder = () => new Promise<void>((listo) => setTimeout(listo, 0));
 
-// sala: la figura con la foto y la cartela. escenaHtml: dónde va el lienzo, del mismo tamaño que la foto.
+// sala: el bloque con la foto. escenaHtml: dónde va el lienzo, del mismo tamaño que la foto.
 export async function montarPantallas(sala: HTMLElement, escenaHtml: HTMLElement) {
   const tactil = window.matchMedia('(pointer: coarse)').matches;
   const lienzo = document.createElement('canvas');
@@ -206,30 +206,8 @@ export async function montarPantallas(sala: HTMLElement, escenaHtml: HTMLElement
   if (pintor.extensions.has('KHR_parallel_shader_compile')) await pintor.compileAsync(escena, camara);
   new ResizeObserver(ajustar).observe(lienzo);
 
-  // Giro: lo que suma la persona al arrastrar (vuelve solo a la pose al soltar), el mouse y el scroll.
-  const estado = { arrastre: 0, punteroX: 0, punteroY: 0, scroll: 0, tiempo: 0 };
-  let arrastrando = false;
-  let ultimoX = 0;
-
-  lienzo.addEventListener('pointerdown', (e) => {
-    arrastrando = true;
-    ultimoX = e.clientX;
-    gsap.killTweensOf(estado, 'arrastre');
-    lienzo.setPointerCapture(e.pointerId);
-  });
-  lienzo.addEventListener('pointermove', (e) => {
-    if (!arrastrando) return;
-    const paso = ((e.clientX - ultimoX) / lienzo.clientWidth) * Math.PI;
-    ultimoX = e.clientX;
-    estado.arrastre = gsap.utils.clamp(-0.7, 0.7, estado.arrastre + paso);
-  });
-  const soltar = () => {
-    if (!arrastrando) return;
-    arrastrando = false;
-    gsap.to(estado, { arrastre: 0, duration: 1.6, ease: 'elastic.out(1, 0.6)' });
-  };
-  lienzo.addEventListener('pointerup', soltar);
-  lienzo.addEventListener('pointercancel', soltar);
+  // Giro: el mouse y el desplazamiento.
+  const estado = { punteroX: 0, punteroY: 0, scroll: 0, tiempo: 0 };
 
   // Con mouse, el abanico se asoma hacia el cursor y la luz lo sigue un poco.
   const portada = sala.closest('section') ?? sala;
@@ -257,7 +235,7 @@ export async function montarPantallas(sala: HTMLElement, escenaHtml: HTMLElement
   const reposoLuz = luz.position.x;
   const pintar = (_t: number, delta: number) => {
     estado.tiempo += Math.min(delta, 50) / 1000;
-    abanico.rotation.y = POSE.y + estado.arrastre + estado.punteroX * 0.3;
+    abanico.rotation.y = POSE.y + estado.punteroX * 0.3 + estado.scroll * 0.35;
     abanico.rotation.x = POSE.x + estado.punteroY * 0.12;
     // Cada pantalla flota a su ritmo; con el desplazamiento el abanico se abre.
     pantallas.forEach((p, i) => {

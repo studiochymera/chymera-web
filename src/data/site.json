@@ -12,12 +12,7 @@
     "boton": "Pide tu propuesta por WhatsApp",
     "botonDemos": "Mira 3 demos funcionando",
     "kit": "¿Todavía no tienes logo? También lo diseñamos.",
-    "kitEnlace": "Mira el Kit de marca de muestra",
-    "cartela": {
-      "titulo": "Tres páginas, un estudio",
-      "detalle": "Vidrio, cerámica y un botón que se nota: así diseñamos cada web.",
-      "gesto": "Arrástralas para girarlas"
-    }
+    "kitEnlace": "Mira el Kit de marca de muestra"
   },
   "beneficios": [
     { "titulo": "Te encuentran en Google", "texto": "Tu negocio aparece cuando buscan “gimnasio cerca” o “spa en Usaquén”, con dirección, horarios y fotos." },
