@@ -106,4 +106,26 @@ if (!sinMovimiento) {
       .then(() => enReposo(montar))
       .catch(() => {});
   }
+
+  // El local de Proceso se arma con los pasos. Se carga cuando la sección se acerca y la página ya cargó.
+  const local = document.querySelector<HTMLElement>('[data-local]');
+  const localEscena = document.querySelector<HTMLElement>('[data-local-escena]');
+  const pasos = document.querySelector<HTMLElement>('[data-pasos]');
+  if (local && localEscena && pasos && !ahorro && 'WebGL2RenderingContext' in window) {
+    const vigia = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        vigia.disconnect();
+        const enReposo = window.requestIdleCallback ?? ((f: () => void) => setTimeout(f, 1));
+        enReposo(() =>
+          import('./local3d')
+            .then(({ montarLocal }) => montarLocal(local, localEscena, pasos))
+            .catch(() => {}),
+        );
+      },
+      { rootMargin: '0px 0px 100% 0px' },
+    );
+    if (document.readyState === 'complete') vigia.observe(localEscena);
+    else window.addEventListener('load', () => vigia.observe(localEscena), { once: true });
+  }
 }
