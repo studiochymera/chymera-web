@@ -1,175 +1,76 @@
 ---
-// Portada de Chymera: titular, botones y una vitrina con las tres demos en un celular.
-// El gesto de la página: la quimera se traza en línea y el celular se "construye" desde su plano.
+// Portada de Chymera: titular a la izquierda y, a la derecha, saliéndose un poco de la página,
+// tres páginas web flotando en abanico en 3D (dos de vidrio esmerilado y una de cerámica azul
+// con el botón celeste). Primero se ve una foto de las pantallas (la misma pose y la misma luz);
+// cuando el 3D carga, la reemplaza sin salto. Si no hay WebGL, queda la foto.
 // El titular y los botones se ven sin esperar ninguna animación.
 import site from '../data/site.json';
 import { enlaceWhatsApp } from '../lib/rutas';
 import Imagen from '../base/Imagen.astro';
-import isotipo from '../../public/brand/isotipo-cream.svg?raw';
 
 const h = site.hero;
-const v = site.vitrina;
-const trazo = isotipo.match(/ d="([^"]+)"/)![1];
-const caja = isotipo.match(/viewBox="([^"]+)"/)![1];
-const proporcion = caja.split(' ').slice(2).join(' / ');
-const demos = site.demos.lista.map((d) => ({ d, plan: site.paquetes.find((p) => p.slug === d.plan)! }));
-const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
 ---
 
 <section class="portada" aria-labelledby="portada-titulo">
-  <div class="guias" aria-hidden="true"></div>
   <div class="contenedor portada-reticula">
-    <div class="portada-texto" data-portada-texto>
+    <div class="portada-texto">
       <p class="portada-etiqueta">{h.etiqueta}</p>
       <h1 id="portada-titulo" class="portada-titulo">
         {h.titulo.split(' ').map((palabra, i) => <><span class="palabra" style={`--i:${i}`}>{palabra}</span>{' '}</>)}
       </h1>
       <p class="portada-sub">{h.subtitulo}</p>
       <div class="portada-botones">
-        <a href={enlaceWhatsApp(site.whatsapp, site.whatsappTexto)} class="boton-claro" target="_blank" rel="noopener">{h.boton}</a>
-        <a href="#portafolio" class="boton-borde">{h.botonDemos}</a>
+        <a href={enlaceWhatsApp(site.whatsapp, site.whatsappTexto)} class="boton-azul" target="_blank" rel="noopener">{h.boton}</a>
+        <a href="#portafolio" class="boton-linea">{h.botonDemos}</a>
       </div>
       <p class="portada-kit">
         {h.kit} <a href="portafolio/kit-de-marca/">{h.kitEnlace}</a>
       </p>
     </div>
 
-    <div class="vitrina" data-vitrina data-inclinar>
-      <div class="quimera" data-portada-quimera aria-hidden="true">
-        <svg class="quimera-trazo" viewBox={caja} focusable="false">
-          <path d={trazo} pathLength="1" fill-rule="evenodd" />
-        </svg>
-      </div>
-
-      <div class="celular-3d" data-inclinar-objeto>
-      <div class="quimera-movil" data-quimera-movil aria-hidden="true" style={`aspect-ratio: ${proporcion}`}></div>
-      <a href={`demos/${demos[0].d.slug}/`} class="celular" data-vitrina-enlace aria-label={ver(demos[0].d.nombre)}>
-        <span class="celular-pantalla">
-          <span class="plano" aria-hidden="true">
-            <span style="--i:0" class="plano-barra"></span>
-            <span style="--i:1" class="plano-titulo"></span>
-            <span style="--i:2" class="plano-titulo plano-corto"></span>
-            <span style="--i:3" class="plano-texto"></span>
-            <span style="--i:4" class="plano-boton"></span>
-            <span style="--i:5" class="plano-foto"></span>
-          </span>
-          {demos.map(({ d }, i) => (
-            <span class="pantalla" data-pantalla={i} data-activa={i === 0 ? '' : undefined}>
-              <Imagen
-                ruta={`portafolio/${d.slug}`}
-                alt=""
-                anchos={[320, 480, 640]}
-                sizes="(min-width: 1024px) 290px, 62vw"
-                proporcion="390/700"
-                prioridad={i === 0}
-                claseMarco="block h-full"
-                class="h-full w-full object-cover object-top"
-              />
-            </span>
-          ))}
-        </span>
-        <span class="brillo" aria-hidden="true"></span>
-      </a>
-      </div>
-
-      <div class="vitrina-pie">
-        <p class="vitrina-titulo">{v.titulo}</p>
-        <div class="pestanas" role="group" aria-label={v.etiqueta}>
-          {demos.map(({ d, plan }, i) => (
-            <button type="button" class="pestana" data-pestana={i} data-nombre={d.nombre} data-slug={d.slug} aria-label={`${d.nombre}, plan ${plan.nombre}`} aria-pressed={i === 0 ? 'true' : 'false'}>
-              <span class="pestana-nombre">{d.nombre.split(' ')[0]}</span>
-              <span class="pestana-plan">{plan.nombre}</span>
-              <span class="pestana-avance" aria-hidden="true"></span>
-            </button>
-          ))}
-          <button type="button" class="pausa" data-pausa data-pausar={v.pausar} data-reanudar={v.reanudar} aria-pressed="false">
-            <span class="pausa-icono" aria-hidden="true"></span>
-            <span class="sr-only" data-pausa-texto>{v.pausar}</span>
-          </button>
-        </div>
+    <div class="sala" data-sala>
+      <div class="sala-escena" data-sala-escena aria-hidden="true">
+        <Imagen
+          ruta="marca/pantallas"
+          alt=""
+          anchos={[560, 840, 1120, 1400]}
+          sizes="(min-width: 1024px) 900px, 130vw"
+          proporcion="1400/1064"
+          prioridad
+          claseMarco="sala-foto"
+          class="block h-full w-full"
+        />
       </div>
     </div>
   </div>
 </section>
 
-<script>
-  // Vitrina: pasa sola de una demo a otra (con pausa), o con las pestañas.
-  const vitrina = document.querySelector<HTMLElement>('[data-vitrina]');
-  if (vitrina) {
-    const pantallas = [...vitrina.querySelectorAll<HTMLElement>('[data-pantalla]')];
-    const pestanas = [...vitrina.querySelectorAll<HTMLButtonElement>('[data-pestana]')];
-    const enlace = vitrina.querySelector<HTMLAnchorElement>('[data-vitrina-enlace]')!;
-    const pausa = vitrina.querySelector<HTMLButtonElement>('[data-pausa]')!;
-    const pausaTexto = pausa.querySelector('[data-pausa-texto]')!;
-    const nombres = pestanas.map((p) => p.dataset.nombre!);
-    const plantilla = enlace.getAttribute('aria-label')!.replace(nombres[0], '{nombre}');
-    let actual = 0;
-
-    const mostrar = (i: number) => {
-      if (i === actual) return;
-      vitrina.classList.add('iniciada');
-      pantallas.forEach((p) => p.removeAttribute('data-previa'));
-      pantallas[actual].removeAttribute('data-activa');
-      pantallas[actual].setAttribute('data-previa', '');
-      pantallas[i].setAttribute('data-activa', '');
-      pestanas.forEach((p, j) => p.setAttribute('aria-pressed', String(j === i)));
-      enlace.setAttribute('href', `demos/${pestanas[i].dataset.slug}/`);
-      enlace.setAttribute('aria-label', plantilla.replace('{nombre}', nombres[i]));
-      actual = i;
-    };
-
-    pestanas.forEach((p, i) => {
-      p.addEventListener('click', () => mostrar(i));
-      p.querySelector('.pestana-avance')!.addEventListener('animationend', () => mostrar((i + 1) % pantallas.length));
-    });
-
-    pausa.addEventListener('click', () => {
-      const pausado = vitrina.classList.toggle('en-pausa');
-      pausa.setAttribute('aria-pressed', String(pausado));
-      pausaTexto.textContent = pausado ? pausa.dataset.reanudar! : pausa.dataset.pausar!;
-    });
-  }
-</script>
-
 <style>
   .portada {
     --tras-intro: 1.3s;
     --salida: cubic-bezier(0.22, 1, 0.36, 1);
-    --mover: cubic-bezier(0.65, 0, 0.35, 1);
     position: relative;
     overflow: hidden;
-    background: var(--color-azul);
-    color: var(--color-crema);
+    background: var(--color-crema);
     isolation: isolate;
-  }
-
-  /* Guías de construcción: la retícula del estudio, apenas visible. */
-  .guias {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-image: linear-gradient(to right, rgb(253 248 244 / 0.045) 1px, transparent 1px);
-    background-size: calc(100% / 4) 100%;
-    mask-image: linear-gradient(to bottom, black 40%, transparent);
-  }
-  @media (min-width: 1024px) {
-    .guias {
-      background-size: calc(100% / 12) 100%;
-    }
   }
 
   .portada-reticula {
     display: grid;
-    gap: 3rem;
-    padding-block: 3.5rem 4rem;
+    padding-block: 1.5rem 3rem;
   }
   @media (min-width: 1024px) {
     .portada-reticula {
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
       align-items: center;
-      gap: 2rem;
-      min-height: min(54rem, calc(100svh - 4rem));
-      padding-block: 4rem;
+      min-height: min(52rem, calc(100svh - 4rem));
+      padding-block: 3rem;
+    }
+    .portada-texto {
+      position: relative;
+      z-index: 1;
+      grid-column: 1 / span 6;
+      grid-row: 1;
     }
   }
 
@@ -179,31 +80,29 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
     gap: 0.625rem;
     font-size: 0.875rem;
     font-weight: 500;
-    color: rgb(253 248 244 / 0.75);
+    color: rgb(4 5 7 / 0.7);
   }
   .portada-etiqueta::before {
     content: '';
     width: 1.75rem;
     height: 1px;
-    background: var(--color-celeste);
+    background: var(--color-azul);
   }
 
   .portada-titulo {
     margin-top: 1.25rem;
-    color: var(--color-crema);
     font-size: clamp(2.6rem, 1.6rem + 4.6vw, 5.25rem);
     font-weight: 600;
     line-height: 1.02;
     letter-spacing: -0.04em;
-    text-wrap: balance;
   }
 
   .portada-sub {
-    max-width: 34rem;
+    max-width: 33rem;
     margin-top: 1.5rem;
     font-size: 1.0625rem;
     line-height: 1.6;
-    color: rgb(253 248 244 / 0.8);
+    color: rgb(4 5 7 / 0.75);
     text-wrap: pretty;
   }
   @media (min-width: 640px) {
@@ -218,347 +117,108 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
     gap: 0.75rem;
     margin-top: 2rem;
   }
+  .boton-linea {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid rgb(29 42 58 / 0.3);
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-azul);
+    transition:
+      border-color 160ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      background-color 160ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      color 160ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .boton-linea:hover {
+    border-color: var(--color-azul);
+    background: var(--color-azul);
+    color: var(--color-crema);
+  }
+  .boton-linea:active {
+    transform: scale(0.98);
+  }
 
   .portada-kit {
+    max-width: 33rem;
     margin-top: 1.75rem;
     padding-top: 1.25rem;
-    max-width: 34rem;
-    border-top: 1px solid rgb(253 248 244 / 0.12);
+    border-top: 1px solid rgb(29 42 58 / 0.12);
     font-size: 0.9375rem;
-    color: rgb(253 248 244 / 0.75);
+    color: rgb(4 5 7 / 0.72);
   }
   .portada-kit a {
-    color: var(--color-crema);
+    color: var(--color-azul);
     font-weight: 600;
     text-decoration: underline;
     text-decoration-color: var(--color-celeste);
-    text-underline-offset: 0.3em;
     text-decoration-thickness: 1px;
-    transition: color 150ms ease;
+    text-underline-offset: 0.3em;
   }
   .portada-kit a:hover {
-    color: var(--color-celeste);
+    text-decoration-thickness: 2px;
   }
 
-  /* Vitrina */
-  .vitrina {
-    display: grid;
-    justify-items: center;
-    gap: 2rem;
+  /* La pieza: un acento que pasa a la derecha y se sale un poco de la página.
+     En celular y tableta va primero, encima del titular, para que se vea al entrar. */
+  .sala {
+    position: relative;
+    order: -1;
+    width: 108%;
+    margin: -1.5rem -24% 0.5rem auto;
   }
-
-  /* En celular la quimera va detrás del titular, para que el trazo se vea al entrar. */
-  .quimera {
+  .sala-escena {
+    position: relative;
+    aspect-ratio: 1400 / 1064;
+    margin: -8% -12% -2%;
+  }
+  .sala-escena :global(.sala-foto) {
     position: absolute;
-    z-index: -1;
-    top: 5.5rem;
-    right: -42%;
-    width: max(125%, 28rem);
-  }
-  .quimera-trazo {
+    inset: 0;
     display: block;
-    width: 100%;
-    height: auto;
-    overflow: visible;
-    transition: opacity 1.2s var(--salida);
+    transition: opacity 0.9s var(--salida);
   }
-  /* La quimera en 3D: quimera3d.ts crea el lienzo (por eso va con :global). Es más grande que el
-     trazo para que la figura no se corte al girar. Aparece encima del trazo y el trazo se va. */
-  .quimera :global(.quimera-3d),
-  .quimera-movil :global(.quimera-3d) {
+  /* El lienzo lo crea pantallas3d.ts (por eso va con :global). Aparece sobre la foto y la foto se va. */
+  .sala-escena :global(.pieza-3d) {
     position: absolute;
-    top: -25%;
-    left: -25%;
-    width: 150%;
-    height: 150%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
-    pointer-events: none;
-    transition: opacity 1.4s var(--salida);
+    transition: opacity 0.9s var(--salida);
   }
-  [data-estado='3d'] > :global(.quimera-3d) {
+  .sala[data-estado='3d'] :global(.pieza-3d) {
     opacity: 1;
   }
-  /* En celular y tableta la quimera en 3D no va detrás del titular, para no tapar el texto:
-     aparece detrás del celular de la vitrina. */
-  .quimera-movil {
-    position: absolute;
-    z-index: -1;
-    top: 4%;
-    left: 50%;
-    width: max(200%, 24rem);
-    translate: -54% 0;
-    pointer-events: none;
-  }
-  .quimera[data-estado='3d'] .quimera-trazo {
+  .sala[data-estado='3d'] :global(.sala-foto) {
     opacity: 0;
-  }
-  .quimera path {
-    fill: var(--color-crema);
-    fill-opacity: 0.06;
-    stroke: var(--color-celeste);
-    stroke-width: 3;
-    stroke-opacity: 0;
-    stroke-dasharray: 1 1;
-    stroke-dashoffset: 0;
-    vector-effect: non-scaling-stroke;
-  }
-
-  .celular {
-    position: relative;
-    display: block;
-    width: min(62vw, 18rem);
-    aspect-ratio: 288 / 504;
-    padding: 0.55rem;
-    border-radius: 2.6rem;
-    background: #0b1119;
-    box-shadow:
-      0 0 0 1px rgb(253 248 244 / 0.14),
-      0 2px 4px rgb(0 0 0 / 0.2),
-      0 30px 60px -20px rgb(0 0 0 / 0.6);
-  }
-  .celular::before {
-    content: '';
-    position: absolute;
-    z-index: 5;
-    top: 1.05rem;
-    left: 50%;
-    width: 28%;
-    height: 0.85rem;
-    translate: -50% 0;
-    border-radius: 999px;
-    background: #0b1119;
-  }
-  .celular:focus-visible {
-    outline: 2px solid var(--color-celeste);
-    outline-offset: 6px;
-  }
-
-  /* Falso 3D: movimiento.ts inclina el celular hacia el mouse y mueve el brillo. */
-  .celular-3d {
-    position: relative;
-  }
-  .brillo {
-    position: absolute;
-    inset: 0.55rem;
-    z-index: 6;
-    border-radius: 2.05rem;
-    background: radial-gradient(circle at var(--brillo-x, 50%) var(--brillo-y, 0%), rgb(255 255 255 / 0.22), transparent 55%);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 300ms ease;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    :global(html.con-movimiento) .vitrina:hover .brillo {
-      opacity: 1;
-    }
-  }
-
-  .celular-pantalla {
-    position: relative;
-    display: block;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 2.05rem;
-    background: #152030;
-  }
-
-  /* El plano: la página antes del diseño. */
-  .plano {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-    padding: 2.6rem 1.1rem 1.1rem;
-  }
-  .plano > span {
-    display: block;
-    border: 1px dashed rgb(39 155 242 / 0.55);
-    border-radius: 3px;
-    transform-origin: left;
-  }
-  .plano-barra {
-    height: 1.4rem;
-    margin-bottom: 1.2rem;
-  }
-  .plano-titulo {
-    height: 1.9rem;
-  }
-  .plano-corto {
-    width: 62%;
-  }
-  .plano-texto {
-    height: 3rem;
-    width: 88%;
-  }
-  .plano-boton {
-    height: 2.2rem;
-    width: 55%;
-    border-radius: 999px !important;
-  }
-  .plano-foto {
-    flex: 1;
-    margin-top: 0.6rem;
-  }
-
-  .pantalla {
-    position: absolute;
-    inset: 0;
-    clip-path: inset(0 0 100% 0);
-    transition: clip-path 900ms var(--mover);
-  }
-  .pantalla[data-activa] {
-    z-index: 2;
-    clip-path: inset(0);
-  }
-  .pantalla[data-previa] {
-    z-index: 1;
-    clip-path: inset(0);
-    transition: none;
-  }
-
-  .vitrina-pie {
-    width: min(100%, 26rem);
-  }
-  .vitrina-titulo {
-    font-family: var(--font-display);
-    font-size: 0.9375rem;
-    font-weight: 600;
-    text-align: center;
-    color: rgb(253 248 244 / 0.9);
-  }
-  .pestanas {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
-    gap: 0.25rem;
-    margin-top: 0.75rem;
-  }
-  .pestana {
-    position: relative;
-    display: grid;
-    min-height: 2.75rem;
-    padding: 0.5rem 0.5rem 0.75rem;
-    border: 0;
-    border-radius: 0.5rem;
-    background: transparent;
-    color: rgb(253 248 244 / 0.72);
-    text-align: left;
-    cursor: pointer;
-    transition: color 150ms ease, background-color 150ms ease;
-  }
-  .pestana:hover {
-    color: var(--color-crema);
-  }
-  .pestana[aria-pressed='true'] {
-    color: var(--color-crema);
-  }
-  .pestana:focus-visible,
-  .pausa:focus-visible {
-    outline: 2px solid var(--color-celeste);
-    outline-offset: 2px;
-  }
-  .pestana-nombre {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    line-height: 1.25;
-  }
-  .pestana-plan {
-    font-size: 0.75rem;
-    white-space: nowrap;
-  }
-  .pestana::before,
-  .pestana-avance {
-    content: '';
-    position: absolute;
-    left: 0.5rem;
-    right: 0.5rem;
-    bottom: 0.25rem;
-    height: 2px;
-    border-radius: 2px;
-  }
-  .pestana::before {
-    background: rgb(253 248 244 / 0.15);
-  }
-  .pestana-avance {
-    background: var(--color-celeste);
-    transform: scaleX(0);
-    transform-origin: left;
-  }
-  .pestana[aria-pressed='true'] .pestana-avance {
-    transform: scaleX(1);
-  }
-
-  .pausa {
-    display: grid;
-    place-items: center;
-    width: 2.75rem;
-    min-height: 2.75rem;
-    border: 0;
-    border-radius: 999px;
-    background: transparent;
-    color: rgb(253 248 244 / 0.75);
-    cursor: pointer;
-    transition: color 150ms ease;
-  }
-  .pausa:hover {
-    color: var(--color-crema);
-  }
-  .pausa-icono {
-    width: 0.7rem;
-    height: 0.8rem;
-    border-inline: 3px solid currentColor;
-  }
-  .pausa[aria-pressed='true'] .pausa-icono {
-    width: 0;
-    height: 0;
-    border-block: 0.45rem solid transparent;
-    border-inline: 0.75rem solid currentColor;
-    border-inline-end-width: 0;
-    translate: 2px 0;
   }
 
   @media (min-width: 640px) {
-    .quimera {
-      top: 3rem;
-      right: -18%;
-      width: 44rem;
-    }
-  }
-  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-    .quimera path {
-      stroke-opacity: 0.7;
+    .sala {
+      width: min(100%, 36rem);
+      margin-bottom: 1.5rem;
     }
   }
   @media (min-width: 1024px) {
-    .vitrina {
-      position: relative;
+    .sala {
+      order: 0;
+      width: auto;
+      grid-column: 7 / span 6;
+      grid-row: 1;
+      margin: 0 -34% 0 0;
     }
-    .quimera-movil {
-      display: none;
-    }
-    .celular {
-      width: 18rem;
-    }
-    .quimera {
-      top: 50%;
-      left: 50%;
-      right: auto;
-      width: min(46rem, 62vw);
-      translate: -40% -56%;
+    .sala-escena {
+      margin: -6% 0 -10% 0;
     }
   }
 
   /* Movimiento: solo si la persona no pidió reducirlo. */
   @media (prefers-reduced-motion: no-preference) {
-    .quimera path {
-      stroke-opacity: 0.5;
-      fill-opacity: 0;
-      stroke-dashoffset: 1;
-      animation:
-        trazar 2.6s var(--mover) calc(var(--tras-intro) + 0.2s) forwards,
-        rellenar 1.2s var(--salida) calc(var(--tras-intro) + 2.4s) forwards;
-    }
-
     /* Titular: las palabras suben en cascada mientras la cortina de la intro se va. */
     .palabra {
       display: inline-block;
@@ -570,10 +230,14 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
     .portada-kit {
       animation: aparecer 0.9s var(--salida) backwards;
     }
-    /* El subtítulo es lo más grande que pinta la portada: solo sube, sin pasar por invisible,
-       para no atrasar la carga que mide Google. */
+    /* El subtítulo y la foto de la pieza son lo más grande que pinta la portada: solo se mueven,
+       sin pasar por invisibles, para no atrasar la carga que mide Google. */
     .portada-sub {
       animation: subir 0.9s var(--salida) backwards;
+    }
+    .sala-escena {
+      animation: posar 1.4s var(--salida) backwards;
+      animation-delay: calc(var(--tras-intro) - 0.1s);
     }
     .portada-etiqueta {
       animation-delay: calc(var(--tras-intro) - 0.1s);
@@ -586,47 +250,6 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
     }
     .portada-kit {
       animation-delay: calc(var(--tras-intro) + 0.45s);
-    }
-
-    .celular {
-      animation: llegar 900ms var(--salida) calc(var(--tras-intro) + 0.1s) backwards;
-    }
-    .plano > span {
-      animation: dibujar 500ms var(--salida) both;
-      animation-delay: calc(var(--tras-intro) + 0.45s + var(--i) * 80ms);
-    }
-    .vitrina:not(.iniciada) .pantalla[data-pantalla='0'] {
-      animation: construir 1.1s var(--mover) calc(var(--tras-intro) + 1.25s) both;
-    }
-
-    .pestana[aria-pressed='true'] .pestana-avance {
-      transform: scaleX(0);
-      animation: avanzar 7s linear forwards;
-    }
-    .vitrina:not(.iniciada) .pestana[data-pestana='0'] .pestana-avance {
-      animation-delay: calc(var(--tras-intro) + 2.35s);
-    }
-    .vitrina.en-pausa .pestana-avance,
-    .vitrina:focus-within .pestana-avance {
-      animation-play-state: paused;
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .vitrina:hover .pestana-avance {
-        animation-play-state: paused;
-      }
-    }
-  }
-
-  /* Sin animación no hay avance automático: la pausa sobra. */
-  @media (prefers-reduced-motion: reduce) {
-    .pausa {
-      display: none;
-    }
-    .pestanas {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .pantalla {
-      transition: none;
     }
   }
 
@@ -649,43 +272,9 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
       transform: translateY(16px);
     }
   }
-  @keyframes trazar {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-  @keyframes rellenar {
-    to {
-      fill-opacity: 0.06;
-      stroke-opacity: 0.18;
-    }
-  }
-  @keyframes llegar {
+  @keyframes posar {
     from {
-      opacity: 0;
-      transform: translateY(28px) scale(0.97);
-    }
-  }
-  @keyframes dibujar {
-    from {
-      opacity: 0;
-      transform: scaleX(0.2);
-    }
-  }
-  @keyframes construir {
-    from {
-      clip-path: inset(0 0 100% 0);
-    }
-    to {
-      clip-path: inset(0);
-    }
-  }
-  @keyframes avanzar {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
+      transform: translateY(24px) scale(0.97);
     }
   }
 </style>

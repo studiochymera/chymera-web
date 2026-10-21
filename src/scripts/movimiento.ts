@@ -75,17 +75,18 @@ if (!sinMovimiento) {
   // Las imágenes diferidas cambian alturas: recalcular las escenas cuando todo cargó.
   window.addEventListener('load', () => ScrollTrigger.refresh());
 
-  // La quimera en 3D se carga cuando termina el trazo de la portada. En computador va encima del
-  // trazo; en pantallas pequeñas va detrás del celular y se carga cuando la persona llega cerca.
-  // Se salta si el navegador no tiene WebGL 2 o si la persona pidió ahorrar datos.
-  const quimera = document.querySelector<HTMLElement>('[data-portada-quimera]');
-  const ancha = window.matchMedia('(min-width: 1024px)').matches;
-  const destino = ancha ? quimera : document.querySelector<HTMLElement>('[data-quimera-movil]');
+  // Las pantallas en 3D reemplazan a su foto cuando la pieza ya se posó en la sala (después de la intro),
+  // la página terminó de cargar y la sala está cerca de la pantalla.
+  // Se salta si el navegador no tiene WebGL 2 o si la persona pidió ahorrar datos: queda la foto.
+  const sala = document.querySelector<HTMLElement>('[data-sala]');
+  const escena = document.querySelector<HTMLElement>('[data-sala-escena]');
   const ahorro = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-  if (quimera && destino && !ahorro && 'WebGL2RenderingContext' in window) {
-    const trazos = quimera.querySelector('path')?.getAnimations() ?? [];
+  if (sala && escena && !ahorro && 'WebGL2RenderingContext' in window) {
+    const posada = escena.getAnimations().map((a) => a.finished);
+    const cargada = new Promise<void>((listo) =>
+      document.readyState === 'complete' ? listo() : window.addEventListener('load', () => listo(), { once: true }),
+    );
     const cerca = new Promise<void>((listo) => {
-      if (ancha) return listo();
       const vigia = new IntersectionObserver(
         ([e]) => {
           if (!e.isIntersecting) return;
@@ -94,15 +95,37 @@ if (!sinMovimiento) {
         },
         { rootMargin: '0px 0px 50% 0px' },
       );
-      vigia.observe(destino);
+      vigia.observe(escena);
     });
     const enReposo = window.requestIdleCallback ?? ((f: () => void) => setTimeout(f, 1));
     const montar = () =>
-      import('./quimera3d')
-        .then(({ montarQuimera }) => montarQuimera(quimera, destino))
+      import('./pantallas3d')
+        .then(({ montarPantallas }) => montarPantallas(sala, escena))
         .catch(() => {});
-    Promise.all([...trazos.map((a) => a.finished), cerca])
+    Promise.all([...posada, cargada, cerca])
       .then(() => enReposo(montar))
       .catch(() => {});
+  }
+
+  // El local de Proceso se arma con los pasos. Se carga cuando la sección se acerca y la página ya cargó.
+  const local = document.querySelector<HTMLElement>('[data-local]');
+  const localEscena = document.querySelector<HTMLElement>('[data-local-escena]');
+  const pasos = document.querySelector<HTMLElement>('[data-pasos]');
+  if (local && localEscena && pasos && !ahorro && 'WebGL2RenderingContext' in window) {
+    const vigia = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        vigia.disconnect();
+        const enReposo = window.requestIdleCallback ?? ((f: () => void) => setTimeout(f, 1));
+        enReposo(() =>
+          import('./local3d')
+            .then(({ montarLocal }) => montarLocal(local, localEscena, pasos))
+            .catch(() => {}),
+        );
+      },
+      { rootMargin: '0px 0px 100% 0px' },
+    );
+    if (document.readyState === 'complete') vigia.observe(localEscena);
+    else window.addEventListener('load', () => vigia.observe(localEscena), { once: true });
   }
 }

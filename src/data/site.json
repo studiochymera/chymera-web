@@ -375,6 +375,8 @@
   "vitrina": {
     "etiqueta": "Tres demos de Chymera en un celular",
     "titulo": "Tres negocios, tres diseños, un mismo estudio.",
+    "texto": "Una barbería, un gimnasio y un spa: cada demo es una web completa con su propio diseño. Toca una pestaña para cambiar de negocio o abre la demo desde el celular.",
+    "enlace": "Ver qué incluye cada demo",
     "pausar": "Pausar",
     "reanudar": "Reanudar",
     "ver": "Ver la demo de {nombre}"
