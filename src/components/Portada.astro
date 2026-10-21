@@ -1,9 +1,9 @@
 ---
-// Portada de Chymera: una sala clara con una sola pieza, un bodegón geométrico en 3D (arco, media
-// esfera, disco, escalera y una esfera celeste) en piedra crema y cerámica azul.
-// Primero se ve una foto del bodegón (la misma pose y la misma luz); cuando el 3D carga, la
-// reemplaza sin salto, la luz sigue al mouse y se puede girar un poco arrastrando. Si no hay
-// WebGL, queda la foto.
+// Portada de Chymera: una sala clara con una sola pieza en 3D, tres páginas web flotando en
+// abanico (dos de vidrio esmerilado y una de cerámica azul con el botón celeste).
+// Primero se ve una foto de las pantallas (la misma pose y la misma luz); cuando el 3D carga, la
+// reemplaza sin salto, flotan, siguen al mouse y se giran un poco arrastrando. Si no hay WebGL,
+// queda la foto.
 // El titular y los botones se ven sin esperar ninguna animación.
 import site from '../data/site.json';
 import { enlaceWhatsApp } from '../lib/rutas';
@@ -33,7 +33,7 @@ const c = h.cartela;
     <figure class="sala" data-sala>
       <div class="sala-escena" data-sala-escena aria-hidden="true">
         <Imagen
-          ruta="marca/bodegon"
+          ruta="marca/pantallas"
           alt=""
           anchos={[560, 840, 1120, 1400]}
           sizes="(min-width: 1024px) 760px, 115vw"
@@ -60,14 +60,6 @@ const c = h.cartela;
     overflow: hidden;
     background: var(--color-crema);
     isolation: isolate;
-  }
-  /* La luz de la sala: un foco suave detrás de la pieza. */
-  .portada::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    background: radial-gradient(75% 70% at 72% 50%, rgb(255 255 255 / 0.55) 0%, transparent 75%);
   }
 
   .portada-reticula {
@@ -198,7 +190,7 @@ const c = h.cartela;
     display: block;
     transition: opacity 0.9s var(--salida);
   }
-  /* El lienzo lo crea bodegon3d.ts (por eso va con :global). Aparece sobre la foto y la foto se va. */
+  /* El lienzo lo crea pantallas3d.ts (por eso va con :global). Aparece sobre la foto y la foto se va. */
   .sala-escena :global(.pieza-3d) {
     position: absolute;
     inset: 0;
@@ -278,7 +270,7 @@ const c = h.cartela;
       margin: 0 0 -6% 0;
     }
     .cartela {
-      margin-top: -2.5rem;
+      margin-top: 0;
       margin-right: 12%;
     }
   }
