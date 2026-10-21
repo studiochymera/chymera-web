@@ -74,4 +74,35 @@ if (!sinMovimiento) {
 
   // Las imágenes diferidas cambian alturas: recalcular las escenas cuando todo cargó.
   window.addEventListener('load', () => ScrollTrigger.refresh());
+
+  // La quimera en 3D se carga cuando termina el trazo de la portada. En computador va encima del
+  // trazo; en pantallas pequeñas va detrás del celular y se carga cuando la persona llega cerca.
+  // Se salta si el navegador no tiene WebGL 2 o si la persona pidió ahorrar datos.
+  const quimera = document.querySelector<HTMLElement>('[data-portada-quimera]');
+  const ancha = window.matchMedia('(min-width: 1024px)').matches;
+  const destino = ancha ? quimera : document.querySelector<HTMLElement>('[data-quimera-movil]');
+  const ahorro = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+  if (quimera && destino && !ahorro && 'WebGL2RenderingContext' in window) {
+    const trazos = quimera.querySelector('path')?.getAnimations() ?? [];
+    const cerca = new Promise<void>((listo) => {
+      if (ancha) return listo();
+      const vigia = new IntersectionObserver(
+        ([e]) => {
+          if (!e.isIntersecting) return;
+          vigia.disconnect();
+          listo();
+        },
+        { rootMargin: '0px 0px 50% 0px' },
+      );
+      vigia.observe(destino);
+    });
+    const enReposo = window.requestIdleCallback ?? ((f: () => void) => setTimeout(f, 1));
+    const montar = () =>
+      import('./quimera3d')
+        .then(({ montarQuimera }) => montarQuimera(quimera, destino))
+        .catch(() => {});
+    Promise.all([...trazos.map((a) => a.finished), cerca])
+      .then(() => enReposo(montar))
+      .catch(() => {});
+  }
 }

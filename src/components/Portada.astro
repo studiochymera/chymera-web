@@ -11,6 +11,7 @@ const h = site.hero;
 const v = site.vitrina;
 const trazo = isotipo.match(/ d="([^"]+)"/)![1];
 const caja = isotipo.match(/viewBox="([^"]+)"/)![1];
+const proporcion = caja.split(' ').slice(2).join(' / ');
 const demos = site.demos.lista.map((d) => ({ d, plan: site.paquetes.find((p) => p.slug === d.plan)! }));
 const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
 ---
@@ -34,11 +35,14 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
     </div>
 
     <div class="vitrina" data-vitrina data-inclinar>
-      <svg class="quimera" data-portada-quimera viewBox={caja} aria-hidden="true" focusable="false">
-        <path d={trazo} pathLength="1" fill-rule="evenodd" />
-      </svg>
+      <div class="quimera" data-portada-quimera aria-hidden="true">
+        <svg class="quimera-trazo" viewBox={caja} focusable="false">
+          <path d={trazo} pathLength="1" fill-rule="evenodd" />
+        </svg>
+      </div>
 
       <div class="celular-3d" data-inclinar-objeto>
+      <div class="quimera-movil" data-quimera-movil aria-hidden="true" style={`aspect-ratio: ${proporcion}`}></div>
       <a href={`demos/${demos[0].d.slug}/`} class="celular" data-vitrina-enlace aria-label={ver(demos[0].d.nombre)}>
         <span class="celular-pantalla">
           <span class="plano" aria-hidden="true">
@@ -250,7 +254,43 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
     top: 5.5rem;
     right: -42%;
     width: max(125%, 28rem);
+  }
+  .quimera-trazo {
+    display: block;
+    width: 100%;
+    height: auto;
     overflow: visible;
+    transition: opacity 1.2s var(--salida);
+  }
+  /* La quimera en 3D: quimera3d.ts crea el lienzo (por eso va con :global). Es más grande que el
+     trazo para que la figura no se corte al girar. Aparece encima del trazo y el trazo se va. */
+  .quimera :global(.quimera-3d),
+  .quimera-movil :global(.quimera-3d) {
+    position: absolute;
+    top: -25%;
+    left: -25%;
+    width: 150%;
+    height: 150%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.4s var(--salida);
+  }
+  [data-estado='3d'] > :global(.quimera-3d) {
+    opacity: 1;
+  }
+  /* En celular y tableta la quimera en 3D no va detrás del titular, para no tapar el texto:
+     aparece detrás del celular de la vitrina. */
+  .quimera-movil {
+    position: absolute;
+    z-index: -1;
+    top: 4%;
+    left: 50%;
+    width: max(200%, 24rem);
+    translate: -54% 0;
+    pointer-events: none;
+  }
+  .quimera[data-estado='3d'] .quimera-trazo {
+    opacity: 0;
   }
   .quimera path {
     fill: var(--color-crema);
@@ -493,6 +533,9 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
     .vitrina {
       position: relative;
     }
+    .quimera-movil {
+      display: none;
+    }
     .celular {
       width: 18rem;
     }
@@ -500,7 +543,7 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
       top: 50%;
       left: 50%;
       right: auto;
-      width: 46rem;
+      width: min(46rem, 62vw);
       translate: -40% -56%;
     }
   }
