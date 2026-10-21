@@ -33,12 +33,13 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
       </p>
     </div>
 
-    <div class="vitrina" data-vitrina>
+    <div class="vitrina" data-vitrina data-inclinar>
       <svg class="quimera" data-portada-quimera viewBox={caja} aria-hidden="true" focusable="false">
         <path d={trazo} pathLength="1" fill-rule="evenodd" />
       </svg>
 
-      <a href={`demos/${demos[0].d.slug}/`} class="celular" data-vitrina-enlace data-cursor={site.cursor.demo} aria-label={ver(demos[0].d.nombre)}>
+      <div class="celular-3d" data-inclinar-objeto>
+      <a href={`demos/${demos[0].d.slug}/`} class="celular" data-vitrina-enlace aria-label={ver(demos[0].d.nombre)}>
         <span class="celular-pantalla">
           <span class="plano" aria-hidden="true">
             <span style="--i:0" class="plano-barra"></span>
@@ -63,7 +64,9 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
             </span>
           ))}
         </span>
+        <span class="brillo" aria-hidden="true"></span>
       </a>
+      </div>
 
       <div class="vitrina-pie">
         <p class="vitrina-titulo">{v.titulo}</p>
@@ -272,7 +275,6 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
       0 0 0 1px rgb(253 248 244 / 0.14),
       0 2px 4px rgb(0 0 0 / 0.2),
       0 30px 60px -20px rgb(0 0 0 / 0.6);
-    transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .celular::before {
     content: '';
@@ -290,9 +292,24 @@ const ver = (nombre: string) => v.ver.replace('{nombre}', nombre);
     outline: 2px solid var(--color-celeste);
     outline-offset: 6px;
   }
+
+  /* Falso 3D: movimiento.ts inclina el celular hacia el mouse y mueve el brillo. */
+  .celular-3d {
+    position: relative;
+  }
+  .brillo {
+    position: absolute;
+    inset: 0.55rem;
+    z-index: 6;
+    border-radius: 2.05rem;
+    background: radial-gradient(circle at var(--brillo-x, 50%) var(--brillo-y, 0%), rgb(255 255 255 / 0.22), transparent 55%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease;
+  }
   @media (hover: hover) and (pointer: fine) {
-    .celular:hover {
-      transform: translateY(-4px);
+    :global(html.con-movimiento) .vitrina:hover .brillo {
+      opacity: 1;
     }
   }
 

@@ -15,7 +15,7 @@
     "kitEnlace": "Mira el Kit de marca de muestra"
   },
   "beneficios": [
-    { "titulo": "Te encuentran en Google", "texto": "Tu negocio aparece cuando buscan \"gimnasio cerca\" o \"spa en Usaquén\", con dirección, horarios y fotos." },
+    { "titulo": "Te encuentran en Google", "texto": "Tu negocio aparece cuando buscan “gimnasio cerca” o “spa en Usaquén”, con dirección, horarios y fotos." },
     { "titulo": "Te escriben y reservan", "texto": "Botón de WhatsApp con el mensaje listo, formulario y reservas en línea conectadas a tu negocio." },
     { "titulo": "Se ve profesional en el celular", "texto": "Rápida, clara y con tu marca. La mayoría de tus clientes te va a ver desde el teléfono." }
   ],
@@ -225,7 +225,9 @@
     "kit": {
       "etiqueta": "Kit de marca de muestra",
       "titulo": "Filo Barbería, de cero a marca",
-      "texto": "La barbería de la demo no tenía logo, así que le hicimos uno con el Kit de marca: logo en tres versiones, paleta, tipografías, favicon, imágenes para redes y una guía de una página.",
+      "texto": "La barbería de la demo no tenía logo, así que le hicimos uno con el Kit de marca.",
+      "incluyeTitulo": "Lo que incluye",
+      "incluye": ["Logo en tres versiones", "Paleta de colores y tipografías", "Favicon, imágenes para redes y guía de marca"],
       "ver": "Ver el kit completo",
       "precio": "Kit de marca · {precio}, junto con cualquier plan"
     }
@@ -403,16 +405,14 @@
     "texto": "Escríbenos por WhatsApp y te mostramos cómo se vería tu página antes de que decidas.",
     "boton": "Pide tu propuesta por WhatsApp"
   },
-  "cursor": {
-    "demo": "Ver demo",
-    "kit": "Ver kit"
+  "beneficiosVisual": {
+    "busqueda": "gimnasio cerca",
+    "resultado": "Tu negocio",
+    "detalle": "Abierto ahora",
+    "acciones": ["Sitio web", "Cómo llegar", "Llamar"],
+    "mensaje": "Hola, quiero reservar una clase de prueba para el sábado.",
+    "hora": "9:41"
   },
-  "franja": [
-    "Páginas web",
-    "Kit de marca",
-    "Reservas en línea",
-    "Hechas en Bogotá"
-  ],
   "kitMuestra": {
     "tituloPagina": "Kit de marca de muestra: Filo Barbería",
     "descripcion": "Ejemplo del Kit de marca de Chymera Studios: logo en tres versiones, paleta, tipografías, favicon, imágenes para redes y guía de marca para una barbería de Chapinero.",
