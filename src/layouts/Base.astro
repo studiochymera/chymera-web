@@ -25,6 +25,7 @@ const imagenSocial = new URL('og.jpg', Astro.site).href;
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
+  '@id': `${Astro.site?.href}#negocio`,
   name: site.nombre,
   url: Astro.site?.href,
   email: site.correo,
