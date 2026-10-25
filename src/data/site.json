@@ -15,7 +15,7 @@
     "kitEnlace": "Mira el Kit de marca de muestra"
   },
   "beneficios": [
-    { "titulo": "Listos para que te encuentren", "texto": "Dejamos tu página y tu perfil de Google Maps listos para cuando buscan “gimnasio cerca” o “spa en Usaquén”, con dirección, horarios y fotos." },
+    { "titulo": "Listos para que te encuentren", "texto": "Tu página y tu perfil de Google Maps, listos para cuando buscan “gimnasio cerca” o “spa en Usaquén”." },
     { "titulo": "Te escriben y reservan", "texto": "Botón de WhatsApp con el mensaje listo, formulario y reservas en línea conectadas a tu negocio." },
     { "titulo": "Se ve profesional en el celular", "texto": "Rápida, clara y con tu marca. La mayoría de tus clientes te va a ver desde el teléfono." }
   ],
@@ -125,7 +125,7 @@
     }
   ],
   "planes": [
-    { "nombre": "Base", "precio": "49.000", "texto": "Hosting, dominio, candado de seguridad, copias de respaldo, soporte por WhatsApp y 30 minutos de cambios al mes.", "items": ["Hosting, candado de seguridad y copias de respaldo", "Renovación de tu dominio .com o .com.co", "Soporte por WhatsApp de lunes a viernes, 8 a. m. a 6 p. m.", "30 minutos de cambios al mes", "Si cambia tu horario o teléfono, lo cambiamos también en tus perfiles de mapas", "Cambios pequeños listos en 1 a 2 días hábiles"] },
+    { "nombre": "Base", "precio": "49.000", "texto": "Hosting, dominio, candado de seguridad, copias de respaldo, soporte por WhatsApp y 30 minutos de cambios al mes.", "items": ["Hosting, candado de seguridad y copias de respaldo", "Renovación de tu dominio .com o .com.co", "Soporte por WhatsApp de lunes a viernes, 8 a. m. a 6 p. m.", "30 minutos de cambios al mes", "Datos al día en tus perfiles de mapas", "Cambios pequeños listos en 1 a 2 días hábiles"] },
     { "nombre": "Activo", "precio": "95.000", "texto": "Todo lo de Base, 60 minutos de cambios, una landing de promoción al trimestre y reporte mensual de visitas, llamadas y rutas desde Google.", "items": ["Todo lo de Base", "60 minutos de cambios al mes", "Una landing de promoción cada trimestre", "Reporte mensual de visitas, llamadas y rutas desde Google"] }
   ],
   "detallePlanes": {
