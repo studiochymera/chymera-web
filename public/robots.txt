@@ -1,3 +1,4 @@
+# Todo abierto, también para los buscadores con IA (OAI-SearchBot, PerplexityBot, Claude-SearchBot, Applebot).
 User-agent: *
 Allow: /
 

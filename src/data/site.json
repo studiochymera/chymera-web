@@ -15,7 +15,7 @@
     "kitEnlace": "Mira el Kit de marca de muestra"
   },
   "beneficios": [
-    { "titulo": "Te encuentran en Google", "texto": "Tu negocio aparece cuando buscan “gimnasio cerca” o “spa en Usaquén”, con dirección, horarios y fotos." },
+    { "titulo": "Listos para que te encuentren", "texto": "Dejamos tu página y tu perfil de Google Maps listos para cuando buscan “gimnasio cerca” o “spa en Usaquén”, con dirección, horarios y fotos." },
     { "titulo": "Te escriben y reservan", "texto": "Botón de WhatsApp con el mensaje listo, formulario y reservas en línea conectadas a tu negocio." },
     { "titulo": "Se ve profesional en el celular", "texto": "Rápida, clara y con tu marca. La mayoría de tus clientes te va a ver desde el teléfono." }
   ],
@@ -56,11 +56,11 @@
       ],
       "grupos": [
         { "titulo": "Diseño y contenido", "items": ["Diseño hecho para tu negocio, con tu logo, colores y fotos", "Textos escritos por nosotros a partir de tu formulario", "Diseño pensado primero para el celular", "Galería de hasta 10 fotos"] },
-        { "titulo": "Google y visibilidad", "items": ["Dominio .com o .com.co registrado a tu nombre", "Título y descripción optimizados para Google", "Ficha de negocio para Google con tu dirección, horario y teléfono", "Mapa del sitio y alta en Google Search Console"] },
+        { "titulo": "Google y visibilidad", "items": ["Dominio .com o .com.co registrado a tu nombre", "Título y descripción optimizados para Google", "Ficha de negocio para Google con tu dirección, horario y teléfono", "Mapa del sitio y alta en Google Search Console y Bing", "Abierta a los buscadores con IA, como ChatGPT, Gemini y Perplexity"] },
         { "titulo": "Contacto", "items": ["Botón de WhatsApp siempre visible, con el mensaje listo", "Enlaces a tus redes sociales", "Mapa de ubicación y horario de atención"] },
         { "titulo": "Entrega", "items": ["Candado de seguridad (https)", "Aviso de privacidad básico", "1 ronda de cambios sobre el borrador", "Página publicada en 3 a 5 días hábiles"] }
       ],
-      "noIncluye": ["Más de una página", "Planes, paquetes o membresías en tarjetas comparativas", "Formulario de contacto", "Perfil de Google Business (se puede agregar por COP 120.000)", "Equipo, testimonios y preguntas frecuentes", "Estadísticas de visitas"]
+      "noIncluye": ["Más de una página", "Planes, paquetes o membresías en tarjetas comparativas", "Formulario de contacto", "Perfil en Google Maps, Bing y Apple Maps (se puede agregar por COP 120.000)", "Equipo, testimonios y preguntas frecuentes", "Estadísticas de visitas"]
     },
     {
       "slug": "negocio",
@@ -69,7 +69,7 @@
       "mensual": "49.000",
       "planMensual": "Base",
       "resumen": "Sitio de hasta 5 páginas para verte serio frente a las cadenas.",
-      "incluye": ["Todo lo de Presencia", "Hasta 5 páginas y 25 servicios", "Planes o membresías, equipo y testimonios", "Preguntas frecuentes y formulario", "Perfil de Google Business optimizado", "2 rondas de cambios", "Listo en 7 a 10 días hábiles"],
+      "incluye": ["Todo lo de Presencia", "Hasta 5 páginas y 25 servicios", "Planes o membresías, equipo y testimonios", "Preguntas frecuentes y formulario", "Perfil en Google Maps, Bing y Apple Maps", "2 rondas de cambios", "Listo en 7 a 10 días hábiles"],
       "destacado": true,
       "idealPara": "Negocios que quieren verse serios frente a las cadenas: gimnasios, spas, clínicas estéticas, estudios y consultorios. Es el plan que más recomendamos.",
       "datos": [
@@ -86,11 +86,11 @@
       ],
       "grupos": [
         { "titulo": "Diseño y contenido", "items": ["Todo lo de Presencia", "Hasta 5 páginas", "Hasta 25 servicios o productos con precio", "Hasta 4 planes, paquetes o membresías en tarjetas", "Equipo (hasta 6 personas) y testimonios (hasta 6)", "Preguntas frecuentes (hasta 10)", "Galería de hasta 25 fotos"] },
-        { "titulo": "Google y visibilidad", "items": ["Todo el SEO de Presencia", "Cada página pensada para una búsqueda distinta, como \"spa en Usaquén\" o \"masajes en Usaquén\"", "Perfil de Google Business creado u optimizado: categoría, servicios, fotos, horario y enlace", "Panel básico de estadísticas de visitas"] },
+        { "titulo": "Google y visibilidad", "items": ["Todo el SEO de Presencia", "Cada página pensada para una búsqueda distinta, como \"spa en Usaquén\" o \"masajes en Usaquén\"", "Perfil en Google Maps, Bing y Apple Maps creado u optimizado: categoría, servicios, fotos, horario y enlace, con los mismos datos en los tres", "Guía para pedir y responder reseñas, con mensaje listo y código QR", "Panel básico de estadísticas de visitas"] },
         { "titulo": "Contacto", "items": ["Formulario de contacto que llega a tu correo", "Botón de WhatsApp, redes, mapa y horario"] },
         { "titulo": "Entrega", "items": ["2 rondas de cambios sobre el borrador", "Página publicada en 7 a 10 días hábiles"] }
       ],
-      "noIncluye": ["Reservas en línea y cobro de anticipos (plan Reservas)", "Reporte mensual de visitas (plan Activo)", "Más de 5 páginas (página adicional COP 150.000)", "Tienda en línea o blog"]
+      "noIncluye": ["Reservas en línea y cobro de anticipos (plan Reservas)", "Reporte mensual de visitas, llamadas y rutas desde Google (plan Activo)", "Más de 5 páginas (página adicional COP 150.000)", "Tienda en línea o blog"]
     },
     {
       "slug": "reservas",
@@ -116,17 +116,17 @@
         { "titulo": "Reservas", "texto": "Calendario con tus horarios, hasta 8 servicios reservables y pago del anticipo." }
       ],
       "grupos": [
-        { "titulo": "Todo lo de Negocio", "items": ["Hasta 5 páginas, 25 servicios y 4 planes o membresías", "Equipo, testimonios y preguntas frecuentes", "Perfil de Google Business y SEO por página", "Formulario de contacto"] },
+        { "titulo": "Todo lo de Negocio", "items": ["Hasta 5 páginas, 25 servicios y 4 planes o membresías", "Equipo, testimonios y preguntas frecuentes", "Perfil en Google Maps, Bing y Apple Maps, y SEO por página", "Formulario de contacto"] },
         { "titulo": "Reservas en línea", "items": ["Página de reservas conectada a Cal.com o a la herramienta que ya uses (AgendaPro, Easycancha, Booksy)", "Hasta 8 servicios reservables, con horario y duración", "Correo de confirmación para tu cliente", "Capacitación de 30 minutos para manejar tus reservas"] },
         { "titulo": "Anticipos", "items": ["Link de pago de tu propia cuenta: Mercado Pago, Wompi o Bold", "La plata llega directo a ti; Chymera no la maneja", "Te guiamos para abrir la cuenta si no la tienes"] },
-        { "titulo": "Plan Activo incluido", "items": ["60 minutos de cambios al mes", "Una landing de promoción cada trimestre", "Reporte mensual de visitas", "2 rondas de cambios y entrega en 10 a 14 días hábiles"] }
+        { "titulo": "Plan Activo incluido", "items": ["60 minutos de cambios al mes", "Una landing de promoción cada trimestre", "Reporte mensual de visitas, llamadas y rutas desde Google", "2 rondas de cambios y entrega en 10 a 14 días hábiles"] }
       ],
       "noIncluye": ["Un sistema de reservas propio hecho a la medida", "Abrir la cuenta de la pasarela de pagos por ti (requiere tus documentos)", "Pagos recurrentes o membresías que se cobran solas", "Integración con software de facturación", "La suscripción de la herramienta de reservas, si es paga", "Las comisiones de la pasarela de pagos"]
     }
   ],
   "planes": [
-    { "nombre": "Base", "precio": "49.000", "texto": "Hosting, dominio, candado de seguridad, copias de respaldo, soporte por WhatsApp y 30 minutos de cambios al mes.", "items": ["Hosting, candado de seguridad y copias de respaldo", "Renovación de tu dominio .com o .com.co", "Soporte por WhatsApp de lunes a viernes, 8 a. m. a 6 p. m.", "30 minutos de cambios al mes", "Cambios pequeños listos en 1 a 2 días hábiles"] },
-    { "nombre": "Activo", "precio": "95.000", "texto": "Todo lo de Base, 60 minutos de cambios, una landing de promoción al trimestre y reporte mensual de visitas.", "items": ["Todo lo de Base", "60 minutos de cambios al mes", "Una landing de promoción cada trimestre", "Reporte mensual de visitas"] }
+    { "nombre": "Base", "precio": "49.000", "texto": "Hosting, dominio, candado de seguridad, copias de respaldo, soporte por WhatsApp y 30 minutos de cambios al mes.", "items": ["Hosting, candado de seguridad y copias de respaldo", "Renovación de tu dominio .com o .com.co", "Soporte por WhatsApp de lunes a viernes, 8 a. m. a 6 p. m.", "30 minutos de cambios al mes", "Si cambia tu horario o teléfono, lo cambiamos también en tus perfiles de mapas", "Cambios pequeños listos en 1 a 2 días hábiles"] },
+    { "nombre": "Activo", "precio": "95.000", "texto": "Todo lo de Base, 60 minutos de cambios, una landing de promoción al trimestre y reporte mensual de visitas, llamadas y rutas desde Google.", "items": ["Todo lo de Base", "60 minutos de cambios al mes", "Una landing de promoción cada trimestre", "Reporte mensual de visitas, llamadas y rutas desde Google"] }
   ],
   "detallePlanes": {
     "titulo": "Qué incluye cada plan",
@@ -149,7 +149,7 @@
       { "titulo": "Formulario de contacto", "valores": ["No", "Sí", "Sí"] },
       { "titulo": "Dominio propio y SEO básico", "valores": ["Sí", "Sí", "Sí"] },
       { "titulo": "Una página por búsqueda clave en Google", "valores": ["No", "Sí", "Sí"] },
-      { "titulo": "Perfil de Google Business", "valores": ["Extra", "Sí", "Sí"] },
+      { "titulo": "Perfil en Google Maps, Bing y Apple Maps", "valores": ["Extra", "Sí", "Sí"] },
       { "titulo": "Estadísticas de visitas", "valores": ["No", "Panel básico", "Panel + reporte mensual"] },
       { "titulo": "Reservas en línea y anticipos", "valores": ["No", "No", "Sí"] },
       { "titulo": "Rondas de cambios", "valores": ["1", "2", "2"] },
@@ -191,7 +191,7 @@
       { "nombre": "Sección adicional", "precio": "$80.000" },
       { "nombre": "Página adicional", "precio": "$150.000" },
       { "nombre": "Ronda de cambios adicional", "precio": "$60.000" },
-      { "nombre": "Perfil de Google Business (plan Presencia)", "precio": "$120.000" },
+      { "nombre": "Perfil en Google Maps, Bing y Apple Maps (plan Presencia)", "precio": "$120.000" },
       { "nombre": "Correo con tu dominio", "precio": "$80.000" },
       { "nombre": "Kit de marca: logo, colores y tipografías", "precio": "$450.000", "detalle": "Solo junto con un plan. Cuestionario y llamada de 20 minutos, 2 propuestas de logo, 2 rondas de ajustes, el logo horizontal, compacto e ícono a color, en negro y en blanco (SVG, PDF y PNG), paleta de 4 a 5 colores, 2 tipografías, favicon, fotos de perfil y portada para tus redes, guía de marca de una página y una búsqueda básica de marcas parecidas en la SIC. No incluye el registro de la marca." },
       { "nombre": "Entrega urgente, en la mitad del plazo", "precio": "+30 % de la instalación" },
@@ -292,7 +292,7 @@
           "Hasta 25 servicios y 4 planes o membresías en tarjetas",
           "Equipo, testimonios y preguntas frecuentes",
           "Formulario de contacto que llega a tu correo",
-          "Perfil de Google Business optimizado y estadísticas de visitas"
+          "Perfil en Google Maps, Bing y Apple Maps, y estadísticas de visitas"
         ],
         "whatsappTexto": "Hola Chymera, vi la demo de la barbería (plan Presencia) y quiero una página así para mi negocio."
       },
@@ -316,7 +316,7 @@
           "Página de reservas: tus clientes eligen servicio, día y hora sin escribirte",
           "Cobro del anticipo con tu link de Mercado Pago, Wompi o Bold",
           "Condiciones de reserva y devolución visibles antes de pagar",
-          "Plan Activo incluido: 60 minutos de cambios al mes, una landing de promoción cada trimestre y reporte mensual de visitas"
+          "Plan Activo incluido: 60 minutos de cambios al mes, una landing de promoción cada trimestre y reporte mensual de visitas, llamadas y rutas desde Google"
         ],
         "whatsappTexto": "Hola Chymera, vi la demo del gimnasio (plan Negocio) y quiero una página así para mi negocio."
       },
@@ -335,7 +335,7 @@
           "En tu página, las reservas se conectan a Cal.com o a la herramienta que ya uses"
         ],
         "siguiente": null,
-        "tope": "Es el plan más completo e incluye el plan mensual Activo: 60 minutos de cambios al mes, una landing de promoción cada trimestre y reporte mensual de visitas.",
+        "tope": "Es el plan más completo e incluye el plan mensual Activo: 60 minutos de cambios al mes, una landing de promoción cada trimestre y reporte mensual de visitas, llamadas y rutas desde Google.",
         "whatsappTexto": "Hola Chymera, vi la demo del spa (plan Reservas) y quiero una página así para mi negocio."
       }
     ]
@@ -344,7 +344,7 @@
     { "titulo": "Hablamos", "texto": "Nos cuentas de tu negocio y llenas un formulario corto con tus datos, fotos y precios." },
     { "titulo": "Te mostramos un borrador", "texto": "Recibes un link para ver tu página en el celular antes de pagar el saldo." },
     { "titulo": "Ajustamos", "texto": "Hacemos los cambios que pidas dentro de las rondas de tu paquete." },
-    { "titulo": "Publicamos", "texto": "Conectamos tu dominio, Google y WhatsApp. Tu página queda en línea." },
+    { "titulo": "Publicamos", "texto": "Conectamos tu dominio y WhatsApp, y damos de alta tu página en Google y Bing. Queda en línea." },
     { "titulo": "Te acompañamos", "texto": "Cada mes mantenemos tu página y hacemos los cambios que necesites." }
   ],
   "preguntas": [
@@ -554,7 +554,7 @@
         {
           "titulo": "Con quién los compartimos",
           "texto": [
-            "No vendemos ni alquilamos tus datos. Los compartimos solo con proveedores que necesitamos para prestar el servicio, que pueden estar fuera de Colombia: Cloudflare (alojamiento y dominios), Google (correo y Google Business), Meta (WhatsApp e Instagram) y GitHub (código de las páginas). También los entregaremos a una autoridad cuando la ley lo exija."
+            "No vendemos ni alquilamos tus datos. Los compartimos solo con proveedores que necesitamos para prestar el servicio, que pueden estar fuera de Colombia: Cloudflare (alojamiento y dominios), Google (correo y perfil en Google Maps), Microsoft y Apple (perfiles en Bing y Apple Maps), Meta (WhatsApp e Instagram) y GitHub (código de las páginas). También los entregaremos a una autoridad cuando la ley lo exija."
           ]
         },
         {
