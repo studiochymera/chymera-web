@@ -26,6 +26,7 @@ Si alguna de estas skills no está disponible en la sesión, decirlo en la respu
 - Demos en `/demos/barberia/` (Presencia), `/demos/gimnasio/` (Negocio) y `/demos/spa/` (Reservas). Cada una tiene su diseño propio: textos en `src/data/demos/<demo>.json`, estilos en `src/styles/demos/<demo>.css` (no usan `global.css`), componentes en `src/components/demos/<demo>/`, fotos en `src/assets/demos/<demo>/`. Las demos no se indexan en Google y no van en `sitemap.xml`.
 - Cada demo muestra solo lo que incluye su plan (mismos límites que la ficha de planes). Los textos de la franja de Chymera y del portafolio están en `site.json` (claves `demos` y `portafolio`).
 - Los datos de contacto de las demos son los de Chymera; nada de teléfonos, correos o redes inventados.
+- Vistas previas privadas de clientes en `public/vista-previa/<cliente>-<código>/`: HTML estático ya armado (no usa Astro ni `site.json`), con `noindex` en cada página y `X-Robots-Tag` en `public/_headers`. Solo se entra con el enlace: no enlazarlas desde el sitio, no ponerlas en `sitemap.xml` ni en `robots.txt` (eso revelaría la ruta). La fuente de la de Andok Group está en /mnt/project-files/clientes/andok-group/web/.
 
 ## Comandos
 - `npm install` · `npm run dev` (http://localhost:4321) · `npm run build` (sale en `dist/`)
