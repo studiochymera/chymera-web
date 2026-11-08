@@ -8,3 +8,7 @@
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Vista previa privada de Andok Group: solo con el enlace, nunca en buscadores
+/vista-previa/*
+  X-Robots-Tag: noindex, nofollow, noarchive
