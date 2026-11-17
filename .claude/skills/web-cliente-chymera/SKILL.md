@@ -5,7 +5,7 @@ description: "Usar al construir, rediseñar o cambiar la web de un cliente de Ch
 
 # Web de cliente de Chymera Studios
 
-Chymera Studios hace webs para negocios locales de Bogotá (Astro + Tailwind, publicadas en Cloudflare Workers). La fuente completa es el Manual de calidad: https://claude.ai/code/artifact/59ad2fe8-bd9f-4315-b3a9-fbf406a4ace0. Léelo antes de empezar; si algo aquí lo contradice, manda el manual.
+Chymera Studios hace webs para negocios locales de Bogotá (Astro + Tailwind, publicadas en Cloudflare Workers). La fuente completa es el Manual de calidad, copiado en `references/manual-calidad.md` de esta skill (original: https://claude.ai/artifact/C5GifgXEAEv8x6cUofNZfV). Léelo antes de empezar; si algo aquí lo contradice, manda el manual. Si la copia y el doc difieren, manda el doc.
 
 ## Regla principal: diseño propio
 - Cada cliente recibe un diseño hecho para él. Lo que se reutiliza es la base técnica (velocidad, SEO, formularios, seguridad, parte legal), nunca el diseño.
@@ -19,7 +19,7 @@ Chymera Studios hace webs para negocios locales de Bogotá (Astro + Tailwind, pu
 2. Mapa de búsquedas: una búsqueda de servicio + zona por página, sin repetir.
 3. Dirección de diseño: referencias, paleta, tipografías, composición, fotos, elemento distintivo y gesto de movimiento. Escribirla en el CLAUDE.md del cliente, junto con la sección "Venta de este cliente".
 4. Portada primero, en celular y computador; compararla antes de seguir.
-5. Repositorio desde la base técnica, con CLAUDE.md hecho desde /mnt/project-files/plantilla-base/CLAUDE.md, y su propia llave de IndexNow en `public/<llave>.txt`.
+5. Repositorio desde la base técnica, con CLAUDE.md hecho desde /mnt/project-files/plantilla-base/CLAUDE.md (en la nube; en el computador, partir de `src/base/` de chymera-web y pedirle a kev la plantilla), y su propia llave de IndexNow en `public/<llave>.txt`.
 6. Textos en el tono del cliente; todo texto en src/data/site.json.
 7. Imágenes WebP o AVIF (principal máx. 200 KB, demás máx. 120 KB), con ancho, alto y texto alternativo.
 8. Construcción primero para celular (360 px), solo las secciones del plan contratado, con las reglas de venta.

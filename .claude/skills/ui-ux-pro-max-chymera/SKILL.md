@@ -5,14 +5,14 @@ description: "Usar al diseñar, rediseñar o revisar cualquier web de Chymera o 
 
 # UI/UX Pro Max en Chymera Studios
 
-Catálogo de diseño (licencia MIT, de nextlevelbuilder/ui-ux-pro-max-skill) guardado en `/mnt/project-files/herramientas/ui-ux-pro-max/`. No hace falta instalar nada: el buscador es Python sin dependencias. No usar `npm i uipro-cli`, porque el entorno en la nube lo bloquea.
+Catálogo de diseño (licencia MIT, de nextlevelbuilder/ui-ux-pro-max-skill) guardado en este repo en `.claude/skills/ui-ux-pro-max/`. No hace falta instalar nada: el buscador es Python sin dependencias. No usar `npm i uipro-cli`. En Windows el comando suele ser `python` en vez de `python3`.
 
 Es una fuente de ideas y de reglas de revisión, no de decisiones. Mandan siempre, en este orden: lo que diga kev, el Manual de calidad, las reglas de la casa (CLAUDE.md, textos en site.json, precios en COP), `diseno-web-chymera` y la guía de diseño de kev. Su paleta sugerida NUNCA reemplaza la del cliente (logo, local, marca); se usa solo como referencia de estilo.
 
 ## Cómo buscar
 
 ```bash
-U=/mnt/project-files/herramientas/ui-ux-pro-max
+U=.claude/skills/ui-ux-pro-max   # desde la raíz del repo
 python3 $U/scripts/search.py "<2 a 5 palabras en inglés>" --domain <dominio>
 ```
 

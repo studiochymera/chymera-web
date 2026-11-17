@@ -49,7 +49,7 @@ Si la portada tiene 3 o más de estas, rehacerla.
 - Nada de animación bloquea el primer pintado ni tapa el botón principal: el titular y el botón se ven sin esperar ninguna animación (LCP).
 
 ## 5. Revisión visual antes de enseñar el borrador
-1. Capturas con Playwright (Chromium ya instalado) a 360, 768 y 1440 px de cada página; mirarlas de verdad.
+1. Capturas con Playwright a 360, 768 y 1440 px de cada página; mirarlas de verdad. En el computador, con el servidor `playwright` de `.mcp.json` y `npm run dev` corriendo; en la nube, Chromium ya está instalado.
 2. Prueba de los 5 segundos: con la portada en celular y sin bajar, ¿se entiende qué es, dónde queda, por qué confiar y qué tocar? ¿Se reconoce el elemento distintivo?
 3. Prueba del logo tapado: si se tapa el logo, ¿podría ser la web de cualquier otro negocio? Si sí, falta dirección de arte.
 4. Recorrido de venta: bajar por toda la página en celular y comprobar que cada sección termina con un camino a la acción principal y que el botón flotante de WhatsApp nunca tapa otro botón ni un precio.
