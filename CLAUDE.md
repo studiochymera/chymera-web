@@ -30,3 +30,10 @@ Si alguna de estas skills no está disponible en la sesión, decirlo en la respu
 
 ## Comandos
 - `npm install` · `npm run dev` (http://localhost:4321) · `npm run build` (sale en `dist/`)
+
+## Trabajar desde el computador (Claude Code en la terminal)
+- Todas las skills de arriba vienen dentro del repo, en `.claude/skills/`: las cuatro de Chymera, `frontend-design`, `web-animation-design`, `make-interfaces-feel-better`, `design-critique`, `accessibility-review` y el catálogo `ui-ux-pro-max`. No hace falta instalar plugins para tenerlas.
+- El Manual de calidad está copiado en `.claude/skills/web-cliente-chymera/references/manual-calidad.md`.
+- `/revisar` pasa las listas del manual sobre la página en la que se trabaja.
+- Capturas: servidor `playwright` de `.mcp.json` (Claude Code pide aprobarlo la primera vez). Usa `cmd /c` porque el computador de kev es Windows.
+- Las rutas `/mnt/project-files/...` solo existen en el proyecto en la nube; en el computador no hay copia de esas carpetas: pedirle a kev lo que haga falta.
