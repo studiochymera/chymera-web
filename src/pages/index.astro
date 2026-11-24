@@ -455,6 +455,12 @@ const formasDemo = ['cuarto', 'triangulo', 'circulo'];
   .enlace-claro:hover {
     text-underline-offset: 7px;
   }
+  /* Área de toque de 44 px sin mover el diseño (fuera de los párrafos). */
+  :is(.enlace, .enlace-claro):not(p *) {
+    display: inline-block;
+    padding-block: 10px;
+    margin-block: -10px;
+  }
   .lista-piezas {
     display: grid;
     gap: 0.5rem;
@@ -661,6 +667,7 @@ const formasDemo = ['cuarto', 'triangulo', 'circulo'];
   /* ---------- Recorrido ---------- */
   .recorrido {
     background: var(--color-medianoche);
+    --foco: var(--color-maiz);
     color: var(--color-papel);
     padding-block: clamp(4.5rem, 10vw, 8rem);
   }
@@ -715,6 +722,12 @@ const formasDemo = ['cuarto', 'triangulo', 'circulo'];
   .recorrido-marcas li[data-activo] {
     width: 3rem;
     background: var(--color-maiz);
+  }
+  /* En celular la mesa queda pegada arriba: que no tape el enlace con foco. */
+  @media (max-width: 1023px) {
+    .recorrido-pasos :is(a, button) {
+      scroll-margin-top: calc(42svh + 8rem);
+    }
   }
   .recorrido-marcas span {
     position: absolute;
@@ -956,6 +969,7 @@ const formasDemo = ['cuarto', 'triangulo', 'circulo'];
     padding: clamp(1.5rem, 4vw, 3.5rem);
     border-radius: 1.5rem;
     background: var(--color-medianoche);
+    --foco: var(--color-maiz);
     color: color-mix(in oklab, var(--color-papel) 85%, transparent);
   }
   @media (min-width: 900px) {
@@ -1058,6 +1072,7 @@ const formasDemo = ['cuarto', 'triangulo', 'circulo'];
   }
   .ficha-destacada {
     background: var(--color-medianoche);
+    --foco: var(--color-maiz);
     color: color-mix(in oklab, var(--color-papel) 85%, transparent);
     border-color: transparent;
   }
@@ -1235,6 +1250,7 @@ const formasDemo = ['cuarto', 'triangulo', 'circulo'];
   /* ---------- Proceso ---------- */
   .proceso {
     background: var(--color-medianoche);
+    --foco: var(--color-maiz);
     color: var(--color-papel);
     padding-block: clamp(4.5rem, 10vw, 8rem);
     view-timeline: --proceso block;
@@ -1579,6 +1595,7 @@ const formasDemo = ['cuarto', 'triangulo', 'circulo'];
     position: relative;
     overflow: hidden;
     background: var(--color-medianoche);
+    --foco: var(--color-maiz);
     color: var(--color-papel);
     padding-block: clamp(6rem, 14vw, 11rem);
   }

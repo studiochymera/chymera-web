@@ -60,9 +60,14 @@ body {
     color: var(--color-crema);
   }
 
+  /* Foco medianoche sobre claro; las zonas oscuras cambian --foco a maíz. */
   :focus-visible {
-    outline: 2px solid var(--color-celeste);
+    outline: 2px solid var(--foco, var(--color-medianoche));
     outline-offset: 3px;
+  }
+  .bg-azul,
+  .bg-tinta {
+    --foco: var(--color-maiz);
   }
 }
 
