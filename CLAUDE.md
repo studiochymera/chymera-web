@@ -14,8 +14,10 @@ Si alguna de estas skills no está disponible en la sesión, decirlo en la respu
 ## Reglas de la casa
 - Todo texto, precio y dato de contacto vive en `src/data/site.json`. No escribir textos sueltos en los componentes.
 - Precios en pesos colombianos (COP), con punto de miles: 1.150.000.
-- Colores de marca (definidos en `src/styles/global.css`): crema #FDF8F4 (fondo), azul #1D2A3A (principal), celeste #279BF2 (solo como acento sobre azul; sobre crema no pasa contraste para texto), tinta #040507 (texto largo). El vino #722F38 no se usa en la web.
-- Logos en `public/brand/` en SVG (navy y cream), vectorizados de los archivos de marca. Todos los formatos están en /mnt/project-files/Chymera/Logos vectorizados. Rutas de imágenes relativas, sin "/" inicial.
+- Marca "Ensamble" (desde nov. 2026): el símbolo es una C hecha de tres piezas (dos cuartos de círculo y un triángulo amarillo) y la palabra "chymera" en minúscula, en Bricolage Grotesque 800. Letras de la web: Bricolage Grotesque (titulares) y Figtree (textos).
+- Colores de marca (definidos en `src/styles/global.css`), paleta Medianoche y maíz, 60-30-10: papel #F5F5F0 (fondo), medianoche #14213D (principal), maíz #FCC931 (acento: pieza diagonal del símbolo y botón principal, con texto tinta encima), tinta #0E1424 (texto largo). El maíz nunca va como texto sobre papel (no pasa contraste). Los nombres viejos (`crema`, `azul`, `celeste`) siguen existiendo y apuntan a la paleta nueva.
+- Logos en `public/brand/` en SVG con las letras en curvas: `chymera-logo-*` (símbolo + palabra), `chymera-simbolo-*` y `chymera-palabra-*`, en versión medianoche (sobre claro) y papel (sobre oscuro). Se regeneran con `python3 scripts/marca/logos.py` (necesita fonttools y uharfbuzz). Copia de todos en /mnt/project-files/marca/logos. Rutas de imágenes relativas, sin "/" inicial.
+- Las piezas de la marca (formas y composiciones) viven en `src/lib/piezas.ts`; la mesa animada de la portada es `src/components/Mesa.astro` + `src/scripts/mesa.ts`.
 - Diseñar primero para celular. Botón de WhatsApp siempre visible.
 - Antes de terminar: `npm run build` sin errores.
 

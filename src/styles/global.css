@@ -2,20 +2,41 @@
 @source not "../pages/demos";
 @source not "../components/demos";
 @source not "../data/demos";
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/sora";
+@import "@fontsource-variable/figtree/wght.css";
+@import "@fontsource-variable/bricolage-grotesque/opsz.css";
 
 @theme {
-  --color-crema: #FDF8F4;
-  --color-crema-2: #F3ECE4;
-  --color-azul: #1D2A3A;
-  --color-azul-2: #26364A;
-  --color-celeste: #279BF2;
-  --color-tinta: #040507;
-  --color-vino: #722F38;
+  /* Marca Ensamble, paleta Medianoche y maíz (60 papel · 30 medianoche · 10 maíz). */
+  --color-papel: #F5F5F0;
+  --color-papel-2: #EAEBE4;
+  --color-medianoche: #14213D;
+  --color-medianoche-2: #1D2D52;
+  --color-maiz: #FCC931;
+  --color-gris: #D5D9E1;
+  --color-pizarra: #3B4A6B;
+  --color-tinta: #0E1424;
 
-  --font-sans: "Inter Variable", system-ui, sans-serif;
-  --font-display: "Sora Variable", "Inter Variable", system-ui, sans-serif;
+  /* Nombres anteriores, apuntando a la paleta nueva para las páginas internas.
+     El maíz (antes celeste) es solo para fondos de botón o texto sobre medianoche: sobre papel no pasa contraste. */
+  --color-crema: var(--color-papel);
+  --color-crema-2: var(--color-papel-2);
+  --color-azul: var(--color-medianoche);
+  --color-azul-2: var(--color-medianoche-2);
+  --color-celeste: var(--color-maiz);
+
+  --font-sans: "Figtree Variable", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Figtree Variable", system-ui, sans-serif;
+}
+
+/* body va fuera de @layer: así gana a los estilos por defecto de cualquier visor (vista previa como Artifact). */
+body {
+  background: var(--color-papel);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @layer base {
@@ -28,9 +49,6 @@
     scroll-behavior: auto;
   }
 
-  body {
-    @apply bg-crema text-tinta font-sans antialiased;
-  }
 
   h1, h2, h3 {
     @apply font-display text-azul tracking-tight;
@@ -42,9 +60,14 @@
     color: var(--color-crema);
   }
 
+  /* Foco medianoche sobre claro; las zonas oscuras cambian --foco a maíz. */
   :focus-visible {
-    outline: 2px solid var(--color-celeste);
+    outline: 2px solid var(--foco, var(--color-medianoche));
     outline-offset: 3px;
+  }
+  .bg-azul,
+  .bg-tinta {
+    --foco: var(--color-maiz);
   }
 }
 
@@ -69,6 +92,13 @@
 
 @utility boton-azul {
   @apply boton bg-azul text-crema hover:bg-azul-2;
+}
+
+@utility boton-maiz {
+  @apply boton bg-maiz text-tinta;
+  &:hover {
+    background: #FFD95A;
+  }
 }
 
 @utility boton-borde {

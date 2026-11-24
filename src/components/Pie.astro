@@ -1,19 +1,100 @@
 ---
 import site from '../data/site.json';
-import { raiz } from '../lib/rutas';
+import { raiz, enlaceWhatsApp } from '../lib/rutas';
 
 const r = raiz(Astro.url.pathname);
+const pre = r === './' ? '' : r;
 const ig = `https://www.instagram.com/${site.instagram}/`;
+const t = site.inicio.pie;
+const wa = enlaceWhatsApp(site.whatsapp, site.whatsappTexto);
+const telefono = `+${site.whatsapp.slice(0, 2)} ${site.whatsapp.slice(2, 5)} ${site.whatsapp.slice(5, 8)} ${site.whatsapp.slice(8)}`;
 ---
 
-<footer class="bg-tinta py-10 text-sm text-crema/60">
-  <div class="contenedor flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-    <img src={`${r}brand/logotipo-cream.svg`} alt="Chymera Studios" width="165" height="40" class="h-6 w-auto" />
-    <div class="flex flex-col gap-1 sm:items-end">
-      <a href={`${r}planes/`} class="hover:text-crema">{site.detallePlanes.titulo}</a>
-      {site.legal.enlaces.map((e) => <a href={`${r}${e.slug}/`} class="hover:text-crema">{e.texto}</a>)}
-      <a href={ig} class="hover:text-crema" target="_blank" rel="noopener">Instagram @{site.instagram}</a>
-      <p>© {new Date().getFullYear()} {site.nombre} · {site.ciudad}, Colombia</p>
+<footer class="pie">
+  <div class="contenedor pie-reticula">
+    <p class="pie-promesa">{site.inicio.promesa}</p>
+    <div class="pie-columna">
+      <p class="pie-titulo">{t.navegar}</p>
+      <a href={`${pre}#servicios`}>Servicios</a>
+      <a href={`${pre}#portafolio`}>Portafolio</a>
+      <a href={`${r}planes/`}>{site.detallePlanes.titulo}</a>
+      <a href={`${r}portafolio/kit-de-marca/`}>{site.portafolio.kit.etiqueta}</a>
+    </div>
+    <div class="pie-columna">
+      <p class="pie-titulo">{t.contacto}</p>
+      <a href={wa} target="_blank" rel="noopener">WhatsApp {telefono}</a>
+      <a href={`mailto:${site.correo}`}>{site.correo}</a>
+      <a href={ig} target="_blank" rel="noopener">Instagram @{site.instagram}</a>
+    </div>
+    <div class="pie-columna">
+      <p class="pie-titulo">{t.legal}</p>
+      {site.legal.enlaces.map((e) => <a href={`${r}${e.slug}/`}>{e.texto}</a>)}
+      <p class="pie-derechos">© {new Date().getFullYear()} {site.nombre} · {site.ciudad}, Colombia</p>
     </div>
   </div>
+  <div class="contenedor">
+    <img class="pie-palabra" src={`${r}brand/chymera-palabra-papel.svg`} alt="" width="3613" height="856" loading="lazy" />
+  </div>
 </footer>
+
+<style>
+  .pie {
+    background: var(--color-tinta);
+    --foco: var(--color-maiz);
+    color: color-mix(in oklab, var(--color-papel) 72%, transparent);
+    padding-block: 4.5rem 1.5rem;
+    font-size: 0.9375rem;
+    overflow: hidden;
+  }
+  .pie-reticula {
+    display: grid;
+    gap: 2.5rem 2rem;
+  }
+  @media (min-width: 768px) {
+    .pie-reticula {
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+    }
+  }
+  .pie-promesa {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--color-papel);
+    max-width: 18ch;
+    text-wrap: balance;
+  }
+  .pie-columna {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pie-columna a {
+    padding-block: 0.6875rem;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition: color 160ms, text-decoration-color 160ms;
+  }
+  .pie-columna a:hover {
+    color: var(--color-papel);
+    text-decoration-color: var(--color-maiz);
+  }
+  .pie-titulo {
+    font-weight: 700;
+    color: var(--color-maiz);
+    margin-bottom: 0.25rem;
+  }
+  .pie-derechos {
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+  }
+  .pie-palabra {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 4rem;
+    opacity: 0.08;
+  }
+</style>

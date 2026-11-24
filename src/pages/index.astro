@@ -1,322 +1,109 @@
 ---
+// Portada de Chymera con la marca Ensamble: todo el sitio está hecho con las tres piezas del símbolo
+// (dos cuartos de círculo y un triángulo). Gesto protagonista: las piezas se arman y se desarman
+// (src/scripts/mesa.ts). Textos en site.json (claves hero, inicio y las de siempre).
 import Base from '../layouts/Base.astro';
 import Encabezado from '../components/Encabezado.astro';
-import Portada from '../components/Portada.astro';
-import Vitrina from '../components/Vitrina.astro';
-import Intro from '../components/Intro.astro';
+import Mesa from '../components/Mesa.astro';
 import Pie from '../components/Pie.astro';
 import BotonWhatsApp from '../components/BotonWhatsApp.astro';
+import Imagen from '../base/Imagen.astro';
 import site from '../data/site.json';
 import { enlaceWhatsApp } from '../lib/rutas';
-import Imagen from '../base/Imagen.astro';
 
+const h = site.hero;
+const ini = site.inicio;
+const e = ini.ensamble;
+const pr = ini.precios;
+const kitPrecio = site.detallePlanes.extras.find((x) => x.nombre.startsWith('Kit de marca'))!.precio;
 const demos = site.demos.lista.map((d) => ({ d, plan: site.paquetes.find((p) => p.slug === d.plan)! }));
-const kitPrecio = site.detallePlanes.extras.find((e) => e.nombre.startsWith('Kit de marca'))!.precio;
-const s = site.servicios;
 const k = site.portafolio.kit;
-const kitColores = site.kitMuestra.colores;
 const cta = site.ctaSecciones;
-const bv = site.beneficiosVisual;
-const [b1, b2, b3] = site.beneficios;
-
 const wa = enlaceWhatsApp(site.whatsapp, site.whatsappTexto);
-const ig = `https://www.instagram.com/${site.instagram}/`;
 const waEspecial = enlaceWhatsApp(site.whatsapp, site.especiales.whatsappTexto);
+const waTaller = enlaceWhatsApp(site.whatsapp, ini.taller.whatsappTexto);
+const rellenar = (t: string) => t.replace('{kit}', kitPrecio).replace('{desde}', site.servicios.web.precio);
+const formasDemo = ['cuarto', 'triangulo', 'circulo'];
 ---
 
 <Base>
-  <Intro />
+  <a href="#contenido" class="saltar">Saltar al contenido</a>
   <Encabezado />
 
   <main id="inicio">
-    <Portada />
-    <Vitrina />
-
-    <!-- Lo que hacemos: bento 1 + 2 (una celda grande y dos apiladas) -->
-    <section id="servicios" class="seccion" aria-labelledby="servicios-titulo">
-      <div class="contenedor">
-        <header class="cabecera">
-          <h2 id="servicios-titulo" class="titulo-seccion">{s.titulo}</h2>
-          <p class="cabecera-texto">{s.intro}</p>
-        </header>
-
-        <div class="bento" data-bento>
-          <article class="celda celda-web">
-            <div class="celda-cuerpo">
-              <h3 class="celda-titulo">{s.web.nombre}</h3>
-              <p class="celda-texto">{s.web.texto}</p>
-              <div class="celda-pie">
-                <p class="celda-precio">{s.web.precio}</p>
-                <a href="#precios" class="enlace enlace-claro">{s.web.enlace}</a>
-              </div>
-            </div>
-            <div class="abanico" aria-hidden="true">
-              {demos.map(({ d }, i) => (
-                <span class="abanico-tel" style={`--d:${i - 1}`} data-abanico>
-                  <Imagen ruta={`portafolio/${d.slug}`} alt="" anchos={[320, 480, 640]} sizes="(min-width: 1024px) 290px, 62vw" proporcion="390/700" claseMarco="block" class="block w-full" />
-                </span>
-              ))}
-            </div>
-          </article>
-
-          <article class="celda celda-kit">
-            <a href="portafolio/kit-de-marca/" class="kit-placa" tabindex="-1" aria-hidden="true">
-              <img src="portafolio/kit-filo/filo-horizontal-color.svg" alt="" width="1129" height="335" loading="lazy" />
-            </a>
-            <div class="celda-cuerpo">
-              <h3 class="celda-titulo">{s.kit.nombre}</h3>
-              <p class="celda-texto">{s.kit.texto}</p>
-              <div class="celda-pie">
-                <p class="celda-precio">{kitPrecio}</p>
-                <a href="portafolio/kit-de-marca/" class="enlace">{s.kit.enlace}</a>
-              </div>
-            </div>
-          </article>
-
-          <article id="especiales" class="celda celda-especiales">
-            <div class="celda-cuerpo">
-              <h3 class="celda-titulo">{site.especiales.titulo}</h3>
-              <p class="celda-texto">{site.especiales.texto}</p>
-              <ul class="chips">
-                {site.especiales.ejemplos.map((e) => <li>{e}</li>)}
-              </ul>
-              <div class="celda-pie">
-                <a href={waEspecial} class="boton-azul" target="_blank" rel="noopener">{site.especiales.boton}</a>
-              </div>
-            </div>
-          </article>
+    <!-- Portada: titular a la izquierda, la mesa de piezas a la derecha (abajo en celular). -->
+    <section class="portada" aria-labelledby="portada-titulo" id="contenido">
+      <div class="contenedor portada-reticula">
+        <div class="portada-texto">
+          <p class="portada-etiqueta">
+            <svg viewBox="0 0 92 92" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M44 0A44 44 0 0 0 0 44H44Z"/><path fill="currentColor" d="M0 48H44V92A44 44 0 0 1 0 48Z"/><path fill="#FCC931" d="M48 0H92L48 44Z"/></svg>
+            {h.etiqueta}
+          </p>
+          <h1 id="portada-titulo" class="portada-titulo">{h.titulo}</h1>
+          <p class="portada-sub">{h.subtitulo}</p>
+          <div class="portada-botones">
+            <a href={wa} class="boton-maiz boton-grande" target="_blank" rel="noopener">{h.boton}</a>
+            <a href="#portafolio" class="boton-linea">{h.botonDemos}</a>
+          </div>
+          <p class="portada-kit">{h.kit} <a href="portafolio/kit-de-marca/">{h.kitEnlace}</a></p>
+        </div>
+        <div class="portada-mesa">
+          <div class="tapete" aria-hidden="true">
+            <span class="tapete-regla tapete-regla-x">{Array.from({ length: 12 }, (_, i) => <span>{i + 1}</span>)}</span>
+            <span class="tapete-regla tapete-regla-y">{'ABCDEFGHIJKL'.split('').map((l) => <span>{l}</span>)}</span>
+          </div>
+          <Mesa tipo="portada" etiqueta={ini.portada.mesa} boton={{ armar: ini.portada.armar, desarmar: ini.portada.desarmar }} class="portada-mesa-piezas">
+            <p class="portada-pista" aria-hidden="true">{ini.portada.pista}</p>
+          </Mesa>
         </div>
       </div>
     </section>
 
-    <!-- Beneficios y sectores: bento 7/5 y 5/7 -->
-    <section class="seccion bg-crema-2" aria-labelledby="beneficios-titulo">
+    <!-- Marquesina de sectores: la lista real va una vez; la copia que da la vuelta está oculta para lectores. -->
+    <section class="marquesina" aria-label={ini.marquesinaEtiqueta}>
+      <div class="marquesina-pista">
+        {[0, 1].map((copia) => (
+          <ul class="marquesina-lista" aria-hidden={copia === 1 ? 'true' : undefined}>
+            {ini.marquesina.map((s, i) => (
+              <li>
+                <span class:list={['marquesina-pieza', `pieza-${i % 3}`]} aria-hidden="true"></span>
+                {s}
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </section>
+
+    <!-- Recorrido: la mesa se queda quieta y las piezas cambian de forma con cada paso. -->
+    <section id="servicios" class="recorrido" data-recorrido aria-labelledby="recorrido-titulo">
       <div class="contenedor">
-        <header class="cabecera">
-          <h2 id="beneficios-titulo" class="titulo-seccion">{site.beneficiosTitulo}</h2>
-          <div class="cabecera-accion">
-            <a href={enlaceWhatsApp(site.whatsapp, cta.beneficios.whatsappTexto)} class="boton-azul" target="_blank" rel="noopener">{cta.beneficios.boton}</a>
-          </div>
+        <header class="recorrido-cabecera">
+          <h2 id="recorrido-titulo" class="titulo-grande">{e.titulo}</h2>
+          <p>{e.intro}</p>
         </header>
-
-        <div class="bento" data-bento>
-          <article class="celda celda-google">
-            <div class="busqueda" aria-hidden="true">
-              <span class="busqueda-campo">
-                <svg viewBox="0 0 24 24" width="18" height="18" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-                {bv.busqueda}
-              </span>
-              <span class="busqueda-resultado" data-destacado>
-                <span class="busqueda-pin"><img src="brand/isotipo-cream.svg" alt="" width="900" height="674" loading="lazy" /></span>
-                <span class="busqueda-datos">
-                  <strong>{bv.resultado}</strong>
-                  <span>{bv.detalle}</span>
-                </span>
-                <span class="busqueda-acciones">
-                  {bv.acciones.map((a) => <span>{a}</span>)}
-                </span>
-              </span>
-              <span class="busqueda-otro"><span></span><span></span></span>
-              <span class="busqueda-otro"><span></span><span></span></span>
+        <div class="recorrido-reticula">
+          <div class="recorrido-mesa">
+            <div class="recorrido-mesa-pegada">
+              <Mesa tipo="recorrido" etiqueta={e.mesa} fondo="oscuro" inicial="marca" />
+              <ol class="recorrido-marcas" aria-hidden="true">
+                {e.pasos.map((p) => <li data-marca-paso={p.id}><span>{p.titulo}</span></li>)}
+              </ol>
             </div>
-            <div class="celda-cuerpo">
-              <h3 class="celda-titulo">{b1.titulo}</h3>
-              <p class="celda-texto">{b1.texto}</p>
-            </div>
-          </article>
-
-          <article class="celda celda-whatsapp">
-            <div class="chat" aria-hidden="true">
-              <span class="chat-burbuja" data-burbuja>
-                {bv.mensaje}
-                <span class="chat-hora">{bv.hora} <span class="chat-visto">✓✓</span></span>
-              </span>
-            </div>
-            <div class="celda-cuerpo">
-              <h3 class="celda-titulo">{b2.titulo}</h3>
-              <p class="celda-texto">{b2.texto}</p>
-            </div>
-          </article>
-
-          <article class="celda celda-celular">
-            <div class="celda-cuerpo">
-              <h3 class="celda-titulo">{b3.titulo}</h3>
-              <p class="celda-texto">{b3.texto}</p>
-            </div>
-            <div class="asoma" aria-hidden="true">
-              <span class="asoma-tel">
-                <Imagen ruta="portafolio/spa" alt="" anchos={[320, 480, 640]} sizes="(min-width: 1024px) 290px, 62vw" proporcion="390/700" claseMarco="block" class="block w-full" />
-              </span>
-            </div>
-          </article>
-
-          <article class="celda celda-sectores">
-            <div class="celda-cuerpo">
-              <h3 class="celda-titulo">{site.sectoresTitulo}</h3>
-              <dl class="sectores">
-                {site.sectores.map((x) => (
-                  <div>
-                    <dt>{x.titulo}</dt>
-                    <dd>{x.texto}</dd>
+          </div>
+          <ol class="recorrido-pasos">
+            {e.pasos.map((p, i) => (
+              <li class="paso" data-paso={p.id}>
+                <span class="paso-numero" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="paso-titulo">{p.titulo}</h3>
+                <p class="paso-texto">{p.texto}</p>
+                {(p.etiqueta || p.enlace || p.boton) && (
+                  <div class="paso-pie">
+                    {p.etiqueta && <span class="paso-etiqueta">{rellenar(p.etiqueta)}</span>}
+                    {p.enlace && <a class="enlace-claro" href={p.enlace.href}>{p.enlace.texto}</a>}
+                    {p.boton && <a class="boton-maiz" href={enlaceWhatsApp(site.whatsapp, cta.beneficios.whatsappTexto)} target="_blank" rel="noopener">{p.boton}</a>}
                   </div>
-                ))}
-              </dl>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Portafolio: bento 7/5 y 5/7 con las tres demos y el Kit de marca -->
-    <section id="portafolio" class="seccion bg-azul text-crema" aria-labelledby="portafolio-titulo">
-      <div class="contenedor">
-        <header class="cabecera cabecera-clara">
-          <h2 id="portafolio-titulo" class="titulo-seccion text-crema">{site.portafolio.titulo}</h2>
-          <p class="cabecera-texto">{site.portafolio.intro}</p>
-        </header>
-
-        <div class="bento" data-bento>
-          {demos.map(({ d, plan }) => (
-            <article class="celda celda-demo">
-              <a href={`demos/${d.slug}/`} class={`escenario escenario-${d.slug}`} tabindex="-1" aria-hidden="true" data-inclinar>
-                <span class="telefono" data-inclinar-objeto>
-                  <Imagen ruta={`portafolio/${d.slug}`} alt="" anchos={[320, 480, 640]} sizes="(min-width: 1024px) 290px, 62vw" proporcion="390/700" claseMarco="block" class="block w-full" />
-                  <span class="brillo"></span>
-                </span>
-              </a>
-              <div class="celda-cuerpo">
-                <h3 class="celda-titulo text-crema">{d.nombre}</h3>
-                <p class="demo-sector">{d.sector}</p>
-                <p class="celda-texto">{d.resumen}</p>
-                <p class="demo-muestra">{site.portafolio.muestra}</p>
-                <ul class="demo-lista">
-                  {d.muestra.map((m) => <li>{m}</li>)}
-                </ul>
-                <p class="demo-plan">
-                  <span>{site.demos.franja.plan.replace('{plan}', plan.nombre)}</span>
-                  <span class="demo-precio">${plan.precio}</span>
-                </p>
-                <div class="celda-pie demo-acciones">
-                  <a href={`demos/${d.slug}/`} class="boton-claro">{site.portafolio.verDemo}</a>
-                  <a href={`planes/${plan.slug}/`} class="enlace enlace-claro">{site.portafolio.verPlan}</a>
-                </div>
-              </div>
-            </article>
-          ))}
-
-          <article class="celda celda-demo celda-kitmuestra" aria-labelledby="kit-titulo">
-            <a href="portafolio/kit-de-marca/" class="escenario escenario-kit" tabindex="-1" aria-hidden="true" data-inclinar>
-              <span class="kit-lamina" data-inclinar-objeto>
-                <span class="kit-hueso">
-                  <img src="portafolio/kit-filo/filo-horizontal-color.svg" alt="" width="1129" height="335" loading="lazy" />
-                </span>
-                <span class="kit-carbon">
-                  <img src="portafolio/kit-filo/filo-compacto-color-oscuro.svg" alt="" width="676" height="440" loading="lazy" />
-                </span>
-                <span class="kit-icono">
-                  <img src="portafolio/kit-filo/filo-icono-color.svg" alt="" width="485" height="485" loading="lazy" />
-                </span>
-                <span class="kit-colores">
-                  {kitColores.map((c) => <span style={`background:${c.hex}`}></span>)}
-                </span>
-                <span class="brillo"></span>
-              </span>
-            </a>
-            <div class="celda-cuerpo">
-              <h3 id="kit-titulo" class="celda-titulo text-crema">{k.titulo}</h3>
-              <p class="celda-texto">{k.texto}</p>
-              <p class="demo-muestra">{k.incluyeTitulo}</p>
-              <ul class="demo-lista">
-                {k.incluye.map((m) => <li>{m}</li>)}
-              </ul>
-              <p class="demo-plan">
-                <span>{s.kit.nombre}</span>
-                <span class="demo-precio">{kitPrecio}</span>
-              </p>
-              <div class="celda-pie demo-acciones">
-                <a href="portafolio/kit-de-marca/" class="boton-claro">{k.ver}</a>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <p class="mt-6 text-sm text-crema/60">{site.portafolio.aviso}</p>
-      </div>
-    </section>
-
-    <!-- Precios -->
-    <section id="precios" class="bg-crema-2 py-16 sm:py-24">
-      <div class="contenedor">
-        <h2 class="titulo-seccion">{site.precios.titulo}</h2>
-        <p class="mt-3 max-w-2xl text-tinta/75">{site.precios.intro}</p>
-
-        <div class="mt-10 grid gap-5 lg:grid-cols-3">
-          {site.paquetes.map((p) => (
-            <article class:list={[
-              'flex flex-col rounded-2xl p-7',
-              p.destacado ? 'border border-transparent bg-azul text-crema ring-2 ring-celeste' : 'border border-azul/10 bg-crema',
-            ]}>
-              <div class="flex items-center justify-between">
-                <h3 class:list={['text-2xl font-semibold', p.destacado && 'text-crema']}>{p.nombre}</h3>
-                {p.destacado && <span class="rounded-full bg-celeste px-3 py-1 text-xs font-semibold text-azul">Más elegido</span>}
-              </div>
-              <p class:list={['mt-2 text-sm', p.destacado ? 'text-crema/75' : 'text-tinta/70']}>{p.resumen}</p>
-              <p class="mt-6 [font-variant-numeric:tabular-nums]">
-                <span class="font-display text-4xl font-semibold tracking-tight">${p.precio}</span>
-                <span class:list={['ml-1 text-sm', p.destacado ? 'text-crema/70' : 'text-tinta/60']}>COP</span>
-              </p>
-              <p class:list={['text-sm [font-variant-numeric:tabular-nums]', p.destacado ? 'text-crema/75' : 'text-tinta/70']}>+ ${p.mensual} al mes</p>
-              <ul class="mt-6 space-y-2 text-sm">
-                {p.incluye.map((item) => (
-                  <li class="flex gap-2">
-                    <span aria-hidden="true" class:list={[p.destacado ? 'text-celeste' : 'text-azul']}>✓</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div class="mt-auto flex flex-col gap-3 pt-8">
-                <a href={enlaceWhatsApp(site.whatsapp, site.detallePlanes.whatsappPlan.replace('{plan}', p.nombre))} target="_blank" rel="noopener" class:list={[p.destacado ? 'boton-claro' : 'boton-azul']}>Quiero {p.nombre}</a>
-                <a href={`planes/${p.slug}/`} class:list={['text-center text-sm font-semibold underline underline-offset-4', p.destacado ? 'text-crema hover:text-celeste' : 'text-azul hover:text-azul-2']}>{site.detallePlanes.verDetalle}</a>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div class="mt-10 grid gap-5 md:grid-cols-2">
-          {site.planes.map((pl) => (
-            <div class="rounded-2xl border border-azul/10 bg-crema p-6">
-              <p class="font-display text-lg font-semibold text-azul [font-variant-numeric:tabular-nums]">Plan {pl.nombre} · ${pl.precio} al mes</p>
-              <p class="mt-2 text-sm text-tinta/75">{pl.texto}</p>
-            </div>
-          ))}
-        </div>
-
-        <p class="mt-8 text-center">
-          <a href="planes/" class="boton-azul">{site.detallePlanes.comparar}</a>
-        </p>
-      </div>
-    </section>
-
-    <!-- Proceso -->
-    <section id="proceso" class="bg-azul py-16 text-crema sm:py-24" aria-labelledby="proceso-titulo">
-      <div class="contenedor">
-        <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <h2 id="proceso-titulo" class="titulo-seccion text-crema">{site.procesoTitulo}</h2>
-          <a href={enlaceWhatsApp(site.whatsapp, cta.proceso.whatsappTexto)} class="boton-claro" target="_blank" rel="noopener">{cta.proceso.boton}</a>
-        </div>
-        <div class="proceso-cuerpo mt-12">
-          <!-- El local en miniatura se arma con los pasos (scripts/local3d.ts); sin 3D queda la foto del local terminado. -->
-          <div class="local" data-local>
-            <div class="local-escena" data-local-escena aria-hidden="true">
-              <Imagen ruta="marca/local" alt="" anchos={[400, 600, 800, 1000]} sizes="(min-width: 1024px) 520px, 80vw" proporcion="1/1" claseMarco="local-foto" class="block h-full w-full" />
-            </div>
-          </div>
-          <ol class="proceso" data-pasos>
-            {site.proceso.map((paso, i) => (
-              <li class="paso">
-                <span class="paso-numero" aria-hidden="true">{i + 1}</span>
-                <h3 class="text-lg font-semibold text-crema">{paso.titulo}</h3>
-                <p class="mt-2 text-sm text-crema/75 [text-wrap:pretty]">{paso.texto}</p>
+                )}
               </li>
             ))}
           </ol>
@@ -324,775 +111,1590 @@ const waEspecial = enlaceWhatsApp(site.whatsapp, site.especiales.whatsappTexto);
       </div>
     </section>
 
-    <!-- Preguntas -->
-    <section id="preguntas" class="py-16 sm:py-24">
-      <div class="contenedor grid gap-10 lg:grid-cols-12">
-        <div class="lg:col-span-4">
-          <h2 class="titulo-seccion">Preguntas frecuentes</h2>
-          <a href={enlaceWhatsApp(site.whatsapp, cta.preguntas.whatsappTexto)} class="boton-azul mt-8" target="_blank" rel="noopener">{cta.preguntas.boton}</a>
+    <!-- Portafolio: cada demo sobre una pieza grande, alternando lados. -->
+    <section id="portafolio" class="portafolio" aria-labelledby="portafolio-titulo">
+      <div class="contenedor">
+        <header class="cabecera">
+          <h2 id="portafolio-titulo" class="titulo-grande">{site.portafolio.titulo}</h2>
+          <p>{site.portafolio.intro}</p>
+        </header>
+        <div class="demos">
+          {demos.map(({ d, plan }, i) => (
+            <article class:list={['demo', i % 2 === 1 && 'demo-invertida']}>
+              <a href={`demos/${d.slug}/`} class="demo-escena" tabindex="-1" aria-hidden="true">
+                <span class:list={['demo-forma', `forma-${formasDemo[i]}`]}></span>
+                <span class="demo-celular">
+                  <Imagen ruta={`portafolio/${d.slug}`} alt="" anchos={[320, 480, 640]} sizes="(min-width: 1024px) 300px, 62vw" proporcion="390/700" claseMarco="block" class="block w-full" />
+                </span>
+              </a>
+              <div class="demo-cuerpo">
+                <p class="demo-plan">
+                  <span>{site.demos.franja.plan.replace('{plan}', plan.nombre)}</span>
+                  <span class="demo-precio">${plan.precio}</span>
+                </p>
+                <h3 class="demo-nombre">{d.nombre}</h3>
+                <p class="demo-sector">{d.sector}</p>
+                <p class="demo-resumen">{d.resumen}</p>
+                <ul class="lista-piezas">
+                  {d.muestra.map((m) => <li>{m}</li>)}
+                </ul>
+                <div class="demo-acciones">
+                  <a href={`demos/${d.slug}/`} class="boton-medianoche">{site.portafolio.verDemo}</a>
+                  <a href={`planes/${plan.slug}/`} class="enlace">{site.portafolio.verPlan}</a>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
-        <div class="divide-y divide-azul/10 border-y border-azul/10 lg:col-span-7 lg:col-start-6">
+
+        <article class="kit" aria-labelledby="kit-titulo">
+          <a href="portafolio/kit-de-marca/" class="kit-lamina" tabindex="-1" aria-hidden="true">
+            <span class="kit-hueso"><img src="portafolio/kit-filo/filo-horizontal-color.svg" alt="" width="1129" height="335" loading="lazy" /></span>
+            <span class="kit-carbon"><img src="portafolio/kit-filo/filo-compacto-color-oscuro.svg" alt="" width="676" height="440" loading="lazy" /></span>
+            <span class="kit-colores">{site.kitMuestra.colores.map((c) => <span style={`background:${c.hex}`}></span>)}</span>
+          </a>
+          <div class="kit-cuerpo">
+            <p class="kit-etiqueta">{k.etiqueta}</p>
+            <h3 id="kit-titulo" class="kit-titulo">{k.titulo}</h3>
+            <p>{k.texto}</p>
+            <ul class="lista-piezas lista-clara">
+              {k.incluye.map((m) => <li>{m}</li>)}
+            </ul>
+            <p class="kit-precio">{k.precio.replace('{precio}', kitPrecio)}</p>
+            <a href="portafolio/kit-de-marca/" class="boton-maiz">{k.ver}</a>
+          </div>
+        </article>
+        <p class="aviso">{site.portafolio.aviso}</p>
+      </div>
+    </section>
+
+    <!-- Precios: cada plan suma una pieza del símbolo. -->
+    <section id="precios" class="precios" aria-labelledby="precios-titulo">
+      <div class="contenedor">
+        <header class="cabecera">
+          <h2 id="precios-titulo" class="titulo-grande">{site.precios.titulo}</h2>
+          <p>{site.precios.intro}</p>
+        </header>
+        <div class="fichas">
+          {site.paquetes.map((p, i) => {
+            const mensual = site.planes.find((m) => m.nombre === p.planMensual)!;
+            return (
+              <article class:list={['ficha', p.destacado && 'ficha-destacada']} aria-labelledby={`ficha-${p.slug}`}>
+                {p.destacado && <p class="ficha-sello">{pr.recomendado}</p>}
+                <svg class="ficha-piezas" viewBox="0 0 92 92" width="64" height="64" role="img" aria-label={pr.piezas[i]}>
+                  <path d="M44 0A44 44 0 0 0 0 44H44Z" class="lleno" />
+                  <path d="M0 48H44V92A44 44 0 0 1 0 48Z" class:list={[i >= 1 ? 'lleno' : 'vacio']} />
+                  <path d="M48 0H92L48 44Z" class:list={[i >= 2 ? 'lleno acento' : 'vacio']} />
+                </svg>
+                <h3 id={`ficha-${p.slug}`} class="ficha-nombre">{p.nombre}</h3>
+                <p class="ficha-resumen">{p.resumen}</p>
+                <p class="ficha-precio"><span class="ficha-signo">$</span>{p.precio}</p>
+                <p class="ficha-unico">{pr.unico}</p>
+                <p class="ficha-mensual">{pr.mensual.replace('{mensual}', mensual.precio).replace('{plan}', mensual.nombre)}</p>
+                <ul class="ficha-lista">
+                  {p.incluye.map((x) => <li>{x}</li>)}
+                </ul>
+                <div class="ficha-acciones">
+                  <a href={enlaceWhatsApp(site.whatsapp, site.detallePlanes.whatsappPlan.replace('{plan}', p.nombre))} class:list={[p.destacado ? 'boton-maiz' : 'boton-medianoche']} target="_blank" rel="noopener">{pr.pedir}</a>
+                  <a href={`planes/${p.slug}/`} class="enlace">{pr.ver}</a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <div class="mensuales" id="mensuales">
+          <div class="mensuales-texto">
+            <h3 class="subtitulo">{pr.mensualesTitulo}</h3>
+            <p>{pr.mensualesTexto}</p>
+          </div>
+          {site.planes.map((m) => (
+            <div class="mensual">
+              <p class="mensual-nombre">{m.nombre}</p>
+              <p class="mensual-precio">${m.precio} <span>{pr.alMes}</span></p>
+              <p class="mensual-texto">{m.texto}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="extras">
+          <div>
+            <h3 class="subtitulo">{pr.extrasTitulo}</h3>
+            <p>{pr.extrasTexto} <strong>{kitPrecio}</strong>.</p>
+          </div>
+          <div>
+            <h3 class="subtitulo">{site.especiales.titulo}</h3>
+            <p>{site.especiales.texto}</p>
+            <a href={waEspecial} class="enlace" target="_blank" rel="noopener">{site.especiales.boton}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proceso: una pieza rueda por la línea mientras se baja por la sección. -->
+    <section id="proceso" class="proceso" aria-labelledby="proceso-titulo">
+      <div class="contenedor">
+        <header class="cabecera cabecera-clara">
+          <h2 id="proceso-titulo" class="titulo-grande">{site.procesoTitulo}</h2>
+          <p>{ini.proceso.intro}</p>
+        </header>
+        <div class="proceso-pista">
+          <span class="proceso-linea" aria-hidden="true"><span class="proceso-rueda"></span></span>
+          <ol class="proceso-pasos">
+            {site.proceso.map((p, i) => (
+              <li class="proceso-paso">
+                <span class="proceso-numero" aria-hidden="true">{i + 1}</span>
+                <h3>{p.titulo}</h3>
+                <p>{p.texto}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <a href={enlaceWhatsApp(site.whatsapp, cta.proceso.whatsappTexto)} class="boton-maiz" target="_blank" rel="noopener">{cta.proceso.boton}</a>
+      </div>
+    </section>
+
+    <!-- Taller: un tablero de 3 x 3 para jugar a armar un logo. -->
+    <section class="taller" aria-labelledby="taller-titulo" data-taller data-casilla={ini.taller.casilla} data-formas={JSON.stringify(ini.taller.formas)}>
+      <div class="contenedor taller-reticula">
+        <div class="taller-texto">
+          <h2 id="taller-titulo" class="titulo-grande">{ini.taller.titulo}</h2>
+          <p>{ini.taller.texto}</p>
+          <fieldset class="taller-colores">
+            <legend>{ini.taller.color}</legend>
+            {ini.taller.colores.map((c, i) => (
+              <label class="taller-color">
+                <input type="radio" name="taller-color" value={c.hex} checked={i === 0} />
+                <span style={`--c:${c.hex}`}></span>
+                {c.nombre}
+              </label>
+            ))}
+          </fieldset>
+          <div class="taller-botones">
+            <button type="button" class="boton-linea" data-taller-mezclar>{ini.taller.mezclar}</button>
+            <button type="button" class="boton-linea" data-taller-limpiar>{ini.taller.limpiar}</button>
+          </div>
+        </div>
+        <div class="taller-mesa">
+          <div class="taller-tablero" role="group" aria-label={ini.taller.tablero} data-taller-tablero>
+            {Array.from({ length: 9 }, (_, i) => (
+              <button type="button" class="casilla" data-casilla={i} aria-label={ini.taller.casilla.replace('{n}', String(i + 1)).replace('{forma}', ini.taller.formas.vacia)}>
+                <svg viewBox="0 0 12 12" aria-hidden="true"><path d="" /></svg>
+              </button>
+            ))}
+          </div>
+          <div class="taller-perfil">
+            <span class="taller-avatar" data-taller-avatar aria-hidden="true"></span>
+            <p>{ini.taller.perfil}</p>
+          </div>
+          <a href={waTaller} class="boton-maiz" target="_blank" rel="noopener">{ini.taller.boton}</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preguntas -->
+    <section id="preguntas" class="preguntas" aria-labelledby="preguntas-titulo">
+      <div class="contenedor preguntas-reticula">
+        <div class="preguntas-cabecera">
+          <h2 id="preguntas-titulo" class="titulo-grande">Preguntas frecuentes</h2>
+          <a href={enlaceWhatsApp(site.whatsapp, cta.preguntas.whatsappTexto)} class="boton-medianoche" target="_blank" rel="noopener">{cta.preguntas.boton}</a>
+        </div>
+        <div class="preguntas-lista">
           {site.preguntas.map((q) => (
-            <details class="group py-5">
-              <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 font-display font-semibold text-azul [&::-webkit-details-marker]:hidden">
-                {q.p}
-                <span class="text-xl text-azul/60 transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+            <details class="pregunta">
+              <summary>
+                <span>{q.p}</span>
+                <svg viewBox="0 0 12 12" width="18" height="18" aria-hidden="true"><path d="M0 0H12L0 12Z" fill="currentColor" /></svg>
               </summary>
-              <p class="mt-3 text-tinta/75">{q.r}</p>
-              {'enlace' in q && (
-                <a href={q.enlace.href} class="mt-3 inline-block font-medium text-azul underline underline-offset-4 hover:text-tinta">{q.enlace.texto}</a>
-              )}
+              <div class="pregunta-respuesta">
+                <p>{q.r} {q.enlace && <a href={q.enlace.href} class="enlace">{q.enlace.texto}</a>}</p>
+              </div>
             </details>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- Contacto: cierre con la quimera en relieve sobre papel azul -->
-    <section id="contacto" class="contacto bg-azul text-crema">
-      <div class="contacto-relieve" aria-hidden="true">
-        <Imagen ruta="marca/relieve" alt="" anchos={[640, 960, 1280]} sizes="(min-width: 768px) 70vw, 100vw" proporcion="1600/1339" claseMarco="block h-full" class="h-full w-full object-cover" />
+    <!-- Cierre -->
+    <section id="contacto" class="contacto" aria-labelledby="contacto-titulo">
+      <div class="contacto-piezas" aria-hidden="true">
+        <span class="cp cp-1"></span><span class="cp cp-2"></span><span class="cp cp-3"></span>
       </div>
-      <div class="contenedor relative py-20 sm:py-28">
-        <h2 class="contacto-titulo">{site.contacto.titulo}</h2>
-        <div class="mt-10 grid gap-8 md:grid-cols-12 md:items-end">
-          <p class="max-w-md text-lg text-crema/80 md:col-span-5">{site.contacto.texto}</p>
-          <div class="flex flex-wrap gap-3 md:col-span-7 md:justify-end">
-            <a href={wa} class="boton-claro" target="_blank" rel="noopener">{site.contacto.boton}</a>
-            <a href={`mailto:${site.correo}`} class="boton-borde">{site.correo}</a>
-            <a href={ig} class="boton-borde" target="_blank" rel="noopener">@{site.instagram}</a>
-          </div>
-        </div>
+      <div class="contenedor contacto-cuerpo">
+        <h2 id="contacto-titulo" class="contacto-titulo">{site.contacto.titulo}</h2>
+        <p class="contacto-texto">{site.contacto.texto}</p>
+        <a href={wa} class="boton-maiz boton-grande" target="_blank" rel="noopener">{site.contacto.boton}</a>
       </div>
     </section>
   </main>
 
   <Pie />
-
   <BotonWhatsApp />
 </Base>
 
 <script>
-  import '../scripts/movimiento';
+  import '../scripts/pagina';
+  import '../scripts/mesa';
+  import '../scripts/taller';
 </script>
 
 <style>
-  .titulo-seccion {
-    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  /* ---------- Base de la página ---------- */
+  .saltar {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 60;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--color-medianoche);
+    color: var(--color-papel);
     font-weight: 600;
-    line-height: 1.06;
-    letter-spacing: -0.035em;
+  }
+  .saltar:focus {
+    top: 1rem;
+  }
+  :global(html) {
+    scroll-padding-top: 5rem;
+  }
+  .titulo-grande {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.25rem, 1.4rem + 3.8vw, 4.75rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variation-settings: 'opsz' 96;
     text-wrap: balance;
   }
-
-  .seccion {
-    padding-block: clamp(4rem, 2.5rem + 5vw, 7rem);
-  }
-
-  /* Cabecera de sección: título a la izquierda, texto o botón a la derecha. */
   .cabecera {
     display: grid;
-    gap: 1rem 1.5rem;
-    margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.25rem);
+    gap: 1.25rem;
+    margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
   }
-  .cabecera-texto {
-    max-width: 34rem;
-    color: rgb(4 5 7 / 0.75);
+  .cabecera p {
+    max-width: 58ch;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--color-tinta) 78%, transparent);
     text-wrap: pretty;
-  }
-  .cabecera-clara .cabecera-texto {
-    color: rgb(253 248 244 / 0.75);
   }
   @media (min-width: 1024px) {
     .cabecera {
-      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-template-columns: 7fr 5fr;
       align-items: end;
+      gap: 3rem;
     }
-    .cabecera > :first-child {
-      grid-column: span 7;
+  }
+  .cabecera-clara p {
+    color: color-mix(in oklab, var(--color-papel) 78%, transparent);
+  }
+  .subtitulo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.375rem;
+    letter-spacing: -0.02em;
+    color: var(--color-medianoche);
+  }
+
+  /* Botones de la página (los de la marca viven en global.css). */
+  .boton-grande {
+    min-height: 3.5rem;
+    padding-inline: 1.75rem;
+    font-size: 1rem;
+  }
+  .boton-linea,
+  .boton-medianoche {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    transition: background-color 160ms cubic-bezier(0.2, 0.7, 0.2, 1), color 160ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    cursor: pointer;
+  }
+  .boton-linea {
+    border: 1.5px solid var(--color-medianoche);
+    color: var(--color-medianoche);
+    background: transparent;
+  }
+  .boton-linea:hover {
+    background: var(--color-medianoche);
+    color: var(--color-papel);
+  }
+  .boton-medianoche {
+    background: var(--color-medianoche);
+    color: var(--color-papel);
+  }
+  .boton-medianoche:hover {
+    background: var(--color-medianoche-2);
+  }
+  .boton-linea:active,
+  .boton-medianoche:active {
+    transform: scale(0.98);
+  }
+  .enlace,
+  .enlace-claro {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    text-decoration-color: var(--color-maiz);
+    transition: text-decoration-color 160ms, text-underline-offset 160ms;
+  }
+  .enlace {
+    color: var(--color-medianoche);
+  }
+  .enlace-claro {
+    color: var(--color-papel);
+  }
+  .enlace:hover,
+  .enlace-claro:hover {
+    text-underline-offset: 7px;
+  }
+  /* Área de toque de 44 px sin mover el diseño (fuera de los párrafos). */
+  :is(.enlace, .enlace-claro):not(p *) {
+    display: inline-block;
+    padding-block: 10px;
+    margin-block: -10px;
+  }
+  .lista-piezas {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .lista-piezas li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+  .lista-piezas li::before {
+    content: '';
+    flex: none;
+    width: 0.625rem;
+    height: 0.625rem;
+    background: var(--color-maiz);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    transform: translateY(0.05rem);
+  }
+
+  /* ---------- Portada ---------- */
+  .portada {
+    position: relative;
+    overflow: clip;
+  }
+  .portada-reticula {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: 2rem 3.5rem;
+  }
+  @media (min-width: 1024px) {
+    .portada-reticula {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-items: center;
+      gap: 1.5rem;
+      min-height: min(54rem, calc(100svh - 4rem));
+      padding-block: 3rem;
     }
-    .cabecera-texto,
-    .cabecera-accion {
+    .portada-texto {
+      grid-column: 1 / span 7;
+      position: relative;
+      z-index: 2;
+    }
+    .portada-mesa {
       grid-column: 8 / span 5;
     }
-    .cabecera-accion {
-      justify-self: end;
-    }
   }
-
-  /* Bento: celdas asimétricas, tantas como piezas de contenido. */
-  .bento {
-    display: grid;
-    gap: 0.75rem;
-  }
-  @media (min-width: 768px) {
-    .bento {
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 1rem;
-    }
-    .bento > :nth-child(4n + 1),
-    .bento > :nth-child(4n + 4) {
-      grid-column: span 7;
-    }
-    .bento > :nth-child(4n + 2),
-    .bento > :nth-child(4n + 3) {
-      grid-column: span 5;
-    }
-    .bento > .celda-web {
-      grid-row: span 2;
-    }
-  }
-
-  .celda {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border-radius: 1.75rem;
-    background: var(--color-crema);
-    box-shadow: inset 0 0 0 1px rgb(29 42 58 / 0.1);
-  }
-  .celda-cuerpo {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    padding: clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem);
-  }
-  .celda-titulo {
-    font-size: clamp(1.5rem, 1.15rem + 1.1vw, 2.1rem);
+  .portada-etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
+    color: var(--color-medianoche);
   }
-  .celda-texto {
-    max-width: 34rem;
-    margin-top: 0.75rem;
-    color: rgb(4 5 7 / 0.75);
+  .portada-titulo {
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.875rem, 1.6rem + 5.6vw, 6.25rem);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+    color: var(--color-medianoche);
+    max-width: 12ch;
+    text-wrap: balance;
+  }
+  .portada-sub {
+    margin-top: 1.5rem;
+    max-width: 46ch;
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--color-tinta) 80%, transparent);
     text-wrap: pretty;
   }
-  .celda-pie {
+  .portada-botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .portada-kit {
+    margin-top: 1.5rem;
+    font-size: 0.9375rem;
+    color: color-mix(in oklab, var(--color-tinta) 72%, transparent);
+  }
+  .portada-kit a {
+    font-weight: 600;
+    color: var(--color-medianoche);
+    text-decoration: underline;
+    text-decoration-color: var(--color-maiz);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+  .portada-mesa {
+    position: relative;
+    width: min(100%, 34rem);
+    justify-self: center;
+    padding: 1.5rem 0 0 1.5rem;
+  }
+  /* Tapete de corte: la retícula de 12 x 12 donde se arman las piezas, con su regla. */
+  .tapete {
+    position: absolute;
+    inset: 1.5rem 0 0 1.5rem;
+    aspect-ratio: 1;
+    border-radius: 0.75rem;
+    background-color: #EEEFE8;
+    background-image:
+      linear-gradient(to right, rgb(20 33 61 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(20 33 61 / 0.08) 1px, transparent 1px);
+    background-size: calc(100% / 12) calc(100% / 12);
+    box-shadow: inset 0 0 0 1px rgb(20 33 61 / 0.08);
+  }
+  .tapete-regla {
+    position: absolute;
+    display: grid;
+    font: 600 0.625rem/1 var(--font-sans);
+    color: rgb(20 33 61 / 0.66);
+    font-variant-numeric: tabular-nums;
+  }
+  .tapete-regla span {
+    display: grid;
+    place-items: center;
+  }
+  .tapete-regla-x {
+    left: 0;
+    right: 0;
+    top: -1.25rem;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .tapete-regla-y {
+    top: 0;
+    bottom: 0;
+    left: -1.25rem;
+    grid-template-rows: repeat(12, 1fr);
+  }
+  .portada-mesa :global(.portada-mesa-piezas) {
+    color: var(--color-medianoche);
+  }
+  .portada-pista {
+    font-size: 0.8125rem;
+    color: color-mix(in oklab, var(--color-tinta) 60%, transparent);
+  }
+  @media (hover: none), (prefers-reduced-motion: reduce) {
+    .portada-pista {
+      visibility: hidden;
+    }
+  }
+
+  /* ---------- Marquesina ---------- */
+  .marquesina {
+    overflow: hidden;
+    background: var(--color-maiz);
+    color: var(--color-tinta);
+    padding-block: 1.1rem;
+    border-block: 1px solid rgb(14 20 36 / 0.12);
+  }
+  .marquesina-pista {
+    display: flex;
+    width: max-content;
+  }
+  .marquesina-lista {
+    display: flex;
+    flex: none;
+    gap: 2.5rem;
+    padding-right: 2.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.125rem, 1rem + 0.8vw, 1.625rem);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .marquesina-lista li {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .marquesina-pieza {
+    width: 0.9em;
+    height: 0.9em;
+    background: var(--color-medianoche);
+  }
+  .pieza-0 {
+    border-radius: 100% 0 0 0;
+  }
+  .pieza-1 {
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+  }
+  .pieza-2 {
+    border-radius: 0 0 0 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .marquesina-pista {
+      animation: marquesina 38s linear infinite;
+    }
+    .marquesina:hover .marquesina-pista {
+      animation-play-state: paused;
+    }
+  }
+  @keyframes marquesina {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* ---------- Recorrido ---------- */
+  .recorrido {
+    background: var(--color-medianoche);
+    --foco: var(--color-maiz);
+    color: var(--color-papel);
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+  .recorrido-cabecera {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: clamp(2rem, 6vw, 4rem);
+  }
+  .recorrido .titulo-grande {
+    color: var(--color-papel);
+  }
+  .recorrido-cabecera p {
+    max-width: 56ch;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--color-papel) 78%, transparent);
+  }
+  @media (min-width: 1024px) {
+    .recorrido-cabecera {
+      grid-template-columns: 7fr 5fr;
+      align-items: end;
+      gap: 3rem;
+    }
+  }
+  .recorrido-reticula {
+    display: grid;
+  }
+  .recorrido-mesa {
+    position: sticky;
+    top: 4rem;
+    z-index: 2;
+    background: var(--color-medianoche);
+    padding-block: 0.75rem;
+  }
+  .recorrido-mesa-pegada {
+    width: min(100%, 42svh, 34rem);
+    margin-inline: auto;
+  }
+  .recorrido-marcas {
+    display: flex;
+    justify-content: center;
+    gap: 0.375rem;
+    margin-top: 0.75rem;
+  }
+  .recorrido-marcas li {
+    width: 1.75rem;
+    height: 0.3rem;
+    border-radius: 999px;
+    background: rgb(245 245 240 / 0.2);
+    transition: background-color 300ms, width 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .recorrido-marcas li[data-activo] {
+    width: 3rem;
+    background: var(--color-maiz);
+  }
+  /* En celular la mesa queda pegada arriba: que no tape el enlace con foco. */
+  @media (max-width: 1023px) {
+    .recorrido-pasos :is(a, button) {
+      scroll-margin-top: calc(42svh + 8rem);
+    }
+  }
+  .recorrido-marcas span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .recorrido-pasos {
+    position: relative;
+  }
+  .paso {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    min-height: 58svh;
+    padding-block: 2.5rem;
+    border-top: 1px solid rgb(245 245 240 / 0.12);
+  }
+  .paso:last-child {
+    min-height: 50svh;
+  }
+  /* El paso que no está activo se apaga cambiando de color (no con opacidad), para que siga
+     pasando contraste AA. */
+  .paso-titulo,
+  .paso-texto,
+  .paso .enlace-claro {
+    transition: color 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  :global(.vivo) .paso:not([data-activo]) .paso-titulo {
+    color: rgb(245 245 240 / 0.52);
+  }
+  :global(.vivo) .paso:not([data-activo]) .paso-texto,
+  :global(.vivo) .paso:not([data-activo]) .enlace-claro {
+    color: rgb(245 245 240 / 0.58);
+  }
+  .paso-numero {
+    font: 700 0.875rem/1 var(--font-sans);
+    color: var(--color-maiz);
+    font-variant-numeric: tabular-nums;
+  }
+  .paso-titulo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 1.4rem + 3vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-papel);
+  }
+  .paso-texto {
+    max-width: 44ch;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--color-papel) 82%, transparent);
+    text-wrap: pretty;
+  }
+  .paso-pie {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.75rem 1.25rem;
-    margin-top: auto;
-    padding-top: 1.75rem;
   }
-  .celda-precio {
-    font-family: var(--font-display);
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--color-azul);
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* Celdas oscuras */
-  .celda-web,
-  .celda-whatsapp,
-  .celda-celular {
-    background: var(--color-azul);
-    color: var(--color-crema);
-    box-shadow: none;
-  }
-  .celda-web .celda-titulo,
-  .celda-whatsapp .celda-titulo,
-  .celda-celular .celda-titulo,
-  .celda-web .celda-precio {
-    color: var(--color-crema);
-  }
-  .celda-web .celda-texto,
-  .celda-whatsapp .celda-texto,
-  .celda-celular .celda-texto {
-    color: rgb(253 248 244 / 0.75);
-  }
-
-  .enlace {
-    font-weight: 600;
-    color: var(--color-azul);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.3em;
-    transition: color 150ms ease, text-decoration-color 150ms ease;
-  }
-  .enlace:hover {
-    color: var(--color-tinta);
-  }
-  .enlace-claro {
-    color: var(--color-crema);
-    text-decoration-color: var(--color-celeste);
-  }
-  .enlace-claro:hover {
-    color: var(--color-celeste);
-  }
-
-  /* Páginas web: las tres demos en abanico, asomando por el borde de la celda. */
-  .celda-web {
-    min-height: 34rem;
-  }
-  .celda-web .celda-cuerpo {
-    flex: none;
-  }
-  .abanico {
-    position: relative;
-    flex: 1;
-    min-height: 19rem;
-  }
-  .abanico-tel {
-    --ancho: clamp(9.5rem, 2rem + 20vw, 19rem);
-    position: absolute;
-    left: 50%;
-    top: clamp(1rem, 0.5rem + 3vw, 3.5rem);
-    z-index: calc(2 - var(--d) * var(--d));
-    width: var(--ancho);
-    margin-left: calc(var(--ancho) / -2);
-    overflow: hidden;
-    border: 5px solid #0b1119;
-    border-radius: 1.6rem;
-    background: #0b1119;
-    box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.7);
-    transform: translateX(calc(var(--d) * 64%)) translateY(calc(var(--d) * var(--d) * 2.5rem)) rotate(calc(var(--d) * 8deg));
-    transform-origin: 50% 100%;
-  }
-
-  /* Kit de marca: la placa con el logo de Filo. */
-  .kit-placa {
-    display: grid;
-    place-items: center;
-    margin: 0.5rem 0.5rem 0;
-    aspect-ratio: 16 / 7;
-    border-radius: 1.25rem;
-    background: #ede6da;
-  }
-  .kit-placa img {
-    width: 62%;
-    height: auto;
-  }
-
-  /* Pedidos especiales */
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1.25rem;
-  }
-  .chips li {
-    padding: 0.3rem 0.75rem;
+  .paso-etiqueta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.25rem 0.875rem;
     border-radius: 999px;
-    box-shadow: inset 0 0 0 1px rgb(29 42 58 / 0.2);
+    border: 1px solid rgb(252 201 49 / 0.6);
+    color: var(--color-maiz);
     font-size: 0.875rem;
-    color: var(--color-azul);
-  }
-
-  /* Te encuentran en Google: un resultado de búsqueda con tu negocio arriba. */
-  .busqueda {
-    display: grid;
-    gap: 0.625rem;
-    margin: 0.5rem 0.5rem 0;
-    padding: clamp(1rem, 0.75rem + 1vw, 1.5rem);
-    border-radius: 1.25rem;
-    background: var(--color-crema-2);
-  }
-  .busqueda-campo {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    min-height: 2.75rem;
-    padding-inline: 1rem;
-    border-radius: 999px;
-    background: #fff;
-    box-shadow: 0 1px 2px rgb(4 5 7 / 0.08), 0 6px 16px -8px rgb(4 5 7 / 0.18);
-    color: var(--color-tinta);
-    font-size: 0.9375rem;
-  }
-  .busqueda-campo svg {
-    flex: none;
-    color: rgb(4 5 7 / 0.55);
-  }
-  .busqueda-resultado {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.75rem 0.875rem;
-    align-items: center;
-    padding: 0.875rem 1rem 1rem;
-    border-radius: 1rem;
-    background: #fff;
-    box-shadow: 0 1px 2px rgb(4 5 7 / 0.08), 0 10px 24px -12px rgb(4 5 7 / 0.25);
-  }
-  .busqueda-pin {
-    display: grid;
-    place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 0.75rem;
-    background: var(--color-azul);
-  }
-  .busqueda-pin img {
-    width: 72%;
-    height: auto;
-  }
-  .busqueda-datos {
-    display: grid;
-    line-height: 1.3;
-  }
-  .busqueda-datos strong {
-    font-family: var(--font-display);
     font-weight: 600;
-    color: var(--color-azul);
-  }
-  .busqueda-datos span {
-    font-size: 0.8125rem;
-    color: #1d6b3a;
-  }
-  .busqueda-acciones {
-    display: flex;
-    flex-wrap: wrap;
-    grid-column: 1 / -1;
-    gap: 0.375rem;
-  }
-  .busqueda-acciones span {
-    padding: 0.3rem 0.75rem;
-    border-radius: 999px;
-    box-shadow: inset 0 0 0 1px rgb(29 42 58 / 0.25);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-azul);
-  }
-  .busqueda-otro {
-    display: grid;
-    gap: 0.4rem;
-    padding: 0.875rem 1rem;
-    border-radius: 1rem;
-    background: rgb(255 255 255 / 0.55);
-  }
-  .busqueda-otro span {
-    height: 0.5rem;
-    border-radius: 999px;
-    background: rgb(29 42 58 / 0.12);
-  }
-  .busqueda-otro span:first-child {
-    width: 45%;
-    background: rgb(29 42 58 / 0.2);
-  }
-  .busqueda-otro span:last-child {
-    width: 75%;
-  }
-
-  /* Te escriben y reservan: el mensaje que llega por WhatsApp. */
-  .chat {
-    display: grid;
-    flex: 1;
-    align-items: end;
-    justify-items: end;
-    margin: 0.5rem 0.5rem 0;
-    padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
-    border-radius: 1.25rem;
-    background:
-      radial-gradient(120% 80% at 100% 0%, rgb(39 155 242 / 0.14), transparent 60%),
-      #17222f;
-    min-height: 11rem;
-  }
-  .chat-burbuja {
-    position: relative;
-    max-width: 17rem;
-    padding: 0.75rem 0.875rem 0.5rem;
-    border-radius: 1rem 1rem 0.25rem 1rem;
-    background: var(--color-crema);
-    color: var(--color-tinta);
-    font-size: 0.9375rem;
-    line-height: 1.4;
-    box-shadow: 0 16px 30px -16px rgb(0 0 0 / 0.6);
-    transform-origin: 100% 100%;
-  }
-  .chat-hora {
-    display: block;
-    margin-top: 0.25rem;
-    font-size: 0.75rem;
-    text-align: right;
-    color: rgb(4 5 7 / 0.55);
     font-variant-numeric: tabular-nums;
   }
-  .chat-visto {
-    color: #1a7fd0;
-    letter-spacing: -0.2em;
-  }
-
-  /* Se ve profesional en el celular: una demo asoma desde abajo. */
-  .celda-celular .celda-cuerpo {
-    flex: none;
-  }
-  .asoma {
-    position: relative;
-    flex: 1;
-    min-height: 13rem;
-    overflow: hidden;
-  }
-  .asoma-tel {
-    position: absolute;
-    left: 50%;
-    top: 0.5rem;
-    width: min(62%, 14rem);
-    overflow: hidden;
-    border: 5px solid #0b1119;
-    border-radius: 1.6rem;
-    background: #0b1119;
-    box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.7);
-    translate: -50% 0;
-  }
-
-  /* Hechas para tu sector */
-  .sectores {
-    display: grid;
-    gap: 1.25rem;
-    margin-top: 1.75rem;
-  }
-  .sectores > div {
-    padding-top: 1rem;
-    border-top: 2px solid var(--color-azul);
-  }
-  .sectores dt {
-    font-family: var(--font-display);
-    font-weight: 600;
-    color: var(--color-azul);
-  }
-  .sectores dd {
-    margin-top: 0.375rem;
-    font-size: 0.9375rem;
-    color: rgb(4 5 7 / 0.75);
-  }
-  /* Tres columnas solo cuando la celda es ancha: celular grande (una sola columna de celdas) o computador. */
-  @media (min-width: 640px) and (max-width: 767.98px), (min-width: 1024px) {
-    .sectores {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+  @media (min-width: 1024px) {
+    .recorrido-reticula {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+    .recorrido-mesa {
+      grid-column: 1 / span 6;
+      top: 4rem;
+      height: calc(100svh - 4rem);
+      display: grid;
+      align-content: center;
+    }
+    .recorrido-mesa-pegada {
+      width: min(100%, 66svh);
+    }
+    .recorrido-pasos {
+      grid-column: 8 / span 5;
+    }
+    .paso {
+      min-height: 78svh;
+      justify-content: center;
+      border-top: 0;
+    }
+    .paso:first-child {
+      margin-top: 8svh;
+    }
+    .paso:last-child {
+      min-height: calc(100svh - 4rem);
     }
   }
 
-  /* Portafolio: cada demo en su escenario, con el celular en falso 3D al pasar el mouse. */
-  .celda-demo {
-    background: var(--color-azul-2);
-    box-shadow: inset 0 0 0 1px rgb(253 248 244 / 0.08);
+  /* ---------- Portafolio ---------- */
+  .portafolio {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
   }
-  .celda-demo .celda-texto {
-    color: rgb(253 248 244 / 0.78);
-  }
-  .escenario {
-    position: relative;
+  .demos {
     display: grid;
-    place-items: end center;
-    height: clamp(17rem, 12rem + 12vw, 22rem);
-    margin: 0.5rem 0.5rem 0;
-    overflow: hidden;
-    border-radius: 1.25rem;
-    background:
-      radial-gradient(90% 70% at 50% 0%, rgb(253 248 244 / 0.09), transparent 70%),
-      #1a2533;
-    perspective: 1100px;
+    gap: clamp(4rem, 10vw, 7rem);
   }
-  /* Cada escenario toma la luz de la marca de su demo. */
-  .escenario-barberia {
-    background: radial-gradient(55% 75% at 50% 85%, rgb(122 31 31 / 0.85), transparent 72%), #1c1916;
+  .demo {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
   }
-  .escenario-gimnasio {
-    background: radial-gradient(55% 75% at 50% 85%, rgb(212 255 58 / 0.3), transparent 72%), #1a1b17;
-  }
-  .escenario-spa {
-    background: radial-gradient(55% 75% at 50% 85%, rgb(192 138 107 / 0.6), transparent 72%), #2f3a2e;
-  }
-  .escenario-kit {
-    background: radial-gradient(80% 80% at 50% 0%, rgb(255 255 255 / 0.5), transparent 70%), #e3dacb;
-  }
-  .telefono {
-    position: relative;
-    display: block;
-    width: clamp(10rem, 7rem + 8vw, 13rem);
-    margin-bottom: -20%;
-    overflow: hidden;
-    border: 5px solid #0b1119;
-    border-radius: 1.6rem;
-    background: #0b1119;
-    box-shadow:
-      0 0 0 1px rgb(253 248 244 / 0.14),
-      0 30px 60px -18px rgb(0 0 0 / 0.75);
-  }
-  @media (min-width: 768px) {
-    .bento > :nth-child(4n + 1) .telefono {
-      width: clamp(11rem, 6rem + 9vw, 15rem);
+  @media (min-width: 900px) {
+    .demo {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    .demo-invertida .demo-escena {
+      order: 2;
     }
   }
-  .demo-sector {
-    margin-top: 0.25rem;
-    font-size: 0.9375rem;
-    color: rgb(253 248 244 / 0.65);
-  }
-  .demo-muestra {
-    margin-top: 1.25rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--color-crema);
-  }
-  .demo-lista {
-    display: grid;
-    gap: 0.375rem;
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-    color: rgb(253 248 244 / 0.8);
-  }
-  .demo-lista li {
+  .demo-escena {
     position: relative;
-    padding-left: 1.25rem;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    max-width: 34rem;
+    width: 100%;
+    justify-self: center;
   }
-  .demo-lista li::before {
-    content: '';
+  .demo-forma {
     position: absolute;
-    left: 0.125rem;
-    top: 0.55em;
-    width: 0.4rem;
-    height: 0.4rem;
-    border-radius: 999px;
-    background: var(--color-celeste);
+    inset: 6%;
+  }
+  .forma-cuarto {
+    background: var(--color-maiz);
+    border-radius: 100% 0 0 0;
+  }
+  .forma-triangulo {
+    background: var(--color-medianoche);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+  }
+  .forma-circulo {
+    background: var(--color-gris);
+    border-radius: 50%;
+  }
+  .demo-celular {
+    position: relative;
+    width: 52%;
+    border-radius: 1.75rem;
+    padding: 0.5rem;
+    background: var(--color-tinta);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.1) inset, 0 30px 60px -20px rgb(14 20 36 / 0.45);
+    transform: rotate(-4deg);
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .demo-invertida .demo-celular {
+    transform: rotate(4deg);
+  }
+  .demo-celular :global(img) {
+    border-radius: 1.3rem;
+  }
+  .demo-escena:hover .demo-celular {
+    transform: rotate(0deg) translateY(-6px);
+  }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .demo-forma {
+        animation: forma-gira linear both;
+        animation-timeline: view();
+        animation-range: entry 0% exit 100%;
+      }
+    }
+  }
+  @keyframes forma-gira {
+    from {
+      transform: rotate(-14deg) scale(0.9);
+    }
+    to {
+      transform: rotate(10deg) scale(1.02);
+    }
+  }
+  .demo-cuerpo {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
   }
   .demo-plan {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.25rem 1rem;
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgb(253 248 244 / 0.12);
+    gap: 0.75rem;
+    align-items: center;
     font-size: 0.9375rem;
-    color: rgb(253 248 244 / 0.75);
+    font-weight: 600;
+    color: var(--color-medianoche);
   }
   .demo-precio {
-    font-family: var(--font-display);
-    font-weight: 600;
-    color: var(--color-crema);
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: var(--color-medianoche);
+    color: var(--color-papel);
     font-variant-numeric: tabular-nums;
   }
+  .demo-nombre {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.25rem, 1.6rem + 3vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-medianoche);
+  }
+  .demo-sector {
+    font-weight: 600;
+    color: color-mix(in oklab, var(--color-tinta) 70%, transparent);
+  }
+  .demo-resumen {
+    max-width: 42ch;
+    font-size: 1.125rem;
+    line-height: 1.55;
+  }
   .demo-acciones {
-    padding-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-top: 0.5rem;
   }
 
-  /* Kit de marca de muestra: lámina con las piezas de Filo. */
-  .celda-kitmuestra .escenario {
-    place-items: center;
-    padding: clamp(1.25rem, 0.5rem + 3vw, 2.5rem);
+  .kit {
+    display: grid;
+    gap: 2rem;
+    margin-top: clamp(4rem, 10vw, 7rem);
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    border-radius: 1.5rem;
+    background: var(--color-medianoche);
+    --foco: var(--color-maiz);
+    color: color-mix(in oklab, var(--color-papel) 85%, transparent);
+  }
+  @media (min-width: 900px) {
+    .kit {
+      grid-template-columns: 7fr 5fr;
+      align-items: center;
+      gap: 3.5rem;
+    }
   }
   .kit-lamina {
-    position: relative;
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) auto;
-    width: min(100%, 27rem);
-    aspect-ratio: 16 / 11;
-    overflow: hidden;
-    border-radius: 0.75rem;
-    box-shadow: 0 30px 60px -18px rgb(0 0 0 / 0.75);
+    min-width: 0;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    grid-template-rows: auto auto;
+    gap: 0.75rem;
   }
-  .kit-lamina > span:not(.brillo) {
+  .kit-hueso,
+  .kit-carbon {
+    min-width: 0;
     display: grid;
     place-items: center;
-    min-height: 0;
-    padding: 0.75rem;
-  }
-  .kit-lamina img {
-    width: auto;
-    max-width: 72%;
-    height: auto;
-    max-height: 72%;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    aspect-ratio: 4 / 3;
   }
   .kit-hueso {
-    grid-column: 1 / -1;
-    background: #ede6da;
+    background: #EDE6DA;
   }
   .kit-carbon {
     background: #141210;
   }
-  .kit-icono {
-    background: #e4dccd;
+  .kit-hueso img,
+  .kit-carbon img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
   }
   .kit-colores {
     grid-column: 1 / -1;
-    grid-template-columns: repeat(4, 1fr);
-    place-items: stretch !important;
-    height: 1.25rem;
-    padding: 0 !important;
+    display: flex;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
   }
-
-  /* Brillo que sigue al mouse sobre las maquetas (lo mueve movimiento.ts). */
-  .brillo {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    border-radius: inherit;
-    background: radial-gradient(circle at var(--brillo-x, 50%) var(--brillo-y, 0%), rgb(255 255 255 / 0.3), transparent 55%);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 300ms ease;
+  .kit-colores span {
+    flex: 1;
   }
-  @media (hover: hover) and (pointer: fine) {
-    :global(html.con-movimiento) .escenario:hover .brillo {
-      opacity: 1;
-    }
-  }
-
-  /* Proceso: una línea de tiempo, porque sí es una secuencia. */
-  .proceso {
+  .kit-cuerpo {
     display: grid;
-    gap: 2rem;
-    position: relative;
+    gap: 1rem;
+    justify-items: start;
   }
-  .paso {
-    position: relative;
-    padding-left: 3.5rem;
+  .kit-etiqueta {
+    font-weight: 700;
+    color: var(--color-maiz);
   }
-  .paso::before {
-    content: '';
-    position: absolute;
-    left: 1.1rem;
-    top: 2.6rem;
-    bottom: -2rem;
-    width: 1px;
-    background: rgb(253 248 244 / 0.18);
-  }
-  .paso:last-child::before {
-    display: none;
-  }
-  .paso-numero {
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: grid;
-    place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border: 1px solid var(--color-celeste);
-    border-radius: 999px;
+  .kit-titulo {
     font-family: var(--font-display);
-    font-weight: 600;
-    color: var(--color-celeste);
-    font-variant-numeric: tabular-nums;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--color-papel);
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .proceso {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 1.5rem;
-    }
-    .paso {
-      padding-left: 0;
-      padding-top: 3.75rem;
-    }
-    .paso::before {
-      left: 2.6rem;
-      right: -1.5rem;
-      top: 1.1rem;
-      bottom: auto;
-      width: auto;
-      height: 1px;
-    }
+  .kit-precio {
+    font-weight: 600;
+    color: var(--color-papel);
+  }
+  .aviso {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: color-mix(in oklab, var(--color-tinta) 62%, transparent);
   }
 
-  /* El local en miniatura: en celular y tableta va encima de los pasos; en computador queda
-     quieto a la derecha mientras los pasos pasan a la izquierda. */
-  .local {
-    width: min(82%, 24rem);
-    margin: -1rem auto 1.5rem;
+  /* ---------- Precios ---------- */
+  .precios {
+    background: var(--color-papel-2);
+    padding-block: clamp(4.5rem, 10vw, 8rem);
   }
-  .local-escena {
-    position: relative;
-    aspect-ratio: 1;
-  }
-  .local-escena :global(.local-foto) {
-    position: absolute;
-    inset: 0;
-    display: block;
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .local-escena :global(.local-3d) {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .local[data-estado='3d'] :global(.local-3d) {
-    opacity: 1;
-  }
-  .local[data-estado='3d'] :global(.local-foto) {
-    opacity: 0;
+  .fichas {
+    display: grid;
+    gap: 1.25rem;
   }
   @media (min-width: 1024px) {
-    .proceso-cuerpo {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
+    .fichas {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: start;
+    }
+  }
+  .ficha {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 2rem 1.75rem;
+    border-radius: 1.5rem;
+    background: var(--color-papel);
+    border: 1px solid rgb(20 33 61 / 0.1);
+  }
+  .ficha-destacada {
+    background: var(--color-medianoche);
+    --foco: var(--color-maiz);
+    color: color-mix(in oklab, var(--color-papel) 85%, transparent);
+    border-color: transparent;
+  }
+  @media (min-width: 1024px) {
+    .ficha-destacada {
+      transform: translateY(-1.5rem);
+    }
+  }
+  .ficha-sello {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--color-maiz);
+    color: var(--color-tinta);
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+  .ficha-piezas {
+    margin-bottom: 1rem;
+  }
+  .ficha-piezas .lleno {
+    fill: var(--color-medianoche);
+  }
+  .ficha-piezas .acento {
+    fill: var(--color-maiz);
+  }
+  .ficha-piezas .vacio {
+    fill: none;
+    stroke: rgb(20 33 61 / 0.35);
+    stroke-width: 2;
+    stroke-dasharray: 5 5;
+  }
+  .ficha-destacada .ficha-piezas .lleno {
+    fill: var(--color-papel);
+  }
+  .ficha-destacada .ficha-piezas .vacio {
+    stroke: rgb(245 245 240 / 0.45);
+  }
+  .ficha-destacada .ficha-piezas .acento {
+    fill: var(--color-maiz);
+  }
+  .ficha-nombre {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: var(--color-medianoche);
+  }
+  .ficha-destacada .ficha-nombre,
+  .ficha-destacada .ficha-precio {
+    color: var(--color-papel);
+  }
+  .ficha-resumen {
+    min-height: 3em;
+    line-height: 1.5;
+  }
+  .ficha-precio {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 2rem + 2vw, 3.25rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-medianoche);
+    font-variant-numeric: tabular-nums;
+  }
+  .ficha-signo {
+    font-size: 0.55em;
+    vertical-align: 0.6em;
+    margin-right: 0.05em;
+  }
+  .ficha-unico {
+    font-size: 0.875rem;
+    color: color-mix(in oklab, currentColor 80%, transparent);
+  }
+  .ficha-mensual {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .ficha-lista {
+    display: grid;
+    gap: 0.5rem;
+    margin-block: 1.25rem 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(20 33 61 / 0.12);
+    font-size: 0.9375rem;
+  }
+  .ficha-destacada .ficha-lista {
+    border-color: rgb(245 245 240 / 0.15);
+  }
+  .ficha-lista li {
+    display: flex;
+    gap: 0.625rem;
+    align-items: baseline;
+  }
+  .ficha-lista li::before {
+    content: '';
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 100% 0 0 0;
+    background: var(--color-maiz);
+  }
+  .ficha-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.25rem;
+    margin-top: auto;
+  }
+  .ficha-destacada .enlace {
+    color: var(--color-papel);
+  }
+
+  .mensuales {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgb(20 33 61 / 0.15);
+  }
+  @media (min-width: 900px) {
+    .mensuales {
+      grid-template-columns: 4fr 4fr 4fr;
+      gap: 2.5rem;
+    }
+  }
+  .mensuales-texto p,
+  .mensual-texto {
+    margin-top: 0.5rem;
+    line-height: 1.55;
+  }
+  .mensual-nombre {
+    font-weight: 700;
+    color: var(--color-medianoche);
+  }
+  .mensual-precio {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: -0.03em;
+    color: var(--color-medianoche);
+    font-variant-numeric: tabular-nums;
+  }
+  .mensual-precio span {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .extras {
+    display: grid;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  @media (min-width: 900px) {
+    .extras {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+  }
+  .extras > div {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: start;
+    padding: 1.75rem;
+    border-radius: 1.25rem;
+    border: 1.5px dashed rgb(20 33 61 / 0.25);
+    line-height: 1.55;
+  }
+
+  /* ---------- Proceso ---------- */
+  .proceso {
+    background: var(--color-medianoche);
+    --foco: var(--color-maiz);
+    color: var(--color-papel);
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    view-timeline: --proceso block;
+  }
+  .proceso .titulo-grande {
+    color: var(--color-papel);
+  }
+  .proceso-pista {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+  .proceso-linea {
+    position: absolute;
+    left: 1.25rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgb(245 245 240 / 0.18);
+  }
+  .proceso-rueda {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: -1.25rem;
+    background: var(--color-maiz);
+    border-radius: 100% 0 0 0;
+  }
+  .proceso-pasos {
+    display: grid;
+    gap: 2.5rem;
+    padding-left: 4rem;
+  }
+  .proceso-paso h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--color-papel);
+    margin-block: 0.5rem;
+  }
+  .proceso-paso p {
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--color-papel) 78%, transparent);
+    max-width: 36ch;
+  }
+  .proceso-numero {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 3.5rem;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-maiz);
+    font-variant-numeric: tabular-nums;
+  }
+  @media (min-width: 1024px) {
+    .proceso-linea {
+      left: 0;
+      right: 0;
+      top: 1.25rem;
+      bottom: auto;
+      width: auto;
+      height: 2px;
+    }
+    .proceso-rueda {
+      left: 0;
+      top: 50%;
+      margin: -1.25rem 0 0;
+    }
+    .proceso-pasos {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 2rem;
+      padding: 4.5rem 0 0;
     }
-    .proceso {
-      grid-column: 1 / span 5;
-      grid-row: 1;
-      gap: 0;
+  }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .proceso-rueda {
+        animation: rueda-y linear both;
+        animation-timeline: --proceso;
+        animation-range: contain 0% contain 100%;
+      }
+      @media (min-width: 1024px) {
+        .proceso-rueda {
+          animation-name: rueda-x;
+          animation-range: entry 60% exit 40%;
+        }
+      }
     }
-    /* Más recorrido entre pasos: el local se arma despacio y se alcanza a ver cada parte. */
-    .paso {
-      padding-block: 0 max(9rem, 26vh);
+  }
+  @keyframes rueda-y {
+    from {
+      top: 0;
+      transform: rotate(0deg);
     }
-    .paso:last-child {
-      padding-bottom: 0;
+    to {
+      top: calc(100% - 2.5rem);
+      transform: rotate(720deg);
     }
-    .paso::before {
-      bottom: 0.5rem;
+  }
+  @keyframes rueda-x {
+    from {
+      left: 0;
+      transform: rotate(0deg);
     }
-    .local {
-      position: sticky;
-      top: calc(50vh - min(17rem, 36vw) + 2rem);
-      grid-column: 7 / span 6;
-      grid-row: 1;
-      align-self: start;
-      width: min(100%, 34rem);
-      margin: 0 0 0 auto;
+    to {
+      left: calc(100% - 2.5rem);
+      transform: rotate(1080deg);
     }
   }
 
-  /* Cierre */
+  /* ---------- Taller ---------- */
+  .taller {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+  .taller-reticula {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 900px) {
+    .taller-reticula {
+      grid-template-columns: 5fr 7fr;
+      gap: 4rem;
+      align-items: center;
+    }
+  }
+  .taller-texto {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+  .taller-texto > p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 44ch;
+  }
+  .taller .titulo-grande {
+    color: var(--color-medianoche);
+  }
+  .taller-colores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .taller-colores legend {
+    font-weight: 700;
+    color: var(--color-medianoche);
+    margin-bottom: 0.5rem;
+  }
+  .taller-color {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.25rem 0.875rem 0.25rem 0.375rem;
+    border-radius: 999px;
+    border: 1.5px solid rgb(20 33 61 / 0.18);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: border-color 160ms;
+  }
+  .taller-color:has(input:checked) {
+    border-color: var(--color-medianoche);
+    box-shadow: inset 0 0 0 1px var(--color-medianoche);
+  }
+  .taller-color:has(input:focus-visible) {
+    outline: 2px solid var(--color-medianoche);
+    outline-offset: 3px;
+  }
+  .taller-color input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .taller-color span {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--c);
+  }
+  .taller-botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .taller-mesa {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: center;
+  }
+  .taller-tablero {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.375rem;
+    width: min(100%, 26rem);
+    padding: 0.375rem;
+    border-radius: 1.25rem;
+    background: #EEEFE8;
+    box-shadow: inset 0 0 0 1px rgb(20 33 61 / 0.1);
+  }
+  .casilla {
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--color-papel);
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 160ms, transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .casilla:hover {
+    background: #fff;
+  }
+  .casilla:active {
+    transform: scale(0.95);
+  }
+  .casilla:focus-visible {
+    outline: 2px solid var(--color-medianoche);
+    outline-offset: 2px;
+  }
+  .casilla svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .casilla :global(path) {
+    transition: d 260ms cubic-bezier(0.22, 1, 0.36, 1), fill 200ms;
+  }
+  .taller-perfil {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-medianoche);
+  }
+  .taller-avatar {
+    display: block;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--color-papel);
+    box-shadow: 0 0 0 1px rgb(20 33 61 / 0.15);
+  }
+  .taller-avatar :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ---------- Preguntas ---------- */
+  .preguntas {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    border-top: 1px solid rgb(20 33 61 / 0.1);
+  }
+  .preguntas-reticula {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .preguntas-cabecera {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+    align-content: start;
+  }
+  .preguntas .titulo-grande {
+    color: var(--color-medianoche);
+  }
+  @media (min-width: 1024px) {
+    .preguntas-reticula {
+      grid-template-columns: 5fr 7fr;
+      gap: 4rem;
+    }
+    .preguntas-cabecera {
+      position: sticky;
+      top: 6rem;
+    }
+  }
+  .pregunta {
+    border-bottom: 1px solid rgb(20 33 61 / 0.15);
+  }
+  .pregunta summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 44px;
+    padding-block: 1.375rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+    letter-spacing: -0.015em;
+    color: var(--color-medianoche);
+    cursor: pointer;
+    list-style: none;
+  }
+  .pregunta summary::-webkit-details-marker {
+    display: none;
+  }
+  .pregunta summary svg {
+    flex: none;
+    color: var(--color-medianoche);
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), color 200ms;
+  }
+  .pregunta[open] summary svg {
+    transform: rotate(-135deg);
+    color: #B48A00;
+  }
+  .pregunta summary:focus-visible {
+    outline: 2px solid var(--color-medianoche);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+  .pregunta-respuesta {
+    padding-bottom: 1.5rem;
+    max-width: 60ch;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  @supports (interpolate-size: allow-keywords) {
+    .pregunta {
+      interpolate-size: allow-keywords;
+    }
+    .pregunta::details-content {
+      height: 0;
+      overflow: clip;
+      transition: height 380ms cubic-bezier(0.22, 1, 0.36, 1), content-visibility 380ms allow-discrete;
+    }
+    .pregunta[open]::details-content {
+      height: auto;
+    }
+  }
+
+  /* ---------- Cierre ---------- */
   .contacto {
     position: relative;
     overflow: hidden;
-    isolation: isolate;
+    background: var(--color-medianoche);
+    --foco: var(--color-maiz);
+    color: var(--color-papel);
+    padding-block: clamp(6rem, 14vw, 11rem);
   }
-  /* Foto del logo en relieve: a la derecha, fundida con el azul hacia el texto. */
-  .contacto-relieve {
-    position: absolute;
-    z-index: -1;
-    inset: 0 0 0 auto;
-    width: 100%;
-  }
-  .contacto-relieve :global(img) {
-    object-position: 62% 50%;
-  }
-  .contacto-relieve::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(to bottom, rgb(29 42 58 / 0.8), rgb(29 42 58 / 0.55) 45%, rgb(29 42 58 / 0.9) 100%);
-  }
-  /* Los botones de borde llevan fondo para leerse sobre la textura del papel. */
-  .contacto :global(.boton-borde) {
-    background-color: rgb(29 42 58 / 0.7);
-  }
-  @media (min-width: 768px) {
-    .contacto-relieve {
-      width: 70%;
-    }
-    .contacto-relieve::after {
-      background: linear-gradient(to right, var(--color-azul) 0%, rgb(29 42 58 / 0.6) 30%, rgb(29 42 58 / 0.1) 70%);
-    }
+  .contacto-cuerpo {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 1.75rem;
+    justify-items: start;
   }
   .contacto-titulo {
-    max-width: 14ch;
-    color: var(--color-crema);
-    font-size: clamp(2.8rem, 1.4rem + 6.4vw, 7.5rem);
-    font-weight: 600;
-    line-height: 0.98;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(3rem, 1.5rem + 7.5vw, 8.5rem);
+    line-height: 0.92;
     letter-spacing: -0.05em;
+    color: var(--color-papel);
+    max-width: 10ch;
+    text-wrap: balance;
+  }
+  .contacto-texto {
+    max-width: 42ch;
+    font-size: 1.1875rem;
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--color-papel) 82%, transparent);
+  }
+  .contacto-piezas {
+    position: absolute;
+    right: -6vw;
+    top: 2.5rem;
+    width: 44vw;
+    aspect-ratio: 1;
+  }
+  @media (max-width: 899px) {
+    .contacto {
+      padding-top: calc(44vw + 4rem);
+    }
+  }
+  @media (min-width: 900px) {
+    .contacto-piezas {
+      top: 50%;
+      right: -4vw;
+      width: min(52vw, 44rem);
+      transform: translateY(-50%);
+    }
+  }
+  .cp {
+    position: absolute;
+    width: calc(50% - 0.75%);
+    height: calc(50% - 0.75%);
+  }
+  .cp-1 {
+    left: 0;
+    top: 0;
+    background: var(--color-medianoche-2);
+    border-radius: 100% 0 0 0;
+  }
+  .cp-2 {
+    left: 0;
+    bottom: 0;
+    background: var(--color-medianoche-2);
+    border-radius: 0 0 0 100%;
+  }
+  .cp-3 {
+    right: 0;
+    top: 0;
+    background: var(--color-maiz);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+  }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .cp-1 {
+        animation: cp-1 linear both;
+      }
+      .cp-2 {
+        animation: cp-2 linear both;
+      }
+      .cp-3 {
+        animation: cp-3 linear both;
+      }
+      .cp {
+        animation-timeline: view();
+        animation-range: entry 0% cover 55%;
+      }
+    }
+  }
+  @keyframes cp-1 {
+    from {
+      transform: translate(-30%, -40%) rotate(-50deg);
+    }
+  }
+  @keyframes cp-2 {
+    from {
+      transform: translate(-45%, 40%) rotate(40deg);
+    }
+  }
+  @keyframes cp-3 {
+    from {
+      transform: translate(40%, -30%) rotate(90deg);
+    }
   }
 </style>
