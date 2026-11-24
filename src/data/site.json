@@ -6,9 +6,9 @@
   "correo": "studio.chymera@gmail.com",
   "instagram": "chymera_studios",
   "hero": {
-    "titulo": "Tu negocio, fácil de encontrar y de reservar.",
+    "titulo": "Tu negocio, armado pieza por pieza.",
     "subtitulo": "Páginas web para gimnasios, estudios, spas y negocios de bienestar en Bogotá. Listas en días, con precio cerrado y alguien que las mantiene cada mes.",
-    "etiqueta": "Estudio web en Bogotá",
+    "etiqueta": "Estudio de webs y marca en Bogotá",
     "boton": "Pide tu propuesta por WhatsApp",
     "botonDemos": "Mira 3 demos funcionando",
     "kit": "¿Todavía no tienes logo? También lo diseñamos.",
@@ -687,6 +687,133 @@
           ]
         }
       ]
+    }
+  },
+  "inicio": {
+    "promesa": "Que tu negocio se vea tan bueno como lo que haces.",
+    "portada": {
+      "mesa": "Símbolo de Chymera: dos cuartos de círculo y un triángulo amarillo que se arman en una C",
+      "armar": "Armar las piezas",
+      "desarmar": "Desarmar las piezas",
+      "pista": "Pasa el cursor por las piezas"
+    },
+    "marquesina": [
+      "Gimnasios",
+      "Estudios de yoga y pilates",
+      "Spas y estética",
+      "Barberías",
+      "Canchas y clubes",
+      "Consultorios",
+      "Portafolios personales",
+      "Eventos y lanzamientos"
+    ],
+    "marquesinaEtiqueta": "Hacemos páginas para",
+    "ensamble": {
+      "titulo": "Cinco piezas para que tu negocio se vea en serio",
+      "intro": "Un negocio se ve profesional cuando todo encaja: la marca, la página, el mapa, los mensajes y alguien pendiente de que todo siga funcionando. Nosotros armamos las cinco.",
+      "mesa": "Ilustración hecha con las piezas de la marca de Chymera",
+      "pasos": [
+        {
+          "id": "marca",
+          "titulo": "Tu marca",
+          "texto": "Logo, colores, tipografías e imágenes para tus redes, para que tu negocio se vea igual de serio en el aviso, en Instagram y en tu página. Se pide junto con cualquier plan.",
+          "etiqueta": "Kit de marca · {kit}",
+          "enlace": {
+            "texto": "Ver el kit de muestra",
+            "href": "portafolio/kit-de-marca/"
+          }
+        },
+        {
+          "id": "web",
+          "titulo": "Tu página",
+          "texto": "Diseño propio, hecho para tu marca y pensado primero para el celular, que es donde te van a ver tus clientes. Lista para Google y para recibir mensajes y reservas.",
+          "etiqueta": "{desde}",
+          "enlace": {
+            "texto": "Ver los planes",
+            "href": "#precios"
+          }
+        },
+        {
+          "id": "mapa",
+          "titulo": "Que te encuentren",
+          "texto": "Tu página y tu perfil de Google Maps, listos para cuando buscan “gimnasio cerca” o “spa en Usaquén”."
+        },
+        {
+          "id": "mensajes",
+          "titulo": "Que te escriban",
+          "texto": "Botón de WhatsApp con el mensaje listo, formulario y reservas en línea conectadas a tu negocio."
+        },
+        {
+          "id": "crece",
+          "titulo": "Que siga funcionando",
+          "texto": "Cada mes mantenemos tu página en línea, renovamos tu dominio y hacemos los cambios que necesites. Con el plan Activo, además, recibes un reporte de visitas, llamadas y rutas desde Google."
+        },
+        {
+          "id": "final",
+          "titulo": "Todo armado",
+          "texto": "Cinco piezas, precio cerrado y alguien que te responde por WhatsApp de lunes a viernes.",
+          "boton": "Cuéntanos de tu negocio"
+        }
+      ]
+    },
+    "precios": {
+      "unico": "pago único de instalación",
+      "mensual": "+ ${mensual} al mes con el plan {plan}",
+      "recomendado": "Recomendado",
+      "ver": "Ver todo lo que incluye",
+      "pedir": "Lo quiero",
+      "piezas": [
+        "Una pieza: lo esencial",
+        "Dos piezas: un sitio completo",
+        "Tres piezas: con reservas"
+      ],
+      "mensualesTitulo": "El plan mensual",
+      "mensualesTexto": "Mantiene tu página en línea y al día. Se escoge junto con la instalación.",
+      "alMes": "al mes",
+      "extrasTitulo": "¿Te falta la marca?",
+      "extrasTexto": "El Kit de marca se pide junto con cualquier plan: dos propuestas de logo, dos rondas de ajustes, colores, tipografías, imágenes para redes y guía de marca."
+    },
+    "proceso": {
+      "intro": "Cinco pasos, del primer mensaje a tu página publicada. Ves cómo queda en tu celular antes de pagar el saldo."
+    },
+    "taller": {
+      "titulo": "Juega con las piezas",
+      "texto": "Así empieza un logo en Chymera: pocas formas, bien escogidas. Toca una casilla para cambiar su forma, escoge un color y arma el tuyo.",
+      "color": "Color",
+      "colores": [
+        {
+          "nombre": "Medianoche",
+          "hex": "#14213D"
+        },
+        {
+          "nombre": "Maíz",
+          "hex": "#FCC931"
+        },
+        {
+          "nombre": "Pizarra",
+          "hex": "#3B4A6B"
+        }
+      ],
+      "mezclar": "Mezclar",
+      "limpiar": "Empezar de cero",
+      "tablero": "Tablero de 3 por 3 casillas",
+      "casilla": "Casilla {n}: {forma}. Toca para cambiarla",
+      "formas": {
+        "vacia": "vacía",
+        "cuadro": "cuadro",
+        "cuarto": "cuarto de círculo",
+        "triangulo": "triángulo",
+        "circulo": "círculo"
+      },
+      "perfil": "Así se vería en tu foto de perfil",
+      "boton": "¿Te gustó? Armemos tu marca de verdad",
+      "whatsappTexto": "Hola Chymera, jugué con las piezas de su página y quiero una marca para mi negocio."
+    },
+    "pie": {
+      "navegar": "Navegar",
+      "contacto": "Contacto",
+      "legal": "Legal",
+      "escribenos": "Escríbenos por WhatsApp"
     }
   }
 }
